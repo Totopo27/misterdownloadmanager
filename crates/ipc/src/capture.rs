@@ -235,9 +235,10 @@ impl CaptureRules {
     /// subdomains too (#532: `youtube.com` listed, the button still showed on www.youtube.com).
     pub fn panel_hidden_on(&self, page: &str) -> bool {
         let host = host_of(page);
-        self.video_panel_sites
-            .split_whitespace()
-            .any(|p| host_matches(&host, p) || host_matches(&host, &format!("*.{p}")))
+        self.video_panel_sites.split_whitespace().any(|p| {
+            host_matches(&host, p)
+                || (!p.starts_with('*') && host_matches(&host, &format!("*.{p}")))
+        })
     }
 }
 
@@ -371,16 +372,20 @@ pub fn host_of(url: &str) -> String {
     host.to_ascii_lowercase()
 }
 
-/// `host` is `pattern` (case-insensitive) or, for `*.example.com`, one of its subdomains.
+/// `host` matches `pattern` (case-insensitive), supporting wildcards (`*`) and, for
+/// `*.example.com`, matching both the domain and its subdomains.
 pub fn host_matches(host: &str, pattern: &str) -> bool {
     let pattern = pattern.trim().to_ascii_lowercase();
     let pattern = pattern
         .split_once("://")
         .map_or(pattern.as_str(), |(_, r)| r);
     let pattern = pattern.split('/').next().unwrap_or("");
+    if pattern.is_empty() {
+        return false;
+    }
     match pattern.strip_prefix("*.") {
-        Some(base) => host == base || host.ends_with(&format!(".{base}")),
-        None => !pattern.is_empty() && host == pattern,
+        Some(base) => wildcard(base, host) || wildcard(pattern, host),
+        None => wildcard(pattern, host),
     }
 }
 
@@ -541,6 +546,18 @@ mod tests {
             CHROME
         ));
         assert!(r.panel_on("https://videos.site/embed/1", Some(""), CHROME));
+        // #759: wildcard support in download panel blacklist.
+        r.video_panel = true;
+        r.video_panel_sites = "*.youtube.* www.vimeo.co* *dailymotion*".into();
+        assert!(!r.panel_on("https://www.youtube.com/watch?v=1", None, CHROME));
+        assert!(!r.panel_on("https://youtube.com/watch?v=1", None, CHROME));
+        assert!(!r.panel_on("https://m.youtube.co.uk/watch?v=1", None, CHROME));
+        assert!(!r.panel_on("https://www.vimeo.com/123", None, CHROME));
+        assert!(!r.panel_on("https://www.vimeo.co/123", None, CHROME));
+        assert!(r.panel_on("https://www.vimeo.org/123", None, CHROME));
+        assert!(!r.panel_on("https://www.dailymotion.com/video/x", None, CHROME));
+        assert!(!r.panel_on("https://sub.dailymotion.fr/video/x", None, CHROME));
+        assert!(r.panel_on("https://other-site.com/video", None, CHROME));
         r.video_panel = true;
         r.advanced_integration = false;
         assert!(!r.panel_on("https://videos.site/", None, CHROME));
@@ -656,6 +673,19 @@ mod tests {
         assert!(host_matches("a.b.example.com", "*.example.com"));
         assert!(host_matches("example.com", "*.example.com"));
         assert!(!host_matches("badexample.com", "*.example.com"));
+        // Wildcard patterns (#759)
+        assert!(host_matches("www.youtube.com", "*.youtube.*"));
+        assert!(host_matches("youtube.com", "*.youtube.*"));
+        assert!(host_matches("youtube.co", "youtube.*"));
+        assert!(host_matches("youtube.com", "youtube.*"));
+        assert!(!host_matches("vimeo.com", "youtube.*"));
+        assert!(host_matches("www.youtube.com", "www.youtube.co*"));
+        assert!(host_matches("www.youtube.co", "www.youtube.co*"));
+        assert!(host_matches("www.youtube.co.uk", "www.youtube.co*"));
+        assert!(!host_matches("www.youtube.es", "www.youtube.co*"));
+        assert!(host_matches("www.youtube.com", "*youtube*"));
+        assert!(host_matches("youtube.com", "*youtube*"));
+        assert!(!host_matches("vimeo.com", "*youtube*"));
         assert!(wildcard("*/files/*.zip", "https://x.org/files/a.zip"));
         assert!(address_matches(
             "example.com/private/*",
