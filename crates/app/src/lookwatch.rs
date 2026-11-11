@@ -106,6 +106,8 @@ impl<T: Clone + PartialEq + Send + 'static> Watched<T> {
     }
 
     /// [`Watched::latest`], waiting at most `within` for the first answer.
+    // Windows' system look only: Linux's and macOS's come from their own watchers.
+    #[cfg_attr(not(windows), allow(dead_code))]
     pub fn first(&self, within: Duration) -> Option<(u64, T)> {
         let start = Instant::now();
         let mut s = self.shared.lock();
