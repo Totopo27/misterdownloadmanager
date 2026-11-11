@@ -88,6 +88,12 @@ MDM lists at most 20,000 videos of one list.
 
 A page address that points at one video inside a playlist or a mix (for example `watch?v=…&list=…`) downloads that one video, never the whole list.
 
+## Speed limits
+
+Videos keep to the [Speed Limiter](connections-and-speed.md#speed-limiter) as other downloads do: the limit for one file, a video's own limit (the **Speed Limiter** tab of its progress window), and the limit for all downloads together, which videos share with the other downloads and torrents. A change applies at once, while the video downloads: turn the limiter off and it speeds up. A video sent in pieces (HLS, DASH) keeps to the limit with all its pieces together.
+
+To do that, MDM hands yt-dlp (and the ffmpeg it starts) a proxy of its own on this computer, which keeps each video to its limits and goes on through your proxy (**Options → Proxy / Socks**, or the system's) when you have one. Through a proxy it can't go on through (an `https://` or a SOCKS4 one), yt-dlp is given your proxy itself and the limit as it was when the video started.
+
 ## Through a VPN's adapter
 
 With **Options → Proxy / Socks → [Network adapter](options.md#proxy--socks)** set, video downloads go through that adapter too, with the same kill switch as other downloads: MDM hands yt-dlp (and the ffmpeg it starts) a proxy of its own on this computer, and opens every connection through the adapter, looking the names up with the DNS you chose in **Options → Connection** (without an adapter, yt-dlp uses the system's DNS). When the adapter disconnects, the video download stops, and it starts again when the adapter is back. Formats sent over RTMP, RTSP, MMS or FTP can't go through it and are refused.

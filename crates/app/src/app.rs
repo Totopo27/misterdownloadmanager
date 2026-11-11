@@ -2773,17 +2773,8 @@ impl App {
         if item.live.is_some() || (item.status == Status::Complete && item.gallery.is_none()) {
             return;
         }
-        // A video from a page: yt-dlp, not the engine.
-        if self.item(id).is_some_and(|i| i.video.is_some()) {
-            self.start_video(id, show);
-            return;
-        }
-        // An image gallery: gallery-dl.
-        if self.item(id).is_some_and(|i| i.gallery.is_some()) {
-            self.start_gallery(id, show);
-            return;
-        }
-        // The download limit is reached: it starts when the window has room again.
+        // The download limit is reached: it starts when the window has room again (a video's or
+        // a gallery's too, #708: their bytes count toward it).
         if self.settings.limits_on && self.quota.blocked {
             if !self.quota.held.contains(&id) {
                 self.quota.held.push(id);
@@ -2795,6 +2786,16 @@ impl App {
                 ));
             }
             self.dirty = true;
+            return;
+        }
+        // A video from a page: yt-dlp, not the engine.
+        if self.item(id).is_some_and(|i| i.video.is_some()) {
+            self.start_video(id, show);
+            return;
+        }
+        // An image gallery: gallery-dl.
+        if self.item(id).is_some_and(|i| i.gallery.is_some()) {
+            self.start_gallery(id, show);
             return;
         }
         if self.item(id).is_some_and(|i| i.torrent.is_some()) {
@@ -2892,8 +2893,8 @@ impl App {
         }
     }
 
-    /// Apply the Speed Limiter's "for one file" setting to every running download, file or
-    /// torrent; one with a remembered limit of its own keeps it, as when it starts.
+    /// Apply the Speed Limiter's "for one file" setting to every running download, file, video
+    /// (#708) or torrent; one with a remembered limit of its own keeps it, as when it starts.
     fn apply_speed_limit(&self) {
         let limit = self.settings.speed_limit();
         for i in &self.items {
@@ -3105,12 +3106,14 @@ impl App {
         let new = taken.saturating_sub(before) as f64;
         let k = 1.0 - (-dt / 2.0).exp();
         let mut speed = speed + (new / dt - speed) * k;
-        // None running: 0 at once, so the torrents take the whole cap back in one step.
-        if !self
-            .items
-            .iter()
-            .any(|i| matches!(i.live.as_ref().map(|l| &l.dl), Some(model::Job::File(_))))
-        {
+        // None running: 0 at once, so the torrents take the whole cap back in one step. A
+        // video's bytes go through the global limiter too (#708).
+        if !self.items.iter().any(|i| {
+            matches!(
+                i.live.as_ref().map(|l| &l.dl),
+                Some(model::Job::File(_) | model::Job::Video { .. })
+            )
+        }) {
             speed = 0.0;
         }
         self.file_speed = (speed, now, taken);
@@ -4084,7 +4087,14 @@ impl App {
         let tools = mdm_tools::tools_dir();
         let tool = tools.as_deref().and_then(mdm_tools::installed);
         let ffmpeg = tools.as_deref().and_then(mdm_tools::ffmpeg::installed);
-        let rate = self.settings.speed_limit();
+        // The limits a file download has (#708): its own remembered one, else the Speed
+        // Limiter's, and the global cap shared with every download; followed as they change
+        // (`apply_speed_limit`, `apply_global_limit`), through the relay.
+        let own = self.item(id).and_then(|i| i.own_limit);
+        let pace = mdm_tools::relay::Pace::new(
+            own.or(self.settings.speed_limit()),
+            Some(self.global.clone()),
+        );
         // A stream in pieces (HLS, DASH): as many at once as a file's connections (#531).
         let fragments = self
             .items
@@ -4119,7 +4129,7 @@ impl App {
             &spec.selector,
             &folder,
             &stem,
-            rate,
+            Some(pace),
             fragments,
             ffmpeg.as_ref().map(|f| f.exe.as_path()),
             item.size,

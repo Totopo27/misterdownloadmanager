@@ -9,6 +9,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 
 use crate::proc::{self, ProcError};
+use crate::relay::Pace;
 use crate::servers;
 
 #[derive(Clone, Debug, PartialEq)]
@@ -220,6 +221,8 @@ pub struct VideoJob {
     /// yt-dlp once the page is looked up (`None` before).
     child: Arc<Mutex<Option<proc::Spawned>>>,
     progress: Arc<Mutex<Progress>>,
+    /// Its speed limits, followed as they change (#708; `crate::relay`).
+    pace: Option<Arc<Pace>>,
 }
 
 /// A private file for the looked-up page (its links are signed; removed when the run ends).
@@ -323,6 +326,7 @@ fn supervise(
     child: &Child,
     expected: Option<u64>,
     retry: Option<&SubsRetry>,
+    pace: Option<&Arc<Pace>>,
 ) {
     let mut ours = ours.to_vec();
     let mut dead: std::collections::BTreeSet<String> = Default::default();
@@ -332,7 +336,7 @@ fn supervise(
     let mut last = String::from("yt-dlp stopped");
     for _ in 0..5 {
         match attempt(
-            exe, url, &ours, browser, progress, child, expected, retry, &dead, reroute,
+            exe, url, &ours, browser, progress, child, expected, retry, &dead, reroute, pace,
         ) {
             Attempt::Stopped => return,
             Attempt::Done(f, problems, quality) => {
@@ -429,7 +433,7 @@ pub const MAX_WHILE_RUNNING: f64 = 0.999;
 /// showed (`expected`, every stream), and the fraction done goes back only when a stream's end
 /// had looked like the whole (no `expected`, the next stream starts).
 ///
-/// Pieces fetched several at once ([`pace_args`]) report from each at its turn: the count can
+/// Pieces fetched several at once ([`fragment_args`]) report from each at its turn: the count can
 /// step back a little, which isn't a new stream (#531: one taken for it added a 25 MB estimate,
 /// and a 6 MB video read 66 MB). Then only a fall to under half of it, by 64 KB or more, is.
 struct Meter {
@@ -536,6 +540,7 @@ fn run(
     progress: &Mutex<Progress>,
     child: &Child,
     mut meter: Option<&mut Meter>,
+    pace: Option<&Arc<Pace>>,
 ) -> Result<Option<Ran>, String> {
     let stdout = {
         // Under the child's lock: stop() either came first (nothing starts) or finds the child
@@ -544,8 +549,8 @@ fn run(
         if progress.lock().unwrap().state == State::Stopped {
             return Ok(None);
         }
-        let spawned =
-            proc::ytdlp_info(exe, &[], ours, file).and_then(|cmd| proc::spawn(cmd, "yt-dlp"));
+        let spawned = proc::ytdlp_info_paced(exe, &[], ours, file, pace)
+            .and_then(|cmd| proc::spawn(cmd, "yt-dlp"));
         match spawned {
             Ok(mut s) => {
                 let out = s.child.stdout.take().expect("piped");
@@ -727,6 +732,7 @@ fn attempt(
     retry: Option<&SubsRetry>,
     dead: &std::collections::BTreeSet<String>,
     reroute: bool,
+    pace: Option<&Arc<Pace>>,
 ) -> Attempt {
     let failed = |error: String, rerouted: bool| Attempt::Failed { error, rerouted };
     let mut info = match look_up(exe, url, browser) {
@@ -774,7 +780,7 @@ fn attempt(
     let _cleanup = Remove(file.clone());
     let at_once = ours.iter().any(|a| a == "--concurrent-fragments");
     let mut meter = Meter::new(expected, at_once);
-    let ran = match run(exe, ours, &file, progress, child, Some(&mut meter)) {
+    let ran = match run(exe, ours, &file, progress, child, Some(&mut meter), pace) {
         Ok(Some(r)) => r,
         Ok(None) => return Attempt::Stopped,
         Err(e) => return failed(e, rerouted),
@@ -825,7 +831,7 @@ fn attempt(
             return Attempt::Done(video, Vec::new(), quality);
         }
         let codes: Vec<String> = refused.iter().map(|(c, _)| c.clone()).collect();
-        match run(exe, &r.args(&codes), &file, progress, child, None) {
+        match run(exe, &r.args(&codes), &file, progress, child, None, pace) {
             Ok(Some(again)) if again.status.as_ref().is_ok_and(|s| s.success()) => {
                 still = subtitle_failures(&again.warnings);
             }
@@ -894,16 +900,16 @@ fn template_text(s: &str) -> String {
     s.replace('%', "%%")
 }
 
-/// yt-dlp's speed: at most `rate` bytes/s; a stream in pieces (HLS, DASH) `fragments` pieces at
-/// once, as a file comes down over several connections (Options → Connection, #531). yt-dlp uses
-/// that for such streams only (a plain file stays one connection), and its limit holds for each
-/// piece, not for them together: with a limit, one piece at a time, so the limit stays the
-/// download's, whatever the format turns out to be.
-pub fn pace_args(rate: Option<u64>, fragments: u32) -> Vec<String> {
-    match rate {
-        Some(r) => vec!["--limit-rate".into(), r.to_string()],
-        None if fragments > 1 => vec!["--concurrent-fragments".into(), fragments.to_string()],
-        None => Vec::new(),
+/// A stream in pieces (HLS, DASH): `fragments` pieces at once, as a file comes down over several
+/// connections (Options → Connection, #531). yt-dlp uses that for such streams only (a plain file
+/// stays one connection). The speed limits hold for the pieces together: the relay paces the
+/// whole download (#708, `crate::relay`; yt-dlp's own `--limit-rate` holds for each piece, and
+/// only where the relay can't be used, `proc::fixed_pace_args`).
+pub fn fragment_args(fragments: u32) -> Vec<String> {
+    if fragments > 1 {
+        vec!["--concurrent-fragments".into(), fragments.to_string()]
+    } else {
+        Vec::new()
     }
 }
 
@@ -916,8 +922,10 @@ const FINAL: &str = "after_move:MDMF %(filepath)s";
 const QUALITY: &str = "video:MDMQ %(format_id)s %(resolution)s";
 
 impl VideoJob {
-    /// Download `url` in format `selector` to `dir/<stem>.<ext>`, at most `rate` bytes/s, a
-    /// stream in pieces `fragments` pieces at once ([`pace_args`]); `ffmpeg` (its exe) merges separate video and audio into an MP4. `expected`: the size the
+    /// Download `url` in format `selector` to `dir/<stem>.<ext>`, held to `pace` (MDM's speed
+    /// limits as they change, #708: through the relay, `proc::ytdlp_info_paced`; None: no
+    /// limit), a stream in pieces `fragments` pieces at once ([`fragment_args`]); `ffmpeg` (its
+    /// exe) merges separate video and audio into an MP4. `expected`: the size the
     /// choice was shown with (every stream), so the progress starts from the whole. `browser`:
     /// what the browser's request for the page carried (proc::FromBrowser). `subs`: the
     /// subtitles to save with it (#68; none for a sound alone, which has no picture to put them
@@ -929,7 +937,7 @@ impl VideoJob {
         selector: &str,
         dir: &Path,
         stem: &str,
-        rate: Option<u64>,
+        pace: Option<Arc<Pace>>,
         fragments: u32,
         ffmpeg: Option<&Path>,
         expected: Option<u64>,
@@ -972,7 +980,7 @@ impl VideoJob {
             "--print".into(),
             QUALITY.into(),
         ];
-        ours.extend(pace_args(rate, fragments));
+        ours.extend(fragment_args(fragments));
         // A subtitles-only second run, for the ones a site refuses (#68): the same output name.
         let mut retry_base: Vec<String> = vec![
             "-o".into(),
@@ -1038,7 +1046,7 @@ impl VideoJob {
         }));
         let child: Child = Arc::new(Mutex::new(None));
         {
-            let (progress, child) = (progress.clone(), child.clone());
+            let (progress, child, pace) = (progress.clone(), child.clone(), pace.clone());
             let (exe, url) = (exe.to_owned(), url.to_owned());
             std::thread::spawn(move || {
                 // The cookie file lives as long as the run.
@@ -1054,6 +1062,7 @@ impl VideoJob {
                         &child,
                         expected,
                         retry.as_ref(),
+                        pace.as_ref(),
                     )
                 });
                 if std::panic::catch_unwind(run).is_err() {
@@ -1068,7 +1077,23 @@ impl VideoJob {
                 }
             });
         }
-        Ok(VideoJob { child, progress })
+        Ok(VideoJob {
+            child,
+            progress,
+            pace,
+        })
+    }
+
+    /// Its own speed limit, now (None: unlimited); the global cap holds as well.
+    pub fn set_speed_limit(&self, rate: Option<u64>) {
+        if let Some(p) = &self.pace {
+            p.set(rate);
+        }
+    }
+
+    /// Its own speed limit.
+    pub fn speed_limit(&self) -> Option<u64> {
+        self.pace.as_ref().and_then(|p| p.get())
     }
 
     pub fn progress(&self) -> Progress {
@@ -1128,15 +1153,21 @@ mod tests {
     }
 
     /// #531: a stream in pieces comes down several at once, as many as a file's connections;
-    /// with a speed limit one at a time, as yt-dlp's limit holds for each piece (measured
-    /// against the lab server: `--limit-rate 512K -N 4` took a quarter of the time).
+    /// the relay paces them together (#708). yt-dlp's own limit holds for each piece (measured
+    /// against the lab server: `--limit-rate 512K -N 4` took a quarter of the time): where it
+    /// is used, one piece at a time.
     #[test]
-    fn fragments_at_once_unless_the_speed_is_limited() {
+    fn fragments_at_once_and_the_fixed_limit_one_at_a_time() {
         let s = |v: Vec<String>| v.join(" ");
-        assert_eq!(s(pace_args(None, 8)), "--concurrent-fragments 8");
-        assert_eq!(s(pace_args(None, 1)), "");
-        assert_eq!(s(pace_args(None, 0)), "");
-        assert_eq!(s(pace_args(Some(524_288), 8)), "--limit-rate 524288");
+        assert_eq!(s(fragment_args(8)), "--concurrent-fragments 8");
+        assert_eq!(s(fragment_args(1)), "");
+        assert_eq!(s(fragment_args(0)), "");
+        // yt-dlp's own limit only where the relay can't pace it (#708): one piece at a time.
+        assert_eq!(
+            s(proc::fixed_pace_args(Some(524_288))),
+            "--limit-rate 524288 --concurrent-fragments 1"
+        );
+        assert_eq!(s(proc::fixed_pace_args(None)), "");
     }
 
     /// Live (network, yt-dlp): `MDM_LIVE_YTDLP=<yt-dlp.exe> MDM_LIVE_PAGE=<video page>

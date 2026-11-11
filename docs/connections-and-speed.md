@@ -118,11 +118,11 @@ The Speed Limiter keeps MDM from using all of your connection.
 
 **Always turn on Speed Limiter on Mister Download Manager startup** turns it on each time MDM starts.
 
-A torrent counts as one file here: each torrent gets the limit of its own. A download with a limit of its own (see [For one download](#for-one-download)) keeps that one.
+A torrent counts as one file here: each torrent gets the limit of its own. So does a video, its pieces and its sound together ([Videos](video.md#speed-limits)). A download with a limit of its own (see [For one download](#for-one-download)) keeps that one.
 
 ### For all downloads together
 
-In the same window, tick **Limit all downloads together to** and set the speed. This caps MDM as a whole, however many files are downloading, torrents included. When torrents and other downloads run at the same time, each side gets at least half of the speed, and more when the other side needs less: a torrent going slowly leaves the rest to the other downloads, and the other way round. It applies whenever it is ticked, whether the per-file limiter is on or off.
+In the same window, tick **Limit all downloads together to** and set the speed. This caps MDM as a whole, however many files are downloading, torrents and videos included. When torrents and other downloads run at the same time, each side gets at least half of the speed, and more when the other side needs less: a torrent going slowly leaves the rest to the other downloads, and the other way round. It applies whenever it is ticked, whether the per-file limiter is on or off.
 
 Tick **Only while I'm using the computer** to apply it only while you use the mouse or keyboard. After a minute without input, MDM goes back to full speed.
 
@@ -136,7 +136,7 @@ In the download's progress window, open the **Speed Limiter** tab:
 2. Set **Maximum download speed** in KBytes/sec. The new limit applies at once.
 3. Tick **Remember Speed Limiter settings for this file on download stop/resume** to keep this limit for the file: it applies again when you resume it later, even after restarting MDM.
 
-For a torrent, the limit is that torrent's alone; the others keep theirs. A torrent can't be held under 16 KBytes/sec: a lower limit gives it 16.
+A video takes a limit of its own the same way. For a torrent, the limit is that torrent's alone; the others keep theirs. A torrent can't be held under 16 KBytes/sec: a lower limit gives it 16.
 
 > Some servers drop the connection when the speed is very low. Avoid a tight limit for servers that can't resume (**Resume capability: No**).
 

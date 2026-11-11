@@ -335,15 +335,24 @@ fn through_proxy(cmd: &mut Command, url: Option<&str>) -> Vec<String> {
     }
 }
 
-/// The helpers' relay, started on first use.
+/// The helpers' relay, started on first use. Its connections go through the chosen adapter with
+/// the chosen DNS (#35, #36); without an adapter (a download paced by it, #708), with the
+/// system's DNS, as yt-dlp's own were.
 fn relay() -> Result<Arc<crate::relay::Relay>, ProcError> {
     let mut slot = RELAY.lock().unwrap();
     if let Some(r) = slot.as_ref() {
         return Ok(r.clone());
     }
-    let relay = crate::relay::Relay::start(Arc::new(|| (route(), dns())))
-        .map(Arc::new)
-        .map_err(|e| ProcError::Start("the network adapter's relay".into(), e))?;
+    let relay = crate::relay::Relay::start(Arc::new(|| {
+        let route = route();
+        let dns = match route {
+            mdm_engine::Route::Any => mdm_engine::DnsChoice::default(),
+            _ => dns(),
+        };
+        (route, dns)
+    }))
+    .map(Arc::new)
+    .map_err(|e| ProcError::Start("the network adapter's relay".into(), e))?;
     *slot = Some(relay.clone());
     Ok(relay)
 }
@@ -353,6 +362,58 @@ fn relay() -> Result<Arc<crate::relay::Relay>, ProcError> {
 enum Helper {
     YtDlp,
     GalleryDl,
+}
+
+/// `proxy` for everything `cmd` starts: `HTTP_PROXY`, `HTTPS_PROXY` and `ALL_PROXY` (curl,
+/// aria2c, ffmpeg, gallery-dl's Python), with `NO_PROXY` taken away so no host is let around it.
+fn proxy_environment(cmd: &mut Command, proxy: &str) {
+    for var in [
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
+        "ALL_PROXY",
+        "http_proxy",
+        "https_proxy",
+        "all_proxy",
+    ] {
+        cmd.env(var, proxy);
+    }
+    cmd.env_remove("NO_PROXY").env_remove("no_proxy");
+}
+
+/// Where a paced download's connections go on to after the relay (#708), without an adapter:
+/// the proxy yt-dlp would have been given (Options -> Proxy / Socks, [`proxy_given`]), else the
+/// one it would have found itself (the environment's, the system's). None: a proxy the relay
+/// can't go on through (`https://`, `socks4://`).
+fn upstream_for(
+    proxy: &mdm_engine::Proxy,
+    url: Option<&url::Url>,
+) -> Option<crate::relay::Upstream> {
+    let given = match proxy_given(proxy, url) {
+        ProxyGiven::Nothing => {
+            let any = url::Url::parse("https://example.com/").expect("a valid address");
+            mdm_engine::net::system_proxy(url.unwrap_or(&any))
+        }
+        ProxyGiven::Argument(p) | ProxyGiven::Environment(p) => Some(p),
+    };
+    match given {
+        None => Some(crate::relay::Upstream::Direct),
+        Some(p) => crate::relay::Upstream::parse(&p),
+    }
+}
+
+/// yt-dlp's own fixed limit, for a paced download the relay can't carry (#708: through a proxy
+/// it can't go on through): the limit as it is when it starts, one piece at a time (yt-dlp's
+/// limit holds for each piece of a stream, not for them together). After `ours`, so it wins.
+pub fn fixed_pace_args(rate: Option<u64>) -> Vec<String> {
+    match rate {
+        Some(r) => vec![
+            "--limit-rate".into(),
+            r.to_string(),
+            "--concurrent-fragments".into(),
+            "1".into(),
+        ],
+        None => Vec::new(),
+    }
 }
 
 /// A helper and the chosen adapter (#35): nothing to do when there's none; refused while it is
@@ -367,30 +428,54 @@ enum Helper {
 ///   formats (mpv or mplayer, in older yt-dlp) stop the download (`--break-match-filters`; `?`
 ///   lets an entry not yet chosen pass, a playlist's).
 /// - gallery-dl: `--proxy`.
-/// - Both, and anything they start: `HTTP_PROXY`, `HTTPS_PROXY` and `ALL_PROXY` (curl, aria2c,
-///   gallery-dl's Python), with `NO_PROXY` taken away so no host is let around it.
+/// - Both, and anything they start: [`proxy_environment`].
+///
+/// A download with a `pace` (#708) goes through the relay with or without an adapter, on an
+/// address of its own ([`crate::relay::Relay::lane`]) that holds it to MDM's speed limits as
+/// they change; without an adapter it goes on through the proxy it would have had
+/// ([`upstream_for`]). One the relay can't carry gets that proxy itself, and yt-dlp's fixed
+/// limit ([`fixed_pace_args`]).
 fn through_adapter(
     cmd: &mut Command,
     helper: Helper,
     url: Option<&str>,
+    pace: Option<&Arc<crate::relay::Pace>>,
 ) -> Result<Vec<String>, ProcError> {
+    let lane = |pace: &Arc<crate::relay::Pace>, upstream| {
+        relay()?
+            .lane(pace, upstream)
+            .map_err(|e| ProcError::Start("the network adapter's relay".into(), e))
+    };
     match route() {
         // No adapter: Options -> Proxy / Socks (#363).
-        mdm_engine::Route::Any => Ok(through_proxy(cmd, url)),
+        mdm_engine::Route::Any => {
+            let Some(pace) = pace else {
+                return Ok(through_proxy(cmd, url));
+            };
+            let page = url.and_then(|u| url::Url::parse(u).ok());
+            let upstream = upstream_for(&PROXY.read().unwrap(), page.as_ref());
+            match upstream {
+                Some(upstream) => {
+                    let lane = lane(pace, upstream)?;
+                    proxy_environment(cmd, &lane);
+                    Ok(vec!["--proxy".into(), lane])
+                }
+                None => {
+                    let mut args = through_proxy(cmd, url);
+                    if helper == Helper::YtDlp {
+                        args.extend(fixed_pace_args(pace.now()));
+                    }
+                    Ok(args)
+                }
+            }
+        }
         mdm_engine::Route::Down { label } => Err(mdm_engine::NetError::Down { label }.into()),
         mdm_engine::Route::Bound(_) => {
-            let url = relay()?.url();
-            for var in [
-                "HTTP_PROXY",
-                "HTTPS_PROXY",
-                "ALL_PROXY",
-                "http_proxy",
-                "https_proxy",
-                "all_proxy",
-            ] {
-                cmd.env(var, &url);
-            }
-            cmd.env_remove("NO_PROXY").env_remove("no_proxy");
+            let url = match pace {
+                Some(pace) => lane(pace, crate::relay::Upstream::Direct)?,
+                None => relay()?.url(),
+            };
+            proxy_environment(cmd, &url);
             Ok(match helper {
                 Helper::YtDlp => vec![
                     "--proxy".into(),
@@ -430,7 +515,7 @@ pub fn gallery_dl(
     url: &str,
 ) -> Result<Command, ProcError> {
     let mut cmd = Command::new(&tool.exe);
-    let route = through_adapter(&mut cmd, Helper::GalleryDl, Some(url))?;
+    let route = through_adapter(&mut cmd, Helper::GalleryDl, Some(url), None)?;
     cmd.env("PYTHONIOENCODING", "utf-8");
     for a in ours {
         cmd.arg(safe(a)?);
@@ -821,7 +906,7 @@ pub fn ytdlp(
     url: &str,
 ) -> Result<Command, ProcError> {
     let mut cmd = ytdlp_command(exe);
-    let route = through_adapter(&mut cmd, Helper::YtDlp, Some(url))?;
+    let route = through_adapter(&mut cmd, Helper::YtDlp, Some(url), None)?;
     layers(&mut cmd, user, ours)?;
     cmd.args(["--ignore-config", "--no-exec", "--no-update"]);
     cmd.args(js_runtime_args());
@@ -840,8 +925,20 @@ pub fn ytdlp_info(
     ours: &[String],
     info: &Path,
 ) -> Result<Command, ProcError> {
+    ytdlp_info_paced(exe, user, ours, info, None)
+}
+
+/// [`ytdlp_info`] for a download held to MDM's speed limits by `pace` (#708,
+/// [`through_adapter`]).
+pub fn ytdlp_info_paced(
+    exe: &Path,
+    user: &[String],
+    ours: &[String],
+    info: &Path,
+    pace: Option<&Arc<crate::relay::Pace>>,
+) -> Result<Command, ProcError> {
     let mut cmd = ytdlp_command(exe);
-    let route = through_adapter(&mut cmd, Helper::YtDlp, None)?;
+    let route = through_adapter(&mut cmd, Helper::YtDlp, None, pace)?;
     layers(&mut cmd, user, ours)?;
     cmd.args(["--ignore-config", "--no-exec", "--no-update"]);
     cmd.args(js_runtime_args());

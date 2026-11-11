@@ -577,14 +577,15 @@ impl Job {
         }
     }
 
-    /// The speed limit can change while a file downloads; yt-dlp takes it at the start; a
-    /// torrent's applies to the whole torrent session.
+    /// The speed limit can change while a file, a video (through the relay, #708) or a torrent
+    /// downloads; gallery-dl takes it at the start.
     pub fn set_speed_limit(&self, rate: Option<u64>) {
         match self {
             Job::File(d) => d.set_speed_limit(rate),
             Job::Torrent(t) => t.set_speed_limit(rate),
             Job::Remote(r) => r.set_speed_limit(rate),
-            Job::Video { .. } | Job::Gallery { .. } => {}
+            Job::Video { job, .. } => job.set_speed_limit(rate),
+            Job::Gallery { .. } => {}
         }
     }
 
@@ -592,7 +593,8 @@ impl Job {
         match self {
             Job::File(d) => d.speed_limit(),
             Job::Torrent(t) => t.speed_limit(),
-            Job::Remote(_) | Job::Video { .. } | Job::Gallery { .. } => None,
+            Job::Video { job, .. } => job.speed_limit(),
+            Job::Remote(_) | Job::Gallery { .. } => None,
         }
     }
 }

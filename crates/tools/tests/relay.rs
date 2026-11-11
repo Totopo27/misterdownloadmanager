@@ -3,6 +3,9 @@
 //! stands in for the adapter's address (bound even toward this computer, `loopback_too`), so the
 //! lab server's log shows where each connection came from. Nothing leaves this computer.
 //!
+//! A download's own address on it (#708) keeps to MDM's speed limits as they change, and goes on
+//! through the proxy it would have had.
+//!
 //! `real_helpers_go_through_the_relay` runs the real yt-dlp and ffmpeg (ignored; see it).
 
 use std::io::{Read, Write};
@@ -246,6 +249,219 @@ fn a_route_change_closes_what_is_open() {
         "#35: the tunnel closed {:?} after the route changed",
         t.elapsed()
     );
+}
+
+/// `user:password` of a proxy address (a lane's, `Relay::lane`), as a Basic credential.
+fn auth_of(proxy: &str) -> String {
+    use base64::Engine;
+    let url = url::Url::parse(proxy).unwrap();
+    let pair = format!("{}:{}", url.username(), url.password().unwrap());
+    format!(
+        "Proxy-Authorization: Basic {}\r\n",
+        base64::engine::general_purpose::STANDARD.encode(pair)
+    )
+}
+
+/// A plain request for `path` on the lab through the proxy address `lane` (its relay `relay`):
+/// the open answer, its head read.
+fn open_through(relay: &Relay, lane: &str, lab: &LabServer, path: &str) -> TcpStream {
+    let mut s = TcpStream::connect(relay.addr()).unwrap();
+    s.set_read_timeout(Some(Duration::from_secs(30))).unwrap();
+    let at = lab_addr(lab);
+    s.write_all(
+        format!(
+            "GET http://{at}{path} HTTP/1.1\r\nHost: {at}\r\n{}\r\n",
+            auth_of(lane)
+        )
+        .as_bytes(),
+    )
+    .unwrap();
+    // The head, a byte at a time (what follows is the body).
+    let mut head = Vec::new();
+    let mut b = [0u8; 1];
+    while !head.ends_with(b"\r\n\r\n") {
+        assert_eq!(s.read(&mut b).unwrap(), 1, "the answer ended in its head");
+        head.push(b[0]);
+    }
+    assert!(
+        head.starts_with(b"HTTP/1.1 200"),
+        "{}",
+        String::from_utf8_lossy(&head)
+    );
+    s
+}
+
+/// Read `n` bytes of a body; the seconds it took.
+fn read_for(s: &mut TcpStream, n: usize) -> f64 {
+    let t = Instant::now();
+    let mut buf = vec![0u8; 64 << 10];
+    let mut left = n;
+    while left > 0 {
+        let want = left.min(buf.len());
+        let got = s.read(&mut buf[..want]).unwrap();
+        assert!(got > 0, "the body ended early");
+        left -= got;
+    }
+    t.elapsed().as_secs_f64()
+}
+
+/// #708: what comes down a download's address keeps to its limits as they are at each moment:
+/// its own, the global cap shared with the other downloads, and none once it is lifted.
+#[test]
+fn a_download_keeps_to_its_limits_as_they_change() {
+    use mdm_engine::limiter::Limiter;
+    use mdm_tools::relay::{Pace, Upstream};
+    let (_rt, lab) = lab();
+    let relay = relay(&Arc::new(Mutex::new(Route::Any)));
+
+    // Its own limit, 400 KB/s: 800 KB take about 2 s.
+    let pace = Pace::new(Some(400 << 10), None);
+    let lane = relay.lane(&pace, Upstream::Direct).unwrap();
+    let mut s = open_through(&relay, &lane, &lab, "/gen/8M/own.bin");
+    let secs = read_for(&mut s, 800 << 10);
+    let rate = 800.0 / secs;
+    println!("own 400 KB/s: {rate:.0} KB/s");
+    assert!((340.0..=460.0).contains(&rate), "{rate:.0} KB/s");
+    // Lifted while it runs: the rest comes at once.
+    pace.set(None);
+    let secs = read_for(&mut s, 4 << 20);
+    println!("lifted: {:.0} KB/s", 4096.0 / secs);
+    assert!(secs < 2.0, "4 MB took {secs:.2} s without a limit");
+    drop(s);
+
+    // The global cap, 500 KB/s, shared by two downloads at once: 1 MB together in about 2 s.
+    let global = Arc::new(Limiter::new(Some(500 << 10)));
+    let (a, b) = (
+        Pace::new(None, Some(global.clone())),
+        Pace::new(None, Some(global.clone())),
+    );
+    let (la, lb) = (
+        relay.lane(&a, Upstream::Direct).unwrap(),
+        relay.lane(&b, Upstream::Direct).unwrap(),
+    );
+    let mut sa = open_through(&relay, &la, &lab, "/gen/4M/a.bin");
+    let mut sb = open_through(&relay, &lb, &lab, "/gen/4M/b.bin");
+    let t = Instant::now();
+    std::thread::scope(|scope| {
+        let ta = scope.spawn(|| read_for(&mut sa, 512 << 10));
+        let tb = scope.spawn(|| read_for(&mut sb, 512 << 10));
+        let (ta, tb) = (ta.join().unwrap(), tb.join().unwrap());
+        println!("global 500 KB/s, two at once: {ta:.2} s and {tb:.2} s for 512 KB each");
+    });
+    let rate = 1024.0 / t.elapsed().as_secs_f64();
+    println!("global 500 KB/s, together: {rate:.0} KB/s");
+    assert!((420.0..=580.0).contains(&rate), "{rate:.0} KB/s");
+    assert!(global.taken() >= 1 << 20, "counted in the cap");
+    // The cap lowered while they run (the torrents took their share): 200 KB/s together.
+    global.set(Some(200 << 10));
+    let t = Instant::now();
+    std::thread::scope(|scope| {
+        scope.spawn(|| read_for(&mut sa, 200 << 10));
+        scope.spawn(|| read_for(&mut sb, 200 << 10));
+    });
+    let rate = 400.0 / t.elapsed().as_secs_f64();
+    println!("global lowered to 200 KB/s: {rate:.0} KB/s");
+    assert!((160.0..=240.0).contains(&rate), "{rate:.0} KB/s");
+}
+
+/// #708: a download's address goes on through the proxy it would have had (here an HTTP proxy
+/// with a login, another relay standing in for it): tunnels and plain requests both, and its
+/// pace holds there too.
+#[test]
+fn a_download_goes_on_through_its_proxy() {
+    use mdm_tools::relay::{Pace, Upstream};
+    let (_rt, lab) = lab();
+    let any = Arc::new(Mutex::new(Route::Any));
+    let proxy = relay(&any);
+    let ours = relay(&any);
+    let upstream = Upstream::parse(&proxy.url()).unwrap();
+    assert!(matches!(&upstream, Upstream::Http { auth: Some(_), .. }));
+    let pace = Pace::new(None, None);
+    let lane = ours.lane(&pace, upstream).unwrap();
+
+    // A plain request.
+    let mut s = open_through(&ours, &lane, &lab, "/gen/64K/plain.bin");
+    assert!(read_for(&mut s, 64 << 10) < 5.0);
+    // A tunnel.
+    let at = lab_addr(&lab);
+    let mut t = TcpStream::connect(ours.addr()).unwrap();
+    t.set_read_timeout(Some(Duration::from_secs(20))).unwrap();
+    t.write_all(format!("CONNECT {at} HTTP/1.1\r\n{}\r\n", auth_of(&lane)).as_bytes())
+        .unwrap();
+    let mut head = Vec::new();
+    let mut b = [0u8; 1];
+    while !head.ends_with(b"\r\n\r\n") {
+        assert_eq!(t.read(&mut b).unwrap(), 1);
+        head.push(b[0]);
+    }
+    assert!(
+        head.starts_with(b"HTTP/1.1 200"),
+        "{}",
+        String::from_utf8_lossy(&head)
+    );
+    t.write_all(
+        format!("GET /gen/1K/tunnel.bin HTTP/1.1\r\nHost: {at}\r\nConnection: close\r\n\r\n")
+            .as_bytes(),
+    )
+    .unwrap();
+    let mut out = Vec::new();
+    let _ = t.read_to_end(&mut out);
+    assert!(
+        out.starts_with(b"HTTP/1.1 200"),
+        "{}",
+        String::from_utf8_lossy(&out)
+    );
+    assert_eq!(body(&out).len(), 1024);
+    let log = lab.log();
+    assert!(log.iter().any(|e| e.path == "/gen/64K/plain.bin"));
+    assert!(log.iter().any(|e| e.path == "/gen/1K/tunnel.bin"));
+
+    // A proxy that refuses: the helper is told, nothing reaches the lab.
+    let mut wrong = url::Url::parse(&proxy.url()).unwrap();
+    wrong.set_password(Some("wrong")).unwrap();
+    let wrong = Upstream::parse(wrong.as_str()).unwrap();
+    let lane = ours.lane(&pace, wrong).unwrap();
+    let before = lab.log().len();
+    let answer = ask(
+        &ours,
+        &format!(
+            "GET http://{at}/gen/1K/no.bin HTTP/1.1\r\nHost: {at}\r\n{}\r\n",
+            auth_of(&lane)
+        ),
+    );
+    let answer = String::from_utf8_lossy(&answer);
+    let tunnel = ask(
+        &ours,
+        &format!("CONNECT {at} HTTP/1.1\r\n{}\r\n", auth_of(&lane)),
+    );
+    let tunnel = String::from_utf8_lossy(&tunnel);
+    assert!(
+        answer.starts_with("HTTP/1.1 407"),
+        "the proxy's own answer: {answer}"
+    );
+    assert!(tunnel.starts_with("HTTP/1.1 502"), "{tunnel}");
+    assert!(tunnel.contains("refused"), "{tunnel}");
+    assert_eq!(lab.log().len(), before);
+}
+
+/// #708: once its download is gone, a download's address opens nothing (it may have been held to
+/// a proxy: never around it).
+#[test]
+fn an_ended_download_opens_nothing() {
+    use mdm_tools::relay::{Pace, Upstream};
+    let (_rt, lab) = lab();
+    let relay = relay(&Arc::new(Mutex::new(Route::Any)));
+    let pace = Pace::new(None, None);
+    let lane = relay.lane(&pace, Upstream::Direct).unwrap();
+    drop(pace);
+    let at = lab_addr(&lab);
+    let answer = ask(
+        &relay,
+        &format!("CONNECT {at} HTTP/1.1\r\n{}\r\n", auth_of(&lane)),
+    );
+    let answer = String::from_utf8_lossy(&answer);
+    assert!(answer.starts_with("HTTP/1.1 502"), "{answer}");
+    assert!(lab.log().is_empty());
 }
 
 /// The real yt-dlp and ffmpeg, through `mdm_tools::proc` as the app starts them, against the lab
