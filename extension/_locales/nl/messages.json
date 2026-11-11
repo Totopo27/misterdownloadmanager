@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Verzonden naar Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager is niet geïnstalleerd of is niet gestart"
-  },
-  "video_drag": {
-    "message": "Sleep om de knop langs de rand van de video te verplaatsen"
-  },
   "menu_selected": {
     "message": "Geselecteerde koppelingen downloaden met Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Live"
   },
   "video_off": {
-    "message": "De downloadknop is uitgeschakeld op deze site"
+    "message": "Uitgeschakeld op deze site"
   },
   "video_drm": {
-    "message": "Beveiligde video: kan niet worden opgeslagen"
+    "message": "Beveiligde video"
   },
   "video_unnamed": {
     "message": "Niet duidelijk welke video dit is: open de eigen pagina van de video en probeer het daar"
   },
   "video_looking": {
     "message": "Kwaliteiten opzoeken…"
-  },
-  "video_open_mdm": {
-    "message": "Openen in Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Geen video om hier te downloaden"
@@ -222,7 +213,7 @@
     "message": "Audio"
   },
   "video_open_post": {
-    "message": "Open het bericht en gebruik dan de knop daar"
+    "message": "Open het bericht om de video te downloaden"
   },
   "popup_send_to": {
     "message": "Downloads verzenden naar"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Voeg de paginatitel toe vóór de namen van mediabestanden"
+  },
+  "video_cant_save": {
+    "message": "kan niet worden opgeslagen"
+  },
+  "video_open_post_button": {
+    "message": "Bericht openen"
+  },
+  "video_drag_dots": {
+    "message": "Sleep de stippen om de knop langs de rand te verplaatsen"
+  },
+  "video_tip": {
+    "message": "$what$ downloaden",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "De beste kwaliteit downloaden"
+  },
+  "video_sending": {
+    "message": "Verzenden naar MDM..."
+  },
+  "video_added": {
+    "message": "Toegevoegd aan MDM"
+  },
+  "video_show": {
+    "message": "Weergeven"
+  },
+  "video_no_answer": {
+    "message": "MDM reageerde niet"
+  },
+  "video_get_mdm": {
+    "message": "MDM ophalen"
+  },
+  "video_retry": {
+    "message": "Opnieuw proberen"
+  },
+  "video_turn_on": {
+    "message": "Inschakelen"
+  },
+  "video_section": {
+    "message": "Downloaden"
+  },
+  "video_best": {
+    "message": "beste"
+  },
+  "video_best_quality": {
+    "message": "Beste kwaliteit"
+  },
+  "video_all_qualities": {
+    "message": "Alle kwaliteiten en ondertitels..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager is niet geïnstalleerd of is niet gestart"
   }
 }

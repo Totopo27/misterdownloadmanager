@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Managerకు పంపబడింది"
   },
-  "video_failed": {
-    "message": "Mister Download Manager ఇన్‌స్టాల్ చేయబడలేదు లేదా ప్రారంభం కాలేదు"
-  },
-  "video_drag": {
-    "message": "వీడియో అంచున తరలించడానికి లాగండి"
-  },
   "menu_selected": {
     "message": "Mister Download Managerతో ఎంచుకున్న లింక్‌లను డౌన్‌లోడ్ చేయండి"
   },
@@ -180,19 +174,16 @@
     "message": "ప్రత్యక్ష ప్రసారం"
   },
   "video_off": {
-    "message": "ఈ సైట్‌లో డౌన్‌లోడ్ బటన్ ఆఫ్ చేయబడింది"
+    "message": "ఈ సైట్‌లో ఆఫ్ చేయబడింది"
   },
   "video_drm": {
-    "message": "రక్షిత వీడియో: దీన్ని సేవ్ చేయలేము"
+    "message": "రక్షిత వీడియో"
   },
   "video_unnamed": {
     "message": "ఇది ఏ వీడియోనో తెలియడం లేదు: దాని స్వంత పేజీని తెరిచి అక్కడ ప్రయత్నించండి"
   },
   "video_looking": {
     "message": "నాణ్యతలను వెతుకుతోంది…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Managerలో తెరువు…"
   },
   "video_no_choices": {
     "message": "ఇక్కడ డౌన్‌లోడ్ చేయడానికి వీడియో లేదు"
@@ -222,7 +213,7 @@
     "message": "ఆడియో"
   },
   "video_open_post": {
-    "message": "పోస్ట్‌ను తెరవండి, ఆపై అక్కడ బటన్‌ను ఉపయోగించండి"
+    "message": "డౌన్‌లోడ్ చేయడానికి పోస్ట్‌ను తెరవండి"
   },
   "popup_send_to": {
     "message": "డౌన్‌లోడ్‌లను దీనికి పంపండి"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "మీడియా ఫైల్ పేర్ల ముందు పేజీ శీర్షికను జోడించు"
+  },
+  "video_cant_save": {
+    "message": "సేవ్ చేయడం సాధ్యం కాదు"
+  },
+  "video_open_post_button": {
+    "message": "పోస్ట్‌ను తెరవండి"
+  },
+  "video_drag_dots": {
+    "message": "అంచు వెంట దాన్ని తరలించడానికి చుక్కలను లాగండి"
+  },
+  "video_tip": {
+    "message": "$what$ డౌన్‌లోడ్ చేయండి",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "ఉత్తమ నాణ్యతను డౌన్‌లోడ్ చేయండి"
+  },
+  "video_sending": {
+    "message": "MDMకు పంపుతోంది..."
+  },
+  "video_added": {
+    "message": "MDMకి జోడించబడింది"
+  },
+  "video_show": {
+    "message": "చూపించు"
+  },
+  "video_no_answer": {
+    "message": "MDM స్పందించలేదు"
+  },
+  "video_get_mdm": {
+    "message": "MDMని పొందండి"
+  },
+  "video_retry": {
+    "message": "మళ్ళీ ప్రయత్నించండి"
+  },
+  "video_turn_on": {
+    "message": "ఆన్ చేయి"
+  },
+  "video_section": {
+    "message": "డౌన్‌లోడ్ చేయండి"
+  },
+  "video_best": {
+    "message": "ఉత్తమమైనది"
+  },
+  "video_best_quality": {
+    "message": "ఉత్తమ నాణ్యత"
+  },
+  "video_all_qualities": {
+    "message": "అన్ని నాణ్యతలు మరియు ఉపశీర్షికలు..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager ఇన్‌స్టాల్ చేయబడలేదు లేదా ప్రారంభం కాలేదు"
   }
 }

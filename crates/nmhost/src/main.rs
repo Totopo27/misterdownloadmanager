@@ -116,6 +116,12 @@ struct Message {
     src: Option<String>,
     /// The page's title (`video`).
     title: Option<String>,
+    /// The button over a plain file (`src`, #703): it is downloaded as any file, at once.
+    direct: bool,
+    /// The button's "Show": the main window with the newest download of this address selected.
+    show_download: Option<String>,
+    /// The button's "Turn on": show it on this site (a host name) again.
+    show_site: Option<String>,
     /// The button's menu: keep it off this site (a host name).
     hide_site: Option<String>,
     /// The button's menu: open its settings in Options (`page`: the toolbar button's popup asks
@@ -319,9 +325,29 @@ fn answer(m: Message, rules: &mdm_ipc::capture::CaptureRules) -> Reply {
         .as_deref()
         .map(str::trim)
         .filter(|h| !h.is_empty());
+    let show_site = m
+        .show_site
+        .as_deref()
+        .map(str::trim)
+        .filter(|h| !h.is_empty());
+    let show_download = m
+        .show_download
+        .as_deref()
+        .map(str::trim)
+        .filter(|a| a.starts_with("http://") || a.starts_with("https://"));
     let panel_cmd = if let Some(host) = hide {
         Some(mdm_ipc::Command {
             panel_hide_site: Some(host.to_owned()),
+            ..Default::default()
+        })
+    } else if let Some(host) = show_site {
+        Some(mdm_ipc::Command {
+            panel_show_site: Some(host.to_owned()),
+            ..Default::default()
+        })
+    } else if let Some(address) = show_download {
+        Some(mdm_ipc::Command {
+            show_download: Some(address.to_owned()),
             ..Default::default()
         })
     } else if m.open_options {
@@ -492,7 +518,10 @@ fn video_command(
         Some(_) => Some(m.url.clone()),
         None => m.referrer.clone().filter(|r| !r.is_empty()),
     };
+    // The button over a plain file (#703): that file, as a file.
+    let direct = m.direct && src.is_some();
     Ok(mdm_ipc::Command {
+        video_direct: direct,
         video_page: Some(src.unwrap_or_else(|| m.url.clone())),
         video_title: m.title.clone().filter(|t| !t.trim().is_empty()),
         referer,
@@ -1580,6 +1609,38 @@ mod tests {
         let m: Message =
             serde_json::from_str(r#"{"hideSite":"tube.test","openOptions":false}"#).unwrap();
         assert_eq!(m.hide_site.as_deref(), Some("tube.test"));
+    }
+
+    #[test]
+    fn the_buttons_file_show_and_turn_on_reach_the_app() {
+        let ua = "Mozilla/5.0 (Windows NT 10.0) Chrome/141.0.0.0 Safari/537.36";
+        let rules = mdm_ipc::capture::CaptureRules::default();
+        // #703: a plain file is downloaded as one, its page the referrer.
+        let m: Message = serde_json::from_str(&format!(
+            r#"{{"video":true,"url":"https://videos.test/p","src":"https://cdn.test/a.mp4","direct":true,"userAgent":"{ua}"}}"#
+        ))
+        .unwrap();
+        let cmd = video_command(&m, &rules, browser(&m)).unwrap();
+        assert!(cmd.video_direct);
+        assert_eq!(cmd.video_page.as_deref(), Some("https://cdn.test/a.mp4"));
+        assert_eq!(cmd.referer.as_deref(), Some("https://videos.test/p"));
+        // `direct` without a file of its own is the page, as before.
+        let m: Message = serde_json::from_str(&format!(
+            r#"{{"video":true,"url":"https://videos.test/p","direct":true,"userAgent":"{ua}"}}"#
+        ))
+        .unwrap();
+        assert!(!video_command(&m, &rules, browser(&m)).unwrap().video_direct);
+        // "Show" and "Turn on": no `url`, so an older host refuses them and does nothing.
+        let m: Message = serde_json::from_str(
+            r#"{"showDownload":"https://videos.test/watch?v=1","showSite":"videos.test"}"#,
+        )
+        .unwrap();
+        assert!(m.url.is_empty() && !m.video);
+        assert_eq!(m.show_site.as_deref(), Some("videos.test"));
+        assert_eq!(
+            m.show_download.as_deref(),
+            Some("https://videos.test/watch?v=1")
+        );
     }
 
     /// `hello` and `rules` say the host and its app have the quality menu; nothing else does.

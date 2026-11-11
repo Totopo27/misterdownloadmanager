@@ -260,6 +260,18 @@ pub fn add_site(sites: &str, host: &str) -> String {
     out
 }
 
+/// `sites` without the names that stand for `host` alone (the video button's "Turn on", undoing
+/// its "Never on <site>"): a pattern for more sites (`*.example.com`) stays, as the user wrote it
+/// for all of them.
+pub fn remove_site(sites: &str, host: &str) -> String {
+    let host = host.trim().to_ascii_lowercase();
+    sites
+        .split_whitespace()
+        .filter(|p| p.contains('*') || !host_matches(&host, p))
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
 /// The sites a list holds (space-separated), as a file: one a line (Options → Download panels,
 /// #424).
 pub fn sites_to_text(sites: &str) -> String {
@@ -555,6 +567,16 @@ mod tests {
         assert_eq!(add_site("a.test", " "), "a.test");
         assert_eq!(add_site("a.test", "b.test *"), "a.test", "one host only");
         assert_eq!(add_site("a.test", "*"), "a.test");
+        assert_eq!(
+            remove_site("a.test Video.Site b.test", "video.site"),
+            "a.test b.test"
+        );
+        assert_eq!(
+            remove_site("*.b.test", "www.b.test"),
+            "*.b.test",
+            "a pattern stays"
+        );
+        assert_eq!(remove_site("a.test", "c.test"), "a.test");
     }
 
     #[test]

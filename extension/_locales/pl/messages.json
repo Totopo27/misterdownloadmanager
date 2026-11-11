@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Wysłano do Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager nie jest zainstalowany lub nie uruchomił się"
-  },
-  "video_drag": {
-    "message": "Przeciągnij, aby przesunąć wzdłuż krawędzi wideo"
-  },
   "menu_selected": {
     "message": "Pobierz wybrane łącza za pomocą Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Na żywo"
   },
   "video_off": {
-    "message": "Przycisk pobierania jest wyłączony na tej stronie"
+    "message": "Wyłączone na tej stronie"
   },
   "video_drm": {
-    "message": "Wideo chronione: nie można go zapisać"
+    "message": "Wideo chronione"
   },
   "video_unnamed": {
     "message": "Nie można ustalić, który to film: otwórz jego własną stronę i spróbuj tam"
   },
   "video_looking": {
     "message": "Wyszukiwanie jakości…"
-  },
-  "video_open_mdm": {
-    "message": "Otwórz w Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Brak wideo do pobrania w tym miejscu"
@@ -222,7 +213,7 @@
     "message": "Dźwięk"
   },
   "video_open_post": {
-    "message": "Otwórz wpis, a następnie użyj przycisku"
+    "message": "Otwórz post, aby pobrać wideo"
   },
   "popup_send_to": {
     "message": "Wyślij pobrane pliki do"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Dodaj tytuł strony przed nazwami plików multimedialnych"
+  },
+  "video_cant_save": {
+    "message": "nie można zapisać"
+  },
+  "video_open_post_button": {
+    "message": "Otwórz post"
+  },
+  "video_drag_dots": {
+    "message": "Przeciągnij kropki, aby przesunąć go wzdłuż krawędzi"
+  },
+  "video_tip": {
+    "message": "Pobierz $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Pobierz najlepszą jakość"
+  },
+  "video_sending": {
+    "message": "Wysyłanie do MDM..."
+  },
+  "video_added": {
+    "message": "Dodano do MDM"
+  },
+  "video_show": {
+    "message": "Pokaż"
+  },
+  "video_no_answer": {
+    "message": "MDM nie odpowiada"
+  },
+  "video_get_mdm": {
+    "message": "Pobierz MDM"
+  },
+  "video_retry": {
+    "message": "Ponów"
+  },
+  "video_turn_on": {
+    "message": "Włącz"
+  },
+  "video_section": {
+    "message": "Pobierz"
+  },
+  "video_best": {
+    "message": "najlepsza"
+  },
+  "video_best_quality": {
+    "message": "Najlepsza jakość"
+  },
+  "video_all_qualities": {
+    "message": "Wszystkie jakości i napisy..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager nie jest zainstalowany lub nie uruchomił się"
   }
 }

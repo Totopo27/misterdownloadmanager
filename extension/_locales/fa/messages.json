@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "به Mister Download Manager ارسال شد"
   },
-  "video_failed": {
-    "message": "Mister Download Manager نصب نشده است یا اجرا نشد"
-  },
-  "video_drag": {
-    "message": "برای جابجایی در لبه ویدیو بکشید"
-  },
   "menu_selected": {
     "message": "پیوندهای انتخاب شده را با Mister Download Manager بارگیری کن"
   },
@@ -165,7 +159,7 @@
     "message": "هنوز ویدیو یا صدایی در این صفحه پیدا نشده است. آن را پخش کنید و سپس این پنجره را دوباره باز کنید."
   },
   "popup_media_streamed": {
-    "message": "پخش‌کنندهٔ این صفحه ویدیو را تکه‌تکه پخش می‌کند، پس فایلی برای فهرست کردن نیست. نشانگر را روی ویدیو ببرید و از دکمهٔ «دانلود ویدیو» آن استفاده کنید."
+    "message": "پخش‌کننده این صفحه ویدیو را به صورت قطعه‌ای پخش می‌کند، بنابراین فایلی برای فهرست کردن وجود ندارد. روی ویدیو اشاره کنید و از دکمه «بارگیری ویدیو» آن استفاده کنید."
   },
   "popup_media_store": {
     "message": "قوانین Chrome Web Store این نسخه از افزونه را از ویدیوهای این سایت دور نگه می‌دارد. «راهنما» می‌گوید چه کاری می‌توانید بکنید."
@@ -180,19 +174,16 @@
     "message": "زنده"
   },
   "video_off": {
-    "message": "دکمه بارگیری در این سایت خاموش است"
+    "message": "در این سایت خاموش است"
   },
   "video_drm": {
-    "message": "ویدیوی محافظت‌شده: امکان ذخیره آن نیست"
+    "message": "ویدیوی محافظت‌شده"
   },
   "video_unnamed": {
-    "message": "مشخص نیست این کدام ویدیو است: صفحهٔ خود ویدیو را باز کنید و آنجا امتحان کنید"
+    "message": "نمی‌توان تشخیص داد این چه ویدیویی است: صفحه خودش را باز کنید و آنجا امتحان کنید"
   },
   "video_looking": {
     "message": "در حال جست‌وجوی کیفیت‌ها…"
-  },
-  "video_open_mdm": {
-    "message": "باز کردن در Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "ویدیویی برای دانلود در اینجا نیست"
@@ -222,7 +213,7 @@
     "message": "صدا"
   },
   "video_open_post": {
-    "message": "پست را باز کنید، سپس از دکمه آنجا استفاده کنید"
+    "message": "برای بارگیری، پست را باز کنید"
   },
   "popup_send_to": {
     "message": "ارسال دانلودها به"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "افزودن عنوان صفحه پیش از نام فایل رسانه"
+  },
+  "video_cant_save": {
+    "message": "قابل ذخیره نیست"
+  },
+  "video_open_post_button": {
+    "message": "باز کردن پست"
+  },
+  "video_drag_dots": {
+    "message": "نقطه‌ها را بکشید تا در امتداد لبه حرکت کند"
+  },
+  "video_tip": {
+    "message": "بارگیری $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "بهترین کیفیت را بارگیری کنید"
+  },
+  "video_sending": {
+    "message": "در حال ارسال به MDM..."
+  },
+  "video_added": {
+    "message": "به MDM اضافه شد"
+  },
+  "video_show": {
+    "message": "نمایش"
+  },
+  "video_no_answer": {
+    "message": "MDM پاسخ نداد"
+  },
+  "video_get_mdm": {
+    "message": "دریافت MDM"
+  },
+  "video_retry": {
+    "message": "تلاش مجدد"
+  },
+  "video_turn_on": {
+    "message": "روشن کردن"
+  },
+  "video_section": {
+    "message": "دانلود"
+  },
+  "video_best": {
+    "message": "بهترین"
+  },
+  "video_best_quality": {
+    "message": "بهترین کیفیت"
+  },
+  "video_all_qualities": {
+    "message": "همه کیفیت‌ها و زیرنویس‌ها..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager نصب نشده است یا اجرا نشد"
   }
 }

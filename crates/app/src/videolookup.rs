@@ -438,11 +438,17 @@ fn answer(token: &str, s: &Search) -> VideoLookupAnswer {
             choices: choices
                 .iter()
                 .take(CHOICES)
-                .map(|c| VideoChoice {
-                    label: crate::videodlg::choice_label(&c.label),
-                    ext: c.ext.clone(),
-                    size: c.size,
-                    audio: mdm_tools::resolve::is_audio(c),
+                .map(|c| {
+                    let (height, fps, kbps) = details(v, c);
+                    VideoChoice {
+                        label: crate::videodlg::choice_label(&c.label),
+                        ext: c.ext.clone(),
+                        size: c.size,
+                        audio: mdm_tools::resolve::is_audio(c),
+                        height,
+                        fps,
+                        kbps,
+                    }
                 })
                 .collect(),
             ..VideoLookupAnswer::of(lookup::READY)
@@ -461,6 +467,46 @@ fn answer(token: &str, s: &Search) -> VideoLookupAnswer {
             VideoLookupAnswer::failed(lookup::ERROR, Some(cut(&message, MESSAGE_MAX)))
         }
     }
+}
+
+/// What the button over the video says of choice `c` of `v` besides its label: the picture's
+/// height (its chip: 1080p, 4K), its frame rate when above 31, and the sound's bitrate for the
+/// sound as the site has it (`ba`).
+fn details(v: &Video, c: &Choice) -> (Option<u32>, Option<u32>, Option<u32>) {
+    let height = c
+        .selector
+        .split("[height=")
+        .nth(1)
+        .and_then(|r| r.split(']').next())
+        .and_then(|h| h.parse::<u32>().ok());
+    let most = |it: &mut dyn Iterator<Item = f64>| {
+        it.fold(None, |m: Option<f64>, x| Some(m.map_or(x, |m| m.max(x))))
+    };
+    let fps = height
+        .and_then(|h| {
+            most(
+                &mut v
+                    .formats
+                    .iter()
+                    .filter(|f| f.video && f.height == Some(h))
+                    .filter_map(|f| f.fps),
+            )
+        })
+        .filter(|f| *f > 31.0)
+        .map(|f| f.round() as u32);
+    let kbps = (c.selector == "ba")
+        .then(|| {
+            most(
+                &mut v
+                    .formats
+                    .iter()
+                    .filter(|f| f.audio && !f.video && f.ext == c.ext)
+                    .filter_map(|f| f.tbr),
+            )
+        })
+        .flatten()
+        .map(|k| k.round() as u32);
+    (height, fps, kbps)
 }
 
 /// The download choice `p` adds, into `folder` (the Video category's), or `music` (the Music

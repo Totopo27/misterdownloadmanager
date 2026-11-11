@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Lähetetty Mister Download Manager:lle"
   },
-  "video_failed": {
-    "message": "Mister Download Manager ei ole asennettu tai sitä ei käynnistetty"
-  },
-  "video_drag": {
-    "message": "Vedä siirtääksesi sitä videon reunaa pitkin"
-  },
   "menu_selected": {
     "message": "Lataa valitut linkit sovelluksella Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Live"
   },
   "video_off": {
-    "message": "Latauspainike ei ole käytössä tällä sivustolla"
+    "message": "Pois päältä tällä sivustolla"
   },
   "video_drm": {
-    "message": "Suojattua videota ei voi tallentaa"
+    "message": "Suojattu video"
   },
   "video_unnamed": {
     "message": "Ei selviä, mikä video tämä on: avaa videon oma sivu ja yritä siellä"
   },
   "video_looking": {
     "message": "Haetaan laatuvaihtoehtoja…"
-  },
-  "video_open_mdm": {
-    "message": "Avaa sovelluksessa Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Täällä ei ole ladattavaa videota"
@@ -222,7 +213,7 @@
     "message": "Ääni"
   },
   "video_open_post": {
-    "message": "Avaa julkaisu ja käytä sitten painiketta siinä"
+    "message": "Avaa julkaisu ladataksesi videon"
   },
   "popup_send_to": {
     "message": "Lähetä lataukset kohteeseen"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Lisää sivun otsikko mediatiedostojen nimien eteen"
+  },
+  "video_cant_save": {
+    "message": "ei voi tallentaa"
+  },
+  "video_open_post_button": {
+    "message": "Avaa julkaisu"
+  },
+  "video_drag_dots": {
+    "message": "Vedä pisteitä siirtääksesi sitä reunaa pitkin"
+  },
+  "video_tip": {
+    "message": "Lataa $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Lataa paras laatu"
+  },
+  "video_sending": {
+    "message": "Lähetetään MDM:ään..."
+  },
+  "video_added": {
+    "message": "Lisätty MDM:ään"
+  },
+  "video_show": {
+    "message": "Näytä"
+  },
+  "video_no_answer": {
+    "message": "MDM ei vastannut"
+  },
+  "video_get_mdm": {
+    "message": "Hanki MDM"
+  },
+  "video_retry": {
+    "message": "Yritä uudelleen"
+  },
+  "video_turn_on": {
+    "message": "Käynnistä"
+  },
+  "video_section": {
+    "message": "Lataa"
+  },
+  "video_best": {
+    "message": "paras"
+  },
+  "video_best_quality": {
+    "message": "Paras laatu"
+  },
+  "video_all_qualities": {
+    "message": "Kaikki laadut ja tekstitykset..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager ei ole asennettu tai sitä ei käynnistetty"
   }
 }

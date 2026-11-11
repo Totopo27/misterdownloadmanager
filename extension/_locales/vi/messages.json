@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Đã gửi đến Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager chưa được cài đặt hoặc chưa khởi động"
-  },
-  "video_drag": {
-    "message": "Kéo để di chuyển dọc theo cạnh video"
-  },
   "menu_selected": {
     "message": "Tải xuống các liên kết đã chọn bằng Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Trực tiếp"
   },
   "video_off": {
-    "message": "Nút tải xuống bị tắt trên trang web này"
+    "message": "Tắt trên trang này"
   },
   "video_drm": {
-    "message": "Video được bảo vệ: không thể lưu"
+    "message": "Video được bảo vệ"
   },
   "video_unnamed": {
     "message": "Không xác định được đây là video nào: hãy mở trang riêng của video và thử ở đó"
   },
   "video_looking": {
     "message": "Đang tìm các chất lượng…"
-  },
-  "video_open_mdm": {
-    "message": "Mở trong Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Không có video nào để tải xuống ở đây"
@@ -222,7 +213,7 @@
     "message": "Âm thanh"
   },
   "video_open_post": {
-    "message": "Mở bài đăng, sau đó dùng nút ở đó"
+    "message": "Mở bài đăng để tải xuống"
   },
   "popup_send_to": {
     "message": "Gửi tải xuống đến"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Thêm tiêu đề trang vào trước tên tệp phương tiện"
+  },
+  "video_cant_save": {
+    "message": "không thể lưu"
+  },
+  "video_open_post_button": {
+    "message": "Mở bài đăng"
+  },
+  "video_drag_dots": {
+    "message": "Kéo các chấm để di chuyển nút dọc theo cạnh"
+  },
+  "video_tip": {
+    "message": "Tải xuống $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Tải xuống chất lượng tốt nhất"
+  },
+  "video_sending": {
+    "message": "Đang gửi đến MDM..."
+  },
+  "video_added": {
+    "message": "Đã thêm vào MDM"
+  },
+  "video_show": {
+    "message": "Hiển thị"
+  },
+  "video_no_answer": {
+    "message": "MDM không phản hồi"
+  },
+  "video_get_mdm": {
+    "message": "Tải MDM"
+  },
+  "video_retry": {
+    "message": "Thử lại"
+  },
+  "video_turn_on": {
+    "message": "Bật"
+  },
+  "video_section": {
+    "message": "Tải xuống"
+  },
+  "video_best": {
+    "message": "tốt nhất"
+  },
+  "video_best_quality": {
+    "message": "Chất lượng tốt nhất"
+  },
+  "video_all_qualities": {
+    "message": "Tất cả chất lượng và phụ đề..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager chưa được cài đặt hoặc chưa khởi động"
   }
 }

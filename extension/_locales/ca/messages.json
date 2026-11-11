@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Enviat a Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager no està instal·lat o no s'ha iniciat"
-  },
-  "video_drag": {
-    "message": "Arrossegueu per moure'l per la vora del vídeo"
-  },
   "menu_selected": {
     "message": "Baixa els enllaços seleccionats amb Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "En directe"
   },
   "video_off": {
-    "message": "El botó de baixada està desactivat en aquest lloc"
+    "message": "Desactivat en aquest lloc"
   },
   "video_drm": {
-    "message": "Vídeo protegit: no es pot desar"
+    "message": "Vídeo protegit"
   },
   "video_unnamed": {
     "message": "No es pot saber quin vídeo és: obriu la seva pàgina i torneu-ho a provar allà"
   },
   "video_looking": {
     "message": "Cercant les qualitats…"
-  },
-  "video_open_mdm": {
-    "message": "Obre a Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "No hi ha cap vídeo per baixar aquí"
@@ -222,7 +213,7 @@
     "message": "Àudio"
   },
   "video_open_post": {
-    "message": "Obre la publicació i fes servir el botó que hi ha"
+    "message": "Obre la publicació per baixar-lo"
   },
   "popup_send_to": {
     "message": "Enviar baixades a"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Afegeix el títol de la pàgina davant dels noms dels fitxers multimèdia"
+  },
+  "video_cant_save": {
+    "message": "no es pot desar"
+  },
+  "video_open_post_button": {
+    "message": "Obre la publicació"
+  },
+  "video_drag_dots": {
+    "message": "Arrossega els punts per moure'l per la vora"
+  },
+  "video_tip": {
+    "message": "Baixa $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Baixa la millor qualitat"
+  },
+  "video_sending": {
+    "message": "S’està enviant a MDM..."
+  },
+  "video_added": {
+    "message": "Afegit a MDM"
+  },
+  "video_show": {
+    "message": "Mostra"
+  },
+  "video_no_answer": {
+    "message": "MDM no ha respost"
+  },
+  "video_get_mdm": {
+    "message": "Obtén MDM"
+  },
+  "video_retry": {
+    "message": "Torna-ho a provar"
+  },
+  "video_turn_on": {
+    "message": "Activa"
+  },
+  "video_section": {
+    "message": "Baixa"
+  },
+  "video_best": {
+    "message": "millor"
+  },
+  "video_best_quality": {
+    "message": "Millor qualitat"
+  },
+  "video_all_qualities": {
+    "message": "Totes les qualitats i subtítols..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager no està instal·lat o no s'ha iniciat"
   }
 }

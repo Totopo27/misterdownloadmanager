@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager으로 보냄"
   },
-  "video_failed": {
-    "message": "Mister Download Manager이(가) 설치되지 않았거나 시작되지 않았습니다."
-  },
-  "video_drag": {
-    "message": "비디오 가장자리를 따라 이동하려면 드래그하세요."
-  },
   "menu_selected": {
     "message": "Mister Download Manager으로 선택한 링크 다운로드"
   },
@@ -180,19 +174,16 @@
     "message": "라이브"
   },
   "video_off": {
-    "message": "이 사이트에서는 다운로드 단추가 꺼져 있습니다."
+    "message": "이 사이트에서 해제됨"
   },
   "video_drm": {
-    "message": "보호된 비디오: 저장할 수 없습니다."
+    "message": "보호된 동영상"
   },
   "video_unnamed": {
     "message": "어떤 비디오인지 알 수 없습니다. 비디오 자체 페이지를 열어 다시 시도하세요"
   },
   "video_looking": {
     "message": "화질을 찾는 중…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager에서 열기…"
   },
   "video_no_choices": {
     "message": "여기에는 다운로드할 비디오가 없습니다"
@@ -222,7 +213,7 @@
     "message": "오디오"
   },
   "video_open_post": {
-    "message": "게시물을 열고 버튼을 사용하세요"
+    "message": "게시물을 열어 다운로드"
   },
   "popup_send_to": {
     "message": "다운로드 보낼 위치"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "미디어 파일 이름 앞에 페이지 제목 추가"
+  },
+  "video_cant_save": {
+    "message": "저장할 수 없음"
+  },
+  "video_open_post_button": {
+    "message": "게시물 열기"
+  },
+  "video_drag_dots": {
+    "message": "점을 끌어 가장자리를 따라 이동"
+  },
+  "video_tip": {
+    "message": "$what$ 다운로드",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "최고 화질 다운로드"
+  },
+  "video_sending": {
+    "message": "MDM으로 보내는 중..."
+  },
+  "video_added": {
+    "message": "MDM에 추가됨"
+  },
+  "video_show": {
+    "message": "표시"
+  },
+  "video_no_answer": {
+    "message": "MDM이 응답하지 않음"
+  },
+  "video_get_mdm": {
+    "message": "MDM 받기"
+  },
+  "video_retry": {
+    "message": "다시 시도"
+  },
+  "video_turn_on": {
+    "message": "켜기"
+  },
+  "video_section": {
+    "message": "다운로드"
+  },
+  "video_best": {
+    "message": "최고"
+  },
+  "video_best_quality": {
+    "message": "최고 화질"
+  },
+  "video_all_qualities": {
+    "message": "모든 화질 및 자막..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager이(가) 설치되지 않았거나 시작되지 않았습니다."
   }
 }

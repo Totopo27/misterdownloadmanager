@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "נשלח אל Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager אינו מותקן או לא הופעל"
-  },
-  "video_drag": {
-    "message": "גרור כדי להזיז אותו לאורך קצה הסרטון"
-  },
   "menu_selected": {
     "message": "הורד את הקישורים שנבחרו באמצעות Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "שידור חי"
   },
   "video_off": {
-    "message": "לחצן ההורדה כבוי באתר זה"
+    "message": "כבוי באתר זה"
   },
   "video_drm": {
-    "message": "סרטון מוגן: לא ניתן לשמור אותו"
+    "message": "סרטון מוגן"
   },
   "video_unnamed": {
     "message": "לא ניתן לדעת איזה סרטון זה: פתחו את הדף שלו ונסו שם"
   },
   "video_looking": {
     "message": "מחפש את האיכויות…"
-  },
-  "video_open_mdm": {
-    "message": "פתח ב-Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "אין כאן סרטון להורדה"
@@ -222,7 +213,7 @@
     "message": "שמע"
   },
   "video_open_post": {
-    "message": "פתח את הפוסט, ואז השתמש בלחצן שם"
+    "message": "פתח את הפוסט כדי להוריד אותו"
   },
   "popup_send_to": {
     "message": "שלח הורדות אל"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "הוספת כותרת הדף לפני שמות קובצי המדיה"
+  },
+  "video_cant_save": {
+    "message": "לא ניתן לשמור"
+  },
+  "video_open_post_button": {
+    "message": "פתח פוסט"
+  },
+  "video_drag_dots": {
+    "message": "גרור את הנקודות כדי להזיז אותו לאורך הקצה"
+  },
+  "video_tip": {
+    "message": "הורד את $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "הורד את האיכות הטובה ביותר"
+  },
+  "video_sending": {
+    "message": "שולח ל-MDM..."
+  },
+  "video_added": {
+    "message": "נוסף ל-MDM"
+  },
+  "video_show": {
+    "message": "הצג"
+  },
+  "video_no_answer": {
+    "message": "MDM לא הגיב"
+  },
+  "video_get_mdm": {
+    "message": "קבל את MDM"
+  },
+  "video_retry": {
+    "message": "נסה שוב"
+  },
+  "video_turn_on": {
+    "message": "הפעל"
+  },
+  "video_section": {
+    "message": "הורד"
+  },
+  "video_best": {
+    "message": "הטובה ביותר"
+  },
+  "video_best_quality": {
+    "message": "האיכות הטובה ביותר"
+  },
+  "video_all_qualities": {
+    "message": "כל האיכויות והכתוביות..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager אינו מותקן או לא הופעל"
   }
 }

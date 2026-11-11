@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Elküldve a következőnek: Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Az Mister Download Manager nincs telepítve, vagy nem indult el"
-  },
-  "video_drag": {
-    "message": "Húzza a videó szélére a mozgatáshoz"
-  },
   "menu_selected": {
     "message": "Kijelölt hivatkozások letöltése az Mister Download Manager alkalmazással"
   },
@@ -180,19 +174,16 @@
     "message": "Élő"
   },
   "video_off": {
-    "message": "A letöltés gomb ezen a webhelyen ki van kapcsolva"
+    "message": "Kikapcsolva ezen a webhelyen"
   },
   "video_drm": {
-    "message": "Védett videó: nem menthető"
+    "message": "Védett videó"
   },
   "video_unnamed": {
     "message": "Nem állapítható meg, melyik videóról van szó: nyissa meg a saját oldalát, és próbálja ott"
   },
   "video_looking": {
     "message": "Minőségek keresése…"
-  },
-  "video_open_mdm": {
-    "message": "Megnyitás a Mister Download Manager alkalmazásban…"
   },
   "video_no_choices": {
     "message": "Itt nincs letölthető videó"
@@ -222,7 +213,7 @@
     "message": "Hang"
   },
   "video_open_post": {
-    "message": "Nyissa meg a bejegyzést, majd használja az ottani gombot"
+    "message": "Nyissa meg a bejegyzést a letöltéshez"
   },
   "popup_send_to": {
     "message": "Letöltések küldése ide"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Az oldal címének hozzáadása a médiafájlok neve elé"
+  },
+  "video_cant_save": {
+    "message": "nem menthető"
+  },
+  "video_open_post_button": {
+    "message": "Bejegyzés megnyitása"
+  },
+  "video_drag_dots": {
+    "message": "Húzza a pontokat a szél mentén való mozgatáshoz"
+  },
+  "video_tip": {
+    "message": "A(z) $what$ letöltése",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "A legjobb minőség letöltése"
+  },
+  "video_sending": {
+    "message": "Küldés az MDM-nek..."
+  },
+  "video_added": {
+    "message": "Hozzáadva az MDM-hez"
+  },
+  "video_show": {
+    "message": "Megjelenítés"
+  },
+  "video_no_answer": {
+    "message": "Az MDM nem válaszolt"
+  },
+  "video_get_mdm": {
+    "message": "MDM beszerzése"
+  },
+  "video_retry": {
+    "message": "Újra"
+  },
+  "video_turn_on": {
+    "message": "Bekapcsolás"
+  },
+  "video_section": {
+    "message": "Letöltés"
+  },
+  "video_best": {
+    "message": "legjobb"
+  },
+  "video_best_quality": {
+    "message": "Legjobb minőség"
+  },
+  "video_all_qualities": {
+    "message": "Minden minőség és felirat..."
+  },
+  "video_failed": {
+    "message": "Az Mister Download Manager nincs telepítve, vagy nem indult el"
   }
 }

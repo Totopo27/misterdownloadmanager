@@ -120,6 +120,14 @@ pub struct Command {
     pub video_pick: Option<VideoPick>,
     /// From that button's menu: never show it on this site (a host name) again.
     pub panel_hide_site: Option<String>,
+    /// From that button's "Turn on" (after "Never on <site>"): show it on this site again.
+    pub panel_show_site: Option<String>,
+    /// With `video_page`, from that button over a video that plays a plain file (no stream, no
+    /// page to read): `video_page` is that file, downloaded as any file at once, with no window.
+    pub video_direct: bool,
+    /// That button's "Show", once a download was added: the main window comes up with the newest
+    /// download of this address (the video's page as it was looked up, or its file) selected.
+    pub show_download: Option<String>,
     /// From the browser's right-click menu: the links of a page or a selection, offered in the
     /// list window to pick from (the browser's `referer` and `cookies` go with them).
     pub links: Vec<String>,

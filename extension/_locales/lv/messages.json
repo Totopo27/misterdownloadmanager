@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Nosūtīts uz Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager nav instalēts vai nav palaists"
-  },
-  "video_drag": {
-    "message": "Velciet, lai pārvietotu to gar video malu"
-  },
   "menu_selected": {
     "message": "Lejupielādēt atlasītās saites ar Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Tiešraide"
   },
   "video_off": {
-    "message": "Lejupielādes poga šajā vietnē ir izslēgta"
+    "message": "Izslēgts šajā vietnē"
   },
   "video_drm": {
-    "message": "Aizsargāts video: to nevar saglabāt"
+    "message": "Aizsargāts video"
   },
   "video_unnamed": {
     "message": "Nevar noteikt, kurš video tas ir: atveriet tā lapu un mēģiniet tur"
   },
   "video_looking": {
     "message": "Meklē kvalitātes…"
-  },
-  "video_open_mdm": {
-    "message": "Atvērt programmā Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Šeit nav lejupielādējama video"
@@ -222,7 +213,7 @@
     "message": "Audio"
   },
   "video_open_post": {
-    "message": "Atveriet ierakstu, tad izmantojiet pogu tur"
+    "message": "Atveriet ziņu, lai lejupielādētu"
   },
   "popup_send_to": {
     "message": "Sūtīt lejupielādes uz"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Pievienot lapas nosaukumu multivides failu nosaukumu priekšā"
+  },
+  "video_cant_save": {
+    "message": "nevar saglabāt"
+  },
+  "video_open_post_button": {
+    "message": "Atvērt ziņu"
+  },
+  "video_drag_dots": {
+    "message": "Velciet punktus, lai pārvietotu to gar malu"
+  },
+  "video_tip": {
+    "message": "Lejupielādēt $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Lejupielādēt labāko kvalitāti"
+  },
+  "video_sending": {
+    "message": "Sūta uz MDM..."
+  },
+  "video_added": {
+    "message": "Pievienots MDM"
+  },
+  "video_show": {
+    "message": "Rādīt"
+  },
+  "video_no_answer": {
+    "message": "MDM neatbildēja"
+  },
+  "video_get_mdm": {
+    "message": "Iegūt MDM"
+  },
+  "video_retry": {
+    "message": "Mēģināt vēlreiz"
+  },
+  "video_turn_on": {
+    "message": "Ieslēgt"
+  },
+  "video_section": {
+    "message": "Lejupielādēt"
+  },
+  "video_best": {
+    "message": "labākā"
+  },
+  "video_best_quality": {
+    "message": "Labākā kvalitāte"
+  },
+  "video_all_qualities": {
+    "message": "Lejupielādēt visās kvalitātēs un ar subtitriem..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager nav instalēts vai nav palaists"
   }
 }

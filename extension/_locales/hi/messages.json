@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager को भेजा गया"
   },
-  "video_failed": {
-    "message": "Mister Download Manager स्थापित नहीं है या शुरू नहीं हुआ"
-  },
-  "video_drag": {
-    "message": "इसे वीडियो के किनारे पर ले जाने के लिए खींचें"
-  },
   "menu_selected": {
     "message": "Mister Download Manager के साथ चयनित लिंक डाउनलोड करें"
   },
@@ -180,19 +174,16 @@
     "message": "लाइव"
   },
   "video_off": {
-    "message": "इस साइट पर डाउनलोड बटन बंद है"
+    "message": "इस साइट पर बंद है"
   },
   "video_drm": {
-    "message": "सुरक्षित वीडियो: इसे सहेजा नहीं जा सकता"
+    "message": "सुरक्षित वीडियो"
   },
   "video_unnamed": {
     "message": "पता नहीं चल पा रहा कि यह कौन-सा वीडियो है: इसका अपना पेज खोलकर वहाँ आज़माएँ"
   },
   "video_looking": {
     "message": "क्वालिटी खोजी जा रही हैं…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager में खोलें…"
   },
   "video_no_choices": {
     "message": "यहाँ डाउनलोड करने के लिए कोई वीडियो नहीं है"
@@ -222,7 +213,7 @@
     "message": "ऑडियो"
   },
   "video_open_post": {
-    "message": "पोस्ट खोलें, फिर वहां बटन का उपयोग करें"
+    "message": "इसे डाउनलोड करने के लिए पोस्ट खोलें"
   },
   "popup_send_to": {
     "message": "डाउनलोड यहां भेजें"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "मीडिया फ़ाइलों के नामों से पहले पेज का शीर्षक जोड़ें"
+  },
+  "video_cant_save": {
+    "message": "सहेजा नहीं जा सकता"
+  },
+  "video_open_post_button": {
+    "message": "पोस्ट खोलें"
+  },
+  "video_drag_dots": {
+    "message": "इसे किनारे पर ले जाने के लिए डॉट्स को खींचें"
+  },
+  "video_tip": {
+    "message": "$what$ डाउनलोड करें",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "सर्वश्रेष्ठ गुणवत्ता डाउनलोड करें"
+  },
+  "video_sending": {
+    "message": "MDM को भेजा जा रहा है..."
+  },
+  "video_added": {
+    "message": "MDM में जोड़ा गया"
+  },
+  "video_show": {
+    "message": "दिखाएँ"
+  },
+  "video_no_answer": {
+    "message": "MDM ने जवाब नहीं दिया"
+  },
+  "video_get_mdm": {
+    "message": "MDM प्राप्त करें"
+  },
+  "video_retry": {
+    "message": "पुनः प्रयास करें"
+  },
+  "video_turn_on": {
+    "message": "चालू करें"
+  },
+  "video_section": {
+    "message": "डाउनलोड करें"
+  },
+  "video_best": {
+    "message": "सर्वश्रेष्ठ"
+  },
+  "video_best_quality": {
+    "message": "सर्वश्रेष्ठ गुणवत्ता"
+  },
+  "video_all_qualities": {
+    "message": "सभी गुणवत्ताएँ और उपशीर्षक..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager स्थापित नहीं है या शुरू नहीं हुआ"
   }
 }

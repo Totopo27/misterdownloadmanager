@@ -4224,8 +4224,15 @@ column	Upload speed	Upload speed
 #. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
 extension	A list of videos: choose them in Mister Download Manager	A list of videos: choose them in Mister Download Manager
 #. text in the browser extension
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+extension	Added to MDM	Added to MDM
+#. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 extension	Added to the queue	Added to the queue
+#. text in the browser extension
+#. command in the menu of the download button over a video: opens the app's Download video window, with every quality and the subtitles
+#. the trailing ... means it is still going on: keep it
+extension	All qualities and subtitles...	All qualities and subtitles...
 #. text in the browser extension
 #. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
 extension	Another Mister Download Manager (a server)	Another Mister Download Manager (a server)
@@ -4233,12 +4240,21 @@ extension	Another Mister Download Manager (a server)	Another Mister Download Man
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 extension	Audio	Audio
 #. text in the browser extension
+#. after the best quality in the menu of the download button over a video, after a star (★ best); lower case; one word
+extension	best	best
+#. text in the browser extension
+#. first row of the menu of the download button over a video while the app is still finding its qualities: downloads the best one as soon as it is known; short
+extension	Best quality	Best quality
+#. text in the browser extension
 #. the name this browser gets in the other MDM's list of paired devices
 extension	Browser extension	Browser extension
 #. text in the browser extension
 #. menu command of the download button over a video: opens its settings in Mister Download Manager
 #. the trailing ... means it is still going on: keep it
 extension	Button settings...	Button settings...
+#. text in the browser extension
+#. on the download button over a copy-protected video, after 'Protected video ·': it can't be downloaded; short, lower case
+extension	can't be saved	can't be saved
 #. text in the browser extension
 #. shown briefly on the download button when nothing on the page says which video the player is playing, so nothing was sent
 extension	Can't tell which video this is: open its own page and try there	Can't tell which video this is: open its own page and try there
@@ -4254,6 +4270,7 @@ extension	Connected to Mister Download Manager {version}	Connected to Mister Dow
 extension	Could not look it up	Could not look it up
 #. text in the browser extension
 #. button beside a video, sound or stream in the toolbar button's popup: download it with the app; verb; short
+#. heading over the list of qualities in the menu of the download button over a video; shown in capitals; one word
 extension	Download	Download
 #. text in the browser extension
 #. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
@@ -4262,11 +4279,17 @@ extension	Download all links with Mister Download Manager	Download all links wit
 #. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
 extension	Download selected links with Mister Download Manager	Download selected links with Mister Download Manager
 #. text in the browser extension
+#. first line of the tooltip of the download button over a video while the app is still finding its qualities
+extension	Download the best quality	Download the best quality
+#. text in the browser extension
 #. the button over a video on a web page that downloads it; verb; short (it sits on the video)
 extension	Download video	Download video
 #. text in the browser extension
 #. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
 extension	Download with Mister Download Manager	Download with Mister Download Manager
+#. text in the browser extension
+#. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
+extension	Download {what}	Download {what}
 #. text in the browser extension
 #. shown in the toolbar button's popup after the site was excluded
 #. {site} = a web site's name such as "example.com" (keep the braces as they are)
@@ -4275,11 +4298,14 @@ extension	Downloads from {site} stay with the browser	Downloads from {site} stay
 #. the toolbar button's status while downloads go to another MDM
 extension	Downloads go to {address}	Downloads go to {address}
 #. text in the browser extension
-#. tooltip of the download button over a video: it can be dragged to another place on the video's edge
-extension	Drag to move it along the video's edge	Drag to move it along the video's edge
+#. second line of the tooltip of the download button over a video: dragging its dotted grip moves it along the video's edge
+extension	Drag the dots to move it along the edge	Drag the dots to move it along the edge
 #. text in the browser extension
 #. the address typed isn't an https:// address
 extension	Enter its https:// address.	Enter its https:// address.
+#. text in the browser extension
+#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+extension	Get MDM	Get MDM
 #. text in the browser extension
 #. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
 extension	Hands downloads from the browser to Mister Download Manager.	Hands downloads from the browser to Mister Download Manager.
@@ -4326,6 +4352,9 @@ extension	Looking up the qualities…	Looking up the qualities…
 #. text in the browser extension
 #. in the menu under the download button over a video: the app took more than a minute to find the video's qualities, so the menu stopped waiting
 extension	Looking up took too long	Looking up took too long
+#. text in the browser extension
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+extension	MDM didn't answer	MDM didn't answer
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 extension	Media on this page	Media on this page
@@ -4377,8 +4406,8 @@ extension	No video to download here	No video to download here
 #. pairing failed: the other MDM didn't answer
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	Not reached. Open its address once in this browser and accept its certificate, then try again.
 #. text in the browser extension
-#. last command of the menu of qualities under the download button over a video: opens the app's Download video window for this video instead; keep the name Mister Download Manager as it is
-extension	Open in Mister Download Manager…	Open in Mister Download Manager…
+#. on the download button over a video (grey) when the button is turned off on this web site; a 'Turn on' button follows it; short
+extension	Off on this site	Off on this site
 #. text in the browser extension
 #. button: open the other MDM's address in a tab (to accept its certificate once)
 extension	Open it	Open it
@@ -4389,8 +4418,11 @@ extension	Open its address once and accept its certificate, then enter a code fr
 #. button in the toolbar button's popup; keep the name Mister Download Manager as it is
 extension	Open Mister Download Manager	Open Mister Download Manager
 #. text in the browser extension
-#. shown briefly on the download button over a video in a feed (a social site's home page, a timeline) when nothing in the feed gives that video's own address, so nothing was sent: the user should open the post the video belongs to and click the button on that page; short
-extension	Open the post, then use the button there	Open the post, then use the button there
+#. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
+extension	Open post	Open post
+#. text in the browser extension
+#. on the download button (amber) over a video in a feed (a social site's home page, a timeline) that can't be downloaded from there: the user should open the post the video belongs to; short
+extension	Open the post to download it	Open the post to download it
 #. text in the browser extension
 #. button in the toolbar button's popup: open the app's Options
 #. the trailing ... means it is still going on: keep it
@@ -4411,8 +4443,11 @@ extension	Prefix media file names with the page title	Prefix media file names wi
 #. shown instead of the Download button beside a copy-protected (DRM) stream in the toolbar button's popup: it can't be downloaded; short
 extension	Protected	Protected
 #. text in the browser extension
-#. shown briefly on the download button when the video is copy-protected (DRM) and no tool can download it
-extension	Protected video: it can't be saved	Protected video: it can't be saved
+#. on the download button over a copy-protected (DRM) video, which no tool can download; 'can't be saved' follows it after a dot; short
+extension	Protected video	Protected video
+#. text in the browser extension
+#. button on the download button over a video when the app didn't answer: try again; verb; very short
+extension	Retry	Retry
 #. text in the browser extension
 #. switch in the toolbar button's popup: on, the app downloads through the same proxy the browser uses (one a VPN or proxy extension sets); the browser then asks once to allow reading it
 extension	Send downloads through this browser's proxy or VPN extension	Send downloads through this browser's proxy or VPN extension
@@ -4420,8 +4455,15 @@ extension	Send downloads through this browser's proxy or VPN extension	Send down
 #. heading in the toolbar button's popup, above the choice of where downloads go
 extension	Send downloads to	Send downloads to
 #. text in the browser extension
+#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. the trailing ... means it is still going on: keep it
+extension	Sending to MDM...	Sending to MDM...
+#. text in the browser extension
 #. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
 extension	Sent to Mister Download Manager	Sent to Mister Download Manager
+#. text in the browser extension
+#. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
+extension	Show	Show
 #. text in the browser extension
 #. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
 extension	Support MDM	Support MDM
@@ -4434,9 +4476,6 @@ extension	The Chrome Web Store's rules keep this copy of the add-on away from th
 #. text in the browser extension
 #. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
 extension	The connection to Mister Download Manager failed	The connection to Mister Download Manager failed
-#. text in the browser extension
-#. shown briefly on the download button over a video when the app's settings keep the button off on this web site
-extension	The download button is off on this site	The download button is off on this site
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 extension	The extension isn't allowed to read this site (the browser's site access).	The extension isn't allowed to read this site (the browser's site access).
@@ -4455,6 +4494,9 @@ extension	This download's details were too large to hand over	This download's de
 #. text in the browser extension
 #. in the toolbar button's popup, when the page's player plays from a stream built in the page (a blob:): the list of the page's media has nothing to show; Download video is the name of the button over videos
 extension	This page's player streams its video in pieces, so there's no file to list. Point at the video and use its Download video button.	This page's player streams its video in pieces, so there's no file to list. Point at the video and use its Download video button.
+#. text in the browser extension
+#. button on the download button over a video when it is off on this web site: turns it on again here; verb; very short
+extension	Turn on	Turn on
 #. text in the browser extension
 #. status when the app is older than the extension; keep the name Mister Download Manager as it is
 extension	Update Mister Download Manager to use everything this extension offers	Update Mister Download Manager to use everything this extension offers

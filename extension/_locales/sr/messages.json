@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Послато апликацији Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager није инсталиран или није покренут"
-  },
-  "video_drag": {
-    "message": "Превуците да бисте га померили дуж ивице видео снимка"
-  },
   "menu_selected": {
     "message": "Преузми изабране везе помоћу Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Уживо"
   },
   "video_off": {
-    "message": "Дугме за преузимање је искључено на овом сајту"
+    "message": "Искључено на овом сајту"
   },
   "video_drm": {
-    "message": "Заштићен видео: не може се сачувати"
+    "message": "Заштићен видео"
   },
   "video_unnamed": {
     "message": "Не може да се утврди који је ово видео: отворите његову страницу и покушајте тамо"
   },
   "video_looking": {
     "message": "Тражење квалитета…"
-  },
-  "video_open_mdm": {
-    "message": "Отвори у Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Овде нема видео снимка за преузимање"
@@ -222,7 +213,7 @@
     "message": "Аудио"
   },
   "video_open_post": {
-    "message": "Отворите објаву, па користите дугме тамо"
+    "message": "Отворите објаву да бисте је преузели"
   },
   "popup_send_to": {
     "message": "Шаљи преузимања на"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Додај наслов странице испред назива медијских датотека"
+  },
+  "video_cant_save": {
+    "message": "не може да се сачува"
+  },
+  "video_open_post_button": {
+    "message": "Отвори објаву"
+  },
+  "video_drag_dots": {
+    "message": "Превуците тачкице да бисте померили дугме дуж ивице"
+  },
+  "video_tip": {
+    "message": "Преузми $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Преузми најбољи квалитет"
+  },
+  "video_sending": {
+    "message": "Шаље се у MDM..."
+  },
+  "video_added": {
+    "message": "Додато у MDM"
+  },
+  "video_show": {
+    "message": "Прикажи"
+  },
+  "video_no_answer": {
+    "message": "MDM није одговорио"
+  },
+  "video_get_mdm": {
+    "message": "Преузми MDM"
+  },
+  "video_retry": {
+    "message": "Покушај поново"
+  },
+  "video_turn_on": {
+    "message": "Укључи"
+  },
+  "video_section": {
+    "message": "Преузми"
+  },
+  "video_best": {
+    "message": "најбољи"
+  },
+  "video_best_quality": {
+    "message": "Најбољи квалитет"
+  },
+  "video_all_qualities": {
+    "message": "Сви квалитети и преводи..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager није инсталиран или није покренут"
   }
 }

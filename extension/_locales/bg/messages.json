@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Изпратено до Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager не е инсталиран или не е стартиран"
-  },
-  "video_drag": {
-    "message": "Плъзнете, за да го преместите по ръба на видеоклипа"
-  },
   "menu_selected": {
     "message": "Изтеглете избрани връзки с Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "На живо"
   },
   "video_off": {
-    "message": "Бутонът за изтегляне е изключен за този сайт"
+    "message": "Изключено за този сайт"
   },
   "video_drm": {
-    "message": "Защитено видео: не може да бъде записано"
+    "message": "Защитено видео"
   },
   "video_unnamed": {
     "message": "Не може да се определи кое видео е това: отворете собствената му страница и опитайте там"
   },
   "video_looking": {
     "message": "Търсене на качествата…"
-  },
-  "video_open_mdm": {
-    "message": "Отваряне в Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Тук няма видео за изтегляне"
@@ -222,7 +213,7 @@
     "message": "Аудио"
   },
   "video_open_post": {
-    "message": "Отворете публикацията, след това използвайте бутона там"
+    "message": "Отворете публикацията, за да я изтеглите"
   },
   "popup_send_to": {
     "message": "Изпращане на изтегляния до"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Добавяне на заглавието на страницата пред имената на медийните файлове"
+  },
+  "video_cant_save": {
+    "message": "не може да се запише"
+  },
+  "video_open_post_button": {
+    "message": "Отворете публикацията"
+  },
+  "video_drag_dots": {
+    "message": "Плъзнете точките, за да го преместите по ръба"
+  },
+  "video_tip": {
+    "message": "Изтеглете $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Изтеглете най-доброто качество"
+  },
+  "video_sending": {
+    "message": "Изпращане към MDM..."
+  },
+  "video_added": {
+    "message": "Добавено към MDM"
+  },
+  "video_show": {
+    "message": "Покажете"
+  },
+  "video_no_answer": {
+    "message": "MDM не отговори"
+  },
+  "video_get_mdm": {
+    "message": "Вземете MDM"
+  },
+  "video_retry": {
+    "message": "Опитайте отново"
+  },
+  "video_turn_on": {
+    "message": "Включете"
+  },
+  "video_section": {
+    "message": "Изтеглете"
+  },
+  "video_best": {
+    "message": "най-добро"
+  },
+  "video_best_quality": {
+    "message": "Най-добро качество"
+  },
+  "video_all_qualities": {
+    "message": "Всички качества и субтитри..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager не е инсталиран или не е стартиран"
   }
 }

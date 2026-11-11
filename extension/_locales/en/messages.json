@@ -41,14 +41,6 @@
     "message": "Sent to Mister Download Manager",
     "description": "shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is"
   },
-  "video_failed": {
-    "message": "Mister Download Manager isn't installed or didn't start",
-    "description": "shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is"
-  },
-  "video_drag": {
-    "message": "Drag to move it along the video's edge",
-    "description": "tooltip of the download button over a video: it can be dragged to another place on the video's edge"
-  },
   "menu_selected": {
     "message": "Download selected links with Mister Download Manager",
     "description": "command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is"
@@ -230,12 +222,12 @@
     "description": "beside a stream in the toolbar button's popup: it is a live broadcast (no fixed length); short"
   },
   "video_off": {
-    "message": "The download button is off on this site",
-    "description": "shown briefly on the download button over a video when the app's settings keep the button off on this web site"
+    "message": "Off on this site",
+    "description": "on the download button over a video (grey) when the button is turned off on this web site; a 'Turn on' button follows it; short"
   },
   "video_drm": {
-    "message": "Protected video: it can't be saved",
-    "description": "shown briefly on the download button when the video is copy-protected (DRM) and no tool can download it"
+    "message": "Protected video",
+    "description": "on the download button over a copy-protected (DRM) video, which no tool can download; 'can't be saved' follows it after a dot; short"
   },
   "video_unnamed": {
     "message": "Can't tell which video this is: open its own page and try there",
@@ -244,10 +236,6 @@
   "video_looking": {
     "message": "Looking up the qualities…",
     "description": "in the menu that opens from the download button over a video, while the app finds which qualities (resolutions, formats) the video can be downloaded in"
-  },
-  "video_open_mdm": {
-    "message": "Open in Mister Download Manager…",
-    "description": "last command of the menu of qualities under the download button over a video: opens the app's Download video window for this video instead; keep the name Mister Download Manager as it is"
   },
   "video_no_choices": {
     "message": "No video to download here",
@@ -286,8 +274,8 @@
     "description": "tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word"
   },
   "video_open_post": {
-    "message": "Open the post, then use the button there",
-    "description": "shown briefly on the download button over a video in a feed (a social site's home page, a timeline) when nothing in the feed gives that video's own address, so nothing was sent: the user should open the post the video belongs to and click the button on that page; short"
+    "message": "Open the post to download it",
+    "description": "on the download button (amber) over a video in a feed (a social site's home page, a timeline) that can't be downloaded from there: the user should open the post the video belongs to; short"
   },
   "popup_send_to": {
     "message": "Send downloads to",
@@ -358,5 +346,79 @@
   "popup_media_title_name": {
     "message": "Prefix media file names with the page title",
     "description": "Option in the browser extension media list: put the page title before the original file name when downloading a detected media file"
+  },
+  "video_cant_save": {
+    "message": "can't be saved",
+    "description": "on the download button over a copy-protected video, after 'Protected video ·': it can't be downloaded; short, lower case"
+  },
+  "video_open_post_button": {
+    "message": "Open post",
+    "description": "button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short"
+  },
+  "video_drag_dots": {
+    "message": "Drag the dots to move it along the edge",
+    "description": "second line of the tooltip of the download button over a video: dragging its dotted grip moves it along the video's edge"
+  },
+  "video_tip": {
+    "message": "Download $what$",
+    "description": "first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Download the best quality",
+    "description": "first line of the tooltip of the download button over a video while the app is still finding its qualities"
+  },
+  "video_sending": {
+    "message": "Sending to MDM...",
+    "description": "on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short"
+  },
+  "video_added": {
+    "message": "Added to MDM",
+    "description": "on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short"
+  },
+  "video_show": {
+    "message": "Show",
+    "description": "button on the download button over a video after a download was added: shows that download in the app's window; verb; very short"
+  },
+  "video_no_answer": {
+    "message": "MDM didn't answer",
+    "description": "on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short"
+  },
+  "video_get_mdm": {
+    "message": "Get MDM",
+    "description": "button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short"
+  },
+  "video_retry": {
+    "message": "Retry",
+    "description": "button on the download button over a video when the app didn't answer: try again; verb; very short"
+  },
+  "video_turn_on": {
+    "message": "Turn on",
+    "description": "button on the download button over a video when it is off on this web site: turns it on again here; verb; very short"
+  },
+  "video_section": {
+    "message": "Download",
+    "description": "heading over the list of qualities in the menu of the download button over a video; shown in capitals; one word"
+  },
+  "video_best": {
+    "message": "best",
+    "description": "after the best quality in the menu of the download button over a video, after a star (★ best); lower case; one word"
+  },
+  "video_best_quality": {
+    "message": "Best quality",
+    "description": "first row of the menu of the download button over a video while the app is still finding its qualities: downloads the best one as soon as it is known; short"
+  },
+  "video_all_qualities": {
+    "message": "All qualities and subtitles...",
+    "description": "command in the menu of the download button over a video: opens the app's Download video window, with every quality and the subtitles"
+  },
+  "video_failed": {
+    "message": "Mister Download Manager isn't installed or didn't start",
+    "description": "shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is"
   }
 }

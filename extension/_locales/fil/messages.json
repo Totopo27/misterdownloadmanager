@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Ipinadala sa Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Hindi naka-install ang Mister Download Manager o hindi nagsimula"
-  },
-  "video_drag": {
-    "message": "I-drag para ilipat ito sa gilid ng video"
-  },
   "menu_selected": {
     "message": "I-download ang mga napiling link gamit ang Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Live"
   },
   "video_off": {
-    "message": "Naka-off ang button ng download sa site na ito"
+    "message": "Naka-off sa site na ito"
   },
   "video_drm": {
-    "message": "Protektadong video: hindi ito mase-save"
+    "message": "Protektadong video"
   },
   "video_unnamed": {
     "message": "Hindi matukoy kung aling video ito: buksan ang sarili nitong page at subukan doon"
   },
   "video_looking": {
     "message": "Hinahanap ang mga kalidad…"
-  },
-  "video_open_mdm": {
-    "message": "Buksan sa Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Walang video na ida-download dito"
@@ -222,7 +213,7 @@
     "message": "Audio"
   },
   "video_open_post": {
-    "message": "Buksan ang post, pagkatapos ay gamitin ang button doon"
+    "message": "Buksan ang post para i-download ito"
   },
   "popup_send_to": {
     "message": "Ipadala ang mga download sa"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Idagdag ang pamagat ng page bago ang mga pangalan ng media file"
+  },
+  "video_cant_save": {
+    "message": "hindi ma-save"
+  },
+  "video_open_post_button": {
+    "message": "Buksan ang post"
+  },
+  "video_drag_dots": {
+    "message": "I-drag ang mga tuldok para ilipat ito sa gilid"
+  },
+  "video_tip": {
+    "message": "I-download ang $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "I-download ang pinakamahusay na kalidad"
+  },
+  "video_sending": {
+    "message": "Ipinapadala sa MDM..."
+  },
+  "video_added": {
+    "message": "Idinagdag sa MDM"
+  },
+  "video_show": {
+    "message": "Ipakita"
+  },
+  "video_no_answer": {
+    "message": "Hindi sumagot ang MDM"
+  },
+  "video_get_mdm": {
+    "message": "Kunin ang MDM"
+  },
+  "video_retry": {
+    "message": "Subukang muli"
+  },
+  "video_turn_on": {
+    "message": "I-on"
+  },
+  "video_section": {
+    "message": "I-download"
+  },
+  "video_best": {
+    "message": "pinakamahusay"
+  },
+  "video_best_quality": {
+    "message": "Pinakamahusay na kalidad"
+  },
+  "video_all_qualities": {
+    "message": "Lahat ng kalidad at subtitle..."
+  },
+  "video_failed": {
+    "message": "Hindi naka-install ang Mister Download Manager o hindi nagsimula"
   }
 }

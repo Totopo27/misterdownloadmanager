@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Отправлено в Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager не установлен или не запустился"
-  },
-  "video_drag": {
-    "message": "Перетащите, чтобы переместить по краю видео"
-  },
   "menu_selected": {
     "message": "Загрузить выбранные ссылки с Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Прямой эфир"
   },
   "video_off": {
-    "message": "Кнопка загрузки отключена на этом сайте"
+    "message": "Отключено на этом сайте"
   },
   "video_drm": {
-    "message": "Защищенное видео: его нельзя сохранить"
+    "message": "Защищенное видео"
   },
   "video_unnamed": {
     "message": "Не удалось определить, что это за видео: откройте его страницу и попробуйте там"
   },
   "video_looking": {
     "message": "Поиск доступных качеств…"
-  },
-  "video_open_mdm": {
-    "message": "Открыть в Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Здесь нет видео для скачивания"
@@ -222,7 +213,7 @@
     "message": "Аудио"
   },
   "video_open_post": {
-    "message": "Откройте публикацию, затем используйте кнопку на этой странице"
+    "message": "Откройте запись, чтобы скачать"
   },
   "popup_send_to": {
     "message": "Отправлять загрузки в"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Добавлять заголовок страницы перед именами медиафайлов"
+  },
+  "video_cant_save": {
+    "message": "невозможно сохранить"
+  },
+  "video_open_post_button": {
+    "message": "Открыть запись"
+  },
+  "video_drag_dots": {
+    "message": "Перетащите точки, чтобы переместить кнопку вдоль края"
+  },
+  "video_tip": {
+    "message": "Скачать $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Скачать в лучшем качестве"
+  },
+  "video_sending": {
+    "message": "Отправка в MDM..."
+  },
+  "video_added": {
+    "message": "Добавлено в MDM"
+  },
+  "video_show": {
+    "message": "Показать"
+  },
+  "video_no_answer": {
+    "message": "MDM не отвечает"
+  },
+  "video_get_mdm": {
+    "message": "Получить MDM"
+  },
+  "video_retry": {
+    "message": "Повторить"
+  },
+  "video_turn_on": {
+    "message": "Включить"
+  },
+  "video_section": {
+    "message": "Скачать"
+  },
+  "video_best": {
+    "message": "лучшее"
+  },
+  "video_best_quality": {
+    "message": "Лучшее качество"
+  },
+  "video_all_qualities": {
+    "message": "Все качества и субтитры..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager не установлен или не запустился"
   }
 }

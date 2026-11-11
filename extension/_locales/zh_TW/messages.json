@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "已傳送至 Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager 未安裝或未啟動"
-  },
-  "video_drag": {
-    "message": "拖曳以沿著影片邊緣移動"
-  },
   "menu_selected": {
     "message": "使用 Mister Download Manager 下載選取的連結"
   },
@@ -180,19 +174,16 @@
     "message": "直播"
   },
   "video_off": {
-    "message": "此網站的下載按鈕已關閉"
+    "message": "此網站已關閉"
   },
   "video_drm": {
-    "message": "受保護的影片：無法儲存"
+    "message": "受保護的影片"
   },
   "video_unnamed": {
     "message": "無法判斷這是哪部影片：請開啟該影片本身的頁面再試一次"
   },
   "video_looking": {
     "message": "正在尋找畫質…"
-  },
-  "video_open_mdm": {
-    "message": "在 Mister Download Manager 中開啟…"
   },
   "video_no_choices": {
     "message": "此處沒有可下載的影片"
@@ -222,7 +213,7 @@
     "message": "音訊"
   },
   "video_open_post": {
-    "message": "開啟貼文，然後使用該處的按鈕"
+    "message": "開啟貼文以下載"
   },
   "popup_send_to": {
     "message": "傳送下載項目至"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "在媒體檔案名稱前加上頁面標題"
+  },
+  "video_cant_save": {
+    "message": "無法儲存"
+  },
+  "video_open_post_button": {
+    "message": "開啟貼文"
+  },
+  "video_drag_dots": {
+    "message": "拖曳點點以沿邊緣移動"
+  },
+  "video_tip": {
+    "message": "下載 $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "下載最佳品質"
+  },
+  "video_sending": {
+    "message": "正在傳送至 MDM..."
+  },
+  "video_added": {
+    "message": "已新增至 MDM"
+  },
+  "video_show": {
+    "message": "顯示"
+  },
+  "video_no_answer": {
+    "message": "MDM 沒有回應"
+  },
+  "video_get_mdm": {
+    "message": "取得 MDM"
+  },
+  "video_retry": {
+    "message": "重試"
+  },
+  "video_turn_on": {
+    "message": "開啟"
+  },
+  "video_section": {
+    "message": "下載"
+  },
+  "video_best": {
+    "message": "最佳"
+  },
+  "video_best_quality": {
+    "message": "最佳品質"
+  },
+  "video_all_qualities": {
+    "message": "所有畫質和字幕..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager 未安裝或未啟動"
   }
 }

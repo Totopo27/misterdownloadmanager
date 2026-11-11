@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager ला पाठवले"
   },
-  "video_failed": {
-    "message": "Mister Download Manager स्थापित केलेले नाही किंवा सुरू झाले नाही"
-  },
-  "video_drag": {
-    "message": "व्हिडिओच्या काठावर हलवण्यासाठी ड्रॅग करा"
-  },
   "menu_selected": {
     "message": "Mister Download Manager सह निवडलेल्या लिंक्स डाउनलोड करा"
   },
@@ -180,19 +174,16 @@
     "message": "थेट"
   },
   "video_off": {
-    "message": "या साइटवर डाउनलोड बटण बंद आहे"
+    "message": "या साइटवर बंद"
   },
   "video_drm": {
-    "message": "संरक्षित व्हिडिओ: जतन करता येत नाही"
+    "message": "संरक्षित व्हिडिओ"
   },
   "video_unnamed": {
     "message": "हा कोणता व्हिडिओ आहे ते कळत नाही: त्याचे स्वतःचे पृष्ठ उघडून तिथे प्रयत्न करा"
   },
   "video_looking": {
     "message": "गुणवत्ता शोधत आहे…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager मध्ये उघडा…"
   },
   "video_no_choices": {
     "message": "येथे डाउनलोड करण्यासाठी व्हिडिओ नाही"
@@ -222,7 +213,7 @@
     "message": "ऑडिओ"
   },
   "video_open_post": {
-    "message": "पोस्ट उघडा, नंतर तेथील बटण वापरा"
+    "message": "डाउनलोड करण्यासाठी पोस्ट उघडा"
   },
   "popup_send_to": {
     "message": "डाउनलोड्स येथे पाठवा"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "मीडिया फायलींच्या नावांपुढे पृष्ठाचे शीर्षक जोडा"
+  },
+  "video_cant_save": {
+    "message": "जतन करता येत नाही"
+  },
+  "video_open_post_button": {
+    "message": "पोस्ट उघडा"
+  },
+  "video_drag_dots": {
+    "message": "कडा बाजूने हलवण्यासाठी ठिपके ओढा"
+  },
+  "video_tip": {
+    "message": "$what$ डाउनलोड करा",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "उत्तम गुणवत्ता डाउनलोड करा"
+  },
+  "video_sending": {
+    "message": "MDM ला पाठवत आहे..."
+  },
+  "video_added": {
+    "message": "MDM मध्ये जोडले"
+  },
+  "video_show": {
+    "message": "दाखवा"
+  },
+  "video_no_answer": {
+    "message": "MDM ने प्रतिसाद दिला नाही"
+  },
+  "video_get_mdm": {
+    "message": "MDM मिळवा"
+  },
+  "video_retry": {
+    "message": "पुन्हा प्रयत्न करा"
+  },
+  "video_turn_on": {
+    "message": "चालू करा"
+  },
+  "video_section": {
+    "message": "डाउनलोड करा"
+  },
+  "video_best": {
+    "message": "उत्तम"
+  },
+  "video_best_quality": {
+    "message": "उत्तम गुणवत्ता"
+  },
+  "video_all_qualities": {
+    "message": "सर्व गुणवत्ता स्तर आणि उपशीर्षके..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager स्थापित केलेले नाही किंवा सुरू झाले नाही"
   }
 }

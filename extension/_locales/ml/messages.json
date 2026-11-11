@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager ലേക്ക് അയച്ചു"
   },
-  "video_failed": {
-    "message": "Mister Download Manager ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല അല്ലെങ്കിൽ ആരംഭിച്ചില്ല"
-  },
-  "video_drag": {
-    "message": "വീഡിയോയുടെ അരികിലൂടെ നീക്കാൻ വലിച്ചിടുക"
-  },
   "menu_selected": {
     "message": "Mister Download Manager ഉപയോഗിച്ച് തിരഞ്ഞെടുത്ത ലിങ്കുകൾ ഡൗൺലോഡ് ചെയ്യുക"
   },
@@ -180,19 +174,16 @@
     "message": "തത്സമയം"
   },
   "video_off": {
-    "message": "ഈ സൈറ്റിൽ ഡൗൺലോഡ് ബട്ടൺ ഓഫാണ്"
+    "message": "ഈ സൈറ്റിൽ ഓഫ് ആണ്"
   },
   "video_drm": {
-    "message": "പരിരക്ഷിത വീഡിയോ: സംരക്ഷിക്കാനാവില്ല"
+    "message": "സംരക്ഷിത വീഡിയോ"
   },
   "video_unnamed": {
     "message": "ഇത് ഏത് വീഡിയോ ആണെന്ന് അറിയാൻ കഴിയുന്നില്ല: അതിന്റെ സ്വന്തം പേജ് തുറന്ന് അവിടെ ശ്രമിക്കുക"
   },
   "video_looking": {
     "message": "ക്വാളിറ്റികൾ തിരയുന്നു…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager-ൽ തുറക്കുക…"
   },
   "video_no_choices": {
     "message": "ഇവിടെ ഡൗൺലോഡ് ചെയ്യാൻ വീഡിയോ ഒന്നുമില്ല"
@@ -222,7 +213,7 @@
     "message": "ഓഡിയോ"
   },
   "video_open_post": {
-    "message": "പോസ്റ്റ് തുറക്കുക, എന്നിട്ട് അവിടെയുള്ള ബട്ടൺ ഉപയോഗിക്കുക"
+    "message": "ഡൗൺലോഡ് ചെയ്യാൻ പോസ്റ്റ് തുറക്കുക"
   },
   "popup_send_to": {
     "message": "ഡൗൺലോഡുകൾ ഇതിലേക്ക് അയയ്ക്കുക"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "മീഡിയ ഫയലുകളുടെ പേരുകൾക്ക് മുന്നിൽ പേജിന്റെ ശീർഷകം ചേർക്കുക"
+  },
+  "video_cant_save": {
+    "message": "സംരക്ഷിക്കാൻ കഴിയില്ല"
+  },
+  "video_open_post_button": {
+    "message": "പോസ്റ്റ് തുറക്കുക"
+  },
+  "video_drag_dots": {
+    "message": "അരികിലൂടെ നീക്കാൻ ഡോട്ടുകൾ വലിച്ചിടുക"
+  },
+  "video_tip": {
+    "message": "$what$ ഡൗൺലോഡ് ചെയ്യുക",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "മികച്ച ഗുണനിലവാരം ഡൗൺലോഡ് ചെയ്യുക"
+  },
+  "video_sending": {
+    "message": "MDM-ലേക്ക് അയക്കുന്നു..."
+  },
+  "video_added": {
+    "message": "MDM-ലേക്ക് ചേർത്തു"
+  },
+  "video_show": {
+    "message": "കാണിക്കുക"
+  },
+  "video_no_answer": {
+    "message": "MDM പ്രതികരിച്ചില്ല"
+  },
+  "video_get_mdm": {
+    "message": "MDM നേടുക"
+  },
+  "video_retry": {
+    "message": "വീണ്ടും ശ്രമിക്കുക"
+  },
+  "video_turn_on": {
+    "message": "ഓൺ ചെയ്യുക"
+  },
+  "video_section": {
+    "message": "ഡൗൺലോഡ് ചെയ്യുക"
+  },
+  "video_best": {
+    "message": "മികച്ചത്"
+  },
+  "video_best_quality": {
+    "message": "മികച്ച ഗുണനിലവാരം"
+  },
+  "video_all_qualities": {
+    "message": "എല്ലാ ഗുണനിലവാരങ്ങളും സബ്ടൈറ്റിലുകളും..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല അല്ലെങ്കിൽ ആരംഭിച്ചില്ല"
   }
 }

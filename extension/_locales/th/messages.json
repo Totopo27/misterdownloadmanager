@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "ส่งไปยัง Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager ไม่ได้ติดตั้งหรือไม่ได้เริ่มทำงาน"
-  },
-  "video_drag": {
-    "message": "ลากเพื่อย้ายไปตามขอบวิดีโอ"
-  },
   "menu_selected": {
     "message": "ดาวน์โหลดลิงก์ที่เลือกด้วย Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "สด"
   },
   "video_off": {
-    "message": "ปุ่มดาวน์โหลดปิดอยู่บนไซต์นี้"
+    "message": "ปิดใช้งานบนไซต์นี้"
   },
   "video_drm": {
-    "message": "วิดีโอที่มีการป้องกัน: ไม่สามารถบันทึกได้"
+    "message": "วิดีโอที่มีการป้องกัน"
   },
   "video_unnamed": {
     "message": "ไม่สามารถระบุได้ว่าเป็นวิดีโอใด: เปิดหน้าของวิดีโอนั้นแล้วลองอีกครั้งที่นั่น"
   },
   "video_looking": {
     "message": "กำลังค้นหาคุณภาพ…"
-  },
-  "video_open_mdm": {
-    "message": "เปิดใน Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "ไม่มีวิดีโอให้ดาวน์โหลดที่นี่"
@@ -222,7 +213,7 @@
     "message": "เสียง"
   },
   "video_open_post": {
-    "message": "เปิดโพสต์ แล้วใช้ปุ่มที่นั่น"
+    "message": "เปิดโพสต์เพื่อดาวน์โหลด"
   },
   "popup_send_to": {
     "message": "ส่งการดาวน์โหลดไปยัง"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "เพิ่มชื่อหน้าไว้หน้าชื่อไฟล์สื่อ"
+  },
+  "video_cant_save": {
+    "message": "บันทึกไม่ได้"
+  },
+  "video_open_post_button": {
+    "message": "เปิดโพสต์"
+  },
+  "video_drag_dots": {
+    "message": "ลากจุดเพื่อย้ายไปตามขอบ"
+  },
+  "video_tip": {
+    "message": "ดาวน์โหลด $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "ดาวน์โหลดคุณภาพดีที่สุด"
+  },
+  "video_sending": {
+    "message": "กำลังส่งไปยัง MDM..."
+  },
+  "video_added": {
+    "message": "เพิ่มไปยัง MDM แล้ว"
+  },
+  "video_show": {
+    "message": "แสดง"
+  },
+  "video_no_answer": {
+    "message": "MDM ไม่ตอบสนอง"
+  },
+  "video_get_mdm": {
+    "message": "รับ MDM"
+  },
+  "video_retry": {
+    "message": "ลองใหม่"
+  },
+  "video_turn_on": {
+    "message": "เปิดใช้งาน"
+  },
+  "video_section": {
+    "message": "ดาวน์โหลด"
+  },
+  "video_best": {
+    "message": "ดีที่สุด"
+  },
+  "video_best_quality": {
+    "message": "คุณภาพดีที่สุด"
+  },
+  "video_all_qualities": {
+    "message": "ทุกคุณภาพและคำบรรยาย..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager ไม่ได้ติดตั้งหรือไม่ได้เริ่มทำงาน"
   }
 }

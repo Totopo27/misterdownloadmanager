@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Managerக்கு அனுப்பப்பட்டது"
   },
-  "video_failed": {
-    "message": "Mister Download Manager நிறுவப்படவில்லை அல்லது தொடங்கவில்லை"
-  },
-  "video_drag": {
-    "message": "வீடியோவின் விளிம்பில் நகர்த்த இழுக்கவும்"
-  },
   "menu_selected": {
     "message": "Mister Download Manager மூலம் தேர்ந்தெடுக்கப்பட்ட இணைப்புகளைப் பதிவிறக்கவும்"
   },
@@ -180,19 +174,16 @@
     "message": "நேரலை"
   },
   "video_off": {
-    "message": "இந்தத் தளத்தில் பதிவிறக்கப் பொத்தான் முடக்கப்பட்டுள்ளது"
+    "message": "இந்த தளத்தில் முடக்கப்பட்டது"
   },
   "video_drm": {
-    "message": "பாதுகாக்கப்பட்ட வீடியோ: இதைச் சேமிக்க முடியாது"
+    "message": "பாதுகாக்கப்பட்ட வீடியோ"
   },
   "video_unnamed": {
     "message": "இது எந்த வீடியோ என்று தெரியவில்லை: அதன் சொந்தப் பக்கத்தைத் திறந்து அங்கே முயலுங்கள்"
   },
   "video_looking": {
     "message": "தரங்களைத் தேடுகிறது…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager இல் திறக்கவும்…"
   },
   "video_no_choices": {
     "message": "இங்கே பதிவிறக்க வீடியோ எதுவும் இல்லை"
@@ -222,7 +213,7 @@
     "message": "ஆடியோ"
   },
   "video_open_post": {
-    "message": "பதிவைத் திறந்து, அங்குள்ள பொத்தானைப் பயன்படுத்தவும்"
+    "message": "பதிவிறக்க பதிவைத் திறக்கவும்"
   },
   "popup_send_to": {
     "message": "பதிவிறக்கங்களை இதற்கு அனுப்பவும்"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "மீடியா கோப்புப் பெயர்களுக்கு முன் பக்கத்தின் தலைப்பைச் சேர்"
+  },
+  "video_cant_save": {
+    "message": "சேமிக்க முடியாது"
+  },
+  "video_open_post_button": {
+    "message": "பதிவை திற"
+  },
+  "video_drag_dots": {
+    "message": "புள்ளிகளை இழுத்து, விளிம்பில் நகர்த்தவும்"
+  },
+  "video_tip": {
+    "message": "$what$-ஐப் பதிவிறக்கவும்",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "சிறந்த தரத்தைப் பதிவிறக்கவும்"
+  },
+  "video_sending": {
+    "message": "MDM-க்கு அனுப்புகிறது..."
+  },
+  "video_added": {
+    "message": "MDM இல் சேர்க்கப்பட்டது"
+  },
+  "video_show": {
+    "message": "காட்டு"
+  },
+  "video_no_answer": {
+    "message": "MDM பதிலளிக்கவில்லை"
+  },
+  "video_get_mdm": {
+    "message": "MDM ஐப் பெறவும்"
+  },
+  "video_retry": {
+    "message": "மீண்டும் முயற்சி"
+  },
+  "video_turn_on": {
+    "message": "இயக்கு"
+  },
+  "video_section": {
+    "message": "பதிவிறக்கவும்"
+  },
+  "video_best": {
+    "message": "சிறந்தது"
+  },
+  "video_best_quality": {
+    "message": "சிறந்த தரம்"
+  },
+  "video_all_qualities": {
+    "message": "அனைத்துத் தரங்களும் வசனங்களும்..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager நிறுவப்படவில்லை அல்லது தொடங்கவில்லை"
   }
 }

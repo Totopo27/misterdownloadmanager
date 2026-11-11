@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "تم الإرسال إلى Mister Download Manager"
   },
-  "video_failed": {
-    "message": "لم يتم تثبيت Mister Download Manager أو لم يبدأ"
-  },
-  "video_drag": {
-    "message": "اسحب لتحريكه على طول حافة الفيديو"
-  },
   "menu_selected": {
     "message": "تنزيل الروابط المحددة باستخدام Mister Download Manager"
   },
@@ -165,10 +159,10 @@
     "message": "لم يتم العثور على أي فيديو أو صوت في هذه الصفحة بعد. ابدأ تشغيله، ثم افتح هذا مرة أخرى."
   },
   "popup_media_streamed": {
-    "message": "يبثّ مشغّل هذه الصفحة الفيديو على أجزاء، فلا يوجد ملف لعرضه هنا. أشِر إلى الفيديو واستخدم زر «تنزيل الفيديو» عليه."
+    "message": "يبث مشغل هذه الصفحة الفيديو على قطع، لذلك لا يوجد ملف لإدراجه. أشر إلى الفيديو واستخدم زر «تنزيل الفيديو» الخاص به."
   },
   "popup_media_store": {
-    "message": "تُبقي قواعد سوق Chrome الإلكتروني هذه النسخة من الإضافة بعيدة عن مقاطع هذا الموقع. يوضّح قسم «تعليمات» ما يمكنك فعله."
+    "message": "تحتفظ قواعد سوق Chrome الإلكتروني بهذه النسخة من الوظيفة الإضافية بعيدا عن مقاطع الفيديو في هذا الموقع. توضح التعليمات ما يمكنك فعله."
   },
   "popup_media_download": {
     "message": "تنزيل"
@@ -180,19 +174,16 @@
     "message": "مباشر"
   },
   "video_off": {
-    "message": "زر التنزيل معطل في هذا الموقع"
+    "message": "متوقف في هذا الموقع"
   },
   "video_drm": {
-    "message": "فيديو محمي: لا يمكن حفظه"
+    "message": "فيديو محمي"
   },
   "video_unnamed": {
-    "message": "تعذّر تحديد هذا الفيديو: افتح صفحته الخاصة وحاول من هناك"
+    "message": "لا يمكن تحديد الفيديو: افتح صفحته الخاصة وحاول هناك"
   },
   "video_looking": {
     "message": "يجري البحث عن الجودات…"
-  },
-  "video_open_mdm": {
-    "message": "فتح في Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "لا يوجد فيديو للتنزيل هنا"
@@ -222,7 +213,7 @@
     "message": "صوت"
   },
   "video_open_post": {
-    "message": "افتح المنشور، ثم استخدم الزر هناك"
+    "message": "افتح المنشور لتنزيله"
   },
   "popup_send_to": {
     "message": "إرسال التنزيلات إلى"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "إضافة عنوان الصفحة قبل أسماء ملفات الوسائط"
+  },
+  "video_cant_save": {
+    "message": "لا يمكن حفظه"
+  },
+  "video_open_post_button": {
+    "message": "افتح المنشور"
+  },
+  "video_drag_dots": {
+    "message": "اسحب النقاط لتحريكه على طول الحافة"
+  },
+  "video_tip": {
+    "message": "نزل $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "نزل أفضل جودة"
+  },
+  "video_sending": {
+    "message": "قيد الإرسال إلى MDM..."
+  },
+  "video_added": {
+    "message": "أضيف إلى MDM"
+  },
+  "video_show": {
+    "message": "إظهار"
+  },
+  "video_no_answer": {
+    "message": "لم يستجب MDM"
+  },
+  "video_get_mdm": {
+    "message": "احصل على MDM"
+  },
+  "video_retry": {
+    "message": "أعد المحاولة"
+  },
+  "video_turn_on": {
+    "message": "تشغيل"
+  },
+  "video_section": {
+    "message": "تنزيل"
+  },
+  "video_best": {
+    "message": "الأفضل"
+  },
+  "video_best_quality": {
+    "message": "أفضل جودة"
+  },
+  "video_all_qualities": {
+    "message": "كل الجودات والترجمات..."
+  },
+  "video_failed": {
+    "message": "لم يتم تثبيت Mister Download Manager أو لم يبدأ"
   }
 }

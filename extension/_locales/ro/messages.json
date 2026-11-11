@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Trimis la Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager nu este instalat sau nu a pornit"
-  },
-  "video_drag": {
-    "message": "Trageți pentru a-l muta de-a lungul marginii videoclipului"
-  },
   "menu_selected": {
     "message": "Descărcați linkurile selectate cu Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "În direct"
   },
   "video_off": {
-    "message": "Butonul de descărcare este dezactivat pe acest site"
+    "message": "Dezactivat pe acest site"
   },
   "video_drm": {
-    "message": "Videoclip protejat: nu poate fi salvat"
+    "message": "Videoclip protejat"
   },
   "video_unnamed": {
     "message": "Nu se poate stabili ce videoclip este: deschideți pagina proprie a videoclipului și încercați acolo"
   },
   "video_looking": {
     "message": "Se caută calitățile…"
-  },
-  "video_open_mdm": {
-    "message": "Deschideți în Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Nu există niciun videoclip de descărcat aici"
@@ -222,7 +213,7 @@
     "message": "Audio"
   },
   "video_open_post": {
-    "message": "Deschideți postarea, apoi utilizați butonul de acolo"
+    "message": "Deschideți postarea pentru a o descărca"
   },
   "popup_send_to": {
     "message": "Trimite descărcările la"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Adaugă titlul paginii înaintea numelor fișierelor media"
+  },
+  "video_cant_save": {
+    "message": "nu poate fi salvat"
+  },
+  "video_open_post_button": {
+    "message": "Deschideți postarea"
+  },
+  "video_drag_dots": {
+    "message": "Trageți punctele pentru a-l muta de-a lungul marginii"
+  },
+  "video_tip": {
+    "message": "Descărcați $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Descărcați cea mai bună calitate"
+  },
+  "video_sending": {
+    "message": "Se trimite către MDM..."
+  },
+  "video_added": {
+    "message": "Adăugat la MDM"
+  },
+  "video_show": {
+    "message": "Afișați"
+  },
+  "video_no_answer": {
+    "message": "MDM nu a răspuns"
+  },
+  "video_get_mdm": {
+    "message": "Obțineți MDM"
+  },
+  "video_retry": {
+    "message": "Reîncercați"
+  },
+  "video_turn_on": {
+    "message": "Activați"
+  },
+  "video_section": {
+    "message": "Descărcați"
+  },
+  "video_best": {
+    "message": "cea mai bună"
+  },
+  "video_best_quality": {
+    "message": "Cea mai bună calitate"
+  },
+  "video_all_qualities": {
+    "message": "Toate calitățile și subtitrările..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager nu este instalat sau nu a pornit"
   }
 }

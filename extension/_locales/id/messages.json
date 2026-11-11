@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Dikirim ke Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager tidak terinstal atau tidak dimulai"
-  },
-  "video_drag": {
-    "message": "Seret untuk memindahkannya di sepanjang tepi video"
-  },
   "menu_selected": {
     "message": "Unduh tautan yang dipilih dengan Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Langsung"
   },
   "video_off": {
-    "message": "Tombol unduh nonaktif di situs ini"
+    "message": "Nonaktif di situs ini"
   },
   "video_drm": {
-    "message": "Video dilindungi: tidak dapat disimpan"
+    "message": "Video terproteksi"
   },
   "video_unnamed": {
     "message": "Tidak bisa diketahui video mana ini: buka halamannya sendiri dan coba di sana"
   },
   "video_looking": {
     "message": "Mencari kualitas…"
-  },
-  "video_open_mdm": {
-    "message": "Buka di Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Tidak ada video untuk diunduh di sini"
@@ -222,7 +213,7 @@
     "message": "Audio"
   },
   "video_open_post": {
-    "message": "Buka postingan, lalu gunakan tombol di sana"
+    "message": "Buka postingan untuk mengunduhnya"
   },
   "popup_send_to": {
     "message": "Kirim unduhan ke"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Tambahkan judul halaman di depan nama file media"
+  },
+  "video_cant_save": {
+    "message": "tidak dapat disimpan"
+  },
+  "video_open_post_button": {
+    "message": "Buka postingan"
+  },
+  "video_drag_dots": {
+    "message": "Seret titik-titik untuk memindahkannya di sepanjang tepi"
+  },
+  "video_tip": {
+    "message": "Unduh $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Unduh kualitas terbaik"
+  },
+  "video_sending": {
+    "message": "Mengirim ke MDM..."
+  },
+  "video_added": {
+    "message": "Ditambahkan ke MDM"
+  },
+  "video_show": {
+    "message": "Tampilkan"
+  },
+  "video_no_answer": {
+    "message": "MDM tidak menjawab"
+  },
+  "video_get_mdm": {
+    "message": "Dapatkan MDM"
+  },
+  "video_retry": {
+    "message": "Coba lagi"
+  },
+  "video_turn_on": {
+    "message": "Aktifkan"
+  },
+  "video_section": {
+    "message": "Unduh"
+  },
+  "video_best": {
+    "message": "terbaik"
+  },
+  "video_best_quality": {
+    "message": "Kualitas terbaik"
+  },
+  "video_all_qualities": {
+    "message": "Semua kualitas dan subtitel..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager tidak terinstal atau tidak dimulai"
   }
 }

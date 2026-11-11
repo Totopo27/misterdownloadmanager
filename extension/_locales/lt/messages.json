@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Išsiųsta į Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager neįdiegta arba nepasileido"
-  },
-  "video_drag": {
-    "message": "Vilkite, kad perkeltumėte jį palei vaizdo įrašo kraštą"
-  },
   "menu_selected": {
     "message": "Atsisiųsti pasirinktas nuorodas su Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Tiesiogiai"
   },
   "video_off": {
-    "message": "Atsisiuntimo mygtukas šioje svetainėje išjungtas"
+    "message": "Išjungta šioje svetainėje"
   },
   "video_drm": {
-    "message": "Apsaugotas vaizdo įrašas: jo negalima įrašyti"
+    "message": "Apsaugotas vaizdo įrašas"
   },
   "video_unnamed": {
     "message": "Neaišku, kuris tai vaizdo įrašas: atidarykite jo paties puslapį ir bandykite ten"
   },
   "video_looking": {
     "message": "Ieškoma kokybių…"
-  },
-  "video_open_mdm": {
-    "message": "Atidaryti programoje Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Čia nėra vaizdo įrašo, kurį būtų galima atsisiųsti"
@@ -222,7 +213,7 @@
     "message": "Garsas"
   },
   "video_open_post": {
-    "message": "Atidarykite įrašą, tada naudokite ten esantį mygtuką"
+    "message": "Atidarykite įrašą, kad galėtumėte jį atsisiųsti"
   },
   "popup_send_to": {
     "message": "Siųsti atsisiuntimus į"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Pridėti puslapio pavadinimą prieš medijos failų vardus"
+  },
+  "video_cant_save": {
+    "message": "negali būti išsaugotas"
+  },
+  "video_open_post_button": {
+    "message": "Atidaryti įrašą"
+  },
+  "video_drag_dots": {
+    "message": "Vilkite taškus, kad perkeltumėte jį palei kraštą"
+  },
+  "video_tip": {
+    "message": "Atsisiųsti $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Atsisiųsti geriausią kokybę"
+  },
+  "video_sending": {
+    "message": "Siunčiama į MDM..."
+  },
+  "video_added": {
+    "message": "Pridėta į MDM"
+  },
+  "video_show": {
+    "message": "Rodyti"
+  },
+  "video_no_answer": {
+    "message": "MDM neatsakė"
+  },
+  "video_get_mdm": {
+    "message": "Gauti MDM"
+  },
+  "video_retry": {
+    "message": "Bandyti dar kartą"
+  },
+  "video_turn_on": {
+    "message": "Įjungti"
+  },
+  "video_section": {
+    "message": "Atsisiųsti"
+  },
+  "video_best": {
+    "message": "geriausia"
+  },
+  "video_best_quality": {
+    "message": "Geriausia kokybė"
+  },
+  "video_all_qualities": {
+    "message": "Visos kokybės ir subtitrai..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager neįdiegta arba nepasileido"
   }
 }

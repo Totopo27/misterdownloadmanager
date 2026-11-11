@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Στάλθηκε στο Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Το Mister Download Manager δεν είναι εγκατεστημένο ή δεν ξεκίνησε"
-  },
-  "video_drag": {
-    "message": "Σύρετε για να το μετακινήσετε κατά μήκος της άκρης του βίντεο"
-  },
   "menu_selected": {
     "message": "Λήψη επιλεγμένων συνδέσμων με το Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Ζωντανά"
   },
   "video_off": {
-    "message": "Το κουμπί λήψης είναι απενεργοποιημένο σε αυτόν τον ιστότοπο"
+    "message": "Ανενεργό σε αυτήν την τοποθεσία"
   },
   "video_drm": {
-    "message": "Προστατευμένο βίντεο: δεν είναι δυνατή η αποθήκευσή του"
+    "message": "Προστατευμένο βίντεο"
   },
   "video_unnamed": {
     "message": "Δεν είναι σαφές ποιο βίντεο είναι αυτό: ανοίξτε τη δική του σελίδα και δοκιμάστε εκεί"
   },
   "video_looking": {
     "message": "Αναζήτηση ποιοτήτων…"
-  },
-  "video_open_mdm": {
-    "message": "Άνοιγμα στο Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Δεν υπάρχει βίντεο για λήψη εδώ"
@@ -222,7 +213,7 @@
     "message": "Ήχος"
   },
   "video_open_post": {
-    "message": "Ανοίξτε την ανάρτηση και μετά χρησιμοποιήστε το κουμπί εκεί"
+    "message": "Ανοίξτε την ανάρτηση για λήψη"
   },
   "popup_send_to": {
     "message": "Αποστολή λήψεων σε"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Προσθήκη του τίτλου της σελίδας πριν από τα ονόματα των αρχείων πολυμέσων"
+  },
+  "video_cant_save": {
+    "message": "δεν μπορεί να αποθηκευτεί"
+  },
+  "video_open_post_button": {
+    "message": "Άνοιγμα ανάρτησης"
+  },
+  "video_drag_dots": {
+    "message": "Σύρετε τις τελείες για να το μετακινήσετε κατά μήκος της άκρης"
+  },
+  "video_tip": {
+    "message": "Λήψη $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Λήψη της καλύτερης ποιότητας"
+  },
+  "video_sending": {
+    "message": "Αποστολή στο MDM..."
+  },
+  "video_added": {
+    "message": "Προστέθηκε στο MDM"
+  },
+  "video_show": {
+    "message": "Εμφάνιση"
+  },
+  "video_no_answer": {
+    "message": "Το MDM δεν απάντησε"
+  },
+  "video_get_mdm": {
+    "message": "Λήψη MDM"
+  },
+  "video_retry": {
+    "message": "Επανάληψη"
+  },
+  "video_turn_on": {
+    "message": "Ενεργοποίηση"
+  },
+  "video_section": {
+    "message": "Λήψη"
+  },
+  "video_best": {
+    "message": "καλύτερη"
+  },
+  "video_best_quality": {
+    "message": "Καλύτερη ποιότητα"
+  },
+  "video_all_qualities": {
+    "message": "Όλες οι ποιότητες και οι υπότιτλοι..."
+  },
+  "video_failed": {
+    "message": "Το Mister Download Manager δεν είναι εγκατεστημένο ή δεν ξεκίνησε"
   }
 }

@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Odesláno do Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Aplikace Mister Download Manager není nainstalovaná nebo se nespustila"
-  },
-  "video_drag": {
-    "message": "Přetažením přesunete podél okraje videa"
-  },
   "menu_selected": {
     "message": "Stáhnout vybrané odkazy pomocí Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Živě"
   },
   "video_off": {
-    "message": "Tlačítko pro stahování je na tomto webu vypnuto"
+    "message": "Vypnuto na tomto webu"
   },
   "video_drm": {
-    "message": "Chráněné video: nelze uložit"
+    "message": "Chráněné video"
   },
   "video_unnamed": {
     "message": "Nelze zjistit, o které video jde: otevřete jeho vlastní stránku a zkuste to tam"
   },
   "video_looking": {
     "message": "Vyhledávání kvalit…"
-  },
-  "video_open_mdm": {
-    "message": "Otevřít v Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Tady není žádné video ke stažení"
@@ -222,7 +213,7 @@
     "message": "Zvuk"
   },
   "video_open_post": {
-    "message": "Otevřete příspěvek a použijte tlačítko tam"
+    "message": "Otevřete příspěvek, abyste mohli video stáhnout"
   },
   "popup_send_to": {
     "message": "Odeslat stahování do"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Přidat název stránky před názvy mediálních souborů"
+  },
+  "video_cant_save": {
+    "message": "nelze uložit"
+  },
+  "video_open_post_button": {
+    "message": "Otevřít příspěvek"
+  },
+  "video_drag_dots": {
+    "message": "Přetáhněte tečky pro přesunutí podél okraje"
+  },
+  "video_tip": {
+    "message": "Stáhnout $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Stáhnout nejlepší kvalitu"
+  },
+  "video_sending": {
+    "message": "Odesílání do MDM..."
+  },
+  "video_added": {
+    "message": "Přidáno do MDM"
+  },
+  "video_show": {
+    "message": "Zobrazit"
+  },
+  "video_no_answer": {
+    "message": "MDM neodpověděl"
+  },
+  "video_get_mdm": {
+    "message": "Získat MDM"
+  },
+  "video_retry": {
+    "message": "Zkusit znovu"
+  },
+  "video_turn_on": {
+    "message": "Zapnout"
+  },
+  "video_section": {
+    "message": "Stáhnout"
+  },
+  "video_best": {
+    "message": "nejlepší"
+  },
+  "video_best_quality": {
+    "message": "Nejlepší kvalita"
+  },
+  "video_all_qualities": {
+    "message": "Všechny kvality a titulky..."
+  },
+  "video_failed": {
+    "message": "Aplikace Mister Download Manager není nainstalovaná nebo se nespustila"
   }
 }

@@ -573,6 +573,13 @@ These ship in a later version, when they're ready.
   Download video window. A stream the page plays (HLS) is listed at once, read by MDM itself; the
   same video asked again within 10 minutes opens at once; the pick starts without looking the
   video up a second time: in review
+- 🔄 The Download video button, redesigned
+  ([#703](https://github.com/anefzaoui/misterdownloadmanager/issues/703)): MDM looks the video up
+  as the button appears and the button names the best quality, which one click downloads; a plain
+  file downloads as a file; its menu lists every quality; after a click it says what happened in
+  its own colour, with Show, Open post, Get MDM and Retry, or Turn on: in review
+- 🔄 The video button no longer comes back on play or pause, and fades sooner
+  ([#741](https://github.com/anefzaoui/misterdownloadmanager/issues/741)): in review
 - 🔄 Picking a video quality already in the list (the menu over a video, the Download video window)
   follows Options' duplicate setting instead of downloading it again: in review
 - 🔄 The progress window's bar glides instead of moving in steps: in review

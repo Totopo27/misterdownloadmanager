@@ -209,7 +209,7 @@ async function showMedia(tab, connected) {
       get.onclick = async () => {
         get.disabled = true;
         const reply = await ask({ type: "media-download", tab: tab.id, url: m.url });
-        said(reply.ok ? t("video_sent") : reply.why === "drm" ? t("video_drm") : t("video_failed"), !reply.ok);
+        said(reply.ok ? t("video_sent") : reply.why === "drm" ? `${t("video_drm")} · ${t("video_cant_save")}` : t("video_failed"), !reply.ok);
         get.disabled = false;
       };
       li.append(get);

@@ -173,6 +173,16 @@ pub struct VideoChoice {
     /// Only the sound (an audio file, a conversion to MP3, Opus or FLAC): the menu lists these
     /// apart from the videos. False from an app older than the field.
     pub audio: bool,
+    /// The picture's height in pixels (the button's chip: 1080p, 4K); none for the sound, or a
+    /// file known only by its type.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub height: Option<u32>,
+    /// Frames a second, when above 31 (60 fps is worth saying, 30 isn't).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fps: Option<u32>,
+    /// The sound's bitrate in kbit/s, for the sound as the site has it.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub kbps: Option<u32>,
 }
 
 /// [`VideoLookupAnswer::state`]'s values, and [`VideoLookupAnswer::reason`]'s.
@@ -344,12 +354,14 @@ mod tests {
                     ext: "mp4".into(),
                     size: Some(187_500_000),
                     audio: false,
+                    ..Default::default()
                 },
                 VideoChoice {
                     label: "Audio only mp3".into(),
                     ext: "mp3".into(),
                     size: None,
                     audio: true,
+                    ..Default::default()
                 },
             ],
             ..VideoLookupAnswer::of(lookup::READY)

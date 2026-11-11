@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Надіслано до Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager не встановлено або не запущено"
-  },
-  "video_drag": {
-    "message": "Перетягніть, щоб перемістити вздовж краю відео"
-  },
   "menu_selected": {
     "message": "Завантажити вибрані посилання за допомогою Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Наживо"
   },
   "video_off": {
-    "message": "Кнопка завантаження вимкнена на цьому сайті"
+    "message": "Вимкнено на цьому сайті"
   },
   "video_drm": {
-    "message": "Захищене відео: його неможливо зберегти"
+    "message": "Захищене відео"
   },
   "video_unnamed": {
     "message": "Не вдалося визначити, що це за відео: відкрийте його власну сторінку і спробуйте там"
   },
   "video_looking": {
     "message": "Пошук доступних якостей…"
-  },
-  "video_open_mdm": {
-    "message": "Відкрити в Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Тут немає відео для завантаження"
@@ -222,7 +213,7 @@
     "message": "Аудіо"
   },
   "video_open_post": {
-    "message": "Відкрийте допис, потім скористайтеся кнопкою там"
+    "message": "Відкрийте допис, щоб завантажити його"
   },
   "popup_send_to": {
     "message": "Надсилати завантаження до"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Додавати заголовок сторінки перед назвами медіафайлів"
+  },
+  "video_cant_save": {
+    "message": "неможливо зберегти"
+  },
+  "video_open_post_button": {
+    "message": "Відкрити допис"
+  },
+  "video_drag_dots": {
+    "message": "Перетягніть крапки, щоб перемістити його по краю"
+  },
+  "video_tip": {
+    "message": "Завантажити $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Завантажити найкращу якість"
+  },
+  "video_sending": {
+    "message": "Надсилання до MDM..."
+  },
+  "video_added": {
+    "message": "Додано до MDM"
+  },
+  "video_show": {
+    "message": "Показати"
+  },
+  "video_no_answer": {
+    "message": "MDM не відповідає"
+  },
+  "video_get_mdm": {
+    "message": "Отримати MDM"
+  },
+  "video_retry": {
+    "message": "Повторити"
+  },
+  "video_turn_on": {
+    "message": "Увімкнути"
+  },
+  "video_section": {
+    "message": "Завантажити"
+  },
+  "video_best": {
+    "message": "найкраща"
+  },
+  "video_best_quality": {
+    "message": "Найкраща якість"
+  },
+  "video_all_qualities": {
+    "message": "Усі якості та субтитри..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager не встановлено або не запущено"
   }
 }

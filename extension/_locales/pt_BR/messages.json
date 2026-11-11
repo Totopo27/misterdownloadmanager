@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Enviado para Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager não está instalado ou não iniciou"
-  },
-  "video_drag": {
-    "message": "Arraste para movê-lo ao longo da borda do vídeo"
-  },
   "menu_selected": {
     "message": "Baixar links selecionados com Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Ao vivo"
   },
   "video_off": {
-    "message": "O botão de download está desativado neste site"
+    "message": "Desativado neste site"
   },
   "video_drm": {
-    "message": "Vídeo protegido: não pode ser salvo"
+    "message": "Vídeo protegido"
   },
   "video_unnamed": {
     "message": "Não dá para saber qual é este vídeo: abra a página dele e tente lá"
   },
   "video_looking": {
     "message": "Buscando as qualidades…"
-  },
-  "video_open_mdm": {
-    "message": "Abrir no Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Nenhum vídeo para baixar aqui"
@@ -222,7 +213,7 @@
     "message": "Áudio"
   },
   "video_open_post": {
-    "message": "Abra a publicação e use o botão lá"
+    "message": "Abra a publicação para baixar o vídeo"
   },
   "popup_send_to": {
     "message": "Enviar downloads para"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Adicionar o título da página antes dos nomes dos arquivos de mídia"
+  },
+  "video_cant_save": {
+    "message": "não pode ser salvo"
+  },
+  "video_open_post_button": {
+    "message": "Abrir postagem"
+  },
+  "video_drag_dots": {
+    "message": "Arraste os pontos para mover o botão ao longo da borda"
+  },
+  "video_tip": {
+    "message": "Baixar $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Baixar a melhor qualidade"
+  },
+  "video_sending": {
+    "message": "Enviando para o MDM..."
+  },
+  "video_added": {
+    "message": "Adicionado ao MDM"
+  },
+  "video_show": {
+    "message": "Mostrar"
+  },
+  "video_no_answer": {
+    "message": "MDM não respondeu"
+  },
+  "video_get_mdm": {
+    "message": "Obter MDM"
+  },
+  "video_retry": {
+    "message": "Tentar novamente"
+  },
+  "video_turn_on": {
+    "message": "Ativar"
+  },
+  "video_section": {
+    "message": "Baixar"
+  },
+  "video_best": {
+    "message": "melhor"
+  },
+  "video_best_quality": {
+    "message": "Melhor qualidade"
+  },
+  "video_all_qualities": {
+    "message": "Todas as qualidades e legendas..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager não está instalado ou não iniciou"
   }
 }

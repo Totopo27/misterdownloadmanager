@@ -2737,6 +2737,14 @@ impl App {
             cmd.video_page = None;
             cmd.url = Some(file);
         }
+        // The button over a video that plays a plain file (#703): downloaded as any file, at
+        // once and without a window (its page the referrer), as Download File Info's Start would.
+        if cmd.video_direct
+            && let Some(file) = cmd.video_page.take()
+        {
+            cmd.url = Some(file);
+            cmd.silent = true;
+        }
         // The browser's download button over a video: the Download video window, looking the
         // page up at once. The main window stays where it is (hidden, minimized): only the
         // dialog opens, as its window is its own.
@@ -2751,6 +2759,19 @@ impl App {
             self.settings.video_panel_sites =
                 mdm_ipc::capture::add_site(&self.settings.video_panel_sites, host);
             self.dirty = true;
+            return;
+        }
+        // Its "Turn on": on this site again.
+        if let Some(host) = cmd.panel_show_site.as_deref() {
+            self.settings.video_panel_sites =
+                mdm_ipc::capture::remove_site(&self.settings.video_panel_sites, host);
+            self.dirty = true;
+            return;
+        }
+        // Its "Show" after a download was added: the main window, that download selected.
+        if let Some(address) = cmd.show_download.as_deref() {
+            self.show_window(ctx);
+            self.select_download_of(address);
             return;
         }
         // The browser's right-click menu: a page's (or a selection's) links, to tick in Import.
@@ -4226,6 +4247,27 @@ impl App {
             VideoGoes::MainQueue => self.queue_later(vec![id], false),
         }
         self.dirty = true;
+    }
+
+    /// The newest download of `address` (a video's page as it was looked up, or its file),
+    /// selected and scrolled to, in All Downloads when the view shown hides it (the button's
+    /// "Show", #703).
+    fn select_download_of(&mut self, address: &str) {
+        let looked = mdm_tools::pages::video_address(address.trim());
+        let found = self
+            .items
+            .iter()
+            .rev()
+            .find(|i| i.url.as_str() == address.trim() || i.url.as_str() == looked)
+            .map(|i| i.id);
+        let Some(id) = found else {
+            return;
+        };
+        if !self.shown_ids().contains(&id) {
+            self.view = View::All;
+        }
+        self.selection.set(id);
+        self.list.scroll_to = self.shown_ids().iter().position(|x| *x == id);
     }
 
     /// The browser's quality menu over a video (crates/nmhost, videolookup.rs): a look-up

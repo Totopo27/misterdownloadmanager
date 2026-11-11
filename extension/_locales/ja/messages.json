@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager に送信済み"
   },
-  "video_failed": {
-    "message": "Mister Download Manager がインストールされていないか、起動していません"
-  },
-  "video_drag": {
-    "message": "ドラッグして動画の端に沿って移動"
-  },
   "menu_selected": {
     "message": "Mister Download Manager で選択したリンクをダウンロード"
   },
@@ -180,19 +174,16 @@
     "message": "ライブ"
   },
   "video_off": {
-    "message": "このサイトではダウンロード ボタンがオフになっています"
+    "message": "このサイトではオフ"
   },
   "video_drm": {
-    "message": "保護されたビデオ: 保存できません"
+    "message": "保護された動画"
   },
   "video_unnamed": {
     "message": "どの動画か判別できません。動画自体のページを開いて、そこでお試しください"
   },
   "video_looking": {
     "message": "画質を検索しています…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager で開く…"
   },
   "video_no_choices": {
     "message": "ここにはダウンロードできる動画がありません"
@@ -222,7 +213,7 @@
     "message": "オーディオ"
   },
   "video_open_post": {
-    "message": "投稿を開いて、そこにあるボタンを使用してください"
+    "message": "ダウンロードするには投稿を開く"
   },
   "popup_send_to": {
     "message": "ダウンロードの送信先"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "メディアファイル名の前にページのタイトルを付ける"
+  },
+  "video_cant_save": {
+    "message": "保存できません"
+  },
+  "video_open_post_button": {
+    "message": "投稿を開く"
+  },
+  "video_drag_dots": {
+    "message": "ドットをドラッグして端に沿って移動"
+  },
+  "video_tip": {
+    "message": "$what$ をダウンロード",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "最高品質をダウンロード"
+  },
+  "video_sending": {
+    "message": "MDM に送信しています..."
+  },
+  "video_added": {
+    "message": "MDM に追加済み"
+  },
+  "video_show": {
+    "message": "表示"
+  },
+  "video_no_answer": {
+    "message": "MDM が応答しません"
+  },
+  "video_get_mdm": {
+    "message": "MDM を入手"
+  },
+  "video_retry": {
+    "message": "再試行"
+  },
+  "video_turn_on": {
+    "message": "オンにする"
+  },
+  "video_section": {
+    "message": "ダウンロード"
+  },
+  "video_best": {
+    "message": "最高"
+  },
+  "video_best_quality": {
+    "message": "最高品質"
+  },
+  "video_all_qualities": {
+    "message": "すべての画質と字幕..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager がインストールされていないか、起動していません"
   }
 }

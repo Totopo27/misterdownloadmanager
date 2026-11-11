@@ -2039,6 +2039,10 @@ async function videoTarget(m, page, sender) {
   return {
     own,
     src,
+    // The post's own page (#689), for the button's "Open post".
+    post: post ? own : "",
+    // The video's own plain file, sent as itself (#703).
+    file,
     title: typeof m.title === "string" && !post && !feed ? m.title.slice(0, 300) : "",
     referrer: tab.url && tab.url !== own ? tab.url : "",
     // The cookies of what yt-dlp is given (the app files them under its host): the stream's
@@ -2082,7 +2086,9 @@ async function videoLookup(m, page, sender) {
     cookieJar: v.cookieJar,
     private: Boolean(tab.incognito),
   });
-  if (reply.lookup && typeof reply.lookup === "object") return { lookup: reply.lookup };
+  // `show`: the address MDM lists a download of it under (the button's "Show"); `post`: the
+  // post's own page, when the video sits in a feed (its "Open post").
+  if (reply.lookup && typeof reply.lookup === "object") return { lookup: reply.lookup, show: v.src || v.own, ...(v.post ? { post: v.post } : {}) };
   // No `lookup`: a host or an app that can't look up after all (an older one refuses the message),
   // or a host that failed. Not kept as able; its rules are asked again, and this click opens
   // the window.
@@ -2114,6 +2120,15 @@ async function videoPick(m, sender) {
   return reply.lookup && typeof reply.lookup === "object" ? { lookup: reply.lookup } : { fallback: true };
 }
 
+const isWeb = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
+// Where the button's "Get MDM" goes.
+const GET_MDM = "https://misterdownloadmanager.com/download";
+// A new tab next to `tab`, opened from it.
+const beside = (tab) => ({
+  ...(Number.isInteger(tab.id) ? { openerTabId: tab.id } : {}),
+  ...(Number.isInteger(tab.index) ? { index: tab.index + 1 } : {}),
+});
+
 async function pageMessage(m, sender) {
   const page = senderPage(sender);
   const tab = sender.tab || {};
@@ -2141,19 +2156,42 @@ async function pageMessage(m, sender) {
   if (m.type === "video" && page) {
     const v = await videoTarget(m, page, sender);
     if (!v) return { ok: false, why: isYouTube(page) ? "unnamed" : "feed" };
+    // The video's own plain file (#703): downloaded as a file, no window.
+    const direct = Boolean(m.direct) && Boolean(v.file) && v.file === v.src;
     const reply = await native({
       video: true,
       url: v.own,
       ...(v.src ? { src: v.src } : {}),
+      ...(direct ? { direct: true } : {}),
       title: v.title,
       referrer: v.referrer,
       cookies: v.cookies,
       cookieJar: v.cookieJar,
       ...(tab.incognito ? { private: true } : {}),
     });
-    return { ok: Boolean(reply.ok), why: reply.why };
+    return { ok: Boolean(reply.ok), why: reply.why, ...(reply.ok && direct ? { show: v.src } : {}) };
   }
   if (m.type === "video-lookup" && page) return videoLookup(m, page, sender);
+  // The button's "Show" (#703): MDM's window with that download selected.
+  if (m.type === "show-download" && isWeb(m.address)) {
+    return { ok: Boolean((await native({ showDownload: m.address })).ok) };
+  }
+  // The button's "Turn on" (after its "Never on this site", or off here in Options): on again.
+  if (m.type === "show-site" && page) {
+    const host = new URL(page).hostname;
+    for (const k of [...panelCache.keys()]) if (k.split(" ").includes(host)) panelCache.delete(k);
+    return { ok: Boolean((await native({ showSite: host })).ok) };
+  }
+  // The button's "Get MDM" (MDM didn't answer): its download page, beside this tab.
+  if (m.type === "get-mdm") {
+    await ext.tabs.create({ url: GET_MDM, ...beside(tab) });
+    return { ok: true };
+  }
+  // The button's "Open post": the post a video in a feed sits in (#689), on this page's site.
+  if (m.type === "open-post" && page && isWeb(m.url) && siteKey(m.url) === siteKey(page)) {
+    await ext.tabs.create({ url: m.url, ...beside(tab) });
+    return { ok: true };
+  }
   if (m.type === "video-poll") return videoPoll(m);
   if (m.type === "video-pick") return videoPick(m, sender);
   if (m.type === "hide-site" && page) {

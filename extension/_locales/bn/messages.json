@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Mister Download Manager-এ পাঠানো হয়েছে"
   },
-  "video_failed": {
-    "message": "Mister Download Manager ইনস্টল করা নেই বা চালু হয়নি"
-  },
-  "video_drag": {
-    "message": "ভিডিওর প্রান্ত বরাবর সরাতে টেনে আনুন"
-  },
   "menu_selected": {
     "message": "Mister Download Manager দিয়ে নির্বাচিত লিঙ্কগুলি ডাউনলোড করুন"
   },
@@ -180,19 +174,16 @@
     "message": "লাইভ"
   },
   "video_off": {
-    "message": "এই সাইটে ডাউনলোড বোতামটি বন্ধ আছে"
+    "message": "এই সাইটে বন্ধ"
   },
   "video_drm": {
-    "message": "সুরক্ষিত ভিডিও: এটি সংরক্ষণ করা যাবে না"
+    "message": "সুরক্ষিত ভিডিও"
   },
   "video_unnamed": {
     "message": "এটি কোন ভিডিও তা বোঝা যাচ্ছে না: ভিডিওটির নিজের পৃষ্ঠা খুলে সেখানে চেষ্টা করুন"
   },
   "video_looking": {
     "message": "কোয়ালিটি খোঁজা হচ্ছে…"
-  },
-  "video_open_mdm": {
-    "message": "Mister Download Manager-এ খুলুন…"
   },
   "video_no_choices": {
     "message": "এখানে ডাউনলোড করার মতো কোনো ভিডিও নেই"
@@ -222,7 +213,7 @@
     "message": "অডিও"
   },
   "video_open_post": {
-    "message": "পোস্টটি খুলুন, তারপর সেখানকার বোতামটি ব্যবহার করুন"
+    "message": "ডাউনলোড করতে পোস্টটি খুলুন"
   },
   "popup_send_to": {
     "message": "ডাউনলোডগুলি এখানে পাঠান"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "মিডিয়া ফাইলের নামের আগে পৃষ্ঠার শিরোনাম যোগ করুন"
+  },
+  "video_cant_save": {
+    "message": "সংরক্ষণ করা যাবে না"
+  },
+  "video_open_post_button": {
+    "message": "পোস্ট খুলুন"
+  },
+  "video_drag_dots": {
+    "message": "প্রান্ত বরাবর সরাতে বিন্দুগুলো টেনে আনুন"
+  },
+  "video_tip": {
+    "message": "$what$ ডাউনলোড করুন",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "সেরা মান ডাউনলোড করুন"
+  },
+  "video_sending": {
+    "message": "MDM-এ পাঠানো হচ্ছে..."
+  },
+  "video_added": {
+    "message": "MDM-এ যোগ করা হয়েছে"
+  },
+  "video_show": {
+    "message": "দেখান"
+  },
+  "video_no_answer": {
+    "message": "MDM সাড়া দেয়নি"
+  },
+  "video_get_mdm": {
+    "message": "MDM পান"
+  },
+  "video_retry": {
+    "message": "পুনরায় চেষ্টা করুন"
+  },
+  "video_turn_on": {
+    "message": "চালু করুন"
+  },
+  "video_section": {
+    "message": "ডাউনলোড করুন"
+  },
+  "video_best": {
+    "message": "সেরা"
+  },
+  "video_best_quality": {
+    "message": "সেরা মান"
+  },
+  "video_all_qualities": {
+    "message": "সব গুণমান এবং সাবটাইটেল..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager ইনস্টল করা নেই বা চালু হয়নি"
   }
 }

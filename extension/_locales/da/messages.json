@@ -32,12 +32,6 @@
   "video_sent": {
     "message": "Sendt til Mister Download Manager"
   },
-  "video_failed": {
-    "message": "Mister Download Manager er ikke installeret eller blev ikke startet"
-  },
-  "video_drag": {
-    "message": "Træk for at flytte den langs videoens kant"
-  },
   "menu_selected": {
     "message": "Download valgte links med Mister Download Manager"
   },
@@ -180,19 +174,16 @@
     "message": "Live"
   },
   "video_off": {
-    "message": "Downloadknappen er slået fra på dette websted"
+    "message": "Slået fra på dette websted"
   },
   "video_drm": {
-    "message": "Beskyttet video: den kan ikke gemmes"
+    "message": "Beskyttet video"
   },
   "video_unnamed": {
     "message": "Kan ikke se, hvilken video det er: Åbn videoens egen side, og prøv der"
   },
   "video_looking": {
     "message": "Finder kvaliteterne…"
-  },
-  "video_open_mdm": {
-    "message": "Åbn i Mister Download Manager…"
   },
   "video_no_choices": {
     "message": "Ingen video at downloade her"
@@ -222,7 +213,7 @@
     "message": "Lyd"
   },
   "video_open_post": {
-    "message": "Åbn opslaget, og brug derefter knappen der"
+    "message": "Åbn opslaget for at downloade det"
   },
   "popup_send_to": {
     "message": "Send downloads til"
@@ -277,5 +268,62 @@
   },
   "popup_media_title_name": {
     "message": "Tilføj sidens titel foran mediefilernes navne"
+  },
+  "video_cant_save": {
+    "message": "kan ikke gemmes"
+  },
+  "video_open_post_button": {
+    "message": "Åbn opslag"
+  },
+  "video_drag_dots": {
+    "message": "Træk prikkerne for at flytte den langs kanten"
+  },
+  "video_tip": {
+    "message": "Download $what$",
+    "placeholders": {
+      "what": {
+        "content": "$1",
+        "example": "1080p MP4 · 412 MB"
+      }
+    }
+  },
+  "video_tip_best": {
+    "message": "Download den bedste kvalitet"
+  },
+  "video_sending": {
+    "message": "Sender til MDM..."
+  },
+  "video_added": {
+    "message": "Tilføjet til MDM"
+  },
+  "video_show": {
+    "message": "Vis"
+  },
+  "video_no_answer": {
+    "message": "MDM svarede ikke"
+  },
+  "video_get_mdm": {
+    "message": "Hent MDM"
+  },
+  "video_retry": {
+    "message": "Prøv igen"
+  },
+  "video_turn_on": {
+    "message": "Slå til"
+  },
+  "video_section": {
+    "message": "Download"
+  },
+  "video_best": {
+    "message": "bedst"
+  },
+  "video_best_quality": {
+    "message": "Bedste kvalitet"
+  },
+  "video_all_qualities": {
+    "message": "Alle kvaliteter og undertekster..."
+  },
+  "video_failed": {
+    "message": "Mister Download Manager er ikke installeret eller blev ikke startet"
   }
 }
