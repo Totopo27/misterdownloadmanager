@@ -676,8 +676,10 @@ These ship in a later version, when they're ready.
   [#534](https://github.com/anefzaoui/misterdownloadmanager/issues/534),
   [#527](https://github.com/anefzaoui/misterdownloadmanager/issues/527)): fix in review
 - 🔄 Two tests that fail now and then on busy CI runners
-  ([#518](https://github.com/anefzaoui/misterdownloadmanager/issues/518)): the slow-flush one fixed;
-  the crash-and-resume one found a real delay in saving a new download's progress, fix in review
+  ([#518](https://github.com/anefzaoui/misterdownloadmanager/issues/518)): the slow-flush one
+  now measures the transfer instead of how fast the runner's disk takes in the file (Windows
+  runners' disks failed it again), fix in review; the crash-and-resume one found a real delay in
+  saving a new download's progress, fix in review
 - 🔄 The window not answering for a few seconds while Windows makes a snapshot of the disk
   (a restore point or a backup) ([#513](https://github.com/anefzaoui/misterdownloadmanager/issues/513)):
   the log and the RSS feeds are now written beside the window, as the list already was; fix in
