@@ -539,6 +539,9 @@ These ship in a later version, when they're ready.
 
 ### Being built
 
+- 🔄 A freeze of the window while it checked Windows' light or dark mode: the registry took
+  seconds to answer ([#719](https://github.com/anefzaoui/misterdownloadmanager/issues/719)): the
+  system's look and the theme files are now read beside the window; fix in review
 - 🔄 A freeze of the window while torrents ran on a busy or slow disk: it waited for the torrent
   engine, which holds a torrent while its writes to the disk end
   ([#693](https://github.com/anefzaoui/misterdownloadmanager/issues/693)): the torrents' numbers

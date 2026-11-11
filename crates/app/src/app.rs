@@ -670,11 +670,10 @@ pub struct App {
     zoom: f32,
     /// The main window was brought inside the screen after the start (scale::fit_window).
     fitted: bool,
-    /// View → Theme's choices (#45), and when the themes folder last changed (read again then).
+    /// View → Theme's choices (#45), and the number of the theme watcher's answer they come from
+    /// (`lookwatch::theme_files`: taken again when it changes).
     theme_list: Vec<crate::themefile::Entry>,
-    themes_changed: Option<std::time::SystemTime>,
-    /// pywal's colours were there at the last check (View → Theme → pywal listed then).
-    pywal_there: bool,
+    theme_files_seen: u64,
     /// When `logic`'s every-2-seconds work last ran (crash state, torrents, #174).
     ticked: Option<Instant>,
     /// The main window's caption matches the mode.
@@ -1207,9 +1206,9 @@ impl App {
             theme_checked: None,
             zoom,
             fitted: false,
-            theme_list: crate::themefile::list(),
-            themes_changed: crate::themefile::changed(),
-            pywal_there: crate::themefile::pywal_file().is_some_and(|p| p.is_file()),
+            // The built-ins until the watcher's first look at the themes folder (#719).
+            theme_list: crate::themefile::list_in(None, None),
+            theme_files_seen: 0,
             ticked: None,
             caption_set: false,
             // The system's title bar is the frame's own: nothing to apply for it.
@@ -7666,7 +7665,7 @@ impl App {
     fn add_theme_file(&mut self, path: &std::path::Path, ctx: &egui::Context) {
         match crate::themefile::add(path) {
             Ok(id) => {
-                self.themes_changed = crate::themefile::changed();
+                // Listed at once (the watcher would at its next look).
                 self.theme_list = crate::themefile::list();
                 self.run(Cmd::Theme(crate::chrome::label(&id)), None, ctx);
             }
@@ -8944,13 +8943,14 @@ impl App {
         {
             self.theme_checked = Some(Instant::now());
             // A theme file added, removed or renamed, pywal's colours written or taken away:
-            // View → Theme lists it.
-            let changed = crate::themefile::changed();
-            let wal = crate::themefile::pywal_file().is_some_and(|p| p.is_file());
-            if changed != self.themes_changed || wal != self.pywal_there {
-                self.themes_changed = changed;
-                self.pywal_there = wal;
-                self.theme_list = crate::themefile::list();
+            // View → Theme lists it. Nothing here reads the registry or the disk: `lookwatch`'s
+            // threads do, and this takes what they found last (#719).
+            let files = crate::lookwatch::theme_files(&ctx);
+            if let Some((seen, found)) = &files
+                && *seen != self.theme_files_seen
+            {
+                self.theme_files_seen = *seen;
+                self.theme_list = found.list.clone();
             }
             let changed = crate::theme::update(
                 self.settings.dark_mode_support,
@@ -8959,7 +8959,9 @@ impl App {
             );
             // Native follows the system's accent and contrast as they change, a theme made from
             // pywal's colours the colours `wal` writes for each new wallpaper.
-            let changed = if crate::theme::follow_system(&ctx) || crate::theme::follow_pywal() {
+            let changed = if crate::theme::follow_system(&ctx)
+                || crate::theme::follow_pywal(files.as_ref().map(|(_, f)| f))
+            {
                 crate::theme::apply_theme(&ctx);
                 true
             } else {

@@ -26,7 +26,9 @@
 //!
 //! A Base16 scheme (`.yaml`, `.yml`) and pywal's `colors.json` are themes too: `crate::schemes`
 //! reads them into the same value tree, on the classic look. pywal's own file, where `wal`
-//! writes it, is the theme `pywal`, read again when `wal` changes it ([`pywal_changed`]).
+//! writes it, is the theme `pywal`, read again when `wal` changes it ([`following_pywal`]).
+//!
+//! The folder and pywal's file are looked at by `lookwatch`'s thread, never the window's (#719).
 
 use std::path::{Path, PathBuf};
 
@@ -58,8 +60,14 @@ pub struct Entry {
 
 /// The built-in themes, then pywal's colours when `wal` has written them, then the theme files
 /// in [`dir`] (by name), each once: a file named as a built-in is skipped (the built-in keeps
-/// its id).
+/// its id). It reads every file of the folder: off the window's thread but for an action of the
+/// user's (View → Theme → Add a theme file).
 pub fn list() -> Vec<Entry> {
+    list_in(dir().as_deref(), pywal_file())
+}
+
+/// [`list`] of the theme files in `dir`, with pywal's colours from `wal` when it is a file.
+pub fn list_in(dir: Option<&Path>, wal: Option<PathBuf>) -> Vec<Entry> {
     let mut out: Vec<Entry> = palette::builtins()
         .iter()
         .map(|t| Entry {
@@ -68,7 +76,7 @@ pub fn list() -> Vec<Entry> {
             path: None,
         })
         .collect();
-    let mut files: Vec<(String, PathBuf)> = dir()
+    let mut files: Vec<(String, PathBuf)> = dir
         .and_then(|d| std::fs::read_dir(d).ok())
         .into_iter()
         .flatten()
@@ -86,7 +94,7 @@ pub fn list() -> Vec<Entry> {
         .collect();
     files.sort();
     // pywal's colours where `wal` keeps them, unless a file of the folder takes the name.
-    if let Some(wal) = pywal_file().filter(|p| p.is_file())
+    if let Some(wal) = wal.filter(|p| p.is_file())
         && !files.iter().any(|(id, _)| id == PYWAL)
     {
         out.push(Entry {
@@ -115,9 +123,9 @@ pub fn list() -> Vec<Entry> {
     out
 }
 
-/// When the themes folder last changed (a file added, removed or renamed); None without one.
-pub fn changed() -> Option<std::time::SystemTime> {
-    std::fs::metadata(dir()?).ok()?.modified().ok()
+/// When a themes folder last changed (a file added, removed or renamed); None without one.
+pub fn folder_stamp(dir: &Path) -> Option<std::time::SystemTime> {
+    std::fs::metadata(dir).ok()?.modified().ok()
 }
 
 /// A theme folder's file: `theme.toml` or `theme.json`.
@@ -163,13 +171,17 @@ pub fn pywal_file() -> Option<PathBuf> {
 }
 
 /// The file's time and size: what says it was written again.
-type Stamp = (Option<std::time::SystemTime>, u64);
+pub type Stamp = (Option<std::time::SystemTime>, u64);
+
+/// pywal's file as a theme was read from it, and its stamp then: the file to follow.
+pub type Followed = (PathBuf, Stamp);
 
 /// pywal's file as last read for the active theme, with its stamp then: None when the active
 /// theme isn't made from it.
-static PYWAL_READ: std::sync::Mutex<Option<(PathBuf, Stamp)>> = std::sync::Mutex::new(None);
+static PYWAL_READ: std::sync::Mutex<Option<Followed>> = std::sync::Mutex::new(None);
 
-fn stamp(path: &Path) -> Stamp {
+/// A file's [`Stamp`] (a look at its details on the disk).
+pub fn stamp(path: &Path) -> Stamp {
     let meta = std::fs::metadata(path).ok();
     (
         meta.as_ref().and_then(|m| m.modified().ok()),
@@ -182,41 +194,60 @@ pub fn forget_pywal() {
     *PYWAL_READ.lock().unwrap_or_else(|e| e.into_inner()) = None;
 }
 
-/// pywal's file as it is now taken as seen: a file that didn't read is read again only once it
+/// pywal's file taken as seen at `written`: a file that didn't read is read again only once it
 /// is written again.
-pub fn pywal_seen() {
-    if let Some((path, seen)) = PYWAL_READ
+pub fn pywal_seen_as(written: Stamp) {
+    if let Some((_, seen)) = PYWAL_READ
         .lock()
         .unwrap_or_else(|e| e.into_inner())
         .as_mut()
     {
-        *seen = stamp(path);
+        *seen = written;
     }
 }
 
-/// True when the active theme is made from pywal's file and `wal` has written it since (its
-/// time or size changed): one look at the file's details, on the main loop's 2-second check.
-pub fn pywal_changed() -> bool {
-    let read = PYWAL_READ.lock().unwrap_or_else(|e| e.into_inner());
-    read.as_ref()
-        .is_some_and(|(path, seen)| stamp(path) != *seen)
+/// The pywal file the active theme is made from, with its stamp when it was read; None when the
+/// theme isn't made from it. `lookwatch`'s thread compares it with the file's stamp now, and
+/// reads the theme again when `wal` has written it since (its time or size changed).
+pub fn following_pywal() -> Option<Followed> {
+    PYWAL_READ.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
-/// The theme with this id: a built-in, or the file of that name in [`dir`].
-pub fn load(id: &str) -> Result<Loaded, String> {
-    let folder = dir().unwrap_or_default();
-    load_in(&folder, id, 0)
+/// The active theme follows this pywal file from now on (None: none), as [`read`] found it.
+pub fn follow_pywal(followed: Option<Followed>) {
+    *PYWAL_READ.lock().unwrap_or_else(|e| e.into_inner()) = followed;
 }
 
-/// The theme in this file (the themes it inherits from beside it).
-pub fn load_file(path: &Path) -> Result<Loaded, String> {
-    let id =
-        theme_id(path).ok_or_else(|| format!("{}: not a .toml or .json file", path.display()))?;
-    load_in(path.parent().unwrap_or(Path::new(".")), &id, 0)
+/// The theme with this id (a built-in, or the file of that name in [`dir`]) or in the theme
+/// file at this path (the themes it inherits from beside it); with pywal's file when the theme
+/// is made from it, to follow ([`follow_pywal`]).
+pub fn read(id: &str) -> (Result<Loaded, String>, Option<Followed>) {
+    let mut followed = None;
+    let path = Path::new(id);
+    let loaded = if path.is_file() {
+        match theme_id(path) {
+            Some(id) => load_in(
+                path.parent().unwrap_or(Path::new(".")),
+                &id,
+                0,
+                &mut followed,
+            ),
+            None => Err(format!("{}: not a .toml or .json file", path.display())),
+        }
+    } else {
+        load_in(&dir().unwrap_or_default(), id, 0, &mut followed)
+    };
+    (loaded, followed)
 }
 
-/// [`load`] from `folder`, `depth` themes down an `inherits` chain.
-fn load_in(folder: &Path, id: &str, depth: usize) -> Result<Loaded, String> {
+/// The theme `id` from `folder`, `depth` themes down an `inherits` chain; pywal's file into
+/// `followed` when one of them is read from it.
+fn load_in(
+    folder: &Path,
+    id: &str,
+    depth: usize,
+    followed: &mut Option<Followed>,
+) -> Result<Loaded, String> {
     if let Some(t) = palette::builtins().into_iter().find(|t| t.id == id) {
         return Ok(Loaded {
             theme: t.clone(),
@@ -245,12 +276,14 @@ fn load_in(folder: &Path, id: &str, depth: usize) -> Result<Loaded, String> {
     let before = wal.as_deref().map(stamp);
     let text = std::fs::read_to_string(&path).map_err(|e| format!("{}: {e}", path.display()))?;
     let (value, mut warnings) = read_value(&path, &text)?;
-    let mut loaded = parse(id, &value, |base| load_in(folder, base, depth + 1))?;
+    let mut loaded = parse(id, &value, |base| {
+        load_in(folder, base, depth + 1, followed)
+    })?;
     warnings.append(&mut loaded.warnings);
     loaded.warnings = warnings;
     // Followed from now on: read again when `wal` writes it.
     if let (Some(wal), Some(seen)) = (wal, before) {
-        *PYWAL_READ.lock().unwrap_or_else(|e| e.into_inner()) = Some((wal, seen));
+        *followed = Some((wal, seen));
     }
     // A theme folder's own icons (`<id>/icons/16`, `24`), unless the file names a set.
     let icons = own.join("icons");
@@ -367,7 +400,7 @@ fn add_in(folder: &Path, source: &Path) -> Result<String, String> {
     }
     let target = folder.join(format!("{id}.{ext}"));
     std::fs::write(&target, &bytes).map_err(|e| format!("{}: {e}", target.display()))?;
-    if let Err(e) = load_in(folder, &id, 0) {
+    if let Err(e) = load_in(folder, &id, 0, &mut None) {
         let _ = std::fs::remove_file(&target);
         return Err(e);
     }
@@ -647,6 +680,16 @@ mod tests {
     use crate::palette::CLASSIC;
     use egui::Color32;
 
+    /// [`super::load_in`], pywal's file not followed.
+    fn load_in(folder: &Path, id: &str, depth: usize) -> Result<Loaded, String> {
+        super::load_in(folder, id, depth, &mut None)
+    }
+
+    /// The theme in this file, as [`read`] gives it.
+    fn load_file(path: &Path) -> Result<Loaded, String> {
+        read(path.to_str().unwrap()).0
+    }
+
     fn toml_theme(id: &str, text: &str) -> Result<Loaded, String> {
         let v: Value = toml::from_str(text).map_err(|e| e.to_string())?;
         parse(id, &v, |base| load_in(Path::new("nowhere"), base, 1))
@@ -854,17 +897,21 @@ mod tests {
         let dir = temp_dir("wal-follow");
         let file = dir.join("colors.json");
         std::fs::write(&file, WAL).unwrap();
-        *PYWAL_READ.lock().unwrap() = Some((file.clone(), stamp(&file)));
-        assert!(!pywal_changed());
+        let changed = || following_pywal().is_some_and(|(path, seen)| stamp(&path) != seen);
+        follow_pywal(Some((file.clone(), stamp(&file))));
+        assert!(!changed());
         // `wal` run again: other colours, another size.
         std::fs::write(
             &file,
             WAL.replace("#3d6a9a", "#7b4d9e\", \"color5\": \"#000"),
         )
         .unwrap();
-        assert!(pywal_changed());
+        assert!(changed());
+        // Taken as seen (a file that didn't read): not again until it is written again.
+        pywal_seen_as(stamp(&file));
+        assert!(!changed());
         forget_pywal();
-        assert!(!pywal_changed());
+        assert_eq!(following_pywal(), None);
         let _ = std::fs::remove_dir_all(&dir);
     }
 

@@ -2524,13 +2524,22 @@ mod drag_thread_tests {
     }
 }
 
+/// The key of Windows' "Choose your app mode" (`AppsUseLightTheme`), under HKEY_CURRENT_USER.
+/// For tests, `MDM_PERSONALIZE_KEY` names another key to read it from (and to watch), so a check
+/// can switch the mode MDM sees without touching the system's.
+fn personalize_key() -> String {
+    std::env::var("MDM_PERSONALIZE_KEY")
+        .ok()
+        .filter(|k| !k.trim().is_empty())
+        .unwrap_or_else(|| r"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize".into())
+}
+
 /// Windows' "Choose your app mode": true when apps should be dark (`AppsUseLightTheme` = 0).
-/// Missing value (older Windows): light.
+/// Missing value (older Windows): light. A registry read, which can wait for seconds (#719): for
+/// a thread other than the window's (`lookwatch`).
 pub fn apps_use_dark() -> bool {
     use windows_sys::Win32::System::Registry::{HKEY_CURRENT_USER, RRF_RT_REG_DWORD, RegGetValueW};
-    let key: Vec<u16> = "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\0"
-        .encode_utf16()
-        .collect();
+    let key: Vec<u16> = personalize_key().encode_utf16().chain([0]).collect();
     let name: Vec<u16> = "AppsUseLightTheme\0".encode_utf16().collect();
     let mut value: u32 = 1;
     let mut size = size_of::<u32>() as u32;
@@ -2575,6 +2584,110 @@ pub fn accent_palette() -> Option<[[u8; 3]; 7]> {
         )
     };
     (rc == 0 && size >= 28).then(|| crate::native::accent_palette_bytes(&bytes))
+}
+
+/// Waits for a change to what the theme follows in the registry (#719): the app mode
+/// ([`personalize_key`]), the accent colour, high contrast and the system colours, each key
+/// watched with `RegNotifyChangeKeyValue`. Opened, armed and waited on by `lookwatch`'s thread,
+/// never the window's: those calls can wait as long as a read.
+pub struct LookKeys {
+    /// The keys open for watching and the event each signals (HKEYs and HANDLEs, kept as numbers
+    /// so the watcher can be moved to its thread).
+    keys: Vec<(isize, isize)>,
+    /// Their notifications are registered (each fires once, and is registered again then).
+    armed: bool,
+}
+
+impl LookKeys {
+    /// The keys that exist (the accent's is missing on older Windows).
+    pub fn open() -> Self {
+        use windows_sys::Win32::System::Registry::{
+            HKEY, HKEY_CURRENT_USER, KEY_NOTIFY, RegCloseKey, RegOpenKeyExW,
+        };
+        use windows_sys::Win32::System::Threading::CreateEventW;
+        let paths = [
+            personalize_key(),
+            r"Software\Microsoft\Windows\CurrentVersion\Explorer\Accent".into(),
+            r"Control Panel\Accessibility\HighContrast".into(),
+            r"Control Panel\Colors".into(),
+        ];
+        let keys = paths
+            .iter()
+            .filter_map(|p| {
+                let wide: Vec<u16> = p.encode_utf16().chain([0]).collect();
+                let mut h: HKEY = std::ptr::null_mut();
+                // SAFETY: opens a key into `h`, closed in Drop (or below).
+                let rc = unsafe {
+                    RegOpenKeyExW(HKEY_CURRENT_USER, wide.as_ptr(), 0, KEY_NOTIFY, &mut h)
+                };
+                if rc != 0 {
+                    return None;
+                }
+                // SAFETY: an unnamed auto-reset event, not signalled; closed in Drop.
+                let event = unsafe { CreateEventW(std::ptr::null(), 0, 0, std::ptr::null()) };
+                if event.is_null() {
+                    // SAFETY: the key just opened, closed once.
+                    unsafe { RegCloseKey(h) };
+                    return None;
+                }
+                Some((h as isize, event as isize))
+            })
+            .collect();
+        LookKeys { keys, armed: false }
+    }
+
+    /// Wait until one of the keys changed, or `limit` passed (what the keys miss is read then).
+    pub fn wait(&mut self, limit: std::time::Duration) {
+        use windows_sys::Win32::Foundation::{HANDLE, WAIT_OBJECT_0};
+        use windows_sys::Win32::System::Registry::{
+            REG_NOTIFY_CHANGE_LAST_SET, REG_NOTIFY_THREAD_AGNOSTIC, RegNotifyChangeKeyValue,
+        };
+        use windows_sys::Win32::System::Threading::WaitForMultipleObjects;
+        if self.keys.is_empty() {
+            std::thread::sleep(limit);
+            return;
+        }
+        let arm = |(key, event): (isize, isize)| {
+            // SAFETY: an open key and its event; the notification is asynchronous, fires once and
+            // ends when the key is closed.
+            unsafe {
+                RegNotifyChangeKeyValue(
+                    key as _,
+                    0,
+                    REG_NOTIFY_CHANGE_LAST_SET | REG_NOTIFY_THREAD_AGNOSTIC,
+                    event as _,
+                    1,
+                )
+            };
+        };
+        if !self.armed {
+            self.keys.iter().copied().for_each(arm);
+            self.armed = true;
+        }
+        let events: Vec<HANDLE> = self.keys.iter().map(|&(_, e)| e as HANDLE).collect();
+        let ms = limit.as_millis().min(u128::from(u32::MAX - 1)) as u32;
+        // SAFETY: our own events, as many as the count says.
+        let rc = unsafe { WaitForMultipleObjects(events.len() as u32, events.as_ptr(), 0, ms) };
+        let fired = rc.wrapping_sub(WAIT_OBJECT_0) as usize;
+        if let Some(&k) = self.keys.get(fired) {
+            // Registered again before the read that follows, so a change during it is seen too.
+            arm(k);
+        }
+    }
+}
+
+impl Drop for LookKeys {
+    fn drop(&mut self) {
+        use windows_sys::Win32::Foundation::CloseHandle;
+        use windows_sys::Win32::System::Registry::RegCloseKey;
+        for &(key, event) in &self.keys {
+            // SAFETY: a key and an event made in `open`, each closed once.
+            unsafe {
+                RegCloseKey(key as _);
+                CloseHandle(event as _);
+            }
+        }
+    }
 }
 
 /// Windows' high-contrast colours while high contrast is on (Settings → Accessibility →

@@ -109,37 +109,48 @@ pub fn select(id: &str, ctx: &egui::Context) -> Vec<String> {
     }
 }
 
-/// A theme file's theme, by its id or its path.
+/// A theme file's theme, by its id or its path; pywal's file followed from now on when the
+/// theme is made from it.
 fn load(id: &str) -> Result<crate::themefile::Loaded, String> {
-    let path = std::path::Path::new(id);
-    if path.is_file() {
-        crate::themefile::load_file(path)
-    } else {
-        crate::themefile::load(id)
+    let (loaded, followed) = crate::themefile::read(id);
+    if loaded.is_ok() {
+        crate::themefile::follow_pywal(followed);
     }
+    loaded
 }
 
 /// The id (or path) [`select`] was last given.
 static SELECTED: std::sync::Mutex<String> = std::sync::Mutex::new(String::new());
 
+/// The id (or path) of the theme chosen last.
+pub fn selected() -> String {
+    SELECTED.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
 /// While the theme is made from pywal's colours (#45): read again when `wal` wrote them anew,
-/// as it does for each new wallpaper. A file that doesn't read (half written as it was read)
-/// keeps the theme as it is, and is read again when it is next written. True when the theme
-/// changed (the caller applies it: `apply_theme`, `apply_mode`).
-pub fn follow_pywal() -> bool {
-    if !crate::themefile::pywal_changed() {
+/// as it does for each new wallpaper; `lookwatch`'s thread reads it (#719), this takes what it
+/// read while the theme and the file it follows are still those it was read for. A file that
+/// doesn't read (half written as it was read) keeps the theme as it is, and is read again when
+/// it is next written. True when the theme changed (the caller applies it: `apply_theme`,
+/// `apply_mode`).
+pub fn follow_pywal(files: Option<&crate::lookwatch::ThemeFiles>) -> bool {
+    let Some(r) = files.and_then(|f| f.pywal.as_ref()) else {
+        return false;
+    };
+    if selected() != r.id || crate::themefile::following_pywal().as_ref() != Some(&r.followed) {
         return false;
     }
-    let id = SELECTED.lock().unwrap_or_else(|e| e.into_inner()).clone();
-    match load(&id) {
-        Ok(loaded) => {
+    let id = &r.id;
+    match &r.read {
+        Ok((theme, _)) => {
             tracing::info!("theme {id}: pywal's colours changed, read again");
-            set(loaded.theme);
+            set(theme.clone());
+            crate::themefile::follow_pywal(r.follow.clone());
             true
         }
         Err(e) => {
             tracing::warn!("theme {id}: {e}; the theme kept until pywal's file is written again");
-            crate::themefile::pywal_seen();
+            crate::themefile::pywal_seen_as(r.written);
             false
         }
     }
@@ -213,12 +224,10 @@ pub fn system_theme(dark: bool) -> egui::SystemTheme {
 /// appearance the window system reports (light when nothing says). True if it changed.
 /// `always_dark` (View → Always dark, #60): dark whatever the system says, for desktops that
 /// report no preference.
+/// On Windows the registry is read by `lookwatch`'s thread, never this one (#719).
 pub fn update(dark_mode_support: bool, always_dark: bool, ctx: &egui::Context) -> bool {
     #[cfg(windows)]
-    let system_dark = {
-        let _ = ctx;
-        crate::win32::apps_use_dark()
-    };
+    let system_dark = crate::lookwatch::system(ctx).dark;
     #[cfg(target_os = "linux")]
     let system_dark = crate::unix::desktop_dark(ctx)
         .unwrap_or_else(|| ctx.system_theme() == Some(egui::Theme::Dark));
@@ -228,19 +237,22 @@ pub fn update(dark_mode_support: bool, always_dark: bool, ctx: &egui::Context) -
     DARK.swap(want, Ordering::Relaxed) != want
 }
 
-/// Did the desktop say its look changed since the last call? On Linux, the portal's and the theme
-/// settings' watchers count each change (`unix::desktop_generation`), and the app's theme check,
-/// otherwise every 2 s, then runs in the frame the change woke (#156). Elsewhere false: the check's
-/// 2 s are its only clock there.
+/// Did the desktop say its look changed since the last call, or the theme files? The watchers
+/// count each change: on Linux the portal's and the theme settings' (`unix::desktop_generation`),
+/// everywhere `lookwatch`'s (Windows' registry, the themes folder, pywal's file). The app's theme
+/// check, otherwise every 2 s, then runs in the frame the change woke (#156, #719).
 pub fn system_changed() -> bool {
+    static WATCHED: AtomicU64 = AtomicU64::new(0);
+    let now = crate::lookwatch::generation();
+    let watched = WATCHED.swap(now, Ordering::Relaxed) != now;
     #[cfg(target_os = "linux")]
     {
         static SEEN: AtomicU64 = AtomicU64::new(0);
         let now = crate::unix::desktop_generation();
-        SEEN.swap(now, Ordering::Relaxed) != now
+        (SEEN.swap(now, Ordering::Relaxed) != now) | watched
     }
     #[cfg(not(target_os = "linux"))]
-    false
+    watched
 }
 
 /// Dark or not: View → Always dark, else the system's mode while Dark Mode support is on.
