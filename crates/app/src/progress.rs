@@ -193,6 +193,10 @@ pub struct Progress {
     /// In-memory state stamp for `rename_disabled_reason`, so disk checks run only when the
     /// window opens, when a download completes, or when list/folder settings change.
     pub rename_guard_stamp: Option<u64>,
+    /// Those disk checks, under way off the window's thread for a newer stamp (#743): a folder
+    /// on a sleeping drive or a network share can take seconds to answer. The reason shown
+    /// stays the last one meanwhile (the rename is checked again when it is carried out).
+    pub rename_guard: Option<(u64, crate::launch::Asked<u64, Option<&'static str>>)>,
 }
 
 pub enum Action {
@@ -258,6 +262,7 @@ impl Progress {
             pending_rename: None,
             rename_disabled_reason: None,
             rename_guard_stamp: None,
+            rename_guard: None,
         }
     }
 

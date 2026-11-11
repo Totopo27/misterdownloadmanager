@@ -504,6 +504,11 @@ Bug fixes from the first days of 0.5.0, a Safari extension, and more file types.
 These ship in the next version.
 
 - ✅ The browser's Download video button in right-to-left languages: its corners and divider follow the text direction, so its outline stays whole
+- ✅ A freeze of the download windows on a drive slow to answer (a sleeping disk, a USB drive, a
+  network folder): Download File Info's numbered name, Show in folder, Download complete and
+  creating a missing folder ask the disk beside the window
+  ([#743](https://github.com/anefzaoui/misterdownloadmanager/issues/743),
+  [#751](https://github.com/anefzaoui/misterdownloadmanager/issues/751))
 - ✅ **Deferred Rename** on a download's **Download status** tab: save a new name while downloading to rename the finished file's stem (and video subtitles) or an exclusive finished folder on completion, leaving shared/save or pre-existing folders, split-archive volumes and single-file torrents under their original names ([#655](https://github.com/anefzaoui/misterdownloadmanager/pull/655))
 - ✅ Links added by hand go with the User-Agent of your default browser, at the version you have
   (Chrome, Edge, Brave, Opera, Vivaldi, Firefox, Safari), instead of a years-old one; **Automatic**
@@ -590,6 +595,10 @@ These ship in a later version, when they're ready.
 
 ### Bugs being looked into
 
+- 🔍 The main window's own looks at the disk on a drive slow to answer: starting or resuming a
+  download that was already under way, a rename or move when one finishes, and links added
+  without Download File Info still wait for it (follows
+  [#743](https://github.com/anefzaoui/misterdownloadmanager/issues/743))
 - 🔄 The browser's video button over a video in a feed sending the feed's address, where yt-dlp
   finds nothing (LinkedIn, Facebook, and other sites with feeds;
   [#689](https://github.com/anefzaoui/misterdownloadmanager/issues/689),

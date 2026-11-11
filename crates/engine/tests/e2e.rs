@@ -825,6 +825,44 @@ async fn the_view_names_the_file_when_its_place_was_taken_meanwhile() {
     }
 }
 
+/// #743: a name given before its folder was looked at (Download File Info doesn't wait for a
+/// slow disk) is numbered as the download starts when it is taken by then, by a file or by
+/// another download's part file: neither is touched, and the view names the file made.
+#[tokio::test]
+async fn a_name_given_unlooked_is_numbered_as_it_starts() {
+    let s = server("").await;
+    let dir = tempfile::tempdir().unwrap();
+    let dest = dir.path().join("master.mp4");
+    std::fs::write(&dest, b"someone else's").unwrap();
+    let part = mdm_engine::naming::part_path(&dir.path().join("master (1).mp4"));
+    std::fs::write(&part, b"another download's").unwrap();
+    let dl = Download::start(
+        Request {
+            url: s.url("/gen/256K/master.mp4?seed=7").parse().unwrap(),
+            headers: Default::default(),
+            dest: Destination::Free(dest.clone()),
+        },
+        fast_opts(),
+    );
+    let (file, path) = view_and_outcome(dl).await;
+    assert_eq!(path, dir.path().join("master (2).mp4"));
+    assert_eq!(file.as_deref(), Some(path.as_path()));
+    assert_eq!(std::fs::read(&dest).unwrap(), b"someone else's");
+    assert_eq!(std::fs::read(&part).unwrap(), b"another download's");
+    assert_eq!(std::fs::metadata(&path).unwrap().len(), 256 * 1024);
+    // Free, it keeps its name.
+    let free = dir.path().join("free.mp4");
+    let dl = Download::start(
+        Request {
+            url: s.url("/gen/64K/free.mp4?seed=8").parse().unwrap(),
+            headers: Default::default(),
+            dest: Destination::Free(free.clone()),
+        },
+        fast_opts(),
+    );
+    assert_eq!(view_and_outcome(dl).await.1, free);
+}
+
 /// The same for a resumed download: the row follows, and the resume itself still works.
 #[tokio::test]
 async fn the_view_names_the_file_when_a_resume_finds_its_place_taken() {

@@ -35,7 +35,7 @@ pub struct GalleryDialog {
     checked: Option<(String, bool)>,
     error: Option<String>,
     start_now: Option<bool>,
-    asking: Option<(crate::dialogs::CreateFolder, ())>,
+    asking: crate::dialogs::FolderGate<()>,
     helpers: Option<crate::helpers::Programs>,
     /// The helper as found (read again after an install or Helpers, not every frame).
     tool: Option<Option<mdm_tools::Installed>>,
@@ -58,7 +58,7 @@ impl GalleryDialog {
             checked: None,
             error: None,
             start_now: None,
-            asking: None,
+            asking: Default::default(),
             helpers: None,
             tool: None,
         }

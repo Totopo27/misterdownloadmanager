@@ -78,9 +78,9 @@ pub struct TorrentDialog {
     /// Download in order (#39).
     in_order: bool,
     /// Asking to create a missing folder.
-    asking: Option<(crate::dialogs::CreateFolder, ())>,
+    asking: crate::dialogs::FolderGate<()>,
     /// Asking whether to use files of the torrent's names already in the folder (#40).
-    asking_files: Option<(crate::dialogs::ExistingFiles, ())>,
+    asking_files: crate::dialogs::FilesGate<()>,
     /// A .torrent on the web (#39, Add URL or the browser): the request it is fetched with
     /// (the browser's cookies). One typed in the box goes as MDM's own downloads do.
     remote: Option<crate::torrents::Remote>,
@@ -249,8 +249,8 @@ impl TorrentDialog {
             focused: false,
             start_now: None,
             in_order: false,
-            asking: None,
-            asking_files: None,
+            asking: Default::default(),
+            asking_files: Default::default(),
             remote,
             clip,
         };
@@ -400,11 +400,13 @@ impl TorrentDialog {
         let folder = crate::dialogs::resolve_path(&self.folder);
         let out = crate::dialogs::ensure_folder(ctx, &mut self.asking, out, &folder);
         // Then: files of the torrent's names already there would be written into (#40).
+        // Looked for off the window's thread (#743), with what the torrent holds as it is now.
         let meta = &self.meta;
-        let out = crate::dialogs::ensure_files_free(ctx, &mut self.asking_files, out, || {
-            meta.as_ref()
-                .map_or_else(Vec::new, |m| m.existing_in(&folder))
-        });
+        let out =
+            crate::dialogs::ensure_files_free(ctx, &mut self.asking_files, out, &folder, || {
+                let (meta, there) = (meta.clone(), folder.clone());
+                move || meta.map_or_else(Vec::new, |m| m.existing_in(&there))
+            });
         match out {
             Outcome::Open => Outcome::Open,
             Outcome::Closed => Outcome::Closed,

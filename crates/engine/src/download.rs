@@ -280,6 +280,10 @@ pub enum Destination {
     Dir(PathBuf),
     /// Save exactly here.
     File(PathBuf),
+    /// Save here, or under the next free numbered name in its folder (`naming::unique_path`)
+    /// when this one is taken as the download starts: a name given before its folder was looked
+    /// at (#743: a window that waits for a sleeping drive freezes), decided here, beside it.
+    Free(PathBuf),
 }
 
 #[derive(Clone, Debug)]
@@ -1921,11 +1925,13 @@ async fn open_destination(
 ) -> Result<(PathBuf, naming::Reservation, File), Error> {
     // The folder must exist: we create it, but a removed drive or offline share can't be.
     let folder = match dest {
-        Destination::File(p) => p.parent().unwrap_or(Path::new("")).to_owned(),
+        Destination::File(p) | Destination::Free(p) => {
+            p.parent().unwrap_or(Path::new("")).to_owned()
+        }
         Destination::Dir(dir) => dir.clone(),
     };
     std::fs::create_dir_all(&folder).map_err(|_| Error::DestinationUnavailable(folder.clone()))?;
-    if let Destination::File(p) = dest
+    if let Destination::File(p) | Destination::Free(p) = dest
         && !naming::path_fits(p)
     {
         return Err(Error::PathTooLong(p.clone()));
@@ -1953,24 +1959,12 @@ async fn open_destination(
             // Shortened to fit Windows' path limit; a folder too deep for any name is an error.
             let name =
                 naming::fit_name(dir, &name).ok_or_else(|| Error::PathTooLong(dir.join(&name)))?;
-            let mut attempt = 0;
-            loop {
-                let dest = naming::unique_path(dir, &name);
-                if let Some(r) = naming::reserve(&dest) {
-                    // Read too: reconnecting connections re-read their last bytes (overlap check).
-                    match std::fs::OpenOptions::new()
-                        .read(true)
-                        .write(true)
-                        .create_new(true)
-                        .open(naming::part_path(&dest))
-                    {
-                        Ok(file) => break (dest, r, file),
-                        Err(e) if e.kind() == io::ErrorKind::AlreadyExists && attempt < 100 => {}
-                        Err(e) => return Err(e.into()),
-                    }
-                }
-                attempt += 1;
-            }
+            claim_free(dir, &name)?
+        }
+        Destination::Free(p) => {
+            let dir = p.parent().unwrap_or(Path::new(""));
+            let name = p.file_name().unwrap_or_default().to_string_lossy();
+            claim_free(dir, &name)?
         }
     };
     // Before any data: a mark the hook sets (Mark of the Web, quarantine) is on the file from
@@ -1986,6 +1980,29 @@ async fn open_destination(
         file.set_len(size)?;
     }
     Ok((dest, reservation, file))
+}
+
+/// `name` in `dir`, or the next free numbered name (`naming::unique_path`): reserved in this
+/// process, its part file created exclusively (another program may take the name meanwhile).
+fn claim_free(dir: &Path, name: &str) -> Result<(PathBuf, naming::Reservation, File), Error> {
+    let mut attempt = 0;
+    loop {
+        let dest = naming::unique_path(dir, name);
+        if let Some(r) = naming::reserve(&dest) {
+            // Read too: reconnecting connections re-read their last bytes (overlap check).
+            match std::fs::OpenOptions::new()
+                .read(true)
+                .write(true)
+                .create_new(true)
+                .open(naming::part_path(&dest))
+            {
+                Ok(file) => return Ok((dest, r, file)),
+                Err(e) if e.kind() == io::ErrorKind::AlreadyExists && attempt < 100 => {}
+                Err(e) => return Err(e.into()),
+            }
+        }
+        attempt += 1;
+    }
 }
 
 /// The download has its file and is receiving it.
@@ -3472,7 +3489,7 @@ pub(crate) fn named(h: &HeaderMap) -> bool {
 /// Where a download is saved under a name of its own (the browser's, the user's), that name.
 fn dest_name(dest: &Destination) -> Option<&str> {
     match dest {
-        Destination::File(p) => p.file_name().and_then(|n| n.to_str()),
+        Destination::File(p) | Destination::Free(p) => p.file_name().and_then(|n| n.to_str()),
         Destination::Dir(_) => None,
     }
 }

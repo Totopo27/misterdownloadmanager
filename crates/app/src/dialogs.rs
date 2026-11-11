@@ -860,6 +860,141 @@ impl AddUrl {
 
 // ---- Download File Info (client 570 × 208) -------------------------------------------------
 
+/// What Download File Info asks the disk about Save As (#743).
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct PlaceAsk {
+    pub dir: PathBuf,
+    pub name: String,
+    /// A name MDM gave: numbered on when it is taken there (`naming::destination`). A typed one
+    /// only has its folder looked at (its download is numbered as it starts if it is taken).
+    pub number: bool,
+}
+
+/// The disk's answer: where the download goes, and whether its folder is there.
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct Found {
+    pub dest: PathBuf,
+    pub folder: bool,
+}
+
+/// How the disk is looked at: [`look`], or a test's slow one.
+pub(crate) type Look = Arc<dyn Fn(&PlaceAsk) -> Found + Send + Sync>;
+
+/// The engine's naming rules on the disk as it is now; on a thread of its own (it may wait).
+fn look(ask: &PlaceAsk) -> Found {
+    Found {
+        dest: if ask.number {
+            mdm_engine::naming::destination(&ask.dir, &ask.name)
+        } else {
+            ask.dir.join(&ask.name)
+        },
+        folder: ask.dir.is_dir(),
+    }
+}
+
+/// Save As's place, looked at off the window's thread (#743, #751): a sleeping hard disk, a USB
+/// drive or a network folder can take seconds to answer whether a name is taken, and the window
+/// waited for it (the freeze report caught 8 s). Save As shows the name as given meanwhile
+/// (fitted, without " (1)"), and takes the numbered one when the answer comes, unless it was
+/// typed over. A download started before the answer is numbered as it starts
+/// (`Destination::Free`, `Item::number_at_start`): nothing is overwritten either way.
+pub(crate) struct SaveAsPlace {
+    look: Look,
+    repaint: Option<egui::Context>,
+    /// The last question, Save As's text it is for (as the answer set it, once taken), and its
+    /// answer to come. A new question asks on a thread of its own: one that hangs on a dead
+    /// share holds up nothing else.
+    asking: Option<(PlaceAsk, String, crate::launch::Asked<PlaceAsk, Found>)>,
+}
+
+impl SaveAsPlace {
+    /// Looked at on the disk; `repaint` shows the answer when it comes.
+    pub fn new(repaint: Option<&egui::Context>) -> Self {
+        Self::with(Arc::new(look), repaint)
+    }
+
+    /// Looked at with `look` (a test's).
+    pub fn with(look: Look, repaint: Option<&egui::Context>) -> Self {
+        SaveAsPlace {
+            look,
+            repaint: repaint.cloned(),
+            asking: None,
+        }
+    }
+
+    /// `name` in `dir` as MDM names it: Save As's text for now (fitted, not numbered: no wait
+    /// for the disk), its free numbered name asked for.
+    pub fn name_in(&mut self, dir: &Path, name: &str) -> String {
+        let shown = display_path(&mdm_engine::naming::guess(dir, name));
+        let ask = PlaceAsk {
+            dir: dir.to_owned(),
+            name: name.to_owned(),
+            number: true,
+        };
+        self.ask(ask, &shown);
+        shown
+    }
+
+    fn ask(&mut self, ask: PlaceAsk, shown: &str) {
+        if self
+            .asking
+            .as_ref()
+            .is_some_and(|(a, s, _)| *a == ask && s == shown)
+        {
+            return;
+        }
+        let asked = crate::launch::Asked::default();
+        let look = self.look.clone();
+        // Never waits: the answer is taken on a later frame (`follow`).
+        let _ = asked.get(
+            &ask,
+            std::time::Duration::MAX,
+            std::time::Duration::ZERO,
+            self.repaint.as_ref(),
+            move |a| look(a),
+        );
+        self.asking = Some((ask, shown.to_owned(), asked));
+    }
+
+    /// Each frame, never waiting: once the answer has come for what Save As (`save_as`) still
+    /// shows, a name MDM gave takes its free numbered name; whether its folder is there. None
+    /// while it hasn't come, or when Save As was typed over since.
+    pub fn follow(&mut self, save_as: &mut String) -> Option<bool> {
+        let (ask, shown, asked) = self.asking.as_mut()?;
+        if shown != save_as {
+            return None;
+        }
+        let found = asked.answer(ask)?;
+        if ask.number {
+            *save_as = display_path(&found.dest);
+            shown.clone_from(save_as);
+        }
+        Some(found.folder)
+    }
+
+    /// Whether Save As's folder is there, as looked at for the text it shows (None: not known
+    /// yet). A path typed in Save As is asked about here, as it is (its folder only).
+    pub fn folder(&mut self, save_as: &mut String) -> Option<bool> {
+        if let Some(there) = self.follow(save_as) {
+            return Some(there);
+        }
+        if self.asking.as_ref().is_some_and(|(_, s, _)| s == save_as) {
+            return None; // asked: the answer is on its way
+        }
+        let dest = resolve_path(save_as);
+        let (Some(dir), Some(name)) = (dest.parent(), dest.file_name()) else {
+            return None;
+        };
+        let ask = PlaceAsk {
+            dir: dir.to_owned(),
+            name: name.to_string_lossy().into_owned(),
+            number: false,
+        };
+        self.ask(ask, &save_as.clone());
+        self.follow(save_as)
+    }
+}
+
 pub struct FileInfo {
     pub url: Url,
     pub login: Option<(String, String)>,
@@ -890,8 +1025,8 @@ pub struct FileInfo {
     category_open: bool,
     /// Browser request context for the download this dialog adds.
     pub context: mdm_ipc::Command,
-    /// Asking to create a missing folder, the dialog's choice held meanwhile.
-    asking: Option<(CreateFolder, Start)>,
+    /// Start or Later held while the folder is looked at, and asked to be created when missing.
+    asking: FolderGate<Start>,
     /// The download already running while the dialog shows (Options → Downloads → "Start
     /// downloading immediately while displaying Download File Info dialog").
     pub early: Option<u64>,
@@ -919,6 +1054,9 @@ pub struct FileInfo {
     /// Whether Save As names a folder, looked at off the window's thread: it is asked every
     /// frame, and a folder on a network share that doesn't answer would freeze the window.
     dest_dir: crate::launch::Asked<PathBuf, bool>,
+    /// Save As's name numbered in its folder, and whether the folder is there, looked at off the
+    /// window's thread (#743).
+    place: SaveAsPlace,
 }
 
 pub enum Start {
@@ -954,7 +1092,8 @@ impl FileInfo {
             .unwrap_or_else(|| mdm_engine::naming::file_name(None, &new.url));
         let category = Category::of(&name);
         let folder = crate::model::category_folder(category, &downloads, &dirs);
-        let save_as = display_path(&mdm_engine::naming::destination(&folder, &name));
+        let mut place = SaveAsPlace::new(Some(ctx));
+        let save_as = place.name_in(&folder, &name);
         let (probe, info) = match from_browser {
             Some(file_name) => (
                 Arc::new(Mutex::new(None)),
@@ -974,6 +1113,7 @@ impl FileInfo {
         };
         FileInfo {
             dest_dir: Default::default(),
+            place,
             url_text: new.url.to_string(),
             url_bad: false,
             focused: false,
@@ -993,7 +1133,7 @@ impl FileInfo {
             dirs,
             category_open: false,
             context,
-            asking: None,
+            asking: FolderGate::default(),
             early: None,
             folders: Vec::new(),
             folders_open: false,
@@ -1050,7 +1190,7 @@ impl FileInfo {
                     self.category = Category::of(&name);
                     let dir =
                         crate::model::category_folder(self.category, &self.downloads, &self.dirs);
-                    self.save_as = display_path(&mdm_engine::naming::destination(&dir, &name));
+                    self.save_as = self.place.name_in(&dir, &name);
                 }
                 // Another address: the browser's name, size and form are not its own, and on
                 // another site neither are its cookies and page (never sent there).
@@ -1088,7 +1228,7 @@ impl FileInfo {
             .map(|n| n.to_string_lossy().into_owned())
             .unwrap_or_default();
         // Fitted to the new folder too (#28): a deeper one leaves a long name less room.
-        self.save_as = display_path(&mdm_engine::naming::destination(folder, &name));
+        self.save_as = self.place.name_in(folder, &name);
         self.edited = true;
     }
 
@@ -1140,7 +1280,13 @@ impl FileInfo {
             .map(|n| n.to_string_lossy().into_owned())
             .unwrap_or_default();
         let folder = crate::model::category_folder(c, &self.downloads, &self.dirs);
-        self.save_as = display_path(&mdm_engine::naming::destination(&folder, &name));
+        self.save_as = self.place.name_in(&folder, &name);
+    }
+
+    /// Whether Save As's folder is there, as looked at off the window's thread for the name it
+    /// shows now (None: not known yet). A name MDM gave has its free numbered name by then.
+    pub fn folder_found(&mut self) -> Option<bool> {
+        self.place.folder(&mut self.save_as)
     }
 
     /// The dialog; Start (or Download Later) waits for a missing folder to be created.
@@ -1196,10 +1342,12 @@ impl FileInfo {
             if let (Ok(pi), false) = (&res, self.edited) {
                 self.category = Category::of(&pi.file_name);
                 let dir = crate::model::category_folder(self.category, &self.downloads, &self.dirs);
-                self.save_as = display_path(&mdm_engine::naming::destination(&dir, &pi.file_name));
+                self.save_as = self.place.name_in(&dir, &pi.file_name);
             }
             self.info = Some(res);
         }
+        // The name numbered in its folder, once the disk has answered (#743).
+        self.place.follow(&mut self.save_as);
         self.follow_route(ctx);
         // The "Download through" line (#44) takes a row of its own while an account takes the
         // address: the window grows by it.
@@ -1711,6 +1859,9 @@ pub struct Complete {
     /// Clicked (or activated) once: from then on a window like any other, no longer above every
     /// program's (it shows above them until then, as IDM's does: #77).
     pub seen: bool,
+    /// Open was pressed: the file is looked for and handed to its program off the window's
+    /// thread (#743); the box closes when it opened, and stays (for Open folder) when it didn't.
+    pub opening: Option<crate::launch::Asked<PathBuf, bool>>,
 }
 
 impl Complete {
@@ -1848,8 +1999,8 @@ impl Complete {
                     if grip.hovered() {
                         ui.ctx().set_cursor_icon(egui::CursorIcon::Grab);
                     }
+                    // The file is looked for beside the window, with the drag (#743).
                     if grip.drag_started()
-                        && self.path.exists()
                         && let Err(e) = crate::win32::drag_file_out(
                             crate::i18n::t("Download complete"),
                             &self.path,
@@ -1877,10 +2028,26 @@ impl Complete {
                 let dragging = crate::win32::dragging_out();
                 #[cfg(not(windows))]
                 let dragging = false; // the grip is Windows-only
-                // A file that can't open says why (the box stays for Open folder).
+                // A file that can't open says why (the box stays for Open folder). Looked for and
+                // handed over off the window's thread (#743): the box closes once it opened.
+                let opened = self.opening.as_ref().and_then(|a| a.answer(&self.path));
+                if opened.is_some() {
+                    self.opening = None;
+                }
                 if (open.clicked() || (!dragging && winui::enter_pressed(ui)))
-                    && open_file(&self.path)
+                    && self.opening.is_none()
                 {
+                    let opening = crate::launch::Asked::default();
+                    let _ = opening.get(
+                        &self.path,
+                        std::time::Duration::MAX,
+                        std::time::Duration::ZERO,
+                        Some(ui.ctx()),
+                        |p| open_file_now(p),
+                    );
+                    self.opening = Some(opening);
+                }
+                if opened == Some(true) {
                     Outcome::Done(())
                 } else if with.clicked() {
                     open_with(&self.path);
@@ -2560,10 +2727,19 @@ pub fn told() -> Vec<(&'static str, String)> {
 }
 
 /// Open a downloaded file with its program, or say why not (moved or deleted since, no
-/// program for it): it did nothing at all. True when it was handed to the system. Waited for
-/// (the `open` crate's launcher, at most 250 ms each on Windows and Linux), unlike
-/// crate::launch's: whether it failed decides whether Download complete stays open.
-pub fn open_file(path: &Path) -> bool {
+/// program for it): on a thread of its own, as the file may be on a drive slow to answer
+/// (#743). Returns at once.
+pub fn open_file(path: &Path) {
+    let path = path.to_owned();
+    crate::launch::spawn("open file", move || {
+        open_file_now(&path);
+    });
+}
+
+/// [`open_file`], waited for: true when the file was handed to the system. For a thread other
+/// than the window's (Download complete asks it through `launch::Asked`: whether it failed
+/// decides whether the box stays open).
+pub fn open_file_now(path: &Path) -> bool {
     let name = crate::i18n::isolate(&path.file_name().unwrap_or_default().to_string_lossy());
     let failed = if !path.exists() {
         crate::i18n::fmt(
@@ -2585,7 +2761,17 @@ pub fn open_file(path: &Path) -> bool {
     false
 }
 
+/// Show the file selected in the file manager (its folder, when the file is gone). Returns at
+/// once: whether the file and its folder are there is looked at on a thread of its own, as a
+/// sleeping hard disk, a USB drive or a network folder can take seconds to answer (#751: 8 s,
+/// on the window's thread, froze it).
 pub fn show_in_folder(path: &Path) {
+    let path = path.to_owned();
+    crate::launch::spawn("show in folder", move || show_in_folder_now(&path));
+}
+
+/// [`show_in_folder`], on the thread it runs on.
+fn show_in_folder_now(path: &Path) {
     #[cfg(windows)]
     {
         use std::os::windows::process::CommandExt;
@@ -2967,6 +3153,8 @@ impl DeleteCategory {
 pub struct CreateFolder {
     folder: PathBuf,
     error: Option<String>,
+    /// Yes was pressed: the folder is made off the window's thread (#743), its answer to come.
+    making: Option<crate::launch::Asked<PathBuf, Result<(), String>>>,
 }
 
 impl CreateFolder {
@@ -2974,6 +3162,7 @@ impl CreateFolder {
         CreateFolder {
             folder,
             error: None,
+            making: None,
         }
     }
 
@@ -3034,20 +3223,33 @@ impl CreateFolder {
                     None,
                 )
                 .clicked();
+                // Made beside the window (#743): a drive slow to answer doesn't hold it.
+                let made = self.making.as_ref().and_then(|m| m.answer(&self.folder));
+                if made.is_some() {
+                    self.making = None;
+                }
+                if let Some(Err(e)) = &made {
+                    self.error = Some(crate::i18n::fmt(
+                        crate::i18n::t("The folder could not be created: {error}"),
+                        &[("error", e)],
+                    ));
+                }
                 if no || winui::escape_pressed(ui) {
                     Outcome::Closed
-                } else if yes || winui::enter_pressed(ui) {
-                    match std::fs::create_dir_all(&self.folder) {
-                        Ok(()) => Outcome::Done(()),
-                        Err(e) => {
-                            self.error = Some(crate::i18n::fmt(
-                                crate::i18n::t("The folder could not be created: {error}"),
-                                &[("error", &e.to_string())],
-                            ));
-                            Outcome::Open
-                        }
-                    }
+                } else if made == Some(Ok(())) {
+                    Outcome::Done(())
                 } else {
+                    if (yes || winui::enter_pressed(ui)) && self.making.is_none() {
+                        let making = crate::launch::Asked::default();
+                        let _ = making.get(
+                            &self.folder,
+                            std::time::Duration::MAX,
+                            std::time::Duration::ZERO,
+                            Some(ui.ctx()),
+                            |f| std::fs::create_dir_all(f).map_err(|e| e.to_string()),
+                        );
+                        self.making = Some(making);
+                    }
                     Outcome::Open
                 }
             },
@@ -3184,80 +3386,151 @@ impl ExistingFiles {
     }
 }
 
-/// Holds a dialog's "start" (`out`) while files the torrent would write into already exist
-/// (`found`, looked for once, when the dialog says start): asks [`ExistingFiles`] and keeps the
-/// result meanwhile; No goes back to the dialog. `asking` lives in the dialog, across frames.
-pub fn ensure_files_free<T>(
-    ctx: &egui::Context,
-    asking: &mut Option<(ExistingFiles, T)>,
-    out: Outcome<T>,
-    found: impl FnOnce() -> Vec<PathBuf>,
-) -> Outcome<T> {
-    match out {
-        Outcome::Closed => {
-            *asking = None;
-            return Outcome::Closed;
+/// A dialog's "start" (`T`) held while what it would start into is looked at on the disk, off
+/// the window's thread (#743: a sleeping hard disk, a USB drive or a network folder can take
+/// seconds to answer, and the window waited for it; the dialog stays as it is meanwhile), then
+/// while a question about it (`Q`) is up. Lives in the dialog, across frames.
+pub struct Gate<T, A, Q> {
+    held: Option<T>,
+    /// Where it was looked at, and the answer (`A`) to come.
+    look: Option<(PathBuf, crate::launch::Asked<PathBuf, A>)>,
+    question: Option<Q>,
+}
+
+/// [`ensure_folder`]'s: whether the folder is there; Create folder.
+pub type FolderGate<T> = Gate<T, bool, CreateFolder>;
+
+/// [`ensure_files_free`]'s: the torrent's files found there; Existing files.
+pub type FilesGate<T> = Gate<T, Vec<PathBuf>, ExistingFiles>;
+
+impl<T, A, Q> Default for Gate<T, A, Q> {
+    fn default() -> Self {
+        Gate {
+            held: None,
+            look: None,
+            question: None,
         }
-        Outcome::Done(v) if asking.is_none() => {
-            let found = found();
-            if found.is_empty() {
-                return Outcome::Done(v);
-            }
-            *asking = Some((ExistingFiles::new(&found), v));
-        }
-        _ => {}
-    }
-    let Some((ask, _)) = asking.as_mut() else {
-        return Outcome::Open;
-    };
-    match ask.show(ctx) {
-        Outcome::Open => Outcome::Open,
-        Outcome::Closed => {
-            *asking = None;
-            Outcome::Open
-        }
-        Outcome::Done(()) => asking
-            .take()
-            .map_or(Outcome::Open, |(_, v)| Outcome::Done(v)),
     }
 }
 
-/// Holds a dialog's "start" (`out`) until `folder` exists: when it is missing, asks to create
-/// it ([`CreateFolder`]) and keeps the dialog's result meanwhile; No goes back to the dialog.
-/// `asking` lives in the dialog, across frames.
+impl<T, A: Clone + PartialEq + Send + 'static, Q> Gate<T, A, Q> {
+    /// The dialog's "start", let go: the gate starts over.
+    fn release(&mut self) -> Outcome<T> {
+        let held = self.held.take();
+        *self = Gate::default();
+        held.map_or(Outcome::Open, Outcome::Done)
+    }
+
+    /// `out` held until `at` has been looked at with `look` (made only when asked; it runs on
+    /// a thread of its own) and the question `ask` makes of the answer (None: nothing to ask)
+    /// was answered Yes by `show`. No goes back to the dialog.
+    fn pass<L: FnOnce(&PathBuf) -> A + Send + 'static>(
+        &mut self,
+        ctx: &egui::Context,
+        out: Outcome<T>,
+        at: &Path,
+        look: impl FnOnce() -> L,
+        ask: impl FnOnce(A) -> Option<Q>,
+        show: impl FnOnce(&mut Q, &egui::Context) -> Outcome<()>,
+    ) -> Outcome<T> {
+        match out {
+            Outcome::Closed => {
+                *self = Gate::default();
+                return Outcome::Closed;
+            }
+            Outcome::Done(v) if self.held.is_none() => self.held = Some(v),
+            // While it is looked at, or the question is up, the dialog's own "start" waits.
+            _ => {}
+        }
+        if self.held.is_none() {
+            return Outcome::Open;
+        }
+        if self.question.is_none() {
+            // Asked once for each place (the dialog's folder may change meanwhile); never waited.
+            if self.look.as_ref().is_none_or(|(p, _)| p != at) {
+                let asked = crate::launch::Asked::default();
+                let _ = asked.get(
+                    &at.to_owned(),
+                    std::time::Duration::MAX,
+                    std::time::Duration::ZERO,
+                    Some(ctx),
+                    look(),
+                );
+                self.look = Some((at.to_owned(), asked));
+            }
+            let found = self.look.as_ref().and_then(|(p, a)| a.answer(p));
+            match found.map(ask) {
+                None => return Outcome::Open,
+                Some(None) => return self.release(),
+                Some(question) => self.question = question,
+            }
+        }
+        let Some(question) = self.question.as_mut() else {
+            return Outcome::Open;
+        };
+        match show(question, ctx) {
+            Outcome::Open => Outcome::Open,
+            Outcome::Closed => {
+                *self = Gate::default();
+                Outcome::Open
+            }
+            Outcome::Done(()) => self.release(),
+        }
+    }
+}
+
+/// Holds a dialog's "start" (`out`) while files the torrent would write into already exist in
+/// `folder` (looked for when the dialog says start, off the window's thread, by what `found`
+/// makes): asks [`ExistingFiles`] and keeps the result meanwhile; No goes back to the dialog.
+/// `gate` lives in the dialog, across frames.
+pub fn ensure_files_free<T, F: FnOnce() -> Vec<PathBuf> + Send + 'static>(
+    ctx: &egui::Context,
+    gate: &mut FilesGate<T>,
+    out: Outcome<T>,
+    folder: &Path,
+    found: impl FnOnce() -> F,
+) -> Outcome<T> {
+    gate.pass(
+        ctx,
+        out,
+        folder,
+        || {
+            let found = found();
+            move |_: &PathBuf| found()
+        },
+        |found| (!found.is_empty()).then(|| ExistingFiles::new(&found)),
+        ExistingFiles::show,
+    )
+}
+
+/// Holds a dialog's "start" (`out`) until `folder` exists: looked at off the window's thread,
+/// and when it is missing, asks to create it ([`CreateFolder`]); No goes back to the dialog.
+/// `gate` lives in the dialog, across frames.
 pub fn ensure_folder<T>(
     ctx: &egui::Context,
-    asking: &mut Option<(CreateFolder, T)>,
+    gate: &mut FolderGate<T>,
     out: Outcome<T>,
     folder: &Path,
 ) -> Outcome<T> {
-    match out {
-        Outcome::Closed => {
-            *asking = None;
-            return Outcome::Closed;
-        }
-        Outcome::Done(v) if asking.is_none() => {
-            if folder.as_os_str().is_empty() || folder.is_dir() {
-                return Outcome::Done(v);
-            }
-            *asking = Some((CreateFolder::new(folder.to_owned()), v));
-        }
-        // While the question is up the dialog's own "start" waits for the answer.
-        _ => {}
-    }
-    let Some((ask, _)) = asking.as_mut() else {
-        return Outcome::Open;
-    };
-    match ask.show(ctx) {
-        Outcome::Open => Outcome::Open,
-        Outcome::Closed => {
-            *asking = None;
-            Outcome::Open
-        }
-        Outcome::Done(()) => asking
-            .take()
-            .map_or(Outcome::Open, |(_, v)| Outcome::Done(v)),
-    }
+    ensure_folder_with(ctx, gate, out, folder, |f| f.is_dir())
+}
+
+/// [`ensure_folder`], the folder looked at with `is_dir` (a test's).
+fn ensure_folder_with<T>(
+    ctx: &egui::Context,
+    gate: &mut FolderGate<T>,
+    out: Outcome<T>,
+    folder: &Path,
+    is_dir: impl FnOnce(&Path) -> bool + Send + 'static,
+) -> Outcome<T> {
+    gate.pass(
+        ctx,
+        out,
+        folder,
+        || move |f: &PathBuf| f.as_os_str().is_empty() || is_dir(f.as_path()),
+        |there| (!there).then(|| CreateFolder::new(folder.to_owned())),
+        CreateFolder::show,
+    )
 }
 
 #[cfg(test)]
@@ -3629,5 +3902,182 @@ mod tests {
             painted[1], painted[0],
             "the pass that closes the dialog paints it as the one before"
         );
+    }
+
+    /// A look at the disk that waits until the test lets it go (a sleeping drive, a network
+    /// folder that answers late); then answers as the engine would on `taken` names.
+    fn slow_look(taken: &'static [&'static str]) -> (Look, std::sync::mpsc::Sender<()>) {
+        let (release, stuck) = std::sync::mpsc::channel::<()>();
+        let stuck = Mutex::new(stuck);
+        let look: Look = Arc::new(move |ask: &PlaceAsk| {
+            // Released once: every look after it answers at once.
+            let _ = stuck.lock().unwrap().recv();
+            let mut name = ask.name.clone();
+            if ask.number {
+                let (stem, ext) = ask.name.rsplit_once('.').unwrap_or((ask.name.as_str(), ""));
+                let ext = if ext.is_empty() {
+                    String::new()
+                } else {
+                    format!(".{ext}")
+                };
+                let mut n = 0;
+                while taken.contains(&name.as_str()) {
+                    n += 1;
+                    name = format!("{stem} ({n}){ext}");
+                }
+            }
+            Found {
+                dest: ask.dir.join(name),
+                folder: true,
+            }
+        });
+        (look, release)
+    }
+
+    /// Wait (at most 5 s) until `place` answers for `save_as`.
+    fn answered(place: &mut SaveAsPlace, save_as: &mut String) -> Option<bool> {
+        let until = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        while std::time::Instant::now() < until {
+            if let Some(there) = place.follow(save_as) {
+                return Some(there);
+            }
+            std::thread::sleep(std::time::Duration::from_millis(2));
+        }
+        None
+    }
+
+    /// #743: a disk that doesn't answer holds up no frame of Download File Info. Save As shows
+    /// the name as given (no " (1)": not known yet), and takes the free numbered one when the
+    /// answer comes at last.
+    #[test]
+    fn a_disk_that_never_answers_holds_up_no_frame() {
+        let dir = std::env::temp_dir().join("mdm-743-slow");
+        let (look, release) = slow_look(&["a.zip"]);
+        let mut place = SaveAsPlace::with(look, None);
+        let started = std::time::Instant::now();
+        let mut save_as = place.name_in(&dir, "a.zip");
+        assert_eq!(save_as, display_path(&dir.join("a.zip")), "the guess");
+        for _ in 0..1000 {
+            assert_eq!(place.follow(&mut save_as), None);
+            assert_eq!(place.folder(&mut save_as), None, "not known yet");
+        }
+        assert!(
+            started.elapsed() < std::time::Duration::from_millis(500),
+            "{:?} for 1000 frames",
+            started.elapsed()
+        );
+        assert_eq!(save_as, display_path(&dir.join("a.zip")), "still the guess");
+        // The disk answers: the name is taken there.
+        drop(release);
+        assert_eq!(answered(&mut place, &mut save_as), Some(true));
+        assert_eq!(save_as, display_path(&dir.join("a (1).zip")));
+        // Asked once: the next frames keep it.
+        assert_eq!(place.folder(&mut save_as), Some(true));
+        assert_eq!(save_as, display_path(&dir.join("a (1).zip")));
+    }
+
+    /// An answer comes for the text it was asked for only: Save As typed over meanwhile keeps
+    /// what was typed, and a new name asked for (another folder) drops the old question's.
+    #[test]
+    fn a_late_answer_never_replaces_what_was_typed_or_picked_since() {
+        let dir = std::env::temp_dir().join("mdm-743-typed");
+        let (look, release) = slow_look(&["a.zip", "b.zip"]);
+        let mut place = SaveAsPlace::with(look, None);
+        let _guess = place.name_in(&dir, "a.zip");
+        // Typed over before the disk answered.
+        let mut save_as = display_path(&dir.join("mine.zip"));
+        drop(release);
+        std::thread::sleep(std::time::Duration::from_millis(50));
+        assert_eq!(place.follow(&mut save_as), None);
+        assert_eq!(save_as, display_path(&dir.join("mine.zip")), "typed: kept");
+        // Typed text has its folder looked at, as typed (never numbered here).
+        let mut there = None;
+        let until = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        while there.is_none() && std::time::Instant::now() < until {
+            there = place.folder(&mut save_as);
+            std::thread::sleep(std::time::Duration::from_millis(2));
+        }
+        assert_eq!(there, Some(true));
+        assert_eq!(save_as, display_path(&dir.join("mine.zip")));
+        // Another name: its own answer, not the last one's.
+        let other = dir.join("elsewhere");
+        save_as = place.name_in(&other, "b.zip");
+        assert_eq!(answered(&mut place, &mut save_as), Some(true));
+        assert_eq!(save_as, display_path(&other.join("b (1).zip")));
+    }
+
+    /// The real look follows the engine's rules: a name taken on the disk (a file, another
+    /// download's part file) is numbered on, the folder said there or not.
+    #[test]
+    fn the_look_numbers_as_the_engine_does() {
+        let d = tempfile::tempdir().unwrap();
+        std::fs::write(d.path().join("a.zip"), b"x").unwrap();
+        std::fs::write(
+            mdm_engine::naming::part_path(&d.path().join("a (1).zip")),
+            b"x",
+        )
+        .unwrap();
+        let mut place = SaveAsPlace::new(None);
+        let mut save_as = place.name_in(d.path(), "a.zip");
+        assert_eq!(answered(&mut place, &mut save_as), Some(true));
+        assert_eq!(save_as, display_path(&d.path().join("a (2).zip")));
+        assert_eq!(
+            resolve_path(&save_as),
+            mdm_engine::naming::destination(d.path(), "a.zip")
+        );
+        let gone = d.path().join("not-there");
+        let mut save_as = place.name_in(&gone, "a.zip");
+        assert_eq!(answered(&mut place, &mut save_as), Some(false));
+        assert_eq!(save_as, display_path(&gone.join("a.zip")));
+    }
+
+    /// #743: Start in a dialog whose folder is on a disk slow to answer holds up no frame: the
+    /// dialog stays as it is until the answer comes, then goes on with what Start said.
+    #[test]
+    fn start_waits_for_the_folder_without_holding_up_a_frame() {
+        let ctx = egui::Context::default();
+        let (release, stuck) = std::sync::mpsc::channel::<()>();
+        let mut gate = FolderGate::<u32>::default();
+        let folder = std::env::temp_dir().join("mdm-743-gate");
+        let started = std::time::Instant::now();
+        let is_dir = move |_: &Path| {
+            let _ = stuck.recv();
+            true
+        };
+        let first = ensure_folder_with(&ctx, &mut gate, Outcome::Done(7), &folder, is_dir);
+        assert!(matches!(first, Outcome::Open));
+        for _ in 0..1000 {
+            // A second Start meanwhile changes nothing; nor does a frame without one.
+            let again = ensure_folder_with(&ctx, &mut gate, Outcome::Done(8), &folder, |_| {
+                unreachable!("looked at once")
+            });
+            assert!(matches!(again, Outcome::Open));
+        }
+        assert!(
+            started.elapsed() < std::time::Duration::from_millis(500),
+            "{:?}",
+            started.elapsed()
+        );
+        drop(release);
+        let until = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        let done = loop {
+            match ensure_folder_with(&ctx, &mut gate, Outcome::Open, &folder, |_| {
+                unreachable!("looked at once")
+            }) {
+                Outcome::Done(v) => break Some(v),
+                _ if std::time::Instant::now() > until => break None,
+                _ => std::thread::sleep(std::time::Duration::from_millis(2)),
+            }
+        };
+        assert_eq!(done, Some(7), "the first Start's");
+        // Let go: the next Start is looked at afresh.
+        let next = ensure_folder_with(&ctx, &mut gate, Outcome::Done(9), &folder, |_| true);
+        let until = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        let mut next = next;
+        while !matches!(next, Outcome::Done(_)) && std::time::Instant::now() < until {
+            std::thread::sleep(std::time::Duration::from_millis(2));
+            next = ensure_folder_with(&ctx, &mut gate, Outcome::Open, &folder, |_| true);
+        }
+        assert!(matches!(next, Outcome::Done(9)));
     }
 }

@@ -240,8 +240,20 @@ pub fn fit_name(dir: &Path, name: &str) -> Option<String> {
 /// deep for any name keeps it whole, and the download says the path is too long. A name from a
 /// long address (a token hundreds of characters long, #28) no longer fails the download.
 pub fn destination(dir: &Path, name: &str) -> PathBuf {
-    let name = fit_name(dir, name).unwrap_or_else(|| name.to_owned());
-    unique_path(dir, &name)
+    unique_path(dir, &fitted(dir, name))
+}
+
+/// `destination` before the folder is looked at: the name fitted to the path limit, not yet
+/// numbered. What a window shows while the disk is asked (a sleeping drive or a network folder
+/// can take seconds to answer, #743); a download started there is numbered on if the name is
+/// taken by then ([`crate::Destination::Free`]). Never touches the disk.
+pub fn guess(dir: &Path, name: &str) -> PathBuf {
+    dir.join(fitted(dir, name))
+}
+
+/// `name` fitted to `dir` (`fit_name`), kept whole when `dir` leaves too little room.
+fn fitted(dir: &Path, name: &str) -> String {
+    fit_name(dir, name).unwrap_or_else(|| name.to_owned())
 }
 
 /// `destination` for a download whose helper picks the extension and takes any `<stem>.*` it
@@ -250,7 +262,7 @@ pub fn destination(dir: &Path, name: &str) -> PathBuf {
 /// with it and a dot, letter case aside, and `in_use` (the other downloads' stems in `dir`)
 /// says no.
 pub fn stem_destination(dir: &Path, name: &str, in_use: impl Fn(&str) -> bool) -> PathBuf {
-    let name = fit_name(dir, name).unwrap_or_else(|| name.to_owned());
+    let name = fitted(dir, name);
     let (stem, ext) = match name.rfind('.') {
         Some(i) if i > 0 => (&name[..i], &name[i..]),
         _ => (name.as_str(), ""),
@@ -725,6 +737,25 @@ mod tests {
         assert_eq!(sanitize("compact.txt"), "compact.txt");
         assert_eq!(sanitize("name. . "), "name");
         assert_eq!(sanitize("..."), "download");
+    }
+
+    /// #743: the guess a window shows before the disk answers is `destination`'s name, fitted
+    /// the same way, never numbered (and never looked up).
+    #[test]
+    fn the_guess_is_the_destination_before_numbering() {
+        let d = tempfile::tempdir().unwrap();
+        assert_eq!(guess(d.path(), "a.zip"), destination(d.path(), "a.zip"));
+        std::fs::write(d.path().join("a.zip"), b"").unwrap();
+        assert_eq!(guess(d.path(), "a.zip"), d.path().join("a.zip"));
+        assert_eq!(destination(d.path(), "a.zip"), d.path().join("a (1).zip"));
+        let long = format!("{}.zip", "x".repeat(400));
+        assert_eq!(
+            guess(d.path(), &long),
+            d.path().join(fit_name(d.path(), &long).unwrap())
+        );
+        // A folder that isn't there: nothing to look up, the same name.
+        let gone = d.path().join("gone");
+        assert_eq!(guess(&gone, "a.zip"), gone.join("a.zip"));
     }
 
     #[test]

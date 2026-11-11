@@ -2459,7 +2459,12 @@ pub fn drag_file_out(title: &str, file: &std::path::Path) -> Result<(), String> 
         if !shared {
             tracing::warn!("drag out: the window's input isn't shared");
         }
-        let result = drag_on_this_thread(hwnd as HWND, &file);
+        // Looked for here, beside the window (#743): a drive slow to answer doesn't hold it.
+        let result = if file.exists() {
+            drag_on_this_thread(hwnd as HWND, &file)
+        } else {
+            Ok(())
+        };
         if let Ok(mut t) = DRAG_ENDED.lock() {
             *t = Some(std::time::Instant::now());
         }
