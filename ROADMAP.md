@@ -557,6 +557,7 @@ Bug fixes from the first days of 0.5.0, a Safari extension, and more file types.
 
 These ship in the next version.
 
+- ✅ Download panels (the video button): site exclusions support wildcards (`*`) like `*.youtube.*` or `youtube.*` ([#759](https://github.com/anefzaoui/misterdownloadmanager/issues/759))
 - ✅ A video's Address is its file's (the stream MDM downloads) in the progress window, Download
   complete and File Properties, its page the web page it was obtained from; a download's page and
   Referer are kept after a restart

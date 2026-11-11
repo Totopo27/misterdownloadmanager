@@ -233,11 +233,12 @@ impl CaptureRules {
 
     /// Is `page` (an address) on a site the button stays off? A name without `*.` takes its
     /// subdomains too (#532: `youtube.com` listed, the button still showed on www.youtube.com).
+    /// Supports wildcards (`*`) like `*.youtube.*` or `youtube.*` (#759).
     pub fn panel_hidden_on(&self, page: &str) -> bool {
         let host = host_of(page);
         self.video_panel_sites.split_whitespace().any(|p| {
-            host_matches(&host, p)
-                || (!p.starts_with('*') && host_matches(&host, &format!("*.{p}")))
+            panel_site_matches(&host, p)
+                || (!p.starts_with('*') && panel_site_matches(&host, &format!("*.{p}")))
         })
     }
 }
@@ -372,9 +373,23 @@ pub fn host_of(url: &str) -> String {
     host.to_ascii_lowercase()
 }
 
-/// `host` matches `pattern` (case-insensitive), supporting wildcards (`*`) and, for
-/// `*.example.com`, matching both the domain and its subdomains.
+/// `host` is `pattern` (case-insensitive) or, for `*.example.com`, one of its subdomains.
 pub fn host_matches(host: &str, pattern: &str) -> bool {
+    let pattern = pattern.trim().to_ascii_lowercase();
+    let pattern = pattern
+        .split_once("://")
+        .map_or(pattern.as_str(), |(_, r)| r);
+    let pattern = pattern.split('/').next().unwrap_or("");
+    match pattern.strip_prefix("*.") {
+        Some(base) => host == base || host.ends_with(&format!(".{base}")),
+        None => !pattern.is_empty() && host == pattern,
+    }
+}
+
+/// `host` matches download panel site `pattern` (case-insensitive), supporting wildcards (`*`)
+/// like `*.youtube.*`, `youtube.*` or `*dailymotion*` (#759) and, for `*.example.com`,
+/// matching both the domain and its subdomains.
+pub fn panel_site_matches(host: &str, pattern: &str) -> bool {
     let pattern = pattern.trim().to_ascii_lowercase();
     let pattern = pattern
         .split_once("://")
@@ -673,19 +688,23 @@ mod tests {
         assert!(host_matches("a.b.example.com", "*.example.com"));
         assert!(host_matches("example.com", "*.example.com"));
         assert!(!host_matches("badexample.com", "*.example.com"));
-        // Wildcard patterns (#759)
-        assert!(host_matches("www.youtube.com", "*.youtube.*"));
-        assert!(host_matches("youtube.com", "*.youtube.*"));
-        assert!(host_matches("youtube.co", "youtube.*"));
-        assert!(host_matches("youtube.com", "youtube.*"));
-        assert!(!host_matches("vimeo.com", "youtube.*"));
-        assert!(host_matches("www.youtube.com", "www.youtube.co*"));
-        assert!(host_matches("www.youtube.co", "www.youtube.co*"));
-        assert!(host_matches("www.youtube.co.uk", "www.youtube.co*"));
-        assert!(!host_matches("www.youtube.es", "www.youtube.co*"));
-        assert!(host_matches("www.youtube.com", "*youtube*"));
-        assert!(host_matches("youtube.com", "*youtube*"));
-        assert!(!host_matches("vimeo.com", "*youtube*"));
+        assert!(
+            !host_matches("othermysite.com", "*mysite.com"),
+            "host_matches treats * literally"
+        );
+        // Wildcard patterns for download panel (#759)
+        assert!(panel_site_matches("www.youtube.com", "*.youtube.*"));
+        assert!(panel_site_matches("youtube.com", "*.youtube.*"));
+        assert!(panel_site_matches("youtube.co", "youtube.*"));
+        assert!(panel_site_matches("youtube.com", "youtube.*"));
+        assert!(!panel_site_matches("vimeo.com", "youtube.*"));
+        assert!(panel_site_matches("www.youtube.com", "www.youtube.co*"));
+        assert!(panel_site_matches("www.youtube.co", "www.youtube.co*"));
+        assert!(panel_site_matches("www.youtube.co.uk", "www.youtube.co*"));
+        assert!(!panel_site_matches("www.youtube.es", "www.youtube.co*"));
+        assert!(panel_site_matches("www.youtube.com", "*youtube*"));
+        assert!(panel_site_matches("youtube.com", "*youtube*"));
+        assert!(!panel_site_matches("vimeo.com", "*youtube*"));
         assert!(wildcard("*/files/*.zip", "https://x.org/files/a.zip"));
         assert!(address_matches(
             "example.com/private/*",
