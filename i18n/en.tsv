@@ -139,10 +139,10 @@
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 	&Start now	&Start now
 #. text in the Options window
-	(separate names by spaces)	(separate names by spaces)
-#. text in the Options window
 #. under Download panels site exclusions list
-	(separate names by spaces; wildcards like *.youtube.* or youtube.* work)	(separate names by spaces; wildcards like *.youtube.* or youtube.* work)
+	(separate by spaces; * matches anything)	(separate by spaces; * matches anything)
+#. text in the Options window
+	(separate names by spaces)	(separate names by spaces)
 #. text in rssdlg.rs
 #. RSS feeds window, Download rules: shown in the empty Save to box
 	(the Torrents category's folder)	(the Torrents category's folder)
