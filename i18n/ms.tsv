@@ -920,9 +920,9 @@
 #, machine
 	Checking {name} ({n} of {total})...	Sedang menyemak {name} ({n} daripada {total})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
-	Checking {percent}	Sedang menyemak {percent}
+	Checking {percent}	Menyemak {percent}
 #. text in the Checksum window; text in the Link grabber window
 #. the trailing ... means it is still going on: keep it
 #, machine
@@ -2289,6 +2289,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	Fail-failnya tidak dapat ditulis: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	gambar dan bunyinya tidak dapat digabungkan menjadi satu fail ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	gambar dan bunyinya tidak dapat digabungkan menjadi satu fail ({error}). Apa yang dimuat turun kekal dalam folder untuk Sambung Semula untuk digabungkan semula ({files}); memadam muat turun dengan "Padamkan fail daripada cakera juga" akan mengalih keluarnya
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	maklumat keluarannya tidak seperti yang dijangkakan: {detail}
@@ -2682,6 +2692,10 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	sederhana
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	Menggabungkan {percent}
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
@@ -5191,6 +5205,7 @@
 #, machine
 	United States Minor Outlying Islands	Kepulauan Terpencil Kecil Amerika Syarikat
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	Tidak diketahui
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5828,14 +5843,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{percent} di {service}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} digabungkan
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} disahkan
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6491,7 +6498,7 @@ menu	&Add new download	&Tambah muat turun baharu
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-menu	&Add new download...	&Tambah muat turun baharu...
+menu	Add &new download...	&Tambah muat turun baharu...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6580,7 +6587,7 @@ menu	&Stop Download	&Hentikan muat turun
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	&Teks
+menu	Te&xt	&Teks
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 menu	&Tray icon	&Ikon dulang
@@ -6663,7 +6670,7 @@ menu	By R&eferer	Mengikut R&eferer
 menu	By Save &Path	Mengikut &Laluan Simpan
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-menu	By St&atus	Mengikut St&atus
+menu	By Stat&us	Mengikut St&atus
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 menu	By Transfer &Rate	Mengikut Kadar &Pemindahan
@@ -6699,6 +6706,10 @@ menu	Delete from queue	Padam daripada baris gilir
 #. menu command in the main window
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): kad grafik ini tiada pemacu Direct3D 12
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 menu	Direct3D didn't start here: OpenGL draws	Direct3D tidak dapat dimulakan pada komputer ini: OpenGL digunakan untuk melukis
@@ -6818,9 +6829,25 @@ menu	Open with...	Buka dengan...
 #. View → Draw with: a graphics system's name, usually kept as is
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	OpenGL tidak bermula di sini
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	OpenGL terhenti dalam pemacu grafik di sini
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	OpenGL di sini terlalu lama untuk melukis MDM
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	Bingkai pertama OpenGL tidak muncul dalam 10 saat
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	Permulaan terakhir OpenGL berakhir sebelum bingkai pertamanya
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

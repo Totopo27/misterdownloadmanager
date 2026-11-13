@@ -67,6 +67,11 @@ pub struct Freeze {
     /// MDM or on macOS). It tells a loop from a wait from a computer too busy to run MDM.
     #[serde(default)]
     pub busy: Option<Busy>,
+    /// What the frame was doing when the watchdog saw it stop ("the tray icon"; empty: not
+    /// known). It names the wait even when the dump comes too late to show it, as on a computer
+    /// slow to wake (#574).
+    #[serde(default)]
+    pub step: String,
 }
 
 /// The window thread's use of the processor over a stretch of a frozen frame.

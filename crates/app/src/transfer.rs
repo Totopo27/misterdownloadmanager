@@ -562,20 +562,17 @@ mod tests {
 
     #[test]
     fn a_large_list_is_searched_in_linear_time() {
-        // 200,000 addresses (about 8 MiB) and as much text that only looks like them: the
-        // search goes through it once (a quadratic one would take minutes here).
-        let mut text = String::new();
-        for i in 0..200_000 {
-            text.push_str(&format!("https://dl.example.com/files/{i}.zip\n"));
-            text.push_str("abc:// not an address ://\n");
-        }
-        let t = std::time::Instant::now();
-        let found = import(&text);
-        assert_eq!(found.len(), 200_000);
-        assert!(
-            t.elapsed() < std::time::Duration::from_secs(10),
-            "{:?}",
-            t.elapsed()
-        );
+        // Addresses and as much text that only looks like them: the search goes through it
+        // once, 8 times the list costing about 8 times as long (not 64), on any machine.
+        let list = |n: usize| {
+            let mut text = String::new();
+            for i in 0..n {
+                text.push_str(&format!("https://dl.example.com/files/{i}.zip\n"));
+                text.push_str("abc:// not an address ://\n");
+            }
+            text
+        };
+        assert_eq!(import(&list(1_000)).len(), 1_000);
+        mdm_labserver::growth::assert_linear(5_000, list, |text| import(&text));
     }
 }

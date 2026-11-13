@@ -34,6 +34,11 @@ pub struct Command {
     pub start_queue: bool,
     /// From the browser: request context to reuse.
     pub referer: Option<String>,
+    /// From the browser (#900): the `Origin` its page's player sent with a video's stream or
+    /// file (`video_page`, `video_lookup`), sent again with it, its playlists and each of its
+    /// pieces, as a site's video server may serve its own pages' players only.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub origin: Option<String>,
     pub cookies: Option<String>,
     /// From the browser: the same cookies, each with the domain, path and flags the browser
     /// keeps for it, for yt-dlp's cookie file. yt-dlp may ask another host than the page's (a

@@ -149,18 +149,24 @@ With **Options → Proxy / Socks → [Network adapter](options.md#proxy--socks)*
 ## Sites that want you signed in
 
 Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted
-one, and YouTube sometimes asks any viewer from an address it doubts to "Sign in to confirm
-you're not a bot". yt-dlp then needs your browser's cookies, the small files that keep you
-signed in.
+one. And YouTube sometimes asks any viewer from a network it doubts (a VPN, a shared or
+cloud address) to "Sign in to confirm you're not a bot". yt-dlp then needs your browser's
+cookies, the small files that keep you signed in.
 
 - **The Download video button over the video** passes that page's cookies, from the window and
-  profile you're in (a private window, a Firefox container), for the look-up and the download.
-  Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on
-  YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.
+  profile you're in (a private window, a Firefox container), for the look-up and the download,
+  so you're signed in as you are in the browser. Nothing to set up. Each cookie goes with the
+  domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or
+  YouTube's mobile site reaches www.youtube.com too.
 - **A pasted address** (Add URL, Download video from a page, a playlist): choose your browser in
   **Options → Sites Logins → Cookies for video sites**. yt-dlp then reads that browser's cookies
   on this computer for every video it looks up or downloads. When the extension passed the
   page's own cookies, those are used instead: they are that page's and that session's.
+- **A spare account, in a profile of its own**: you don't have to lend yt-dlp your main
+  account. Make a second profile in your browser, sign in to the site there with a spare
+  account, and put that profile in **Profile** (its name, or its folder with **...**). yt-dlp
+  reads that profile's cookies only. yt-dlp's developers advise this too: a site may limit an
+  account it sees used by a program.
 
 ![Options, Sites Logins: Cookies for video sites, From browser: Firefox](images/help/options-logins.webp)
 *Cookies for video sites: off, or a browser and its profile.*

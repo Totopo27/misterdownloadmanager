@@ -904,8 +904,7 @@ impl OptionsDialog {
         {
             let (title, from) = (dir_line.clone(), self.cat_dir.clone());
             winui::start_pick(ui.ctx(), "options-category-folder", move || {
-                rfd::FileDialog::new()
-                    .set_title(title)
+                crate::winui::file_dialog(&title)
                     .set_directory(from)
                     .pick_folder()
             });
@@ -2153,7 +2152,7 @@ impl OptionsDialog {
         {
             let title = pick_title.to_owned();
             winui::start_pick(ui.ctx(), "options-cookie-profile", move || {
-                rfd::FileDialog::new().set_title(title).pick_folder()
+                crate::winui::file_dialog(&title).pick_folder()
             });
         }
         if let Some(dir) = winui::picked(ui.ctx(), "options-cookie-profile") {
@@ -2612,8 +2611,7 @@ impl OptionsDialog {
                 // i18n: the kind of file the Open dialog lists (sound files)
                 let kind = crate::i18n::t("Sounds").to_owned();
                 winui::start_pick(ui.ctx(), &format!("sound-{i}"), move || {
-                    rfd::FileDialog::new()
-                        .set_title(title)
+                    crate::winui::file_dialog(&title)
                         .add_filter(kind, &["wav"])
                         .pick_file()
                 });
@@ -3303,8 +3301,7 @@ impl OptionsDialog {
                         {
                             let title = crate::i18n::t("Export").to_owned();
                             winui::start_pick(ui.ctx(), "opt-panels-export", move || {
-                                rfd::FileDialog::new()
-                                    .set_title(title)
+                                crate::winui::file_dialog(&title)
                                     .add_filter("TXT", &["txt"])
                                     .set_file_name("sites.txt")
                                     .save_file()
@@ -3321,8 +3318,7 @@ impl OptionsDialog {
                         {
                             let title = crate::i18n::t("Import").to_owned();
                             winui::start_pick(ui.ctx(), "opt-panels-import", move || {
-                                rfd::FileDialog::new()
-                                    .set_title(title)
+                                crate::winui::file_dialog(&title)
                                     .add_filter("TXT", &["txt"])
                                     .pick_file()
                             });

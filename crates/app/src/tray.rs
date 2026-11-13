@@ -203,6 +203,9 @@ impl Tray {
 
     /// The icon's tip: the app's name, and while downloads run how many and how fast.
     pub fn set_tooltip(&self, tip: &str) {
+        // The shell draws it: without isolates (#919).
+        let tip = crate::i18n::os_text(tip);
+        let tip = tip.as_str();
         let mut last = self.tip.borrow_mut();
         let due = last
             .1

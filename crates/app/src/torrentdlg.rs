@@ -483,9 +483,8 @@ impl TorrentDialog {
             let kind = crate::i18n::t("Torrent files").to_owned();
             let title = crate::i18n::t("Open torrent file").to_owned();
             winui::start_pick(ui.ctx(), "torrent-file", move || {
-                rfd::FileDialog::new()
+                crate::winui::file_dialog(&title)
                     .add_filter(kind, &["torrent"])
-                    .set_title(title)
                     .pick_file()
             });
         }

@@ -651,19 +651,23 @@ pub fn show_in_folder(path: &Path) {
     });
 }
 
-/// Options → Downloads → open magnet links and .torrent files with Mister Download Manager:
-/// Linux records it with xdg-mime for the desktop entry the packages install (turning it off
-/// leaves the choice to the desktop's settings). Not on macOS yet: it hands links to an app as
-/// open-URL events, which the app doesn't receive.
+/// Torrent settings → open magnet links and .torrent files with Mister Download Manager: Linux
+/// records it with xdg-mime for the desktop entry the packages install, macOS with Launch
+/// Services for the app (`open_events::make_default`, #698). Turning it off leaves the choice to
+/// the desktop's settings (macOS: Finder's Get Info → Open with).
 pub fn set_torrent_handlers(on: bool) {
-    if on && !cfg!(target_os = "macos") {
-        spawn(Command::new("xdg-mime").args([
-            "default",
-            "misterdownloadmanager.desktop",
-            "x-scheme-handler/magnet",
-            "application/x-bittorrent",
-        ]));
+    if !on {
+        return;
     }
+    #[cfg(target_os = "macos")]
+    open_events::make_default();
+    #[cfg(not(target_os = "macos"))]
+    spawn(Command::new("xdg-mime").args([
+        "default",
+        "misterdownloadmanager.desktop",
+        "x-scheme-handler/magnet",
+        "application/x-bittorrent",
+    ]));
 }
 
 /// `win32::assistive_technology_listening`: Linux's AT-SPI adapter answers a screen reader with
@@ -1620,6 +1624,8 @@ pub fn tell_window_failed(text: &str) {
     eprintln!("{text}");
     tracing::error!("{text}");
     let title = "Mister Download Manager";
+    // A program of the desktop's draws it: without isolates (#919).
+    let text = &crate::i18n::os_text(text);
     let boxes: [(&str, Vec<&str>); 2] = [
         (
             "zenity",
@@ -1831,6 +1837,234 @@ pub fn file_icon(what: &crate::fileicons::What, px: u32) -> Option<crate::fileic
             premultiplied: true,
         })
     })
+}
+
+/// macOS hands an app what it should open (a .torrent double-clicked in Finder or dropped on
+/// MDM's icon in the Dock, a magnet link clicked in a browser) as Apple events, not on its
+/// command line, also to an MDM already running (#698). These receive them and send each one
+/// down the command channel, as a .torrent or magnet link on Windows' or Linux's command line
+/// goes (`mdm_ipc::parse_args`): Add torrent opens for it. The app's Info.plist
+/// (tools/installer/build-macos.sh) tells macOS that MDM opens them.
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+pub mod open_events {
+    use std::ffi::c_void;
+    use std::sync::Arc;
+    use std::sync::mpsc::Sender;
+
+    use objc2::rc::Retained;
+    use objc2::{DefinedClass as _, MainThreadMarker, MainThreadOnly, define_class, msg_send, sel};
+    use objc2_foundation::{
+        NSAppleEventDescriptor, NSAppleEventManager, NSNotification, NSNotificationCenter,
+        NSObject, NSString,
+    };
+
+    /// Apple event codes (four characters): open documents, get URL, and an event's direct
+    /// object (the files, the link).
+    const CORE_EVENT_CLASS: u32 = u32::from_be_bytes(*b"aevt");
+    const OPEN_DOCUMENTS: u32 = u32::from_be_bytes(*b"odoc");
+    const INTERNET_EVENT_CLASS: u32 = u32::from_be_bytes(*b"GURL");
+    const GET_URL: u32 = u32::from_be_bytes(*b"GURL");
+    const DIRECT_OBJECT: u32 = u32::from_be_bytes(*b"----");
+
+    pub struct Ivars {
+        tx: Sender<mdm_ipc::Incoming>,
+        wake: Arc<dyn Fn() + Send + Sync>,
+    }
+
+    define_class!(
+        // SAFETY: NSObject has no subclassing requirements, and OpenEvents doesn't implement Drop.
+        #[unsafe(super(NSObject))]
+        #[thread_kind = MainThreadOnly]
+        #[name = "MDMOpenEvents"]
+        #[ivars = Ivars]
+        pub struct OpenEvents;
+
+        impl OpenEvents {
+            /// AppKit installs its own handlers as the app starts, and dispatches the events
+            /// that launched it after this notification: Apple's moment for an app's own
+            /// handlers (installed earlier, AppKit's would replace them).
+            #[unsafe(method(willFinishLaunching:))]
+            fn will_finish_launching(&self, _note: &NSNotification) {
+                let manager = NSAppleEventManager::sharedAppleEventManager();
+                // SAFETY: both selectors are this class's, taking (event, reply) as the manager
+                // calls them; the handler lives as long as MDM (`start`). The event codes are
+                // AEEventClass and AEEventID, 32-bit codes.
+                unsafe {
+                    let _: () = msg_send![&*manager, setEventHandler: self,
+                        andSelector: sel!(openDocuments:withReplyEvent:),
+                        forEventClass: CORE_EVENT_CLASS, andEventID: OPEN_DOCUMENTS];
+                    let _: () = msg_send![&*manager, setEventHandler: self,
+                        andSelector: sel!(getURL:withReplyEvent:),
+                        forEventClass: INTERNET_EVENT_CLASS, andEventID: GET_URL];
+                }
+            }
+
+            #[unsafe(method(openDocuments:withReplyEvent:))]
+            fn open_documents(
+                &self,
+                event: &NSAppleEventDescriptor,
+                _reply: &NSAppleEventDescriptor,
+            ) {
+                for path in direct_object(event).map(|l| file_paths(&l)).unwrap_or_default() {
+                    self.hand(path);
+                }
+            }
+
+            #[unsafe(method(getURL:withReplyEvent:))]
+            fn get_url(&self, event: &NSAppleEventDescriptor, _reply: &NSAppleEventDescriptor) {
+                if let Some(link) = direct_object(event).and_then(|d| link(&d)) {
+                    self.hand(link);
+                }
+            }
+        }
+    );
+
+    impl OpenEvents {
+        /// A .torrent's path or a magnet link to the app, as its command line would.
+        fn hand(&self, item: String) {
+            match mdm_ipc::parse_args(std::slice::from_ref(&item)) {
+                Some(cmd) => {
+                    tracing::info!("opened from the system: {item}");
+                    let _ = self.ivars().tx.send(mdm_ipc::Incoming { cmd, reply: None });
+                    (self.ivars().wake)();
+                }
+                None => tracing::info!("opened from the system, not a torrent: {item}"),
+            }
+        }
+    }
+
+    /// Receive the open-documents and get-URL events from now on (`app` calls it on the main
+    /// thread, before the window's event loop starts).
+    pub fn start(tx: Sender<mdm_ipc::Incoming>, wake: Arc<dyn Fn() + Send + Sync>) {
+        let Some(mtm) = MainThreadMarker::new() else {
+            return;
+        };
+        let this = OpenEvents::alloc(mtm).set_ivars(Ivars { tx, wake });
+        // SAFETY: NSObject's init, on the object just allocated with its ivars set.
+        let this: Retained<OpenEvents> = unsafe { msg_send![super(this), init] };
+        let name = NSString::from_str("NSApplicationWillFinishLaunchingNotification");
+        // SAFETY: the selector is this class's and takes the notification.
+        unsafe {
+            NSNotificationCenter::defaultCenter().addObserver_selector_name_object(
+                &this,
+                sel!(willFinishLaunching:),
+                Some(&*name),
+                None,
+            );
+        }
+        // Neither the notification centre nor the event manager keeps its observer or handler:
+        // this one lives as long as MDM.
+        std::mem::forget(this);
+    }
+
+    /// The app's identifier and the .torrent file type, as Info.plist names them
+    /// (tools/installer/build-macos.sh).
+    pub const BUNDLE_ID: &str = "io.github.anefzaoui.misterdownloadmanager";
+    pub const TORRENT_TYPE: &str = "org.bittorrent.torrent";
+
+    #[link(name = "CoreServices", kind = "framework")]
+    unsafe extern "C" {
+        fn LSSetDefaultHandlerForURLScheme(scheme: *const c_void, bundle_id: *const c_void) -> i32;
+        fn LSSetDefaultRoleHandlerForContentType(
+            content_type: *const c_void,
+            role: u32,
+            bundle_id: *const c_void,
+        ) -> i32;
+    }
+
+    /// MDM the default app for magnet links and .torrent files (Torrent settings' switch). A
+    /// copy started outside its app (`cargo run`) has nothing to register: the log says so.
+    pub fn make_default() {
+        let id = NSString::from_str(BUNDLE_ID);
+        let scheme = NSString::from_str("magnet");
+        let torrent = NSString::from_str(TORRENT_TYPE);
+        // kLSRolesAll: viewer, editor, shell.
+        const ALL_ROLES: u32 = 0xFFFF_FFFF;
+        // SAFETY: NSString is toll-free bridged to CFString; the strings outlive the calls.
+        let (magnet, file) = unsafe {
+            (
+                LSSetDefaultHandlerForURLScheme(cf(&scheme), cf(&id)),
+                LSSetDefaultRoleHandlerForContentType(cf(&torrent), ALL_ROLES, cf(&id)),
+            )
+        };
+        if magnet != 0 || file != 0 {
+            tracing::info!(
+                "torrents: Launch Services didn't take MDM for magnet links ({magnet}) or                  .torrent files ({file})"
+            );
+        }
+    }
+
+    fn cf(s: &NSString) -> *const c_void {
+        (s as *const NSString).cast()
+    }
+
+    fn direct_object(event: &NSAppleEventDescriptor) -> Option<Retained<NSAppleEventDescriptor>> {
+        // SAFETY: paramDescriptorForKeyword: takes an AEKeyword (a 32-bit code).
+        unsafe { msg_send![event, paramDescriptorForKeyword: DIRECT_OBJECT] }
+    }
+
+    /// The paths of an open-documents event's files (a list, numbered from 1, of file URLs or
+    /// aliases).
+    pub fn file_paths(list: &NSAppleEventDescriptor) -> Vec<String> {
+        (1..=list.numberOfItems())
+            .filter_map(|i| list.descriptorAtIndex(i))
+            .filter_map(|d| d.fileURLValue())
+            .filter_map(|u| u.path())
+            .map(|p| p.to_string())
+            .collect()
+    }
+
+    /// A get-URL event's link.
+    pub fn link(d: &NSAppleEventDescriptor) -> Option<String> {
+        d.stringValue()
+            .map(|s| s.to_string())
+            .filter(|s| !s.is_empty())
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use objc2_foundation::NSURL;
+
+        /// #698: the files of an open-documents event, as Finder sends them, and a magnet
+        /// link's get-URL event become what MDM's command line takes.
+        #[test]
+        fn finder_events_become_commands() {
+            let list = NSAppleEventDescriptor::listDescriptor();
+            let files = [
+                "/Users/me/Downloads/debian.iso.torrent",
+                "/tmp/a b/ü.torrent",
+            ];
+            for (i, p) in files.iter().enumerate() {
+                let url = NSURL::fileURLWithPath(&NSString::from_str(p));
+                list.insertDescriptor_atIndex(
+                    &NSAppleEventDescriptor::descriptorWithFileURL(&url),
+                    i as isize + 1,
+                );
+            }
+            let paths = file_paths(&list);
+            // A file URL's path comes back as the file system spells it: `ü` decomposed (u and
+            // its diaeresis), the same file to every macOS call that opens it.
+            assert_eq!(
+                paths,
+                [
+                    "/Users/me/Downloads/debian.iso.torrent",
+                    "/tmp/a b/u\u{308}.torrent"
+                ]
+            );
+            let cmd = mdm_ipc::parse_args(&paths[..1]).unwrap();
+            assert_eq!(cmd.url.as_deref(), Some(files[0]));
+
+            let magnet = "magnet:?xt=urn:btih:7acf8fb590b2060dd9c3146ef770169d593433b0&dn=x";
+            let d = NSAppleEventDescriptor::descriptorWithString(&NSString::from_str(magnet));
+            let got = link(&d).unwrap();
+            assert_eq!(got, magnet);
+            let cmd = mdm_ipc::parse_args(&[got]).unwrap();
+            assert_eq!(cmd.url.as_deref(), Some(magnet));
+            assert!(file_paths(&NSAppleEventDescriptor::listDescriptor()).is_empty());
+        }
+    }
 }
 
 // ---- Crash reports (crash.rs, mdm-crash) -------------------------------------------------------

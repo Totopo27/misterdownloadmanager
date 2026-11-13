@@ -913,10 +913,12 @@ mod tests {
         assert!(failed.is_empty(), "failed: {failed:?}");
     }
 
-    #[tokio::test]
+    /// On Tokio's paused clock: a race would wait for its connection's time limit, which the
+    /// clock skips to; asked nothing, no time passes, however busy the machine.
+    #[tokio::test(start_paused = true)]
     async fn one_address_is_not_raced() {
         let ip: IpAddr = "192.0.2.1".parse().unwrap();
-        let started = Instant::now();
+        let started = tokio::time::Instant::now();
         assert_eq!(
             reachable_first("single.test", vec![ip], 9, &Route::Any).await,
             vec![ip]

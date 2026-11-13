@@ -746,8 +746,8 @@ async fn read(url: &str, from: &FromBrowser, opts: &mdm_engine::Options) -> Opti
 struct Hops<'a> {
     /// The stream's scheme, host and port.
     origin: (String, Option<String>, Option<u16>),
-    /// The browser's cookie and referrer still go: every hop so far was to the stream's origin.
-    /// Once one wasn't, never again, for this request or the next.
+    /// The browser's cookie, referrer and origin still go: every hop so far was to the stream's
+    /// origin. Once one wasn't, never again, for this request or the next.
     credentials: bool,
     from: &'a FromBrowser,
     opts: &'a mdm_engine::Options,
@@ -756,7 +756,7 @@ struct Hops<'a> {
 impl Hops<'_> {
     /// `url`'s text and the address it came from, after at most [`MAX_REDIRECTS`] redirects.
     async fn get(&mut self, mut url: Url) -> Option<(Url, String)> {
-        use reqwest::header::{CONTENT_TYPE, COOKIE, LOCATION, REFERER};
+        use reqwest::header::{CONTENT_TYPE, COOKIE, LOCATION, ORIGIN, REFERER};
         let given = |s: &Option<String>| {
             s.as_deref()
                 .map(str::trim)
@@ -781,6 +781,10 @@ impl Hops<'_> {
                 }
                 if let Some(r) = given(&self.from.referer) {
                     req = req.header(REFERER, r);
+                }
+                // The page's Origin, as its player sent it (#900).
+                if let Some(o) = given(&self.from.origin) {
+                    req = req.header(ORIGIN, o);
                 }
             }
             let mut resp = req.send().await.ok()?;
@@ -1111,24 +1115,25 @@ mod tests {
     /// than any real line), and a line just under the cap is read in linear time.
     #[test]
     fn crafted_attribute_lines_cost_no_square() {
-        let t = std::time::Instant::now();
-        for line in [
-            format!("#EXT-X-KEY:{}", "A".repeat(MAX_BYTES)),
-            format!("#EXT-X-KEY:{}", "A=\"".repeat(MAX_BYTES / 3)),
-            format!("#EXT-X-KEY:{}", "A".repeat(MAX_ATTRIBUTE_LINE - 20)),
-            format!(
-                "#EXT-X-KEY:METHOD=AES-128,{}",
-                "B".repeat(MAX_ATTRIBUTE_LINE - 40)
-            ),
-        ] {
-            let _ = attributes(&line);
-        }
-        assert!(
-            t.elapsed() < std::time::Duration::from_secs(1),
-            "{:?}",
-            t.elapsed()
-        );
+        // Longer than any real line: refused from its length alone.
         assert!(attributes(&format!("#EXT-X-KEY:{}", "A".repeat(MAX_BYTES))).is_none());
+        assert!(attributes(&format!("#EXT-X-KEY:{}", "A=\"".repeat(MAX_BYTES / 3))).is_none());
+        // Under the cap: 8 times the line costs about 8 times as long (not 64), on any machine.
+        let crafted = |n: usize| {
+            [
+                format!("#EXT-X-KEY:{}", "A".repeat(n)),
+                format!("#EXT-X-KEY:{}", "A=\"".repeat(n / 3)),
+                format!("#EXT-X-KEY:METHOD=AES-128,{}", "B".repeat(n)),
+            ]
+        };
+        let small = (MAX_ATTRIBUTE_LINE - 40) / mdm_labserver::growth::SCALE;
+        mdm_labserver::growth::assert_linear(small, crafted, |lines| {
+            for _ in 0..20 {
+                for line in &lines {
+                    std::hint::black_box(attributes(line));
+                }
+            }
+        });
         // The run's skip changes nothing: a key after a failed run is still found.
         let a = attributes("#EXT-X-KEY:AAAA BBB-9 METHOD=NONE").unwrap();
         assert_eq!(a.get("METHOD").map(String::as_str), Some("NONE"));
@@ -1393,6 +1398,7 @@ mod tests {
     fn browser() -> FromBrowser {
         FromBrowser {
             referer: Some("https://videos.test/watch".into()),
+            origin: Some("https://videos.test".into()),
             user_agent: Some("UA/1".into()),
             cookies: Some("sid=secret".into()),
             jar: vec![mdm_ipc::BrowserCookie {
@@ -1411,7 +1417,8 @@ mod tests {
     }
 
     /// The stream as the browser asked for it: its cookie header (never the jar), its page as
-    /// the referrer, its User-Agent, on both requests to the stream's server.
+    /// the referrer, its player's Origin (#900), its User-Agent, on both requests to the
+    /// stream's server.
     #[test]
     fn the_stream_is_asked_for_as_the_browser_did() {
         let s = Server::start(Arc::new(|path: &str| match path {
@@ -1432,6 +1439,7 @@ mod tests {
         for r in &seen {
             assert_eq!(r.header("cookie"), Some("sid=secret"));
             assert_eq!(r.header("referer"), Some("https://videos.test/watch"));
+            assert_eq!(r.header("origin"), Some("https://videos.test"));
             assert_eq!(r.header("user-agent"), Some("UA/1"));
         }
         // Not a playlist's address: not even asked.
@@ -1480,6 +1488,7 @@ mod tests {
         for r in &elsewhere {
             assert_eq!(r.header("cookie"), None, "{}", r.path);
             assert_eq!(r.header("referer"), None, "{}", r.path);
+            assert_eq!(r.header("origin"), None, "{}", r.path);
             assert_eq!(r.header("user-agent"), Some("UA/1"));
         }
         // Back to the stream's server after another: still none.

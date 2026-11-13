@@ -905,10 +905,6 @@
 #. the trailing ... means it is still going on: keep it
 #, machine
 	Checking {name} ({n} of {total})...	ᎠᎪᎵᏰᏗ {name} ({n} ᎤᎾᏓᏑᏴ {total})...
-#. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
-#, machine
-	Checking {percent}	ᎠᎾᎦᏔᎲᏍᎬ {percent}
 #. text in the Checksum window; text in the Link grabber window
 #. the trailing ... means it is still going on: keep it
 #, machine
@@ -5076,6 +5072,7 @@
 #, machine
 	United States Minor Outlying Islands	ᎤᎾᎵᎪᏒᎯ ᏍᏓᏗᎢ ᏧᎾᏍᏗ ᏙᏱᏗᏢ ᏚᎦᏚᏛᎢ
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	ᏄᏬᎵᏍᏔᏅᎾ
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -6342,7 +6339,7 @@ menu	&Add new download	Ꭲ&ᏓᏁᏟᏴᏓ ᎢᏤ ᏗᎦᏁᏟᏴᏗ
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	Ꭲ&ᏓᏁᏟᏴᏓ ᎢᏤ ᎭᏓᎴᎯᏍᏗ...
+menu	Add &new download...	Ꭲ&ᏓᏁᏟᏴᏓ ᎢᏤ ᎭᏓᎴᎯᏍᏗ...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6451,7 +6448,7 @@ menu	&Stop Download	&ᎠᏑᏰᏍᏗ ᏗᎦᏁᏟᏴᏗ
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	&ᏗᎪᏪᎵ
+menu	Te&xt	&ᏗᎪᏪᎵ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6562,7 +6559,7 @@ menu	By Save &Path	Ꮧ&ᏓᏟᏍᏔᏅᎯ ᎢᏗᏁᏟᏴᏍᏗ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	Ꮧ&ᏓᏟᏍᏔᏅᎯ ᎢᏗᏁᏟᏴᏍᏗ
+menu	By Stat&us	Ꮧ&ᏓᏟᏍᏔᏅᎯ ᎢᏗᏁᏟᏴᏍᏗ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6614,6 +6611,10 @@ menu	Direct3D	Direct3D
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
 menu	Direct3D didn't start here: OpenGL draws	Direct3D ᎥᏝ ᏳᎴᏅᎮ ᎠᏂ: OpenGL ᏕᎪᏪᎵᏍᎪᎢ
+#. menu command in the main window
+#. View → Draw with: a greyed note; Direct3D draws the windows through Windows' own software renderer (WARP) instead of a graphics card
+#, machine
+menu	Direct3D draws with Windows' software renderer (WARP)	Direct3D Windows' software renderer (WARP) ᎬᏗᎭ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
@@ -6708,6 +6709,10 @@ menu	Metal	Metal
 #, machine
 menu	Metal didn't start here: OpenGL draws	Metal ᎥᏝ ᏳᎴᏅᏔᏃ: OpenGL ᏕᎬᎪᏍᏗ
 #. menu command in the main window
+#. View → Draw with: a greyed note; Metal draws the windows through a software renderer instead of a graphics card
+#, machine
+menu	Metal draws with a software renderer	Metal software renderer ᎬᏗᎭ
+#. menu command in the main window
 #. View → Theme: a style theme's name (Windows 8's flat look); keep "Metro" unless your language writes it otherwise
 #, machine
 menu	Metro	ᎺᏦ
@@ -6754,6 +6759,10 @@ menu	Open with...	ᎤᏍᏚᎢᏍᏗ...
 #. View → Draw with: a graphics system's name, usually kept as is
 #, machine
 menu	OpenGL	OpenGL
+#. menu command in the main window
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#, machine
+menu	OpenGL here is too old to draw MDM	OpenGL ᎡᏂᎢᏳᏍᏗ MDM ᎥᏝ ᎬᏗᏍᏗ ᏱᎩ
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window
@@ -6905,6 +6914,10 @@ menu	Vulkan	Vulkan
 #. View → Draw with: a greyed note; Vulkan failed on this computer, so OpenGL draws the windows
 #, machine
 menu	Vulkan didn't start here: OpenGL draws	Vulkan ᎥᏝ ᏳᎴᏅᏔᏃ: OpenGL ᏕᎬᎪᏍᏗ
+#. menu command in the main window
+#. View → Draw with: a greyed note; Vulkan draws the windows through a software renderer instead of a graphics card
+#, machine
+menu	Vulkan draws with a software renderer	Vulkan software renderer ᎬᏗᎭ
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine

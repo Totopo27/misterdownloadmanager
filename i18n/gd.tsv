@@ -920,7 +920,7 @@
 #, machine
 	Checking {name} ({n} of {total})...	A’ sgrùdadh {name} ({n} de {total})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
 	Checking {percent}	A’ sgrùdadh {percent}
 #. text in the Checksum window; text in the Link grabber window
@@ -2289,6 +2289,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	cha b' urrainn na faidhlichean aige a sgrìobhadh: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	Cha b’ urrainn an dealbh agus am fuaim a chur ri chèile ann an aon fhaidhle ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	Cha b’ urrainn an dealbh agus am fuaim a chur ri chèile ann an aon fhaidhle ({error}). Tha na faidhlichean a chaidh a luchdadh a-nuas fhathast sa phasgan airson an cur ri chèile a-rithist le “Lean air adhart” ({files}); ma sguabas tu às an luchdadh a-nuas le “Sguab às am faidhle bhon diosg cuideachd”, thèid na faidhlichean a thoirt air falbh
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	chan eil am fiosrachadh sgaoilidh aige mar a bha dùil: {detail}
@@ -2682,6 +2692,10 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	meadhanach
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	A’ cothlamadh {percent}
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
@@ -5191,6 +5205,7 @@
 #, machine
 	United States Minor Outlying Islands	Mion-Eileanan Iomallach nan Stàitean Aonaichte
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	Neo-aithnichte
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5828,14 +5843,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{percent} aig {service}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} air a cho-aonadh
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} air a dhearbhadh
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6505,7 +6512,7 @@ menu	&Add new download	Cuir luchdachadh sìos &ùr ris
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	Cuir luchdachadh sìos &ùr ris...
+menu	Add &new download...	Cuir luchdachadh sìos &ùr ris...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6614,7 +6621,7 @@ menu	&Stop Download	&Stad an luchdachadh sìos
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	&Teacsa
+menu	Te&xt	&Teacsa
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6725,7 +6732,7 @@ menu	By Save &Path	A rèir Slighe &Sàbhalaidh
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	A rèir Inb&he
+menu	By Stat&us	A rèir Inb&he
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6773,6 +6780,10 @@ menu	Delete from queue	Sguab às às a' chiudha
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 #, machine
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): chan eil draibhear Direct3D 12 aig a’ chairt grafaigeachd seo
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
@@ -6926,9 +6937,25 @@ menu	Open with...	Fosgail le...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	Cha do thòisich OpenGL an seo
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	Reothadh OpenGL taobh a-staigh draibhear a’ chairt-ghrafaig an seo
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	Tha OpenGL an seo ro shean airson MDM a tharraing
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	Cha do nochd a’ chiad fhrèam aig OpenGL taobh a-staigh 10 diogan
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	Thàinig tòiseachadh mu dheireadh OpenGL gu crìch mus do nochd a’ chiad fhrèam aige
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

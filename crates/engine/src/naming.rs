@@ -784,16 +784,17 @@ mod tests {
         assert_eq!(stems.pick("Song.mp4"), d.join("Song (4).mp4"));
         assert_eq!(stems.pick("Songs.mp3"), d.join("Songs (1).mp3"));
         assert_eq!(stems.pick("Song extra.mp4"), d.join("Song extra.mp4"));
-        let t = std::time::Instant::now();
-        for i in 0..5000 {
-            stems.pick(&format!("Video {}.mp4", i % 2500));
+        // Many names, each twice: each looked up, not compared with every other one.
+        fn pick_all((mut stems, n): (Stems, usize)) -> Stems {
+            for i in 0..n {
+                stems.pick(&format!("Video {}.mp4", i % (n / 2)));
+            }
+            stems
         }
+        stems = pick_all((stems, 5000));
         assert_eq!(stems.pick("Video 7.mp4"), d.join("Video 7 (2).mp4"));
-        assert!(
-            t.elapsed() < std::time::Duration::from_secs(2),
-            "{:?}",
-            t.elapsed()
-        );
+        // 8 times the names cost about 8 times as long (not 64), on any machine.
+        mdm_labserver::growth::assert_linear(1000, |n| (Stems::new(d, []), n), pick_all);
     }
 
     #[test]

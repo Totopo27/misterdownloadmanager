@@ -74,6 +74,10 @@
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "はい。MDMは進行状況を随時保存するため、接続が切れたり、クラッシュしたり、再起動したりしても、中断したところから再開します。再開する前に、サーバー上のファイルが変更されていないか確認します。ダウンロードアドレスの有効期限が切れた場合は、<g1>ダウンロードアドレスを更新</g1>して新しいアドレスを設定すれば、ダウンロード済みのデータを保持できます。<g2>中断したダウンロードを再開する</g2>をご覧ください。"
   },
+  "0168c749ceaa28cd": {
+   "source": "Many videos are split into chapters on their page: YouTube's list under the player, with a title and a start time for each part. With <g1>Embed chapters</g1> ticked, under <g2>Subtitles</g2>, they go into the video file, so players such as VLC, MPV, MPC-HC and Windows' Media Player list them and skip from one to the next.",
+   "text": "多くの動画はページ上でチャプターに分割されています。YouTube のプレーヤーの下にあるリストには、各部分のタイトルと開始時刻が表示されます。<g2>字幕</g2> の下にある <g1>チャプターを埋め込む</g1> にチェックを入れると、チャプターが動画ファイルに組み込まれるため、VLC、MPV、MPC-HC、Windows Media Player などのプレーヤーでチャプターが一覧表示され、次々にスキップできます。"
+  },
   "016a9690b4c55ee5": {
    "source": "Both are kept in a <x1/> folder in MDM's data folder.",
    "text": "どちらもMDMのデータフォルダ内の<x1/>フォルダに保存されます。"
@@ -429,6 +433,10 @@
   "06492aa608ada06d": {
    "source": "<g1>Paused and resumed</g1> like a file, also after quitting MDM: it carries on from the bytes already saved.",
    "text": "MDM を終了した後も、ファイルと同様に <g1>一時停止および再開</g1> できます。既に保存されたバイトから続行されます。"
+  },
+  "064d85de675962c9": {
+   "source": "A JavaScript runtime for YouTube",
+   "text": "YouTube 用 JavaScript ランタイム"
   },
   "0679d081a8cd40ea": {
    "source": "Turns the API on or off: <x1/>.",
@@ -829,10 +837,6 @@
   "0c4d9a6c3c067798": {
    "source": "The interface is in every language Windows 11 offers. The catalogs in <g1><x2/></g1> were made by machine translation, and each row marked <x3/> waits for a native speaker:",
    "text": "インターフェースはWindows 11で提供されるすべての言語に対応しています。<g1><x2/></g1>の翻訳カタログは機械翻訳で作成されており、<x3/>の印が付いた各行はネイティブスピーカーによる確認を待っています。"
-  },
-  "0c4e47b7b5c8f9f5": {
-   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why.",
-   "text": "レポートで、グラフィック ドライバー内でウィンドウ スレッドがフレームを表示しているときにフリーズしていることが示されている場合 (Intel の場合は <x1/> または <x2/>、NVIDIA の場合は <x3/>、AMD の場合は <x4/>、<x5/> の下)、それは MDM ではなくドライバーの OpenGL がスタックしている状態です。Windows では、<g6>表示 → 描画方法 → Direct3D</g6> (既定) を選択して MDM を再起動し、グラフィック ドライバーを更新してください。<g7>描画方法</g7> に Direct3D が起動しなかったと表示されている場合、その下の行に理由が示されます。"
   },
   "0c6ce890ecccf13e": {
    "source": "For an internet plan with a data cap, select <g1>Download limits</g1> on the left:",
@@ -1946,6 +1950,10 @@
    "source": "The download's log (hover over it in the list) says what happened: <g1>Extracted 12 files to …</g1>, or why not, for example <g2>Couldn't extract movie.7z.001: volume 3 of it is missing</g2>. An encrypted archive without its password opens the <g3>Archive password</g3> window. Type the password and click <g4>Extract</g4>, or <g5>Cancel</g5> to leave the archive as it is.",
    "text": "ダウンロードのログ（リストでホバーすると表示されます）には、何が起こったか、またはなぜ起こらなかったかが表示されます。例えば、<g1>12個のファイルを…に展開しました</g1>、または<g2>movie.7z.001を展開できませんでした：ボリューム3がありません</g2>。パスワードのない暗号化されたアーカイブは、<g3>アーカイブのパスワード</g3>ウィンドウを開きます。パスワードを入力して<g4>展開</g4>をクリックするか、<g5>キャンセル</g5>をクリックしてアーカイブをそのままにします。"
   },
+  "1d2b4c5972daa383": {
+   "source": "It's ticked to begin with, and stays as you leave it for the next video.",
+   "text": "最初はチェックが入っており、次の動画でもその設定が維持されます。"
+  },
   "1d4ee2f96c724f0f": {
    "source": "A torrent: what it sends to peers, while it runs.",
    "text": "実行中にピアに送信されるトレントのデータ量。"
@@ -2450,10 +2458,6 @@
    "source": "A download starts over instead of resuming",
    "text": "ダウンロードが再開されずに最初から始まる"
   },
-  "24bf3f2f66091d90": {
-   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one, and YouTube sometimes asks any viewer from an address it doubts to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
-   "text": "一部の動画は、サインインしている視聴者のみが再生できます。メンバー限定動画、プライベート動画、年齢制限付き動画、また YouTube は、疑わしいアドレスからの視聴者に対して「ロボットではないことを確認するためにサインインしてください」と求めることがあります。この場合、yt-dlp は、サインイン状態を維持するための小さなファイルであるブラウザーの Cookie を必要とします。"
-  },
   "24c00ebf1248106f": {
    "source": "An etched separator's highlight line",
    "text": "エッチングされた区切り線のハイライト線"
@@ -2553,6 +2557,10 @@
   "26673a8544097ecf": {
    "source": "The highlight under it",
    "text": "その下のハイライト"
+  },
+  "266d0ba8f73d462e": {
+   "source": "Chapters",
+   "text": "チャプター"
   },
   "266f7f0ad3be1761": {
    "source": "Languages →",
@@ -2745,6 +2753,10 @@
   "28b58f9af9a6fed9": {
    "source": "In Chrome, Edge, Brave, Opera or Vivaldi",
    "text": "Chrome、Edge、Brave、Opera、Vivaldiの場合"
+  },
+  "28e42e284885ce6e": {
+   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. A stream goes with what the browser sent when the player asked for it, its referrer, its origin and its cookies (a player embedded from another site may have cookies the browser keeps for that page only), and MDM sends them again with each of its playlists and pieces: a site's video server that serves its own pages' players only lets MDM through as well. Sound players get the button too.",
+   "text": "クリックした動画、つまり再生中の動画ファイル自体、またはプレーヤーが読み込んだストリーム（HLS または DASH）、それ以外の場合はページを取得します。ボタンがどれを意味するか判断できない場合、ツールバー ボタンの<g1>このページのメディア</g1>にすべて表示されます。埋め込みプレーヤーも機能し、サイトへのサインイン情報、プレーヤーを埋め込んでいるページ、ブラウザーのユーザー エージェントも一緒に送信されるため、メンバー限定の動画や、埋め込みサイトでのみ再生される動画もダウンロードできます。ストリームは、プレーヤーが要求したときにブラウザーが送信したもの、そのリファラー、そのオリジン、およびそのクッキー（別のサイトから埋め込まれたプレーヤーは、ブラウザーがそのページ専用に保持するクッキーを持っている場合があります）とともに送信され、MDM はそれらを各プレイリストとピースとともに再度送信します。独自のページのプレーヤーにのみサービスを提供するサイトの動画サーバーも、MDM を通過させます。音声プレーヤーにもボタンが表示されます。"
   },
   "28eeaa8ad9bf85a3": {
    "source": "Requests",
@@ -3330,6 +3342,10 @@
    "source": "<g1>VPN and proxy support:</g1> send downloads through the browser's proxy or VPN extension (off until you turn it on).",
    "text": "<g1>VPN とプロキシのサポート:</g1> ブラウザーのプロキシまたは VPN 拡張機能を通じてダウンロードを送信します (有効にするまでオフ)。"
   },
+  "31a94655ff7435c5": {
+   "source": "<g1>Arch</g1>: <x2/>, or",
+   "text": "<g1>Arch</g1>: <x2/>、または"
+  },
   "31c727cb512fbff6": {
    "source": "<g1>Download all links</g1> and <g2>Download selected links</g2> send a page's links to <g3>Link grabber</g3>.",
    "text": "<g1>すべてのリンクをダウンロード</g1>と<g2>選択したリンクをダウンロード</g2>は、ページのリンクを<g3>リンク グラバー</g3>に送信します。"
@@ -3430,10 +3446,6 @@
    "source": "Choose the subtitles; tick Put them into the video to keep them inside the file.",
    "text": "字幕を選択し、ビデオに埋め込むにチェックを入れてファイル内に保持します。"
   },
-  "33cd34762a5593c2": {
-   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. Sound players get the button too.",
-   "text": "クリックした動画、つまり、動画が再生するファイル自体、またはプレーヤーが読み込んだストリーム (HLS または DASH)、あるいはページを取得します。ボタンがどれを意図しているか判断できない場合、ツールバーボタンの<g1>このページのメディア</g1>にすべてがリストされます。埋め込みプレーヤーも機能し、サイトへのサインイン、プレーヤーを埋め込むページ、ブラウザの User-Agent も一緒に送信されるため、メンバー向け、または埋め込みサイトでのみ再生される動画もダウンロードできます。音声プレーヤーにもボタンが表示されます。"
-  },
   "33e74c2131bce5b0": {
    "source": "Torrents share the cap fairly",
    "text": "トレントは制限を公平に共有"
@@ -3525,10 +3537,6 @@
   "35092e177f7efaa5": {
    "source": "Download complete with Open and Open folder",
    "text": "「開く」と「フォルダーを開く」が表示された「ダウンロード完了」"
-  },
-  "3512eeafea5246da": {
-   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). When the window thread is already back in the event loop by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
-   "text": "<g1>問題の捕捉。</g1> MDM がクラッシュ (Windows の例外、Linux のシグナル、macOS の Mach 例外) したり、パニックに陥ったり、フリーズしたりすると、モニターにダンプを要求します。フリーズとは、ウィンドウのフレームが 8 秒以上実行された状態を指し、スリープ時間を無視するウォッチドッグ スレッドによって監視されます。フレームの 2 つの部分を計測します。MDM が処理する部分 (受信コマンド、ダウンロードのクロック、キュー、スケジューラ。最小化時も実行されます) と描画部分です。フレーム間の待機時間は計測しません。ウォッチドッグは、その間にウィンドウ スレッドが取得したプロセッサ時間も計測し、その意味をレポートで示します。つまり、ずっと実行されていた (ループ)、ロックまたは I/O で待機していた (デッドロック)、あるいは通常のコードではほとんど実行されていなかった (コンピューターが MDM を実行するには忙しすぎるか、ディスクからの読み込みが遅い。MDM のバグである可能性は低い。これらは <x2/> という 1 つのシグネチャを共有します) のいずれかです。ダンプが書き込まれる時点でウィンドウ スレッドがすでにイベント ループに戻っている場合、フリーズはスナップショットの前に終了していたため、そのスタックでは説明できません。これらのレポートはその旨を伝え、<x3/> というシグネチャを共有します。macOS ではまだ計測していません。その後、モニターは <x5/> と <x6/> を介して、外部からすべてのスレッドの<g4>ミニダンプ</g4>を書き込みます。クラッシュしたプロセスは自身のダンプを書き込むことはありません。これは Firefox、Crashpad、Sentry も同様です。"
   },
   "3513f93cb0fa7d72": {
    "source": "<g1>Far</g1> (red): over 150 ms, usually another continent. A far server is often slower, and more connections help it most.",
@@ -3681,6 +3689,10 @@
   "377dbb7411c44fb3": {
    "source": ".AppImage",
    "text": ".AppImage"
+  },
+  "37a51fbe4037e117": {
+   "source": "<g1>Any system</g1>, Deno for your user alone: <x2/> (on Windows, in PowerShell: <x3/>)",
+   "text": "<g1>任意のシステム</g1>、Deno をユーザーのみにインストールする場合: <x2/> (Windows の PowerShell では: <x3/>)"
   },
   "37a82a5012e58c8d": {
    "source": "(the lighter background)",
@@ -4170,6 +4182,10 @@
    "source": "It works as a kill switch. When the adapter disconnects, running torrents stop with \"… is not connected; it goes on when it is back\", and they start again through the adapter when it is. Until MDM notices (within a second), the engine's sockets are still bound to an address that is gone, so nothing can leave another way. A torrent added while the adapter isn't connected doesn't start, and says why. Tracker names are still looked up by the system's DNS.",
    "text": "この機能はキルスイッチとして動作します。アダプターが切断されると、実行中のトレントは「…は接続されていません。接続が戻ると再開します」というメッセージとともに停止します。接続が戻ると、アダプター経由で再開します。MDMが切断を検知するまで（1秒以内）、エンジンのソケットは接続が切れたアドレスにバインドされたままなので、他の経路から通信が送信されることはありません。アダプターが接続されていない間に追加したトレントは開始されず、その理由が表示されます。トラッカー名の検索には引き続きシステムのDNSが使われます。"
   },
+  "3e956985953c6c3e": {
+   "source": "<g1>Videos that need you signed in</g1>: the button over the video hands MDM the page's own cookies, so you're signed in as in the browser. For pasted links and playlists, <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, from the profile you choose: a separate one with a spare account works well. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works. <g3>The help</g3> says more.",
+   "text": "<g1>ログインが必要な動画</g1>: 動画上のボタンで、ページの Cookie が MDM に渡され、ブラウザと同じようにログインできます。貼り付けたリンクやプレイリストの場合、<g2>オプション → サイトのログイン → 動画サイトの Cookie</g2> で、yt-dlp が選択したプロファイルのブラウザの Cookie を読み取れるようになります。予備のアカウントを持つ別のプロファイルがうまく機能します。Chrome、Edge、Brave は Windows で Cookie をロックしており、その旨がウィンドウに表示されます。Firefox は機能します。<g3>ヘルプ</g3>に詳細が記載されています。"
+  },
   "3e9e6b7b10d78723": {
    "source": "<g1>Start</g1> adds the ticked links to the <g2>Main download queue</g2> and starts the queue. It downloads as many files at once as the queue allows.",
    "text": "<g1>開始</g1>を選択すると、チェックしたリンクが<g2>メインダウンロードキュー</g2>に追加され、キューが開始します。キューで設定されている数のファイルを同時にダウンロードします。"
@@ -4189,6 +4205,10 @@
   "3ebf8f1307545f42": {
    "source": "Download manager command line and automation API — Mister Download Manager",
    "text": "ダウンロード マネージャーのコマンドラインと自動化 API — Mister Download Manager"
+  },
+  "3ec0fd3706431045": {
+   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download, so you're signed in as you are in the browser. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
+   "text": "<g1>動画上の動画をダウンロードボタン</g1> は、現在開いているウィンドウとプロファイル (プライベートウィンドウ、Firefox コンテナ) から、そのページの Cookie を検索とダウンロードのために渡すため、ブラウザでサインインしているのと同じ状態でサインインできます。設定は不要です。各 Cookie はブラウザが保持しているドメインと関連付けられているため、YouTube Music (music.youtube.com) や YouTube のモバイルサイトでのサインインも www.youtube.com にも適用されます。"
   },
   "3ec9f591006bbd23": {
    "source": "The installer. Pick this one unless you have a reason not to. It can set up browser integration and open <x1/> files and magnet links with MDM.",
@@ -4490,6 +4510,10 @@
    "source": "Links that work only once no longer fail with \"403 Forbidden\".",
    "text": "一度しか機能しないリンクが「403 Forbidden」というエラーで失敗することはなくなりました。"
   },
+  "43510d0cf7beac55": {
+   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep and the first minute after the computer wakes, while its disk, network and screen come back: a stall then is written to the log, and reported only if it lasts past that minute. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). Each report also names what the frame was doing when it stopped (the tray icon, the downloads' progress, drawing the main window). When the window thread is already back in the event loop, or in the pause after a frame of a hidden window, by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
+   "text": "<g1>問題の捕捉。</g1> MDM がクラッシュ (Windows の例外、Linux のシグナル、macOS の Mach 例外) したり、パニックに陥ったり、フリーズしたりすると、モニターにダンプを要求します。フリーズとは、ウィンドウが 8 秒以上実行されているフレームのことで、スリープ時間とコンピューターが復帰してから最初の 1 分間を無視するウォッチドッグ スレッドによって監視されます。この間、ディスク、ネットワーク、画面が復帰します。その後、停止がログに書き込まれ、その 1 分を超えて継続した場合にのみ報告されます。フレームの 2 つの部分の時間を計測します。MDM が処理する部分 (受信コマンド、ダウンロードのクロック、キュー、スケジューラ) は最小化されていても実行され、描画も行われます。フレーム間の待機は計測されません。ウォッチドッグは、その間にウィンドウ スレッドが取得したプロセッサ時間も測定し、レポートはその意味を示します。ずっと実行されていた (ループ)、ロックまたは I/O で待機していた (デッドロック)、または通常のコードではほとんど実行されていなかった (コンピューターが MDM を実行するには忙しすぎるか、ディスクからロードするのが遅い、MDM のバグではない可能性が高い) ということです (これらは <x2/> という 1 つのシグネチャを共有します)。各レポートには、停止したときにフレームが何をしていたか (トレイ アイコン、ダウンロードの進行状況、メイン ウィンドウの描画) も記載されます。ダンプが書き込まれるまでにウィンドウ スレッドがすでにイベント ループに戻っているか、非表示のウィンドウのフレーム後のポーズにある場合、フリーズはスナップショットの前に終了していたため、そのスタックでは説明できません。これらのレポートはその旨を伝え、<x3/> というシグネチャを共有します。macOS ではまだ測定されていません。その後、モニターは <x5/> と <x6/> を介して、外部からすべてのスレッドの <g4>ミニダンプ</g4> を書き込みます。クラッシュしたプロセスは、Firefox、Crashpad、Sentry と同様に、独自のダンプを書き込むことはありません。"
+  },
   "436bac2c4f3d3f4c": {
    "source": "<g1>Downloads → Start queue</g1> and <g2>Downloads → Stop queue</g2> list them too.",
    "text": "<g1>ダウンロード → キューを開始</g1>と<g2>ダウンロード → キューを停止</g2>からも、すべてのキューを選択できます。"
@@ -4545,6 +4569,10 @@
   "4447a34a8cbe1ae6": {
    "source": "<g1>The Categories pane and the menus</g1> (<g2>#113</g2>): the pane reads as a tree (each category named with its count, open or shut, selected), the menu bar and every right-click menu as menus whose items can be run, and <g3>Shift+F10</g3> or the <g4>Menu</g4> key opens the selected category's menu. A menu opened from the keyboard no longer stays invisible until the mouse moves.",
    "text": "<g1>［カテゴリ］ペインとメニュー</g1> (<g2>#113</g2>): ペインはツリーとして読み上げられ (各カテゴリは件数とともに名前が付けられ、開いているか閉じているか、選択されているか)、メニュー バーとすべての右クリック メニューは項目を実行できるメニューとして読み上げられ、<g3>Shift+F10</g3> または <g4>Menu</g4> キーで選択されたカテゴリのメニューが開きます。キーボードから開かれたメニューは、マウスが動くまで見えないままになることはなくなりました。"
+  },
+  "44502a7e800ed659": {
+   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you. On Linux it makes MDM your desktop's default app for them; on macOS, their default app (Finder offers MDM in <g5>Open With</g5> for <x6/> files either way, and a double-click opens them in MDM when no other app is their default).",
+   "text": "これらのいずれかによって停止されたトレントは、イベント ログにその旨が表示され、MDM の起動時に再び共有されることはありません。再度共有するには、制限を上げるかオフにしてください。- <g1>すべてのトレントのアップロードを次の値に制限する:</g1> — 既定ではオフです。ダウンロード中および共有中に、すべてのトレントが他のピアに送信する合計量を制限します。トレントの進行状況ウィンドウにある独自のアップロード制限は、これに加えて適用されます。- <g2>マグネット リンクと .torrent ファイルを Mister Download Manager で開く</g2> — これにより、Windows はブラウザーでマグネット リンクを、エクスプローラーで <x3/> ファイルを MDM で開きます。これは Windows アカウントのみに適用されます。Windows の <g4>プログラムから開く</g4> で選択したプログラムが優先されます。セットアップ時にこの設定をオンにできます。Linux では、MDM がデスクトップの既定のアプリになります。macOS では、それらの既定のアプリになります (Finder は、<x6/> ファイルに対しては <g5>プログラムから開く</g5> で MDM を提供し、他のアプリが既定でない場合はダブルクリックで MDM で開きます)。"
   },
   "445e6378c12f1e16": {
    "source": "<g1>Image gallery support:</g1> download whole galleries (Flickr, Imgur, DeviantArt and more) with gallery-dl.",
@@ -4766,6 +4794,10 @@
    "source": "The extension now installs from your browser's store, updates itself, and catches more of what you download.",
    "text": "拡張機能がブラウザーのストアからインストールされ、自動更新されるようになり、より多くのダウンロードを検出するようになりました。"
   },
+  "483cd37a4558c14a": {
+   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier while a window changes.",
+   "text": "どちらも起動できない場合、MDM はソフトウェア レンダラー (Windows では Microsoft、Linux では Mesa) で描画するため、ウィンドウは開きます (リモート デスクトップ、グラフィック ドライバーのない仮想マシン)。これは機能しますが、ウィンドウが変更される間、プロセッサーの負荷が高くなります。"
+  },
   "487a0af4191d3496": {
    "source": "<g1><g2>Its site says so</g2></g1><g3>its site says</g3>",
    "text": "<g1><g2>サイトに記載</g2></g1><g3>サイトに記載</g3>"
@@ -4893,10 +4925,6 @@
   "4a575d95633d11ec": {
    "source": "Free Download Manager",
    "text": "Free Download Manager"
-  },
-  "4a68031b1da16fe4": {
-   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and the page as the referrer.",
-   "text": "リンク、動画、音声、画像を右クリックして、<g1>Mister Download Manager でダウンロード</g1>を選択します。種類に関係なく、MDMがダウンロードします。要求して開始するため、ここではファイルの種類リストや除外サイトは適用されません（これらはMDMが自動で引き継ぐダウンロードのみを決めます）。ストリームとして再生される動画は、プレーヤーが読み込んだストリーム（HLSまたはDASH）とともに<g2>動画をダウンロード</g2>ウィンドウに送られます。これは<g3>動画上のボタン</g3>を使った場合と同じです。ストリームのサーバー用の Cookie と、リファラーとしてのページも送信されます。"
   },
   "4a736a6235625512": {
    "source": "Connections and resuming in detail →",
@@ -5173,6 +5201,10 @@
   "4e56d054c4ea1845": {
    "source": "<g1>A minimized MDM keeps working</g1>: with the main window minimized (not to the notification area), queues didn't start their next file, the Scheduler's starts and stops didn't fire, download limits, the network adapter's kill switch, the clipboard monitor, the update check, the taskbar's progress and saving the list all waited until the window was restored. They run in every window state now, and their windows (Download complete, a limit's notice) open at once.",
    "text": "<g1>最小化された MDM は動作し続けます</g1>: メイン ウィンドウが最小化されている (通知領域ではない) 場合、キューは次のファイルを起動せず、スケジューラの起動と停止は実行されず、ダウンロード制限、ネットワーク アダプターのキル スイッチ、クリップボード モニター、更新チェック、タスクバーの進行状況、リストの保存はすべてウィンドウが復元されるまで待機していました。これらはすべてのウィンドウ状態で実行されるようになり、それらのウィンドウ (ダウンロード完了、制限の通知) はすぐに開きます。"
+  },
+  "4ea06c1b2a86d1c8": {
+   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like, and any link whose look-up found a web page): they are neither shown nor downloaded.",
+   "text": "<g1>Web ページを非表示にする</g1> (既定でオン) は、ページへのリンク (<x2/>、<x3/> など、および検索で Web ページが見つかったリンク) を除外します。これらは表示もダウンロードもされません。"
   },
   "4f07dda13d242d23": {
    "source": "Options on its Connection page: connections per download, per-server exceptions, Download limits and the DNS list",
@@ -5762,6 +5794,10 @@
    "source": "<g1>Needs a login</g1>: the server wants a user name and password, or the page's cookies.",
    "text": "<g1>ログインが必要です</g1>：サーバーがユーザー名とパスワード、またはページの Cookie を要求しています。"
   },
+  "57d55935c79c75f6": {
+   "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
+   "text": "いずれかをインストールしてください。どちらでも動作します。その後、動画をもう一度検索してください。MDM は Deno、Node.js (nvm でインストールされたものも含む)、Bun を自動的に検出します。それでも表示される場合は、新しいプログラムのフォルダーが MDM の起動時に使用された <x1/> にないためです (Windows のインストーラーは、それ以降に起動されたプログラムに対して追加します)。MDM を終了し (<g2>タスク → 終了</g2>)、再度起動してください。"
+  },
   "57df30288a29fe94": {
    "source": "Made possible by these amazing humans",
    "text": "素晴らしい方々のご協力に感謝いたします"
@@ -5877,6 +5913,10 @@
   "594222b0d8ddd185": {
    "source": "Add URL.",
    "text": "URL を追加。"
+  },
+  "598886119cab837f": {
+   "source": "<g1>A web page's address.</g1> Paste or copy the address of a page (<x2/>) and MDM reads the page and lists the links on it, as the browser's <g3>Download all links</g3> does, in a package named after the page. The page itself is left unticked. This works for addresses that came on their own (pasted, copied, typed, in a list), not for the links found on a page, so MDM never wanders off through a site. MDM reads only what the page itself holds: links a page's scripts add after it loads come only through the browser.",
+   "text": "<g1>Web ページのアドレス。</g1> ページのアドレス (<x2/>) を貼り付けるかコピーすると、MDM はそのページを読み込み、ブラウザの <g3>すべてのリンクをダウンロード</g3> と同様に、ページの名前が付いたパッケージにそのページのリンクを一覧表示します。ページ自体はチェックされません。これは、単独で取得されたアドレス (貼り付け、コピー、入力、リスト内) に機能し、ページで見つかったリンクには機能しないため、MDM がサイト内をさまようことはありません。MDM はページ自体に含まれるもののみを読み取ります。ページが読み込まれた後にスクリプトが追加するリンクは、ブラウザを介してのみ取得されます。"
   },
   "59920ff7101c276f": {
    "source": "Fix the translation in the row's third column and delete its <x1/> line.",
@@ -6522,6 +6562,10 @@
    "source": "The layout is familiar on purpose: the toolbar, the categories, the download list, the progress window with every connection, queues and the scheduler. The differences: MDM is free and open source, downloads BitTorrent and magnet links in the same list, finished faster in <g1>our benchmark</g1>, speaks 86 languages and has builds for Linux and macOS. IDM is the more mature product, refined over many years. See the full <g2>comparison</g2>.",
    "text": "ツールバー、カテゴリ、ダウンロード リスト、各接続の進行状況ウィンドウ、キュー、スケジューラなど、おなじみのレイアウトは意図的なものです。MDM と IDM の違いは、MDM が無料でオープンソースであること、BitTorrent とマグネット リンクを同じリストでダウンロードできること、<g1>当社のベンチマーク</g1>でより高速に完了したこと、86 言語に対応していること、Linux および macOS 用のビルドがあることです。IDM は長年にわたって洗練された、より成熟した製品です。<g2>詳細な比較</g2>をご覧ください。"
   },
+  "626d6a7f553a1946": {
+   "source": "<g1>macOS</g1>: <x2/>, or",
+   "text": "<g1>macOS</g1>: <x2/>、または"
+  },
   "62e049f954021405": {
    "source": "Control it from your phone or your browser",
    "text": "スマートフォンまたはブラウザから制御"
@@ -6710,10 +6754,6 @@
    "source": "The video download button moves to a free corner instead of covering a control of the page, such as a thumbnail's watch-later button (<g1>#421</g1>). Dragging it still puts it where you want it.",
    "text": "動画ダウンロード ボタンが、サムネイルの「後で見る」ボタンなど、ページのコントロールを覆う代わりに、空いている隅に移動するようになりました (<g1>#421</g1>)。ドラッグすると、引き続き好きな場所に配置できます。"
   },
-  "65da44cc551abd0f": {
-   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
-   "text": "<g1>ダウンロード完了</g1>には、ファイルのサイズ、アドレス、保存場所が表示されます。<g2>開く</g2>、<g3>プログラムから開く</g3>、<g4>フォルダーを開く</g4>、または<g5>閉じる</g5>を選択してください。Windowsでは、右下の小さなボックスをエクスプローラー、メール、チャットにドラッグしてファイルをドロップすることもできます。このウィンドウは、クリックするまで他のプログラムの上に表示されますが、入力中のプログラムからキーボードのフォーカスを奪うことはありません。"
-  },
   "662e8cdda4078826": {
    "source": "32 MiB, one connection in three crawls at 128 KB/s",
    "text": "32 MiB、128 KB/秒で3回のクロールで1接続"
@@ -6765,10 +6805,6 @@
   "66f0d356afa03754": {
    "source": "Two helpers, checked before use",
    "text": "使用前に確認する 2 つのヘルパー"
-  },
-  "66f7530c7179f562": {
-   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
-   "text": "<g1>動画上の動画をダウンロード ボタン</g1> は、現在使用しているウィンドウとプロファイル (プライベート ウィンドウ、Firefox コンテナー) から、そのページの Cookie を検索とダウンロードのために渡します。設定は不要です。各 Cookie はブラウザーが保持しているドメインと関連付けられているため、YouTube Music (music.youtube.com) または YouTube のモバイル サイトでのサインインは www.youtube.com にも到達します。"
   },
   "670bb10cde757ad1": {
    "source": "MDM never writes the token to its event log, crash reports, the automation API or the command line's output.",
@@ -6958,6 +6994,10 @@
    "source": "Contribute — Mister Download Manager",
    "text": "貢献 — Mister Download Manager"
   },
+  "6a404128afe84a22": {
+   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why; MDM then remembers the freeze and draws with WARP from the next start.",
+   "text": "レポートで、ウィンドウ スレッドがフレームを表示しているときにグラフィック ドライバー内にあることが示されるフリーズ (<x1/> または Intel の <x2/>、NVIDIA の <x3/>、AMD の <x4/>、<x5/> の下) は、MDM ではなくドライバーの OpenGL がスタックしている状態です。Windows では、<g6>表示 → 描画方法 → Direct3D</g6> (既定) を選択して MDM を再起動し、グラフィック ドライバーを更新してください。<g7>描画方法</g7> に Direct3D が起動しなかったと表示されている場合、その下の行に理由が表示されます。MDM はフリーズを記憶し、次回の起動時から WARP で描画します。"
+  },
   "6a658020a3c19e30": {
    "source": "Other systems and files",
    "text": "その他のシステムとファイル"
@@ -7065,6 +7105,10 @@
   "6bde01e223d4005d": {
    "source": "Every run and the raw data",
    "text": "すべての実行結果と生データ"
+  },
+  "6be8a7107f3f9737": {
+   "source": "Choose <g1>Subtitles</g1> if you want them (see below). <g2>Embed chapters</g2> is ticked: see <g3>Chapters</g3>.",
+   "text": "字幕が必要な場合は <g1>字幕</g1> を選択します (下記参照)。<g2>チャプターを埋め込む</g2> にチェックが入っています。<g3>チャプター</g3> を参照してください。"
   },
   "6c054ced98124c36": {
    "source": "Options, Connection: connections per download and per-server exceptions.",
@@ -7277,6 +7321,10 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "［停止］で yt-dlp も停止するようになりました。以前はバックグラウンドでダウンロードを続けていました。"
+  },
+  "6f06002d2161cba3": {
+   "source": "Last updated 2026-11-13",
+   "text": "最終更新日: 2026-11-13"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7718,6 +7766,10 @@
    "source": "End-to-end medians with interquartile ranges, the ratio with its 95% interval, and the Mann–Whitney test, as <x1/> writes them.",
    "text": "四分位範囲を含む全体の中央値、95%信頼区間付きの比率、および<x1/>が示すマン・ホイットニー検定。"
   },
+  "75b26b8aac083dec": {
+   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, puts the chapters into the file, and converts the sound for an MP3, Opus or FLAC choice.",
+   "text": "その後、yt-dlp はダウンロード後に通常行う処理を実行します。動画とその音声を ffmpeg で結合して 1 つの MP4 にし、字幕を保存または埋め込み、チャプターをファイルに含め、MP3、Opus、または FLAC の選択肢のために音声を変換します。"
+  },
   "75c5e88776534271": {
    "source": "Adding a link again after its finished file was moved or deleted starts a new download, instead of asking about a duplicate that isn't there (<g1>#342</g1>).",
    "text": "完了したファイルが移動または削除された後にリンクを再度追加すると、存在しない重複について尋ねるのではなく、新しいダウンロードが開始されるようになりました (<g1>#342</g1>)。"
@@ -7777,10 +7829,6 @@
   "76e020dc2c735bdd": {
    "source": "From top to bottom:",
    "text": "上から下へ:"
-  },
-  "76e8fe34285e22ca": {
-   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download.",
-   "text": "<g1>オプション → アーカイブ → リンクが届いたときに確認する</g1>で確認をオフにできます。一部のファイルホストでは、情報の確認がダウンロードとしてカウントされます。"
   },
   "7704f35f9d60deac": {
    "source": "Our benchmark, replayed: the same PC, the same test server, the median of alternating runs.",
@@ -7974,10 +8022,6 @@
    "source": "<g1>The window no longer freezes when the system's sleep or keychain service is slow</g1> (follows <g2>#222</g2>): a queue set to <g3>Wake the computer to run this queue</g3> asks the system to keep the computer awake while it runs. On Linux that is logind, which can be slow to answer just after the computer wakes, exactly when such a queue starts, and MDM waited for it on the window's own thread (asking again every 5 seconds while it refused). It is now asked in the background, on every system; the queue's downloads, retries and log lines are the same. A keyring that doesn't answer at start (a stopped GNOME Keyring) is now waited for once, at most 5 seconds, instead of once per saved password, and saving the list no longer asks it at all. On Linux the check for a tray to hide windows in, and in Download File Info the check that <g4>Save As</g4> isn't a folder (slow on a network share that doesn't answer), no longer run on the window's thread on every frame.",
    "text": "<g1>システムのスタンバイまたはキーチェーン サービスが遅くてもウィンドウがフリーズしなくなりました</g1> ( <g2>#222</g2> に続く): <g3>このキューを実行するためにコンピューターをスリープ解除する</g3>に設定されたキューは、実行中にコンピューターをスリープ解除しておくようシステムに要求します。Linux では logind がこれにあたり、コンピューターがスリープ解除された直後、まさにこのようなキューが開始されるときに応答が遅くなることがあり、MDM はウィンドウ自身のスレッドでそれを待っていました (拒否されている間は 5 秒ごとに再要求)。これはすべてのシステムでバックグラウンドで要求されるようになり、キューのダウンロード、再試行、ログ行は同じです。起動時に応答しないキーリング (停止した GNOME Keyring) は、保存されたパスワードごとに 1 回ではなく、最大 5 秒間 1 回だけ待機されるようになり、リストを保存してもまったく要求されなくなりました。Linux では、ウィンドウを非表示にするトレイのチェック、およびダウンロード ファイル情報で<g4>名前を付けて保存</g4>がフォルダーではないことのチェック (応答しないネットワーク共有では遅い) は、すべてのフレームでウィンドウのスレッドでは実行されなくなりました。"
   },
-  "7a431c024b9ed18e": {
-   "source": "Choose <g1>Subtitles</g1> if you want them (see below).",
-   "text": "字幕が必要な場合は、<g1>字幕</g1>を選択してください（下記参照）。"
-  },
   "7a5b7ab31d5f22cb": {
    "source": "Click <g1>Add Torrent</g1> on the toolbar to open a <x2/> file, or use the arrow next to it for <g3>Add magnet link...</g3>. A magnet link pasted into <g4>Add URL</g4> works too. Torrents land in the same list as your other downloads, marked <g5>Torrent</g5> in the <g6>Source</g6> column, and go into queues and the Scheduler like them.",
    "text": "ツールバーの<g1>Torrent を追加</g1>をクリックして<x2/>ファイルを開くか、その横の矢印を使って<g3>マグネット リンクの追加...</g3>を選択します。<g4>URL を追加</g4>に貼り付けたマグネットリンクも機能します。トレントは他のダウンロードと同じリストに表示され、<g6>ソース</g6>列に<g5>トレント</g5>とマークされ、他のダウンロードと同様にキューとスケジューラに入ります。"
@@ -8089,10 +8133,6 @@
   "7bde548eabfafc71": {
    "source": "Eight per download by default, and up to 32 if you choose in Options → Connection, or 128 after ticking Allow more than 32 connections there. MDM uses fewer when a server allows fewer, and only one when a server can't send parts of a file at all.",
    "text": "デフォルトではダウンロードごとに8接続を使用します。オプション → 接続で最大32接続まで選択でき、32を超える接続を許可にチェックを入れると、最大128接続まで使用できます。サーバーが許可する接続数が少ない場合、MDMはそれに合わせて接続数を減らします。また、サーバーがファイルを分割して送信できない場合は、1接続だけを使用します。"
-  },
-  "7beb76c0e99ab62c": {
-   "source": "<g1>Videos that need you signed in</g1>: <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, for pasted links. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works, and so does the button over the video.",
-   "text": "<g1>サインインが必要な動画</g1>: <g2>オプション → サイトのログイン → 動画サイトの Cookie</g2> を使用すると、yt-dlp が貼り付けられたリンクのブラウザーの Cookie を読み取ることができます。Chrome、Edge、Brave は Windows で Cookie をロックするため、ウィンドウにその旨が表示されます。Firefox は機能し、動画上のボタンも機能します。"
   },
   "7bf940f9155b4bce": {
    "source": "<x1/> <g2>Open source · Apache-2.0</g2>",
@@ -8533,6 +8573,10 @@
   "810aeb3bcab43ab3": {
    "source": "A torrent: what it has sent to peers against what it took.",
    "text": "トレントがピアに送信したデータ量と、ピアから受信したデータ量の比率。"
+  },
+  "810e3acee25be1c6": {
+   "source": "YouTube hides most of a video's qualities behind small puzzles that yt-dlp solves with a JavaScript runtime: <g1>Deno</g1>, <g2>Node.js</g2> or <g3>Bun</g3>. Without one, the list is short, sometimes only the sound and a low quality, and MDM says so: <g4>YouTube needs a JavaScript runtime to list its video qualities</g4>. Other sites don't need one.",
+   "text": "YouTube は、動画のほとんどの品質を小さなパズルで隠しています。yt-dlp は <g1>Deno</g1>、<g2>Node.js</g2>、<g3>Bun</g3> のいずれかの JavaScript ランタイムを使ってこれを解決します。これらがないと、リストは短く、音声と低品質のみになることもあり、MDM は「<g4>YouTube の動画品質を一覧表示するには JavaScript ランタイムが必要です</g4>」と表示します。他のサイトでは必要ありません。"
   },
   "8144fd9d669ebeed": {
    "source": "Does it download torrents? — Mister Download Manager",
@@ -9174,10 +9218,6 @@
    "source": "<g1>Themes</g1><g2>Nine looks, light and dark, from Classic to Aqua, or your own in a text file.</g2>",
    "text": "<g1>テーマ</g1><g2>クラシックから Aqua まで、ライトとダークの 9 種類の外観、またはテキスト ファイルで独自のテーマを作成できます。</g2>"
   },
-  "8b93f9dffbe6efdb": {
-   "source": "If Direct3D, Vulkan or Metal can't start on your computer (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
-   "text": "お使いのコンピューターで Direct3D、Vulkan、または Metal が起動できない場合 (ドライバーがない、一部の仮想マシンなど)、または MDM の最初のウィンドウが 10 秒以内に表示されない場合 (MDM がリストとそのアイコンを読み込む時間は含まれません。コンピューターの起動直後がどれほど遅くても同じです)、MDM は OpenGL で描画します。<g1>表示 → 描画方法</g1> にその旨と理由が表示されます。再度選択すると、次回の起動時に再試行されます。"
-  },
   "8b95ee287644fd4f": {
    "source": "Mister Download Manager's link grabber collects a page's links, sorts them into packages, checks which are online and extracts the archives they bring.",
    "text": "Mister Download Manager のリンク グラバーは、ページのリンクを収集し、パッケージに分類し、オンラインであるかどうかを確認し、それらがもたらすアーカイブを展開します。"
@@ -9225,6 +9265,10 @@
   "8c6583c8229f13c3": {
    "source": "Downloads and torrents in one app, stable on Android",
    "text": "ダウンロードとトレントを1つのアプリで、Androidで安定動作"
+  },
+  "8c714d229ab4b2fb": {
+   "source": "They go into a video (MP4, MKV, WebM) and into the sound as the site has it (<g1>Audio only, original</g1>), not into an MP3, Opus or FLAC file.",
+   "text": "チャプターは動画 (MP4、MKV、WebM) と、サイトにあるままの音声 (<g1>音声のみ（オリジナル）</g1>) に組み込まれます。MP3、Opus、または FLAC ファイルには組み込まれません。"
   },
   "8c7321b31cd98d97": {
    "source": "<g1>Toolbar.</g1> <g2>Add URL</g2>, <g3>Add Torrent</g3>, <g4>Resume</g4>, <g5>Stop</g5>, <g6>Stop All</g6>, <g7>Delete</g7>, <g8>Delete Completed</g8>, <g9>Options</g9>, <g10>Scheduler</g10>, <g11>Start Queue</g11>, <g12>Stop Queue</g12>. The small arrow next to <g13>Add Torrent</g13>, <g14>Start Queue</g14> and <g15>Stop Queue</g15> opens more choices.",
@@ -9929,6 +9973,10 @@
   "9757a8b628979f6a": {
    "source": "The list shows each quality with its size, best first, and the sound alone at the end. Check <g1>Save to</g1> and <g2>File name</g2>, then click <g3>Download Now</g3>, or <g4>Later</g4> to put it in the list for later. The video gets its own row and progress window, like any other download.",
    "text": "リストには、各品質とそのサイズが、最適なものから順に表示され、最後に音声のみが表示されます。<g1>保存先</g1>と<g2>ファイル名</g2>を確認し、<g3>今すぐダウンロード</g3>をクリックするか、<g4>後で</g4>をクリックして後でダウンロードするリストに追加します。動画は、他のダウンロードと同様に、独自の行と進行状況ウィンドウを取得します。"
+  },
+  "9763111f0a019af1": {
+   "source": "If Direct3D, Vulkan or Metal can't start on your graphics card (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
+   "text": "グラフィック カードで Direct3D、Vulkan、または Metal を起動できない場合 (ドライバーがない、一部の仮想マシンなど)、または最初のウィンドウが 10 秒以内に表示されない場合 (MDM がリストとそのアイコンを読み込む時間は、コンピューターの起動直後の速度に関係なくカウントされません)、MDM は OpenGL で描画し、<g1>表示 → 描画方法</g1> にその理由が表示されます。再度選択すると、次回の起動時に再試行されます。"
   },
   "976e1bc04dee0c02": {
    "source": "Both the address you clicked and the one its redirects led to are checked, so a site you excluded stays excluded even when it sends you to another server. Everything else stays with the browser. Changes in Options reach the browser within a minute; you don't need to restart it.",
@@ -10681,6 +10729,10 @@
   "a23e572b5c83c41e": {
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "そのサイズで画面より大きいウィンドウ (1366 × 768 の画面で 200 % のオプション) は、画面が許す限り大きく開き、残りはスクロールします。スクロール バー、マウス ホイール、または <g1>Tab</g1> キーで次のコントロールに移動します。"
+  },
+  "a24bd8fd730a41d0": {
+   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows で OpenGL のバージョンが 3.0 より古い場合 (Intel の初代 HD Graphics など、OpenGL 2.1 の古いグラフィック カード ドライバー)、MDM は描画できません。ウィンドウが正しく表示されません。MDM は起動時にこれを検知し、Microsoft のソフトウェア レンダラー (WARP) で Direct3D を使用して再起動します。その後、<g1>表示 → 描画方法</g1> にその旨が表示されます。そこで <g2>OpenGL</g2> を選択すると、再度試行されます。"
   },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
@@ -11702,6 +11754,10 @@
    "source": "<g1>Crash reports</g1><g2>Mister Download Manager</g2>",
    "text": "<g1>クラッシュ レポート</g1><g2>Mister Download Manager</g2>"
   },
+  "b1a0ed24728365e7": {
+   "source": "The command line (<x1/>) puts them in too, whenever ffmpeg is there.",
+   "text": "コマンドライン (<x1/>) でも、ffmpeg があればチャプターが組み込まれます。"
+  },
   "b1aebd102c185a01": {
    "source": "RSS feeds for torrents, with download rules — Mister Download Manager",
    "text": "トレント用 RSS フィードとダウンロード ルール — Mister Download Manager"
@@ -11709,10 +11765,6 @@
   "b1b2249661e1c4a9": {
    "source": "Keep changes focused and match the code around them. A few rules hold everywhere:",
    "text": "変更の範囲を絞り、周囲のコードに合わせてください。全体に適用されるルールがいくつかあります。"
-  },
-  "b1cfb9dac9c38d80": {
-   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, and converts the sound for an MP3, Opus or FLAC choice.",
-   "text": "その後、yt-dlp はダウンロード後に実行する処理を行います。ffmpeg を使用して動画と音声を 1 つの MP4 に結合し、字幕を保存または埋め込み、MP3、Opus、FLAC の選択肢に合わせて音声を変換します。"
   },
   "b1d90b3e9d2a1cd5": {
    "source": "runs unit tests and end-to-end downloads against <x1/> with injected faults (slow, dropped and refused connections, servers without ranges, changing files). <x2/> runs the published speed comparison; its raw data is in <x3/>.",
@@ -11737,6 +11789,10 @@
   "b2181eccf65e86be": {
    "source": "This <g1>website</g1> counts visits with <g2>Statcounter</g2>, which sets a cookie and sees your IP address; it runs only on the website, never in the app.",
    "text": "この<g1>ウェブサイト</g1>は、<g2>Statcounter</g2>で訪問者数をカウントしています。StatcounterはCookieを設定し、お客様のIPアドレスを認識します。これはウェブサイト上でのみ実行され、アプリ内では実行されません。"
+  },
+  "b21b0cc3853450de": {
+   "source": "On Windows, when OpenGL fails on a card without Direct3D 12, MDM draws with Direct3D on Microsoft's software renderer (WARP) from the next start, and <g1>View → Draw with</g1> says why: OpenGL couldn't start, it is too old to draw MDM (older than 3.0, such as Intel's first HD Graphics, whose OpenGL 2.1 drew MDM's windows as garbage), its first window didn't show within 10 seconds, or MDM froze inside the graphics driver while OpenGL showed a frame (the older Intel HD Graphics and AMD Radeon cards' drivers did). Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows では、Direct3D 12 のないカードで OpenGL が失敗した場合、MDM は次回の起動時から Microsoft のソフトウェア レンダラー (WARP) で Direct3D を使用して描画し、<g1>表示 → 描画方法</g1> にその理由が表示されます。OpenGL が起動できなかった、MDM を描画するには古すぎる (Intel の最初の HD Graphics など、OpenGL 2.1 が MDM のウィンドウを正しく描画できなかった 3.0 より古いもの)、最初のウィンドウが 10 秒以内に表示されなかった、または OpenGL がフレームを表示している間に MDM がグラフィック ドライバー内でフリーズした (古い Intel HD Graphics および AMD Radeon カードのドライバーで発生しました) などです。そこで <g2>OpenGL</g2> を選択すると、再試行されます。"
   },
   "b23baab9a4561a1d": {
    "source": "Pauses running downloads.",
@@ -11765,6 +11821,10 @@
   "b26bf4af67d50f02": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: it is free and open source, laid out like IDM, imports your IDM list, and also downloads torrents and videos. Free Download Manager, AB Download Manager, Motrix, Neat Download Manager, Prism, JDownloader 2, Xtreme Download Manager and Gopeed are free too, each with its own strengths.",
    "text": "Internet Download Manager のレイアウトをその価格なしで利用したいなら、Mister Download Manager がおすすめです。無料でオープンソースであり、IDM と同じレイアウトで、IDM のリストをインポートでき、トレントや動画もダウンロードできます。Free Download Manager、AB Download Manager、Motrix、Neat Download Manager、Prism、JDownloader 2、Xtreme Download Manager、Gopeed も無料であり、それぞれに独自の強みがあります。"
+  },
+  "b26c000488bb45a1": {
+   "source": "<g1>Windows</g1>: <x2/>, or <x3/>. The installers on <g4>deno.com</g4> and <g5>nodejs.org</g5> work too.",
+   "text": "<g1>Windows</g1>: <x2/>、または <x3/>。<g4>deno.com</g4> および <g5>nodejs.org</g5> のインストーラーも動作します。"
   },
   "b26fdfb3218b9d13": {
    "source": "Many more: the checksum dialog, the progress window's completion options and speed limit, the torrent and video windows (Stop a look-up, stale video choices), Batch's letter ranges, addresses without http://, duplicate links arriving together, imports that doubled downloads, menu titles that shared access letters in French and other languages, and more.",
@@ -11885,6 +11945,10 @@
   "b3ca971adc7126d9": {
    "source": "View → Theme switches at once, keeping the layout.",
    "text": "表示 → テーマで、レイアウトを維持したままテーマをすぐに切り替えられます。"
+  },
+  "b3d7bbeea9ab71d3": {
+   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). With ffmpeg, the video's chapters go into the file too, as Download video's <g19>Embed chapters</g19> does. <x20/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x21/>; when it isn't connected, nothing starts.",
+   "text": "動画をダウンロードします。<x1/> は <x2/> から品質セレクターを受け取ります (<x3/> = 最良の単一ファイル; <x4/> = サイトにあるままの音声、変換なし; <x5/>、<x6/>、<x7/>、<x8/> = そのビットレートの MP3 形式の音声、<x9/> は最高の可変ビットレート; <x10/> = Opus 形式; <x11/> = FLAC 形式、ロスレスですがサイトの音声より良くはありません。変換には ffmpeg が必要です)。<x12/>: MDM 独自のダウンローダーは、yt-dlp が見つけた各ストリームをこの数の接続 (デフォルトは 8、1〜128) で取得し、ストリームをこの数のピース (HLS、DASH) で一度に取得します。<x13/> は字幕をその横に保存します。<x14/> (<x15/>) からの言語コード、またはアップローダーが提供したすべての字幕には <x16/> を使用します。<x17/> は代わりにサイトの自動キャプションを取得します。<x18/> は字幕を動画に埋め込みます (ffmpeg、MP4 または MKV が必要です)。ffmpeg を使用すると、動画のチャプターもファイルに埋め込まれます。これは、動画のダウンロードの <g19>チャプターを埋め込む</g19> と同じです。<x20/> は、<x21/> のように、ダウンロードの接続と yt-dlp (および ffmpeg) の接続を 1 つのネットワーク アダプター経由で送信します。接続されていない場合、何も開始されません。"
   },
   "b3f1633383cc8b77": {
    "source": "Open <g1>Downloads → Options</g1>, or click <g2>Options</g2> on the toolbar. The window has twelve pages on two rows of tabs. <g3>OK</g3> saves your changes; closing the window or pressing <g4>Esc</g4> throws them away.",
@@ -12169,6 +12233,10 @@
   "b86face263e9f2af": {
    "source": "We'd rather you knew. IDM has a site grabber that follows a whole website's pages (MDM's link grabber takes the links of one page), and many years of polish and compatibility fixes. MDM is new; if something you rely on is missing, <g1>ask for it</g1>.",
    "text": "IDM にはウェブサイト全体のページをたどるサイトグラバー (MDM のリンクグラバーは 1 ページのリンクを取得) があり、長年の改良と互換性修正が施されています。MDM は新しいプログラムです。必要な機能が不足している場合は、<g1>ご要望ください</g1>。"
+  },
+  "b886cc5ff82424bc": {
+   "source": "<g1>A spare account, in a profile of its own</g1>: you don't have to lend yt-dlp your main account. Make a second profile in your browser, sign in to the site there with a spare account, and put that profile in <g2>Profile</g2> (its name, or its folder with <g3>...</g3>). yt-dlp reads that profile's cookies only. yt-dlp's developers advise this too: a site may limit an account it sees used by a program.",
+   "text": "<g1>独自のプロファイルに予備のアカウント</g1>: メインのアカウントを yt-dlp に貸す必要はありません。ブラウザで別のプロファイルを作成し、そこで予備のアカウントでサイトにサインインし、そのプロファイルを <g2>プロファイル</g2> (その名前、または <g3>...</g3> を使ってそのフォルダー) に設定します。yt-dlp はそのプロファイルの Cookie のみを読み取ります。yt-dlp の開発者もこれを推奨しています。サイトがプログラムによって使用されているアカウントを制限する可能性があるためです。"
   },
   "b88a67e39c494a61": {
    "source": "The server runs on the app's Tokio runtime, one listener per local network address. Each request is checked (<x1/>, <x2/>, token), turned into an <x3/> marked <x4/> (a field no request line can set) and handed to the app through the same channel as the command line's; the app answers it on its next frame, as it answers the automation API. Its page is built in (<x5/>) and its texts come from the app's catalogs (<x6/>).",
@@ -12774,10 +12842,6 @@
    "source": "Choose before you add",
    "text": "追加する前に選択"
   },
-  "c20a850dfc745632": {
-   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier.",
-   "text": "どちらも起動できない場合、MDMはソフトウェアレンダラー (WindowsではMicrosoft、LinuxではMesa) で描画するため、ウィンドウは開きます (リモートデスクトップ、グラフィックドライバーのない仮想マシンなど)。動作はしますが、プロセッサーの負荷が高くなります。"
-  },
   "c21ae87a328182aa": {
    "source": "<g1>Link grabber</g1><g2>A page's links gathered, sorted into packages and checked online, then the archives unpacked when they arrive.</g2>",
    "text": "<g1>リンク グラバー</g1><g2>ページのリンクを収集し、パッケージに分類してオンラインで確認し、到着時にアーカイブを解凍します。</g2>"
@@ -12918,6 +12982,10 @@
    "source": "The download manager you already know, rebuilt to be faster. Free, open source and written from scratch in Rust.",
    "text": "既におなじみのダウンロードマネージャーが、より高速に再構築されました。無料、オープンソースでRustでゼロから書かれています。"
   },
+  "c4d8ea1c0d48428a": {
+   "source": "It needs ffmpeg, which writes them. A video without chapters is saved as it is.",
+   "text": "チャプターを書き込む ffmpeg が必要です。チャプターのない動画はそのまま保存されます。"
+  },
   "c4eff53dc61fce12": {
    "source": "Your rights",
    "text": "お客様の権利"
@@ -12989,6 +13057,10 @@
   "c5980664ded251b8": {
    "source": "<g1>The system:</g1> MDM's version and how you installed it, your operating system and its version, the processor, the language and theme, and how many downloads and queues you have. These are counts only.",
    "text": "<g1>システム:</g1> MDM のバージョンとインストール方法、オペレーティングシステムとそのバージョン、プロセッサ、言語とテーマ、ダウンロードとキューの数。これらは数のみです。"
+  },
+  "c5a292e743078486": {
+   "source": "A distribution's yt-dlp can also be too old for YouTube: if the list stays short, click <g1>Use MDM's own copy</g1> beside yt-dlp in <g2>Helpers...</g2>.",
+   "text": "ディストリビューションの yt-dlp が YouTube に対して古すぎる場合もあります。リストが短いままの場合は、<g2>ヘルパー...</g2> の yt-dlp の横にある <g1>MDM 独自のコピーを使用</g1> をクリックしてください。"
   },
   "c5b1d8d5e4be4a3b": {
    "source": "How the pictures come down",
@@ -13154,6 +13226,10 @@
    "source": "Checked before you download",
    "text": "ダウンロード前に確認"
   },
+  "c845f9239d5bddd5": {
+   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and what the browser sent with the stream (its referrer and origin, else the page as the referrer).",
+   "text": "リンク、動画、音声、画像を右クリックして、<g1>Mister Download Manager でダウンロード</g1>を選択します。MDM は、その種類にかかわらずダウンロードします。ユーザーが要求したため、ファイルの種類リストや除外サイトはここでは適用されません（これらは、MDM が自動的に引き継ぐダウンロードを決定するだけです）。ストリームとして再生される動画は、<g2>動画をダウンロード</g2>ウィンドウに、プレーヤーが読み込んだストリーム（HLS または DASH）として送られます。これは、<g3>動画上のボタン</g3>が送信するのと同じで、ストリームのサーバー用のクッキーと、ブラウザーがストリームとともに送信したもの（そのリファラーとオリジン、それ以外の場合はページがリファラーとして）が含まれます。"
+  },
   "c84f2046978e476a": {
    "source": "A title bar MDM draws itself",
    "text": "MDM が独自に描画するタイトル バー"
@@ -13297,10 +13373,6 @@
   "ca67cb26c4c8dabb": {
    "source": "View → Theme changes how MDM looks at once and keeps everything where it was. Pick one of the built-in looks, each with a light and a dark side, or make your own in a text file.",
    "text": "［表示］→［テーマ］で MDM の見た目をすぐに変更でき、すべての要素は元の場所に保たれます。組み込みのテーマから選択するか、テキスト ファイルで独自のテーマを作成できます。各テーマにはライトとダークのモードがあります。"
-  },
-  "ca722db87f0d3bad": {
-   "source": "Last updated 2026-11-12 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "最終更新日: 2026-11-12 · アプリ、ブラウザ拡張機能、misterdownloadmanager.com に適用されます"
   },
   "ca7a6b77fb1e5a3c": {
    "source": "strengthens every edge and text colour on top.",
@@ -13834,6 +13906,10 @@
    "source": "Maturity",
    "text": "成熟度"
   },
+  "d2fc243b93084d12": {
+   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one. And YouTube sometimes asks any viewer from a network it doubts (a VPN, a shared or cloud address) to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
+   "text": "一部の動画は、サインインした視聴者のみが再生できます。メンバー限定動画、プライベート動画、年齢制限のある動画などです。また、YouTube は、疑わしいネットワーク (VPN、共有アドレス、クラウドアドレス) からの視聴者に対して、「ボットではないことを確認するためにサインインしてください」と求めることがあります。その場合、yt-dlp には、サインイン状態を維持する小さなファイルであるブラウザの Cookie が必要です。"
+  },
   "d30e4557ff06a9ab": {
    "source": "Reports, translations and help",
    "text": "レポート、翻訳、ヘルプ"
@@ -13961,6 +14037,10 @@
   "d4c9212e6107e470": {
    "source": "Playlists and channels",
    "text": "プレイリストとチャンネル"
+  },
+  "d4ce3b34f58e526c": {
+   "source": "<g1>Ubuntu and Debian</g1>:",
+   "text": "<g1>Ubuntu および Debian</g1>:"
   },
   "d4d2535439e2c024": {
    "source": "Coming from IDM?",
@@ -15074,6 +15154,10 @@
    "source": "Press <g1>F3</g1> to jump to the next match. The search wraps round to the top.",
    "text": "<g1>F3</g1>を押すと、次の一致にジャンプします。検索は先頭に戻ります。"
   },
+  "e71e432fdd540d5b": {
+   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download. With the look-ups off, MDM asks nothing of the network until you start, so a web page's address isn't read for its links either.",
+   "text": "<g1>オプション → アーカイブ → リンクが到着したときに検索</g1> で検索をオフにします。一部のファイル ホストでは、検索をダウンロードとしてカウントします。検索をオフにすると、MDM は開始するまでネットワークに何も要求しないため、Web ページのアドレスもリンクのために読み取られません。"
+  },
   "e7281739beb4476f": {
    "source": "A download manager can fill your whole connection. These steps cap MDM so that browsing, video calls and games stay smooth.",
    "text": "ダウンロードマネージャーは、インターネット接続をすべて使い切ることがあります。次の手順で MDM の速度を制限すると、ウェブ閲覧、ビデオ通話、ゲームをスムーズに楽しめます。"
@@ -15141,10 +15225,6 @@
   "e7d58a9cc03da7fd": {
    "source": "Point at the video in your browser and click the Download video button that appears over it, or paste the page's address into Tasks → Download video from a…",
    "text": "ブラウザで動画にカーソルを合わせ、表示される動画をダウンロードボタンをクリックするか、ページのURLをタスク → ページから動画をダウンロードに貼り付けます。MDMは、サイトが提供するすべての画質とサイズを一覧表示します。その中から1つを選べば、他のファイルと同じようにダウンロードされます。数千のサイトに対応しているyt-dlpを使用しています。ダウンロードは、権利のある動画のみにしてください。ページから動画をダウンロードをご覧ください。"
-  },
-  "e7e684a8f8aec6c8": {
-   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like): they are neither shown nor downloaded.",
-   "text": "<g1>Web ページを非表示にする</g1>（初期設定でオン）を有効にすると、ページへのリンク（<x2/>、<x3/>など）は除外され、表示もダウンロードもされません。"
   },
   "e7f203ecd75caead": {
    "source": "Can my AI assistant use MDM? — Mister Download Manager",
@@ -15398,6 +15478,10 @@
    "source": "Note",
    "text": "注"
   },
+  "eb9f527d55414228": {
+   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "最終更新日: 2026-11-13 · アプリ、ブラウザ拡張機能、misterdownloadmanager.com に適用されます"
+  },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
    "text": "<g1>一度しか機能しないリンク</g1> (または一度に 1 つのダウンロードしか許可しないホスト) は、ダウンロード ファイル情報で参照された後、「403 Forbidden」で失敗していました (<g2>#28</g2>): ウィンドウの参照とダウンロードがそれぞれサーバーに要求していました。ダウンロードはウィンドウが取得した応答から続行され、その接続がその間に閉じられた場合にのみ再度要求します。"
@@ -15449,10 +15533,6 @@
   "ec83076f0311f20e": {
    "source": "A theme is one small text file in <g1>TOML</g1> (or JSON, <x2/>; or a <g3>colour scheme</g3>, <x4/>). It names only what it changes; everything else comes from the theme it <x5/>:",
    "text": "テーマは、<g1>TOML</g1> (または JSON、<x2/>。または <g3>配色</g3>、<x4/>) 形式の小さなテキスト ファイルです。変更する項目のみを記述し、それ以外のすべては <x5/> するテーマから取得されます。"
-  },
-  "ec8dbbc2dc38cd32": {
-   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you.",
-   "text": "これらの設定によって停止したトレントは、イベントログにその旨が記録され、MDM の起動時に再び共有されることはありません。再び共有するには、制限値を上げるか、オフにしてください。 - <g1>すべてのトレントのアップロードを次の値に制限する</g1> — デフォルトではオフです。ダウンロード中と共有中に、すべてのトレントが他のピアに送信するデータの合計量を制限します。進捗ウィンドウで設定する個々のトレントのアップロード制限も適用されます。 - <g2>マグネットリンクと .torrent ファイルを Mister Download Manager で開く</g2> — これを有効にすると、Windows でマグネットリンクはブラウザーから、<x3/> ファイルはエクスプローラーから MDM で開かれるようになります。この設定はお使いの Windows アカウントにのみ適用されます。Windows の<g4>プログラムから開く</g4>で選択したプログラムが優先されます。セットアップ時に有効にすることもできます。"
   },
   "ec99486fc82e0b86": {
    "source": "Options",
@@ -15525,6 +15605,10 @@
   "ed1e476b363fc15b": {
    "source": "What protects you",
    "text": "あなたを保護するもの"
+  },
+  "ed30bf8c293519f0": {
+   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. As when you drag a file in Explorer, a folder on the same drive gets the file moved there and another drive gets a copy (hold <g6>Shift</g6> to move it, <g7>Ctrl</g7> to copy it). The download follows a moved file: the list and <g8>Open</g8> find it in its new place. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
+   "text": "<g1>ダウンロード完了</g1> には、ファイルのサイズ、アドレス、保存先が表示されます。<g2>開く</g2>、<g3>プログラムから開く</g3>、<g4>フォルダーを開く</g4>、または <g5>閉じる</g5> を選択します。Windows では、右下にある小さなボックスをエクスプローラー、メール、チャットにドラッグして、ファイルをそこにドロップすることもできます。エクスプローラーでファイルをドラッグする場合と同様に、同じドライブ上のフォルダーにはファイルが移動され、別のドライブにはコピーが作成されます (<g6>Shift</g6> キーを押しながらドラッグすると移動、<g7>Ctrl</g7> キーを押しながらドラッグするとコピー)。ダウンロードは移動されたファイルに従います。リストと <g8>開く</g8> は、新しい場所でファイルを見つけます。このウィンドウは、クリックするまで他のプログラムの上に表示され、入力中のプログラムからキーボードのフォーカスを奪うことはありません。"
   },
   "ed39bbda605ca874": {
    "source": "Every file finds its folder",
@@ -15758,6 +15842,10 @@
    "source": "Image galleries — Mister Download Manager help",
    "text": "画像ギャラリー — Mister Download Manager ヘルプ"
   },
+  "f02ad447917b29c8": {
+   "source": "<g1>Fedora</g1>:",
+   "text": "<g1>Fedora</g1>:"
+  },
   "f0332c2aa7cd2077": {
    "source": "<g1>A download's progress file could be written again just after it stopped</g1> (<g2>#106</g2>), and <g3>a download could fail as it finished, with \"part file still in use\"</g3> (<g4>#116</g4>). MDM saves a download's progress every few seconds, in a file beside it. A download paused or finished during one of those saves could stop before the save was done; that save then wrote an old progress file a moment later, or, when the last bytes arrived during it, still held the file. A download now stops only once its save is done.",
    "text": "<g1>ダウンロードの進行状況ファイルが、停止直後に再度書き込まれる可能性がありました</g1> (<g2>#106</g2>)。また、<g3>ダウンロードが完了時に「part file still in use」で失敗する可能性がありました</g3> (<g4>#116</g4>)。MDM は、ダウンロードの進行状況を数秒ごとに、その隣のファイルに保存します。これらの保存中に一時停止または完了したダウンロードは、保存が完了する前に停止する可能性があり、その保存はしばらくして古い進行状況ファイルを書き込むか、最後のバイトがその間に到着した場合、ファイルを保持したままでした。ダウンロードは、保存が完了した後にのみ停止するようになりました。"
@@ -15969,10 +16057,6 @@
   "f3664543700a7df7": {
    "source": "Download File Info",
    "text": "ダウンロード ファイル情報"
-  },
-  "f385c86abe758db3": {
-   "source": "Last updated 2026-11-12",
-   "text": "最終更新日: 2026-11-12"
   },
   "f3901fedc4a7dd52": {
    "source": "<g1>Browser extension</g1><g2>Downloads you click in Chrome, Edge, Brave, Opera, Vivaldi or Firefox go straight to MDM, sign-in included.</g2>",
@@ -16252,7 +16336,7 @@
   },
   "f89c54d71eb189a4": {
    "source": "If the graphics card is reset while MDM runs (a driver update), MDM starts again by itself. Lost twice in 10 minutes, it goes back to OpenGL, and <g1>View → Draw with</g1> says why.",
-   "text": "MDM の実行中にグラフィック カードがリセットされた場合 (ドライバーの更新など)、MDM は自動的に再起動します。10 分以内に 2 回失われた場合、OpenGL に戻り、<g1>表示 → 描画方法</g1>にその理由が表示されます。"
+   "text": "MDM の実行中にグラフィック カードがリセットされた場合 (ドライバーの更新など)、MDM は自動的に再起動します。10 分以内に 2 回失われた場合、OpenGL に戻り、<g1>表示 → 描画方法</g1> にその理由が表示されます。"
   },
   "f8b52274ed125d5f": {
    "source": "Tick <g1>Wake the computer to run this queue</g1> and a sleeping computer is woken a minute before the start time, so the network is back when the queue begins. It stays awake while the queue runs; afterwards its own sleep settings apply again. The line under the option says when the next wake is, or why there can't be one.",
@@ -16521,10 +16605,6 @@
   "fbba8f18d2fae06e": {
    "source": "A text box's bottom line while it can be typed in",
    "text": "入力可能なテキスト ボックスの下線"
-  },
-  "fbc41fd4efa0fd9a": {
-   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). <x19/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x20/>; when it isn't connected, nothing starts.",
-   "text": "動画をダウンロードします。<x1/> は <x2/> から品質セレクターを取得します (<x3/> = 最高の単一ファイル; <x4/> = サイトにあるままの音声、変換なし; <x5/>、<x6/>、<x7/>、<x8/> = そのビットレートの MP3 形式の音声、<x9/> は最高の可変ビットレート; <x10/> = Opus 形式; <x11/> = FLAC 形式、ロスレスですがサイトの音声より良くはありません; 変換には ffmpeg が必要です)。<x12/>: MDM 独自のダウンローダーは、yt-dlp が見つけた各ストリームをこの数の接続 (デフォルトは 8、1 から 128) で取得し、ストリームを一度にこの数のピース (HLS、DASH) で取得します。<x13/> は字幕をその横に保存します: <x14/> (<x15/>) からの言語コード、またはアップローダーが提供したすべての字幕には <x16/> を指定します。<x17/> は代わりにサイトの自動キャプションを取得します。<x18/> はそれらを動画に埋め込みます (ffmpeg、MP4 または MKV が必要です)。<x19/> は、ダウンロードの接続と yt-dlp (および ffmpeg) の接続を、<x20/> のように 1 つのネットワーク アダプター経由で送信します。接続されていない場合、何も開始されません。"
   },
   "fbc5c79e5fad811f": {
    "source": "<g1>VS Code</g1>: in <x2/>, or <g3>MCP: Add Server</g3> in the command palette:",

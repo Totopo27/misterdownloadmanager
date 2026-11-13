@@ -727,6 +727,70 @@ async fn hls_and_dash_without_their_endings_or_types() {
     assert!(js.contains("dataset.kind") && js.contains("dataset.decoy"));
 }
 
+/// The HLS video tracks and the audio track merge as yt-dlp merges a site's (its `[Merger]`:
+/// `-map 0:v:0 -map 1:a:0`, copied into MP4), and the result decodes: a video track that held
+/// only sound failed with "Error opening output files: Invalid argument". Ignored: it needs
+/// `MDM_TEST_FFMPEG` (ffmpeg's program).
+///
+///   MDM_TEST_FFMPEG=…\ffmpeg.exe cargo test -p mdm-labserver --test http -- --ignored hls_tracks
+#[tokio::test]
+#[ignore]
+async fn hls_tracks_merge_as_yt_dlp_merges_them() {
+    use std::process::Command;
+    let ffmpeg = std::env::var("MDM_TEST_FFMPEG").expect("set MDM_TEST_FFMPEG");
+    let s = server("").await;
+    let dir = tempfile::tempdir().unwrap();
+    let joined = |track: &str| dir.path().join(format!("{track}.ts"));
+    for track in ["720p", "360p", "audio"] {
+        let mut all = Vec::new();
+        for i in 0..3 {
+            let r = reqwest::get(s.url(&format!("/hls/{track}/seg{i}.ts")))
+                .await
+                .unwrap();
+            all.extend(r.bytes().await.unwrap());
+        }
+        std::fs::write(joined(track), all).unwrap();
+    }
+    for video in ["720p", "360p"] {
+        let out = dir.path().join(format!("{video}.mp4"));
+        let merged = Command::new(&ffmpeg)
+            .args(["-v", "error", "-y", "-i"])
+            .arg(joined(video))
+            .arg("-i")
+            .arg(joined("audio"))
+            .args(["-c", "copy", "-map", "0:v:0", "-map", "1:a:0"])
+            .args(["-bsf:a:0", "aac_adtstoasc", "-movflags", "+faststart"])
+            .arg(&out)
+            .output()
+            .unwrap();
+        let said = String::from_utf8_lossy(&merged.stderr);
+        assert!(merged.status.success(), "{video}: {said}");
+        // Every picture and sound decodes, with nothing to say.
+        let decoded = Command::new(&ffmpeg)
+            .args(["-v", "error", "-i"])
+            .arg(&out)
+            .args(["-f", "null", "-"])
+            .output()
+            .unwrap();
+        let said = String::from_utf8_lossy(&decoded.stderr);
+        assert!(decoded.status.success() && said.trim().is_empty(), "{said}");
+        // What it holds (`-i` alone lists it, then stops for want of an output).
+        let listed = Command::new(&ffmpeg).arg("-i").arg(&out).output().unwrap();
+        let said = String::from_utf8_lossy(&listed.stderr);
+        let size = if video == "720p" {
+            "1280x720"
+        } else {
+            "640x360"
+        };
+        assert!(
+            said.contains("Video: h264 (Main)") && said.contains(size),
+            "{said}"
+        );
+        assert!(said.contains("Audio: aac (LC)"), "{said}");
+        assert!(said.contains("Duration: 00:00:12.00"), "{said}");
+    }
+}
+
 #[tokio::test]
 async fn help_lists_the_routes() {
     let s = server("").await;

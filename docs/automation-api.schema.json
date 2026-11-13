@@ -425,6 +425,13 @@
             "null"
           ]
         },
+        "origin": {
+          "description": "From the browser (#900): the `Origin` its page's player sent with a video's stream or\nfile (`video_page`, `video_lookup`), sent again with it, its playlists and each of its\npieces, as a site's video server may serve its own pages' players only.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "pair": {
           "default": false,
           "description": "The remote control (#157, `misterdownloadmanager-cli pair`): show a new pairing code;\nanswered with it, the page's addresses and a QR code to scan ([`api::PairAnswer`]).",

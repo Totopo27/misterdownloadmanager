@@ -141,6 +141,26 @@ pub fn clipboard_text() -> Option<String> {
     })
 }
 
+/// A number that changes whenever the clipboard does, so the watch for copied links
+/// (clipboard.rs) reads it only then: Windows' sequence number. None where the system keeps none
+/// a program can ask for without opening the clipboard (Linux, macOS): read at each look.
+/// Off-screen test copies: when their `MDM_TEST_CLIPBOARD` file last changed (or never).
+pub fn clipboard_changes() -> Option<u64> {
+    if offscreen() {
+        let changed = std::env::var_os("MDM_TEST_CLIPBOARD")
+            .and_then(|f| std::fs::metadata(f).ok()?.modified().ok())
+            .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+            .map_or(0, |d| d.as_nanos() as u64);
+        return Some(changed);
+    }
+    #[cfg(windows)]
+    return Some(u64::from(win32::clipboard_sequence()));
+    // Linux and macOS: no such number without the clipboard's own protocol (X11's XFixes,
+    // macOS's changeCount): the watch reads the text each time, off the window's thread.
+    #[cfg(not(windows))]
+    None
+}
+
 /// How long a read or write of the clipboard waits for the one under way in this process.
 /// Ours take milliseconds; one that waits on a program that owns the clipboard and hangs
 /// (#418) is given up on, so the window's thread is never held by it for longer.
@@ -376,6 +396,9 @@ fn app() -> eframe::Result {
             ctx.request_repaint();
         }
     });
+    // macOS: so do the .torrent files and magnet links Finder and the browsers hand over (#698).
+    #[cfg(target_os = "macos")]
+    unix::open_events::start(tx.clone(), wake.clone());
     // The remote control (#141) sends its commands down the same channel.
     let sink = mdm_ipc::Sink::new(tx.clone(), wake.clone());
     let _ = mdm_ipc::serve(tx, move || wake());
@@ -461,12 +484,12 @@ fn app() -> eframe::Result {
         tracing::info!("started with the session: hidden");
         viewport = viewport.with_visible(false);
     }
-    // OpenGL or Direct3D (View → Draw with, #89), the other one when it can't start.
+    // OpenGL or Direct3D (View → Draw with, #89), the next way when one can't start (Direct3D on
+    // WARP before OpenGL, #847).
     let plan = renderer::plan(
         loaded.settings.renderer,
         renderer::overridden(&args).as_deref(),
-        renderer::failed_before().is_some(),
-        renderer::gl_unfit_before(),
+        renderer::Known::read(),
     );
     let options = || eframe::NativeOptions {
         viewport: viewport.clone(),

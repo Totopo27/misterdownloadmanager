@@ -60,7 +60,10 @@ newest one.
 - **The sound alone**: **Audio only MP3** at its best variable bitrate or at 320, 256, 192 or
   128 kbps, **Audio only OPUS**, and **Audio only FLAC**, with an honest note that FLAC can't
   add quality the site's sound doesn't have.
-- **Videos that need you signed in**: **Options → Sites Logins → Cookies for video sites** lets
-  yt-dlp read a browser's cookies, for pasted links. Chrome, Edge and Brave lock theirs on
-  Windows, and the window says so; Firefox works, and so does the button over the video.
+- **Videos that need you signed in**: the button over the video hands MDM the page's own
+  cookies, so you're signed in as in the browser. For pasted links and playlists, **Options →
+  Sites Logins → Cookies for video sites** lets yt-dlp read a browser's cookies, from the
+  profile you choose: a separate one with a spare account works well. Chrome, Edge and Brave
+  lock theirs on Windows, and the window says so; Firefox works.
+  [The help](video.md#sites-that-want-you-signed-in) says more.
 - **Your own yt-dlp and ffmpeg**: **Helpers...** takes a copy you already have.

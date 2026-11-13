@@ -703,7 +703,7 @@ impl Programs {
                 let title =
                     crate::i18n::fmt(crate::i18n::t("Choose {name}"), &[("name", h.name())]);
                 winui::start_pick(ui.ctx(), &format!("helper-{}", h.name()), move || {
-                    rfd::FileDialog::new().set_title(title).pick_file()
+                    crate::winui::file_dialog(&title).pick_file()
                 });
             }
             if winui::button(

@@ -86,7 +86,7 @@ impl Properties {
             Outcome::Done(()) => {
                 let address = url::Url::parse(self.address.trim())
                     .ok()
-                    .filter(|u| !self.stream && *u != item.url);
+                    .filter(|u| self.address_editable(item) && *u != item.url);
                 let referer = self.referer.trim();
                 Outcome::Done(Changes {
                     id: self.id,
@@ -102,6 +102,23 @@ impl Properties {
             Outcome::Closed => Outcome::Closed,
             Outcome::Open => Outcome::Open,
         }
+    }
+
+    /// The address can be replaced (Refresh download address) while the download isn't finished
+    /// or running, unless it isn't a file's address: a video's stream (#795) or a torrent's
+    /// magnet link or .torrent file (#904), which are shown read only. The same answer decides
+    /// the field and OK's check, so a field that can't be edited never holds OK back.
+    fn address_editable(&self, item: &Item) -> bool {
+        item.status != Status::Complete
+            && item.live.is_none()
+            && !self.stream
+            && item.torrent.is_none()
+    }
+
+    /// OK closes the window: the address, when it can be replaced, is one MDM downloads.
+    fn address_ok(&self, item: &Item) -> bool {
+        !self.address_editable(item)
+            || url::Url::parse(self.address.trim()).is_ok_and(|u| mdm_engine::supported(&u))
     }
 
     fn body(&mut self, ui: &mut Ui, o: Pos2, icons: &mut ShellIcons, item: &Item) -> Outcome<()> {
@@ -260,8 +277,7 @@ impl Properties {
             let title = crate::i18n::t("Move to folder").to_owned();
             let from = item.dest.parent().unwrap_or(Path::new(".")).to_path_buf();
             winui::start_pick(ui.ctx(), &format!("move-to-{}", self.id), move || {
-                rfd::FileDialog::new()
-                    .set_title(title)
+                crate::winui::file_dialog(&title)
                     .set_directory(from)
                     .pick_folder()
             });
@@ -277,7 +293,8 @@ impl Properties {
             crate::i18n::t("Address:"),
             LIGHT_TEXT(),
         );
-        if editable && !self.stream {
+        let address_editable = self.address_editable(item);
+        if address_editable {
             let edit = winui::edit_light(
                 ui,
                 r(o, col, 171.0, 467.0 - col, 23.0),
@@ -472,8 +489,7 @@ impl Properties {
             false,
         )
         .clicked();
-        let address_ok = !editable
-            || url::Url::parse(self.address.trim()).is_ok_and(|u| mdm_engine::supported(&u));
+        let address_ok = self.address_ok(item);
         if winui::escape_pressed(ui) {
             Outcome::Closed
         } else if ok || winui::enter_pressed(ui) {
@@ -517,4 +533,61 @@ fn readonly(ui: &mut Ui, rc: egui::Rect, value: &str) {
 
 fn password(ui: &mut Ui, rc: egui::Rect, value: &mut String, enabled: bool) {
     winui::password_light_on(ui, rc, value, enabled, LIGHT_BG());
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn item(url: &str) -> Item {
+        let mut item = Item::new(
+            1,
+            url::Url::parse(url).unwrap(),
+            PathBuf::from("file.iso"),
+            crate::model::Category::Programs,
+        );
+        item.status = Status::Stopped;
+        item
+    }
+
+    /// #904: a torrent's address is its magnet link (or .torrent), shown read only; OK closes
+    /// the window instead of asking for an http(s) or ftp(s) address it can't be given.
+    #[test]
+    fn a_torrents_properties_close_with_ok() {
+        let mut torrent = item("magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567");
+        torrent.torrent = Some(crate::torrents::TorrentSpec {
+            hash: "0123456789abcdef0123456789abcdef01234567".into(),
+            files: None,
+            folder: PathBuf::from("f"),
+            uploaded: 0,
+            seeded_secs: 0,
+            peers: 0,
+            up_speed: 0.0,
+            upload_limit: None,
+            in_order: false,
+            ends_first: false,
+        });
+        let props = Properties::new(&torrent, crate::debrid::Route::default());
+        assert!(!props.address_editable(&torrent));
+        assert!(props.address_ok(&torrent));
+    }
+
+    /// A file's address that isn't finished stays editable, and a bad one still holds OK back.
+    #[test]
+    fn a_files_address_is_still_checked() {
+        let file = item("https://example.com/file.iso");
+        let mut props = Properties::new(&file, crate::debrid::Route::default());
+        assert!(props.address_editable(&file));
+        assert!(props.address_ok(&file));
+        "not an address".clone_into(&mut props.address);
+        assert!(!props.address_ok(&file));
+        "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567"
+            .clone_into(&mut props.address);
+        assert!(!props.address_ok(&file));
+        "ftp://example.com/file.iso".clone_into(&mut props.address);
+        assert!(props.address_ok(&file));
+        let mut done = item("https://example.com/file.iso");
+        done.status = Status::Complete;
+        assert!(!props.address_editable(&done));
+    }
 }

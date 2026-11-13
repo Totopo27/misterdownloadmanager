@@ -920,9 +920,9 @@
 #, machine
 	Checking {name} ({n} of {total})...	{name} ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ ({total} ਵਿੱਚੋਂ {n})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
-	Checking {percent}	{percent} ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ
+	Checking {percent}	ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ {percent}
 #. text in the Checksum window; text in the Link grabber window
 #. the trailing ... means it is still going on: keep it
 #, machine
@@ -2289,6 +2289,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	ਇਸ ਦੀਆਂ ਫ਼ਾਈਲਾਂ ਲਿਖੀਆਂ ਨਹੀਂ ਜਾ ਸਕੀਆਂ: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	ਇਸ ਦੀ ਤਸਵੀਰ ਅਤੇ ਆਵਾਜ਼ ਨੂੰ ਇੱਕ ਫ਼ਾਈਲ ਵਿੱਚ ਜੋੜਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	ਇਸ ਦੀ ਤਸਵੀਰ ਅਤੇ ਆਵਾਜ਼ ਨੂੰ ਇੱਕ ਫ਼ਾਈਲ ਵਿੱਚ ਜੋੜਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ ({error})। ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਫ਼ਾਈਲਾਂ ਮੁੜ ਜੋੜਨ ਲਈ ਫੋਲਡਰ ਵਿੱਚ ਰਹਿੰਦੀਆਂ ਹਨ ({files}); “ਡਿਸਕ ਤੋਂ ਫ਼ਾਈਲ ਵੀ ਮਿਟਾਓ” ਚੋਣ ਨਾਲ ਡਾਊਨਲੋਡ ਮਿਟਾਉਣ 'ਤੇ ਇਹ ਫ਼ਾਈਲਾਂ ਵੀ ਹਟਾ ਦਿੱਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	ਇਸ ਦੀ ਰੀਲੀਜ਼ ਜਾਣਕਾਰੀ ਉਮੀਦ ਅਨੁਸਾਰ ਨਹੀਂ ਹੈ: {detail}
@@ -2682,6 +2692,10 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	ਮੱਧਮ
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	ਜੋੜਿਆ ਜਾ ਰਿਹਾ ਹੈ {percent}
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
@@ -5191,6 +5205,7 @@
 #, machine
 	United States Minor Outlying Islands	ਸੰਯੁਕਤ ਰਾਜ ਦੇ ਛੋਟੇ ਬਾਹਰੀ ਟਾਪੂ
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	ਅਣਜਾਣ
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5828,14 +5843,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service} 'ਤੇ {percent}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} ਮਰਜ ਕੀਤਾ ਗਿਆ
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} ਤਸਦੀਕ ਕੀਤਾ ਗਿਆ
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6505,7 +6512,7 @@ menu	&Add new download	ਨਵਾਂ ਡਾਊਨਲੋਡ ਸ਼ਾਮਲ ਕਰ
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	ਨਵਾਂ ਡਾਊਨਲੋਡ &ਸ਼ਾਮਲ ਕਰੋ...
+menu	Add &new download...	ਨਵਾਂ ਡਾਊਨਲੋਡ &ਸ਼ਾਮਲ ਕਰੋ...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6614,7 +6621,7 @@ menu	&Stop Download	ਡਾਊਨਲੋਡ ਰੋਕੋ(&S)
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	ਟੈਕਸਟ(&T)
+menu	Te&xt	ਟੈਕਸਟ(&X)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6725,7 +6732,7 @@ menu	By Save &Path	ਸੇਵ ਮਾਰਗ ਅਨੁਸਾਰ(&P)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	ਸਥਿਤੀ ਅਨੁਸਾਰ(&a)
+menu	By Stat&us	ਸਥਿਤੀ ਅਨੁਸਾਰ(&u)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6773,6 +6780,10 @@ menu	Delete from queue	ਕਤਾਰ ਤੋਂ ਮਿਟਾਓ
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 #, machine
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): ਇਸ ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ ਵਿੱਚ ਕੋਈ Direct3D 12 ਡਰਾਈਵਰ ਨਹੀਂ ਹੈ
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
@@ -6926,9 +6937,25 @@ menu	Open with...	ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	ਇੱਥੇ OpenGL ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	ਇੱਥੇ OpenGL ਗ੍ਰਾਫਿਕਸ ਡਰਾਈਵਰ ਦੇ ਅੰਦਰ ਫ੍ਰੀਜ਼ ਹੋ ਗਿਆ
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	ਇੱਥੇ OpenGL MDM ਨੂੰ ਡਰਾਅ ਕਰਨ ਲਈ ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	OpenGL ਦਾ ਪਹਿਲਾ ਫਰੇਮ 10 ਸਕਿੰਟਾਂ ਦੇ ਅੰਦਰ ਨਹੀਂ ਦਿਖਾਇਆ ਗਿਆ
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	OpenGL ਦੀ ਆਖਰੀ ਸ਼ੁਰੂਆਤ ਇਸਦੇ ਪਹਿਲੇ ਫਰੇਮ ਤੋਂ ਪਹਿਲਾਂ ਖਤਮ ਹੋ ਗਈ
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

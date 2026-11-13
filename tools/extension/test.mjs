@@ -55,9 +55,11 @@ function fakeApi({
   const event = (name) => {
     const fns = [];
     return {
-      addListener: (f) => {
+      addListener: (f, ...spec) => {
         fns.push(f);
         listeners[name] = (...a) => fns.reduce((r, g) => g(...a) ?? r, undefined);
+        // Its filter and extra info, as the listener asked (#900: Chromium's extraHeaders).
+        listeners[`${name}Spec`] = spec;
       },
     };
   };
@@ -170,6 +172,8 @@ function fakeApi({
     webRequest: {
       onBeforeRequest: event("beforeRequest"),
       onBeforeSendHeaders: event("beforeSendHeaders"),
+      onSendHeaders: event("sendHeaders"),
+      onErrorOccurred: event("errorOccurred"),
       onHeadersReceived: event("headersReceived"),
       onResponseStarted: event("responseStarted"),
       onAuthRequired: event("authRequired"),
@@ -1236,6 +1240,58 @@ const MPD = (protect) => `<?xml version="1.0"?>
   const v = natives(calls).find((m) => m.video);
   assert.deepEqual([v.url, v.referrer, v.src], ["https://emb.test/player/1", "https://blog.test/post", "https://emb.test/e/master.m3u8"]);
   ok("media list: a frame's stream goes with the frame's page");
+}
+{
+  // #900: what the browser sent with a stream (its Referer, Origin and Cookie; Chromium shows
+  // them with extraHeaders only) goes with it, from the media list and from the button over its
+  // player: the Referer and Origin its player sent, and the cookies it sent that no store lists
+  // (a frame's own) beside the store's, for its host. A request that failed leaves nothing.
+  const ask = (listeners, m, sender) => new Promise((r) => listeners.message(m, sender, (x) => r(JSON.parse(JSON.stringify(x)))));
+  for (const firefox of [false, true]) {
+    const frames = { 0: { href: "https://anime.test/ep/1", players: [] }, 2: { href: "https://player.video.test/embed/x", players: [] } };
+    const tabs = { 9: { id: 9, url: "https://anime.test/ep/1", title: "Episode 1" } };
+    const { api, calls, listeners } = fakeApi({ firefox, frames, tabs, rules: { videoLookup: true }, lookup: () => ({ ok: true, lookup: { state: "pending", token: "t1" } }) });
+    load(api, firefox);
+    await settle();
+    assert.deepEqual(JSON.parse(JSON.stringify(listeners.sendHeadersSpec[1])), firefox ? ["requestHeaders"] : ["requestHeaders", "extraHeaders"]);
+    const url = "https://cdn.video.test/manifest/x.m3u8?sec=abc";
+    const headers = [
+      { name: "Accept", value: "*/*" },
+      { name: "Origin", value: "https://player.video.test" },
+      { name: "Referer", value: "https://player.video.test/" },
+      { name: "Cookie", value: "sid=1; part=p1" },
+    ];
+    // Another request that failed (its answer is another's), then the stream's.
+    listeners.sendHeaders({ requestId: "6", tabId: 9, frameId: 0, url: "https://cdn.video.test/x.m3u8", requestHeaders: [{ name: "Origin", value: "https://wrong.test" }] });
+    listeners.errorOccurred({ requestId: "6" });
+    listeners.responseStarted(res("https://cdn.video.test/x.m3u8", "xmlhttprequest", H("application/vnd.apple.mpegurl"), { requestId: "6" }));
+    listeners.sendHeaders({ requestId: "7", tabId: 9, frameId: 2, url, requestHeaders: headers });
+    listeners.responseStarted(res(url, "xmlhttprequest", H("application/vnd.apple.mpegurl"), { frameId: 2, requestId: "7" }));
+    await settle();
+    assert.equal((await popupAsk(listeners, { type: "media-download", tab: 9, url })).ok, true);
+    const v = natives(calls).find((m) => m.video);
+    assert.deepEqual(v.fetchedWith, { referer: "https://player.video.test/", origin: "https://player.video.test" });
+    assert.equal(v.cookies, "sid=1; part=p1", "the header the browser sent for it");
+    assert.deepEqual(
+      v.cookieJar.map((c) => [c.name, c.value, c.domain, c.hostOnly]),
+      [
+        ["sid", "1", ".tube.test", false],
+        ["part", "p1", "cdn.video.test", true],
+      ],
+      "the store's, and the frame's own for its host",
+    );
+    await popupAsk(listeners, { type: "media-download", tab: 9, url: "https://cdn.video.test/x.m3u8" });
+    const failed = natives(calls).filter((m) => m.video).at(-1);
+    assert.deepEqual([failed.src, failed.fetchedWith], ["https://cdn.video.test/x.m3u8", undefined], "nothing kept from a failed request");
+    // The button over the frame's player (playing from blob:): its stream, the same way.
+    const sender = { id: "ours", url: "https://player.video.test/embed/x", frameId: 2, tab: { id: 9, url: "https://anime.test/ep/1", incognito: false } };
+    await ask(listeners, { type: "video-lookup", src: "blob:https://player.video.test/1", title: "" }, sender);
+    const m = natives(calls).find((x) => x.videoLookup);
+    assert.equal(m.videoLookup.src, url);
+    assert.deepEqual(m.fetchedWith, { referer: "https://player.video.test/", origin: "https://player.video.test" });
+    assert.equal(m.cookieJar.length, 2);
+  }
+  ok("a stream goes with the Referer, Origin and cookies its player sent (#900)");
 }
 {
   // The browser stopped the script and started it again: what the tab loaded is read back.

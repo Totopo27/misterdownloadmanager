@@ -5,7 +5,7 @@
 use std::net::{IpAddr, Ipv4Addr};
 use std::time::Duration;
 
-use mdm_engine::download::probe;
+use mdm_engine::download::{State, probe};
 use mdm_engine::{Destination, Download, Options, Proxy, Request};
 use mdm_labserver::{Config, LabServer};
 
@@ -45,7 +45,8 @@ async fn the_look_and_the_download_see_the_server() {
             ..opts()
         },
     );
-    // Seen while it runs (the progress window), not only at the end.
+    // Seen while it runs (the progress window), not only at the end; whole from the first
+    // look on (#933: the round trip came before the address, as the connection opened).
     let mut seen = None;
     for _ in 0..100 {
         seen = d.snapshot().server;
@@ -58,6 +59,42 @@ async fn the_look_and_the_download_see_the_server() {
     assert_eq!(seen.ip, Some(IpAddr::V4(Ipv4Addr::LOCALHOST)));
     assert!(seen.rtt.is_some() && !seen.proxied);
     d.wait().await.unwrap();
+}
+
+/// #933: a server slow to answer (its headers 400 ms after the request) was told half, its
+/// connection's time without its address, from the connection's opening to its answer; it is
+/// told whole, once it answered.
+#[tokio::test]
+async fn a_server_slow_to_answer_is_told_whole() {
+    let lab = LabServer::start(Config::default()).await.unwrap();
+    let dir = tempfile::tempdir().unwrap();
+    let d = Download::start(
+        Request {
+            url: lab
+                .url("/gen/256K/slow.bin?seed=933&latency_ms=400")
+                .parse()
+                .unwrap(),
+            headers: Default::default(),
+            dest: Destination::Dir(dir.path().to_owned()),
+        },
+        opts(),
+    );
+    // Looked at every 5 ms from the start, as the progress window does every frame.
+    let mut told = None;
+    loop {
+        let view = d.snapshot();
+        if let Some(seen) = view.server {
+            assert_eq!(seen.ip, Some(IpAddr::V4(Ipv4Addr::LOCALHOST)), "{seen:?}");
+            assert!(seen.rtt.is_some(), "{seen:?}");
+            told = Some(seen);
+        }
+        if matches!(view.state, State::Done | State::Failed | State::Cancelled) {
+            break;
+        }
+        tokio::time::sleep(Duration::from_millis(5)).await;
+    }
+    d.wait().await.unwrap();
+    told.expect("the download saw the server");
 }
 
 #[tokio::test]

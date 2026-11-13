@@ -920,9 +920,9 @@
 #, machine
 	Checking {name} ({n} of {total})...	{name} சரிபார்க்கப்படுகிறது ({total} இல் {n})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
-	Checking {percent}	{percent} சரிபார்க்கிறது
+	Checking {percent}	சரிபார்க்கிறது {percent}
 #. text in the Checksum window; text in the Link grabber window
 #. the trailing ... means it is still going on: keep it
 #, machine
@@ -2289,6 +2289,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	அதன் கோப்புகளை எழுத முடியவில்லை: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	அதன் படம் மற்றும் ஒலியை ஒரே கோப்பாக இணைக்க முடியவில்லை ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	அதன் படம் மற்றும் ஒலியை ஒரே கோப்பாக இணைக்க முடியவில்லை ({error}). பதிவிறக்கப்பட்ட பகுதிகள் மீண்டும் தொடங்கும்போது இணைப்பதற்காகக் கோப்புறையிலேயே இருக்கும் ({files}); “வட்டிலிருந்து கோப்பையும் நீக்கு” என்பதைத் தேர்ந்தெடுத்து பதிவிறக்கத்தை நீக்கினால், அந்தக் கோப்புகள் நீக்கப்படும்.
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	அதன் வெளியீட்டுத் தகவல் எதிர்பார்த்தபடி இல்லை: {detail}
@@ -2682,6 +2692,10 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	நடுத்தரம்
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	இணைக்கிறது {percent}
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
@@ -5191,6 +5205,7 @@
 #, machine
 	United States Minor Outlying Islands	அமெரிக்க ஐக்கிய நாடுகளின் சிறிய வெளித்தீவுகள்
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	அறியப்படாதது
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5828,14 +5843,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service} இல் {percent}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} ஒன்றிணைக்கப்படுகிறது
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} சரிபார்க்கப்படுகிறது
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6505,7 +6512,7 @@ menu	&Add new download	புதிய பதிவிறக்கத்தை�
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	புதிய பதிவிறக்கத்தைச் &சேர்...
+menu	Add &new download...	புதிய பதிவிறக்கத்தைச் &சேர்...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6614,7 +6621,7 @@ menu	&Stop Download	பதிவிறக்கத்தை நிறுத்�
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	உரை(&T)
+menu	Te&xt	உரை(&X)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6725,7 +6732,7 @@ menu	By Save &Path	&சேமிக்கும் பாதையின்ப�
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	நி&லையின்படி
+menu	By Stat&us	நி&லையின்படி
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6773,6 +6780,10 @@ menu	Delete from queue	வரிசையிலிருந்து நீக�
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 #, machine
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): இந்த கிராபிக்ஸ் கார்டில் Direct3D 12 இயக்கி இல்லை
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
@@ -6926,9 +6937,25 @@ menu	Open with...	இதனுடன் திற...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	OpenGL இங்குத் தொடங்கவில்லை
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	OpenGL இங்கு கிராபிக்ஸ் டிரைவரில் முடங்கியது
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	MDM-ஐ வரைவதற்கு இங்குள்ள OpenGL மிகவும் பழையது
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	OpenGL இன் முதல் ஃப்ரேம் 10 வினாடிகளுக்குள் காட்டப்படவில்லை
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	OpenGL இன் கடைசி தொடக்கம் அதன் முதல் ஃப்ரேமிற்கு முன் முடிந்தது
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

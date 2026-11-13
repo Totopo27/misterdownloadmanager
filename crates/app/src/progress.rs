@@ -524,7 +524,8 @@ impl Progress {
         // Hidden until dialogs::keep_theme has given it its theme.
         let mut builder = crate::quiet(ViewportBuilder::default())
             .with_visible(false)
-            .with_title(title)
+            // The taskbar shows it: without isolates (#919).
+            .with_title(crate::i18n::os_text(&title))
             .with_inner_size(shown)
             // IDM's progress window has 2 px borders and a fixed size. On Windows the sizing
             // frame is asked for and win32::progress_frame trims its borders, disables resizing
@@ -575,8 +576,7 @@ impl Progress {
                         Some(CaptionButton::ToTray) => Action::Hide,
                         Some(CaptionButton::Minimize) if minimize_hides => Action::Hide,
                         Some(CaptionButton::Minimize) => {
-                            ui.ctx()
-                                .send_viewport_cmd(egui::ViewportCommand::Minimized(true));
+                            crate::dialogs::minimize(ui.ctx(), hwnd);
                             action
                         }
                         _ => action,
@@ -1003,7 +1003,7 @@ impl Progress {
             crate::i18n::t("Transfer rate"),
             winui::TEXT(),
         );
-        let rate = if item.status == Status::Downloading {
+        let rate = if item.status == Status::Downloading && !item.past_last_byte() {
             model::rate(item.rate())
         } else {
             String::new()
@@ -1313,6 +1313,10 @@ impl Progress {
             winui::copyable(ui, rect, key, s, cut);
         };
         let web_page = item.got_web_page();
+        // A failure that takes a paragraph to explain: the reason under "Error", in the rows of
+        // the sizes and times, which say nothing then (a site's page, #701; a video's failed
+        // merge, what stays for Resume).
+        let explained = web_page || item.merge_failed();
         let status = match item.status {
             // A torrent reading and checking its files says so, not "Receiving data" (#39).
             _ if let Some(checking) = item.torrent_checking() => checking,
@@ -1359,7 +1363,7 @@ impl Progress {
             // i18n: a download's status (state it is in, not a command): waiting in a queue
             Status::Queued => crate::i18n::t("Waiting").to_owned(),
             // The site's page instead of the file (#701): why, and what to do, under it.
-            Status::Error if web_page => crate::i18n::t("Error").to_owned(),
+            Status::Error if explained => crate::i18n::t("Error").to_owned(),
             Status::Error => crate::i18n::fmt(
                 // i18n: a download's status: it failed, with the reason
                 crate::i18n::t("Error: {error}"),
@@ -1410,7 +1414,8 @@ impl Progress {
                 crate::i18n::mark("Transfer rate"),
                 112.0,
                 135.0,
-                if item.status == Status::Downloading {
+                // Every byte in (#736): nothing comes in while the file is checked or joined.
+                if item.status == Status::Downloading && !item.past_last_byte() {
                     model::rate(item.rate())
                 } else {
                     String::new()
@@ -1446,7 +1451,7 @@ impl Progress {
         for (label, base, vx, value) in rows {
             // A site's page instead of the file (#701): its sizes and times say nothing, the
             // reason takes their rows.
-            if web_page && label != "Status" {
+            if explained && label != "Status" {
                 continue;
             }
             let vx = if vx == 135.0 {
@@ -1469,7 +1474,7 @@ impl Progress {
             };
             fit(ui, label, vx, base, &value, vc);
         }
-        if web_page {
+        if explained {
             winui::paragraph(
                 p,
                 o.x + 33.0,

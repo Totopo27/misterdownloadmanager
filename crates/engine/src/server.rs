@@ -7,6 +7,11 @@
 //! one more (TLS 1.3). The time a connection took to open, its name lookup left out (the
 //! resolver reports it, `dns_spent`), divided by those round trips, is the round trip's
 //! estimate; the quickest of the download's connections is kept.
+//!
+//! All of it is told once the first answer came (#933): the answer says which address sent it
+//! and whether over https. Before then a connection's time alone would be half a record, with no
+//! address, and twice the real round trip over https; a server slow to answer kept it so for
+//! seconds, and a download stopped meanwhile kept it for good.
 
 use std::future::Future;
 use std::net::IpAddr;
@@ -41,11 +46,16 @@ struct Seen {
     /// The quickest connection's opening, and whether the answer came over https.
     quickest: Option<Duration>,
     tls: bool,
+    /// An answer came: `server` and `tls` are its.
+    answered: bool,
 }
 
 impl ServerSeen {
     pub fn get(&self) -> Option<Server> {
         let s = self.inner.lock().unwrap();
+        if !s.answered {
+            return None;
+        }
         let mut server = s.server.clone();
         server.rtt = s.quickest.map(|d| d / if s.tls { 2 } else { 1 });
         (server.ip.is_some() || server.rtt.is_some()).then_some(server)
@@ -69,6 +79,7 @@ impl ServerSeen {
             s.server.ip = Some(a.ip());
         }
         s.tls = resp.url().scheme() == "https";
+        s.answered = true;
         if let Some(cdn) = cdn_of(resp.headers()) {
             s.server.cdn = Some(cdn);
         }
@@ -194,6 +205,10 @@ mod tests {
         let seen = ServerSeen::default();
         assert_eq!(seen.get(), None);
         seen.connected_in(Duration::from_millis(80));
+        // #933: a connection open, no answer yet: nothing told (not a round trip without its
+        // address, perhaps twice too long).
+        assert_eq!(seen.get(), None);
+        seen.inner.lock().unwrap().answered = true;
         seen.connected_in(Duration::from_millis(60));
         seen.connected_in(Duration::from_millis(90));
         assert_eq!(seen.get().unwrap().rtt, Some(Duration::from_millis(60)));

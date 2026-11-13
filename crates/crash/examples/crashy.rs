@@ -58,6 +58,7 @@ fn main() {
                         main: true,
                         seconds: 1,
                         busy: None,
+                        step: String::new(),
                     });
                     simulate(&h);
                     // The dump is written while this thread waits for the answer: done.

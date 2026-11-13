@@ -1,21 +1,23 @@
 //! Adaptive streams for the browser tests: an HLS master playlist with two video variants and an
 //! audio rendition, and a DASH manifest with the same tracks (and a copy marked as encrypted with
 //! Widevine, for the extension's media list to show as protected, #38). Each track has `SEGMENTS` segments
-//! of `SEGMENT_SECS` seconds. HLS segments are real MPEG-TS (`ts_segment`): one AAC stream of
-//! silence each, so ffmpeg (yt-dlp's HLS downloader) finds a stream and remuxes it, as it does a
-//! site's (#236: fake bytes made every ffmpeg stop with "could not find codec parameters" or
-//! "Output file does not contain any stream"). The video tracks carry that sound too: nothing here
-//! decodes pictures. DASH segments are deterministic fakes (init segments start with an `ftyp`
-//! box), enough for a client that lists, fetches or joins them, not for one that decodes them.
+//! of `SEGMENT_SECS` seconds. HLS segments are real MPEG-TS (`ts_segment`), so ffmpeg (yt-dlp's
+//! HLS downloader and its merger) finds their streams and copies them, as it does a site's (#236:
+//! fake bytes made every ffmpeg stop with "could not find codec parameters" or "Output file does
+//! not contain any stream"): the audio track is AAC silence, each video track an H.264 grey
+//! picture (`h264`) and nothing else, as a site's are when its sound is a rendition of its own
+//! (a video track that held only sound failed yt-dlp's merge, `-map 0:v:0`). DASH segments are
+//! deterministic fakes (init segments start with an `ftyp` box), enough for a client that lists,
+//! fetches or joins them, not for one that decodes them.
 
 use std::collections::HashMap;
 
 use axum::extract::{Path, Query};
-use axum::http::{StatusCode, header};
+use axum::http::{HeaderMap, StatusCode, header};
 use axum::response::{IntoResponse, Response};
 use percent_encoding::{NON_ALPHANUMERIC, utf8_percent_encode};
 
-use crate::content;
+use crate::{content, h264};
 
 pub const SEGMENTS: u32 = 3;
 pub const SEGMENT_SECS: u32 = 4;
@@ -69,9 +71,10 @@ fn segment(track: usize, index: u32, len: usize) -> Vec<u8> {
     buf
 }
 
-/// The PMT's PID, the sound's, and the null packets' (ISO/IEC 13818-1).
+/// The PMT's PID, the sound's, the picture's, and the null packets' (ISO/IEC 13818-1).
 const PMT_PID: u16 = 0x1000;
 const AUDIO_PID: u16 = 0x0100;
+const VIDEO_PID: u16 = 0x0101;
 const NULL_PID: u16 = 0x1fff;
 /// AAC-LC, 32 kHz, mono: 1024 samples a frame, so a 4 s segment is exactly 125 frames.
 const RATE: u32 = 32_000;
@@ -80,38 +83,73 @@ const FRAMES: u32 = SEGMENT_SECS * RATE / 1024;
 const SILENCE: [u8; 4] = [0x01, 0x18, 0x20, 0x07];
 /// 90 kHz clock ticks per AAC frame.
 const FRAME_TICKS: u64 = 1024 * 90_000 / RATE as u64;
+/// The video tracks' frames a second, and their 90 kHz ticks per frame.
+const FPS: u32 = 25;
+const VIDEO_TICKS: u64 = 90_000 / FPS as u64;
 
-/// Segment `index` of track number `track` as MPEG-TS, exactly `len` bytes (a multiple of 188):
-/// a PAT, a PMT, one PES of `FRAMES` silent ADTS frames whose PTS goes on from the segment
-/// before (with a PCR), then null packets with seeded payloads, so every segment of every track
-/// differs. Continuity counters go on from the segment before, as in one stream cut in pieces.
-fn ts_segment(track: usize, index: u32, len: usize) -> Vec<u8> {
-    let pts = u64::from(index) * u64::from(FRAMES) * FRAME_TICKS;
-    let mut pes = vec![0x00, 0x00, 0x01, 0xc0, 0, 0, 0x80, 0x80, 5];
+/// A PES of stream `id` with `pts` and `payload`, its length filled in.
+fn pes(id: u8, pts: u64, payload: &[u8]) -> Vec<u8> {
+    let mut pes = vec![0x00, 0x00, 0x01, id, 0, 0, 0x80, 0x80, 5];
     pes.extend(timestamp(0x2, pts));
-    let frame_len = 7 + SILENCE.len();
-    for _ in 0..FRAMES {
-        pes.extend(adts_header(frame_len));
-        pes.extend(SILENCE);
-    }
+    pes.extend(payload);
     let pes_len = u16::try_from(pes.len() - 6).expect("a PES fits its length field");
     pes[4..6].copy_from_slice(&pes_len.to_be_bytes());
+    pes
+}
 
-    let audio_packets = packet_count(pes.len());
+/// Segment `index` of track number `track` as MPEG-TS, exactly `len` bytes (a multiple of 188):
+/// a PAT, a PMT, then the track's stream, whose PTS goes on from the segment before: the sound's
+/// one PES of `FRAMES` silent ADTS frames, or a picture's PES a frame (`FPS` a second, the first
+/// an IDR frame), each PES's first packet with a PCR. Then null packets with seeded payloads, so
+/// every segment of every track differs. Continuity counters go on from the segment before, as
+/// in one stream cut in pieces.
+fn ts_segment(track: usize, index: u32, len: usize) -> Vec<u8> {
+    let start = u64::from(index) * u64::from(SEGMENT_SECS) * 90_000;
+    // The stream's PID, its PMT type, and its PESes with their PTS.
+    let (pid, kind, pieces) = match TRACKS[track].video {
+        Some((w, h)) => {
+            // idr_pic_id 1 or 2: two IDR frames in a row differ in it.
+            let idr = index % 2 + 1;
+            let frames = (0..SEGMENT_SECS * FPS).map(|n| {
+                let pts = start + u64::from(n) * VIDEO_TICKS;
+                (pts, pes(0xe0, pts, &h264::frame(w, h, FPS, idr, n)))
+            });
+            (VIDEO_PID, 0x1b, frames.collect::<Vec<_>>())
+        }
+        None => {
+            debug_assert_eq!(start, u64::from(index) * u64::from(FRAMES) * FRAME_TICKS);
+            let frame_len = 7 + SILENCE.len();
+            let mut sound = Vec::new();
+            for _ in 0..FRAMES {
+                sound.extend(adts_header(frame_len));
+                sound.extend(SILENCE);
+            }
+            (AUDIO_PID, 0x0f, vec![(start, pes(0xc0, start, &sound))])
+        }
+    };
+
+    let per_segment: usize = pieces.iter().map(|(_, p)| packet_count(p.len())).sum();
     let cc = |per_segment: usize| ((index as usize * per_segment) % 16) as u8;
     let mut out = Vec::with_capacity(len);
     out.extend(psi_packet(0, cc(1), &pat()));
-    out.extend(psi_packet(PMT_PID, cc(1), &pmt()));
-    let mut rest = &pes[..];
+    out.extend(psi_packet(PMT_PID, cc(1), &pmt(kind, pid)));
     let mut n = 0;
-    while !rest.is_empty() {
-        let counter = (cc(audio_packets) + n as u8) & 15;
-        let (packet, used) = pes_packet(n == 0, counter, (n == 0).then_some(pts), rest);
-        out.extend(packet);
-        rest = &rest[used..];
-        n += 1;
+    for (i, (pts, pes)) in pieces.iter().enumerate() {
+        // The sound's one PES is a random access point, a picture's first frame only.
+        let key = i == 0;
+        let mut rest = &pes[..];
+        let mut first = true;
+        while !rest.is_empty() {
+            let counter = (cc(per_segment) + n as u8) & 15;
+            let pcr = first.then_some((*pts, key));
+            let (packet, used) = pes_packet(pid, first, counter, pcr, rest);
+            out.extend(packet);
+            rest = &rest[used..];
+            first = false;
+            n += 1;
+        }
     }
-    debug_assert_eq!(n, audio_packets);
+    debug_assert_eq!(n, per_segment);
     assert!(out.len() <= len, "a {len}-byte segment holds its stream");
     let mut fill = segment(track, index, len - out.len());
     for (k, packet) in fill.chunks_mut(TS_PACKET).enumerate() {
@@ -133,15 +171,22 @@ fn packet_count(len: usize) -> usize {
     1 + len.saturating_sub(176).div_ceil(184)
 }
 
-/// One TS packet of the sound's PES and how much of `rest` it carries: the first with
-/// payload_unit_start (and the PCR), the last filled out with adaptation-field stuffing.
-fn pes_packet(start: bool, cc: u8, pcr: Option<u64>, rest: &[u8]) -> (Vec<u8>, usize) {
+/// One TS packet of stream `pid`'s PES and how much of `rest` it carries: the first with
+/// payload_unit_start and the PCR (with the random access flag when `.1`), the last filled out
+/// with adaptation-field stuffing.
+fn pes_packet(
+    pid: u16,
+    start: bool,
+    cc: u8,
+    pcr: Option<(u64, bool)>,
+    rest: &[u8],
+) -> (Vec<u8>, usize) {
     // The adaptation field's bytes after its length byte.
     let mut field = Vec::new();
-    if let Some(base) = pcr {
-        // Random access and a PCR (a 33-bit base, 6 reserved bits, a 9-bit extension of 0).
+    if let Some((base, key)) = pcr {
+        // A PCR (a 33-bit base, 6 reserved bits, a 9-bit extension of 0).
         field.extend([
-            0x50,
+            if key { 0x50 } else { 0x10 },
             (base >> 25) as u8,
             (base >> 17) as u8,
             (base >> 9) as u8,
@@ -167,8 +212,8 @@ fn pes_packet(start: bool, cc: u8, pcr: Option<u64>, rest: &[u8]) -> (Vec<u8>, u
     let control = if has_field { 0x30 } else { 0x10 };
     let mut p = vec![
         0x47,
-        (u8::from(start) << 6) | (AUDIO_PID >> 8) as u8,
-        AUDIO_PID as u8,
+        (u8::from(start) << 6) | (pid >> 8) as u8,
+        pid as u8,
         control | cc,
     ];
     if has_field {
@@ -204,12 +249,13 @@ fn pat() -> Vec<u8> {
     section(0x00, &[0, 1, 0xc1, 0, 0, 0, 1, pmt[0], pmt[1]])
 }
 
-/// The PMT: one stream, AAC in ADTS (stream type 0x0f), which carries the PCR too.
-fn pmt() -> Vec<u8> {
-    let (hi, lo) = (0xe0 | (AUDIO_PID >> 8) as u8, AUDIO_PID as u8);
+/// The PMT: one stream of type `kind` (0x0f AAC in ADTS, 0x1b H.264) at `pid`, which carries
+/// the PCR too.
+fn pmt(kind: u8, pid: u16) -> Vec<u8> {
+    let (hi, lo) = (0xe0 | (pid >> 8) as u8, pid as u8);
     section(
         0x02,
-        &[0, 1, 0xc1, 0, 0, hi, lo, 0xf0, 0, 0x0f, hi, lo, 0xf0, 0],
+        &[0, 1, 0xc1, 0, 0, hi, lo, 0xf0, 0, kind, hi, lo, 0xf0, 0],
     )
 }
 
@@ -258,10 +304,21 @@ const M3U8: &str = "application/vnd.apple.mpegurl";
 
 /// `/hls/master.m3u8`.
 pub(crate) async fn hls_master() -> Response {
-    let mut s = String::from(
+    master("audio/index.m3u8")
+}
+
+/// `/hls/broken-audio.m3u8`: the same, its sound's pieces not MPEG-TS (seeded bytes): every
+/// piece downloads, and ffmpeg can't read the sound to join it with the picture (a failed merge).
+pub(crate) async fn hls_broken_master() -> Response {
+    master("audio/broken.m3u8")
+}
+
+/// A master playlist of the video tracks, its sound at `audio` (relative to it).
+fn master(audio: &str) -> Response {
+    let mut s = format!(
         "#EXTM3U\n#EXT-X-VERSION:3\n\
          #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=\"aud\",NAME=\"English\",LANGUAGE=\"en\",\
-         DEFAULT=YES,AUTOSELECT=YES,URI=\"audio/index.m3u8\"\n",
+         DEFAULT=YES,AUTOSELECT=YES,URI=\"{audio}\"\n",
     );
     for t in &TRACKS {
         if let Some((w, h)) = t.video {
@@ -280,13 +337,17 @@ pub(crate) async fn hls_file(Path((name, file)): Path<(String, String)>) -> Resp
     let Some((ti, t)) = track(&name) else {
         return StatusCode::NOT_FOUND.into_response();
     };
-    if file == "index.m3u8" {
+    if let Some(prefix) = match file.as_str() {
+        "index.m3u8" => Some("seg"),
+        "broken.m3u8" => Some("broken"),
+        _ => None,
+    } {
         let mut s = format!(
             "#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-TARGETDURATION:{SEGMENT_SECS}\n\
              #EXT-X-MEDIA-SEQUENCE:0\n#EXT-X-PLAYLIST-TYPE:VOD\n"
         );
         for i in 0..SEGMENTS {
-            s += &format!("#EXTINF:{SEGMENT_SECS}.000,\nseg{i}.ts\n");
+            s += &format!("#EXTINF:{SEGMENT_SECS}.000,\n{prefix}{i}.ts\n");
         }
         s += "#EXT-X-ENDLIST\n";
         return text(M3U8, s);
@@ -334,10 +395,54 @@ enc{i}.ts
             encrypt(&ts_segment(ti, i, t.segment_len), &iv),
         );
     }
+    // Named as pieces, but no MPEG-TS: `broken.m3u8`'s.
+    if let Some(i) = numbered(&file, "broken", ".ts").filter(|i| *i < SEGMENTS) {
+        return bytes("video/mp2t", segment(ti, i, t.segment_len));
+    }
     match numbered(&file, "seg", ".ts") {
         Some(i) if i < SEGMENTS => bytes("video/mp2t", ts_segment(ti, i, t.segment_len)),
         _ => StatusCode::NOT_FOUND.into_response(),
     }
+}
+
+/// #900: the HLS stream again, served only as the browser asks for it from a page of `site` (a
+/// host and port): every request, the playlists' and each segment's, must come with that page's
+/// `Origin` and a `Referer` on it, as a site's video server checks (a player on another site's
+/// page, a CDN that serves its own site's player only). Anything else gets 403. Its answers
+/// allow that origin to read them (CORS), as the browser's player on that page does.
+fn guarded(site: &str, headers: &HeaderMap, resp: Response) -> Response {
+    let want = format!("http://{site}");
+    let origin = headers.get(header::ORIGIN).and_then(|v| v.to_str().ok());
+    let referer = headers.get(header::REFERER).and_then(|v| v.to_str().ok());
+    let allowed = origin == Some(want.as_str())
+        && referer.is_some_and(|r| r.starts_with(&format!("{want}/")));
+    let mut resp = if allowed {
+        resp
+    } else {
+        (
+            StatusCode::FORBIDDEN,
+            format!("the Origin and Referer of {want} are required\n"),
+        )
+            .into_response()
+    };
+    if let Ok(v) = want.parse() {
+        resp.headers_mut()
+            .insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, v);
+    }
+    resp
+}
+
+/// `/hlsg/{site}/master.m3u8` (#900): `/hls/master.m3u8` for pages of `site` only ([`guarded`]).
+pub(crate) async fn hlsg_master(Path(site): Path<String>, headers: HeaderMap) -> Response {
+    guarded(&site, &headers, hls_master().await)
+}
+
+/// `/hlsg/{site}/{track}/{file}` (#900): `/hls/{track}/{file}` for pages of `site` only.
+pub(crate) async fn hlsg_file(
+    Path((site, name, file)): Path<(String, String, String)>,
+    headers: HeaderMap,
+) -> Response {
+    guarded(&site, &headers, hls_file(Path((name, file))).await)
 }
 
 /// The encrypted pieces' key (`/hls/{track}/key.bin`), their playlist's first sequence number.
@@ -535,6 +640,10 @@ mod tests {
         assert_eq!(crc32_mpeg(b"123456789"), 0x0376_e6e7);
     }
 
+    fn pid_of(p: &[u8]) -> u16 {
+        (u16::from(p[1] & 0x1f) << 8) | u16::from(p[2])
+    }
+
     #[test]
     fn segments_are_whole_packets_with_their_stream_first() {
         for (ti, t) in TRACKS.iter().enumerate() {
@@ -542,20 +651,40 @@ mod tests {
                 let s = ts_segment(ti, i, t.segment_len);
                 assert_eq!(s.len(), t.segment_len);
                 assert!(s.chunks(TS_PACKET).all(|p| p[0] == 0x47));
-                let pid = |p: &[u8]| (u16::from(p[1] & 0x1f) << 8) | u16::from(p[2]);
-                let pids: Vec<u16> = s.chunks(TS_PACKET).map(pid).collect();
+                let pids: Vec<u16> = s.chunks(TS_PACKET).map(pid_of).collect();
                 assert_eq!(&pids[..2], [0, PMT_PID]);
-                let audio = pids.iter().filter(|p| **p == AUDIO_PID).count();
-                assert!(pids[2..2 + audio].iter().all(|p| *p == AUDIO_PID));
-                assert!(pids[2 + audio..].iter().all(|p| *p == NULL_PID));
-                // The PES starts in the first sound packet, after its adaptation field.
+                let (pid, kind) = match t.video {
+                    Some(_) => (VIDEO_PID, 0x1b),
+                    None => (AUDIO_PID, 0x0f),
+                };
+                // The PMT names the track's one stream.
+                assert_eq!(s[TS_PACKET + 5 + 12], kind, "{}", t.name);
+                let stream = pids.iter().filter(|p| **p == pid).count();
+                assert!(pids[2..2 + stream].iter().all(|p| *p == pid));
+                assert!(pids[2 + stream..].iter().all(|p| *p == NULL_PID));
+                // The PES starts in the stream's first packet, after its adaptation field
+                // (a PCR, and the random access flag).
                 let first = &s[2 * TS_PACKET..3 * TS_PACKET];
                 assert_eq!(first[1] & 0x40, 0x40);
+                assert_eq!(first[5], 0x50);
                 let payload = &first[5 + first[4] as usize..];
-                assert_eq!(&payload[..4], [0, 0, 1, 0xc0]);
-                // ADTS frames back to back.
-                assert_eq!(&payload[14..16], [0xff, 0xf1]);
-                assert_eq!(&payload[14 + 11..14 + 13], [0xff, 0xf1]);
+                if t.video.is_none() {
+                    assert_eq!(&payload[..4], [0, 0, 1, 0xc0]);
+                    // ADTS frames back to back.
+                    assert_eq!(&payload[14..16], [0xff, 0xf1]);
+                    assert_eq!(&payload[14 + 11..14 + 13], [0xff, 0xf1]);
+                } else {
+                    // A picture: its access unit delimiter, then the SPS (an IDR frame).
+                    assert_eq!(&payload[..4], [0, 0, 1, 0xe0]);
+                    assert_eq!(&payload[14..19], [0, 0, 0, 1, 0x09]);
+                    assert_eq!(&payload[20..25], [0, 0, 0, 1, 0x67]);
+                    // A PES a frame: SEGMENT_SECS × FPS of them.
+                    let starts = s
+                        .chunks(TS_PACKET)
+                        .filter(|p| pid_of(p) == pid && p[1] & 0x40 != 0)
+                        .count();
+                    assert_eq!(starts, (SEGMENT_SECS * FPS) as usize);
+                }
             }
         }
     }

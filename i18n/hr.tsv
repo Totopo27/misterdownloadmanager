@@ -915,7 +915,7 @@
 #, machine
 	Checking {name} ({n} of {total})...	Provjeravam {name} ({n} od {total})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
 	Checking {percent}	Provjera {percent}
 #. text in the Checksum window; text in the Link grabber window
@@ -1788,6 +1788,11 @@
 #. remote control page (on a phone): tab: downloads finished
 #, machine
 	Finished	Završeno
+#. text in a download's progress window
+#. a download's status: every byte is in, the file is being written out and given its name
+#. the trailing ... means it is still going on: keep it
+#, machine
+	Finishing...	Završavanje...
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2274,6 +2279,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	nije bilo moguće zapisati njegove datoteke: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	sliku i zvuk nije bilo moguće spojiti u jednu datoteku ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	slika i zvuk nisu se mogli spojiti u jednu datoteku ({error}). Preuzeto ostaje u mapi za ponovno spajanje ({files}); brisanje preuzimanja s „Izbriši i datoteku s diska” uklanja ga
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	informacije o izdanju nisu očekivane: {detail}
@@ -2667,6 +2682,19 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	srednje
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	Spajanje {percent}
+#. text in the download list (sizes, speeds, status)
+#. a video's status while its picture and sound are joined into one file (ffmpeg)
+#. the trailing ... means it is still going on: keep it
+#, machine
+	Merging...	Spajanje...
+#. text in the download list (sizes, speeds, status)
+#. a video's status while its picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%"
+#, machine
+	Merging... ({percent})	Spajanje... ({percent})
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -3564,6 +3592,11 @@
 #. the trailing ... means it is still going on: keep it
 #, machine
 	Reading the torrent...	Čitanje torrenta...
+#. message or event log entry in the main window
+#. the status strip while Tasks → Import reads a file; {file} is its name
+#. the trailing ... means it is still going on: keep it
+#, machine
+	Reading {file}...	Čitanje {file}...
 #. text in helpers.rs
 #, machine
 	Reads a page and lists every quality the site offers, up to 4K, from YouTube, Vimeo and over a thousand other sites.	Čita stranicu i navodi sve kvalitete koje web-mjesto nudi, do 4K, s YouTubea, Vimea i više od tisuću drugih web-mjesta.
@@ -5153,6 +5186,7 @@
 #, machine
 	United States Minor Outlying Islands	Manji udaljeni otoci Sjedinjenih Država
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	Nepoznato
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5295,6 +5329,10 @@
 #. the trailing ... means it is still going on: keep it
 #, machine
 	Verifying...	Provjeravam...
+#. text in the download list (sizes, speeds, status)
+#. a download's status while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%"
+#, machine
+	Verifying... ({percent})	Provjeravanje... ({percent})
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
@@ -5786,14 +5824,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{percent} na usluzi {service}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} spojeno
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} provjereno
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6463,7 +6493,7 @@ menu	&Add new download	&Dodaj novo preuzimanje
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	&Dodaj novo preuzimanje...
+menu	Add &new download...	&Dodaj novo preuzimanje...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6572,7 +6602,7 @@ menu	&Stop Download	&Zaustavi preuzimanje
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	&Tekst
+menu	Te&xt	&Tekst
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6683,7 +6713,7 @@ menu	By Save &Path	Po putanji &spremanja
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	Po st&atusu
+menu	By Stat&us	Po st&atusu
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6731,6 +6761,10 @@ menu	Delete from queue	Izbriši iz reda čekanja
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 #, machine
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): ova grafička kartica nema upravljački program za Direct3D 12
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
@@ -6884,9 +6918,25 @@ menu	Open with...	Otvori pomoću...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	OpenGL se ovdje nije pokrenuo
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	OpenGL se ovdje zamrznuo unutar grafičkog upravljačkog programa
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	OpenGL je ovdje prestar za crtanje MDM-a
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	Prvi okvir OpenGL-a nije se prikazao unutar 10 sekundi
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	Posljednje pokretanje OpenGL-a završilo je prije prvog okvira
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

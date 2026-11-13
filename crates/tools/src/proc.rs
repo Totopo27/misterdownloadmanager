@@ -491,10 +491,13 @@ pub fn safe(s: &str) -> Result<&str, ProcError> {
 /// What the browser's request for a page carried, so yt-dlp asks as the browser did: the page
 /// that embeds a player (Referer), the browser's User-Agent, and the page's cookies, which sign a
 /// member's or a site's own videos in: each with its domain and flags (`jar`), or, from an older
-/// extension, a Cookie header's `name=value; …` (`cookies`).
+/// extension, a Cookie header's `name=value; …` (`cookies`). For a stream the page's player
+/// asked for, the `Origin` it sent too (#900): a site's video server may serve its own pages'
+/// players only.
 #[derive(Clone, Debug, Default)]
 pub struct FromBrowser {
     pub referer: Option<String>,
+    pub origin: Option<String>,
     pub user_agent: Option<String>,
     pub cookies: Option<String>,
     pub jar: Vec<mdm_ipc::BrowserCookie>,
@@ -523,6 +526,14 @@ impl FromBrowser {
         }
         if let Some(ua) = given(&self.user_agent) {
             args.extend(["--user-agent".to_owned(), safe(ua)?.to_owned()]);
+        }
+        // yt-dlp sends it with the address and keeps it in each format's headers, which MDM's
+        // engine sends with the stream's playlists and each of its pieces (#769).
+        if let Some(origin) = given(&self.origin) {
+            args.extend([
+                "--add-header".to_owned(),
+                format!("Origin:{}", safe(origin)?),
+            ]);
         }
         let host = url::Url::parse(url)
             .ok()
@@ -1172,6 +1183,36 @@ mod tests {
         assert!(!path.exists(), "removed once done");
         let none = FromBrowser::default().args("https://x.test/").unwrap();
         assert!(none.0.is_empty() && none.1.is_none());
+    }
+
+    /// #900: the Origin a page's player sent with a stream goes to yt-dlp as a header of its
+    /// own, which yt-dlp keeps in each format's headers (the engine's for every piece); one that
+    /// would break the command line is refused, as a Referer is.
+    #[test]
+    fn the_origin_the_player_sent_goes_to_ytdlp() {
+        let b = FromBrowser {
+            referer: Some("https://player.test/".into()),
+            origin: Some("https://player.test".into()),
+            ..Default::default()
+        };
+        let (args, _) = b.args("https://cdn.test/x.m3u8").unwrap();
+        assert_eq!(
+            args,
+            [
+                "--referer",
+                "https://player.test/",
+                "--add-header",
+                "Origin:https://player.test"
+            ]
+        );
+        let bad = FromBrowser {
+            origin: Some("https://x.test\r\nCookie: a=1".into()),
+            ..Default::default()
+        };
+        assert!(matches!(
+            bad.args("https://x.test/"),
+            Err(ProcError::BadArgument)
+        ));
     }
 
     /// #229: the button over a YouTube video sends the watch page (its player plays a blob:, and

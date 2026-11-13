@@ -176,7 +176,9 @@ impl Limiter {
 mod tests {
     use super::*;
 
-    #[tokio::test]
+    /// On Tokio's paused clock, as the tests below: the waits are the limiter's alone, not a
+    /// busy machine's.
+    #[tokio::test(start_paused = true)]
     async fn limits_average_rate() {
         let l = Limiter::new(Some(400 * 1024));
         let t = Instant::now();
@@ -187,7 +189,7 @@ mod tests {
         assert!((0.4..0.75).contains(&secs), "{secs:.2}s");
     }
 
-    #[tokio::test]
+    #[tokio::test(start_paused = true)]
     async fn unlimited_and_changeable() {
         let l = Limiter::new(None);
         let t = Instant::now();

@@ -74,6 +74,10 @@
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "हाँ। MDM डाउनलोड की प्रगति को लगातार सहेजता रहता है, इसलिए कनेक्शन टूटने, क्रैश होने या रीस्टार्ट होने के बाद डाउनलोड वहीं से जारी रहता है जहाँ रुका था। फिर से शुरू करने से पहले यह जाँचता है कि सर्वर पर फ़ाइल बदली तो नहीं है। डाउनलोड का पता समाप्त हो जाने पर <g1>डाउनलोड पता रीफ़्रेश करें</g1> से नया पता देकर डेटा सुरक्षित रखा जा सकता है। <g2>रुका हुआ डाउनलोड फिर से शुरू करें</g2> देखें।"
   },
+  "0168c749ceaa28cd": {
+   "source": "Many videos are split into chapters on their page: YouTube's list under the player, with a title and a start time for each part. With <g1>Embed chapters</g1> ticked, under <g2>Subtitles</g2>, they go into the video file, so players such as VLC, MPV, MPC-HC and Windows' Media Player list them and skip from one to the next.",
+   "text": "कई वीडियो उनके पेज पर अध्यायों में विभाजित होते हैं: खिलाड़ी के नीचे YouTube की सूची, प्रत्येक भाग के लिए एक शीर्षक और एक प्रारंभ समय के साथ। <g2>उपशीर्षक</g2> के तहत, <g1>अध्याय एम्बेड करें</g1> पर टिक करने पर, वे वीडियो फ़ाइल में चले जाते हैं, ताकि VLC, MPV, MPC-HC और Windows के Media Player जैसे खिलाड़ी उन्हें सूचीबद्ध करें और एक से दूसरे पर जाएं।"
+  },
   "016a9690b4c55ee5": {
    "source": "Both are kept in a <x1/> folder in MDM's data folder.",
    "text": "दोनों MDM के डेटा फ़ोल्डर में एक <x1/> फ़ोल्डर में रखे जाते हैं।"
@@ -429,6 +433,10 @@
   "06492aa608ada06d": {
    "source": "<g1>Paused and resumed</g1> like a file, also after quitting MDM: it carries on from the bytes already saved.",
    "text": "एक फ़ाइल की तरह <g1>रोका गया और फिर से शुरू किया गया</g1>, MDM छोड़ने के बाद भी: यह पहले से सहेजे गए बाइट्स से जारी रहता है।"
+  },
+  "064d85de675962c9": {
+   "source": "A JavaScript runtime for YouTube",
+   "text": "YouTube के लिए एक JavaScript रनटाइम"
   },
   "0679d081a8cd40ea": {
    "source": "Turns the API on or off: <x1/>.",
@@ -829,10 +837,6 @@
   "0c4d9a6c3c067798": {
    "source": "The interface is in every language Windows 11 offers. The catalogs in <g1><x2/></g1> were made by machine translation, and each row marked <x3/> waits for a native speaker:",
    "text": "इंटरफ़ेस हर उस भाषा में है जो Windows 11 प्रदान करता है। <g1><x2/></g1> में कैटलॉग मशीन अनुवाद द्वारा बनाए गए थे, और <x3/> के रूप में चिह्नित प्रत्येक पंक्ति एक मूल वक्ता का इंतजार कर रही है:"
-  },
-  "0c4e47b7b5c8f9f5": {
-   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why.",
-   "text": "एक फ़्रीज़ जिसकी रिपोर्ट ग्राफ़िक्स ड्राइवर के अंदर विंडो थ्रेड को एक फ़्रेम दिखाते हुए दिखाती है (<x1/> या Intel के लिए <x2/>, NVIDIA के लिए <x3/>, AMD के लिए <x4/>, <x5/> के तहत) ड्राइवर का OpenGL अटका हुआ है, MDM नहीं: Windows पर, <g6>देखें → इसके साथ ड्रा करें → Direct3D</g6> (डिफ़ॉल्ट) चुनें और MDM को पुनरारंभ करें, और ग्राफ़िक्स ड्राइवर को अपडेट करें। यदि <g7>इसके साथ ड्रा करें</g7> कहता है कि Direct3D वहां शुरू नहीं हुआ, तो उसके नीचे की पंक्ति कारण बताती है।"
   },
   "0c6ce890ecccf13e": {
    "source": "For an internet plan with a data cap, select <g1>Download limits</g1> on the left:",
@@ -1946,6 +1950,10 @@
    "source": "The download's log (hover over it in the list) says what happened: <g1>Extracted 12 files to …</g1>, or why not, for example <g2>Couldn't extract movie.7z.001: volume 3 of it is missing</g2>. An encrypted archive without its password opens the <g3>Archive password</g3> window. Type the password and click <g4>Extract</g4>, or <g5>Cancel</g5> to leave the archive as it is.",
    "text": "डाउनलोड का लॉग (सूची में उस पर होवर करें) बताता है कि क्या हुआ: <g1>12 फ़ाइलें निकाली गईं…</g1>, या क्यों नहीं, उदाहरण के लिए <g2>movie.7z.001 नहीं निकाल सका: इसका वॉल्यूम 3 गायब है</g2>। बिना पासवर्ड के एक एन्क्रिप्टेड संग्रह <g3>संग्रह पासवर्ड</g3> विंडो खोलता है। पासवर्ड टाइप करें और <g4>निकालें</g4> पर क्लिक करें, या संग्रह को वैसे ही छोड़ने के लिए <g5>रद्द करें</g5> पर क्लिक करें।"
   },
+  "1d2b4c5972daa383": {
+   "source": "It's ticked to begin with, and stays as you leave it for the next video.",
+   "text": "यह शुरू में टिक किया गया होता है, और अगले वीडियो के लिए आप इसे जैसा छोड़ते हैं, वैसा ही रहता है।"
+  },
   "1d4ee2f96c724f0f": {
    "source": "A torrent: what it sends to peers, while it runs.",
    "text": "एक टॉरेंट: यह चलते समय साथियों को क्या भेजता है।"
@@ -2450,10 +2458,6 @@
    "source": "A download starts over instead of resuming",
    "text": "एक डाउनलोड फिर से शुरू होने के बजाय फिर से शुरू होता है"
   },
-  "24bf3f2f66091d90": {
-   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one, and YouTube sometimes asks any viewer from an address it doubts to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
-   "text": "कुछ वीडियो केवल साइन-इन किए हुए दर्शक के लिए चलते हैं: जैसे सदस्य का या निजी वीडियो, आयु-प्रतिबंधित वीडियो, और YouTube कभी-कभी किसी ऐसे पते से आने वाले दर्शक से “आप बॉट नहीं हैं, इसकी पुष्टि करने के लिए साइन इन करें” के लिए कहता है जिस पर उसे संदेह होता है। तब yt-dlp को आपके ब्राउज़र की कुकीज़ की ज़रूरत होती है, वे छोटी फ़ाइलें जो आपको साइन-इन रखती हैं।"
-  },
   "24c00ebf1248106f": {
    "source": "An etched separator's highlight line",
    "text": "एक नक्काशीदार विभाजक की हाइलाइट रेखा"
@@ -2553,6 +2557,10 @@
   "26673a8544097ecf": {
    "source": "The highlight under it",
    "text": "उसके नीचे का हाइलाइट"
+  },
+  "266d0ba8f73d462e": {
+   "source": "Chapters",
+   "text": "अध्याय"
   },
   "266f7f0ad3be1761": {
    "source": "Languages →",
@@ -2745,6 +2753,10 @@
   "28b58f9af9a6fed9": {
    "source": "In Chrome, Edge, Brave, Opera or Vivaldi",
    "text": "Chrome, Edge, Brave, Opera या Vivaldi में"
+  },
+  "28e42e284885ce6e": {
+   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. A stream goes with what the browser sent when the player asked for it, its referrer, its origin and its cookies (a player embedded from another site may have cookies the browser keeps for that page only), and MDM sends them again with each of its playlists and pieces: a site's video server that serves its own pages' players only lets MDM through as well. Sound players get the button too.",
+   "text": "यह उस वीडियो को लेता है जिस पर आपने क्लिक किया था: जब वह कोई फ़ाइल चलाता है तो उसकी अपनी फ़ाइल, या प्लेयर द्वारा लोड की गई स्ट्रीम (HLS या DASH), अन्यथा पेज। जब बटन यह नहीं बता पाता कि आपका मतलब कौन सा है, तो टूलबार बटन का <g1>इस पृष्ठ का मीडिया</g1> उन सभी को सूचीबद्ध करता है। एम्बेडेड प्लेयर भी काम करते हैं, और साइट के लिए आपका साइन-इन, प्लेयर को एम्बेड करने वाला पेज और आपके ब्राउज़र का User-Agent इसके साथ जाता है, ताकि सदस्यों के लिए वीडियो, या जो केवल उन साइटों पर चलते हैं जो उन्हें एम्बेड करती हैं, उन्हें डाउनलोड किया जा सके। एक स्ट्रीम ब्राउज़र द्वारा भेजे गए डेटा के साथ जाती है जब प्लेयर ने इसके लिए अनुरोध किया था, उसका रेफ़रर, उसका ओरिजिन और उसकी कुकीज़ (किसी अन्य साइट से एम्बेडेड प्लेयर में ऐसी कुकीज़ हो सकती हैं जिन्हें ब्राउज़र केवल उस पेज के लिए रखता है), और MDM उन्हें अपनी प्रत्येक प्लेलिस्ट और टुकड़ों के साथ फिर से भेजता है: एक साइट का वीडियो सर्वर जो केवल अपने स्वयं के पेजों के प्लेयर को सेवा देता है, MDM को भी अनुमति देता है। ध्वनि प्लेयर को भी बटन मिलता है।"
   },
   "28eeaa8ad9bf85a3": {
    "source": "Requests",
@@ -3330,6 +3342,10 @@
    "source": "<g1>VPN and proxy support:</g1> send downloads through the browser's proxy or VPN extension (off until you turn it on).",
    "text": "<g1>VPN और प्रॉक्सी समर्थन:</g1> ब्राउज़र के प्रॉक्सी या VPN एक्सटेंशन के माध्यम से डाउनलोड भेजें (जब तक आप इसे चालू नहीं करते तब तक बंद)।"
   },
+  "31a94655ff7435c5": {
+   "source": "<g1>Arch</g1>: <x2/>, or",
+   "text": "<g1>Arch</g1>: <x2/>, या"
+  },
   "31c727cb512fbff6": {
    "source": "<g1>Download all links</g1> and <g2>Download selected links</g2> send a page's links to <g3>Link grabber</g3>.",
    "text": "<g1>सभी लिंक डाउनलोड करें</g1> और <g2>चयनित लिंक डाउनलोड करें</g2> एक पृष्ठ के लिंक को <g3>लिंक ग्रैबर</g3> पर भेजते हैं।"
@@ -3430,10 +3446,6 @@
    "source": "Choose the subtitles; tick Put them into the video to keep them inside the file.",
    "text": "उपशीर्षक चुनें। उन्हें फ़ाइल में रखने के लिए “उन्हें वीडियो में डालें” चुनें।"
   },
-  "33cd34762a5593c2": {
-   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. Sound players get the button too.",
-   "text": "यह उस वीडियो को लेता है जिस पर आपने क्लिक किया था: जब यह एक फ़ाइल चलाता है तो उसकी अपनी फ़ाइल, या प्लेयर द्वारा लोड की गई स्ट्रीम (HLS या DASH), अन्यथा पृष्ठ। जब बटन यह नहीं बता सकता कि आपका क्या मतलब है, तो टूलबार बटन का <g1>इस पृष्ठ का मीडिया</g1> उन सभी को सूचीबद्ध करता है। एम्बेडेड प्लेयर भी काम करते हैं, और साइट के लिए आपका साइन-इन, प्लेयर को एम्बेड करने वाला पृष्ठ और आपके ब्राउज़र का User-Agent इसके साथ जाता है, ताकि सदस्यों के लिए वीडियो, या जो केवल उस साइट पर चलते हैं जो उन्हें एम्बेड करती है, डाउनलोड किए जा सकें। साउंड प्लेयर को भी बटन मिलता है।"
-  },
   "33e74c2131bce5b0": {
    "source": "Torrents share the cap fairly",
    "text": "टॉरेंट सीमा को समान रूप से साझा करते हैं"
@@ -3525,10 +3537,6 @@
   "35092e177f7efaa5": {
    "source": "Download complete with Open and Open folder",
    "text": "खोलें और फ़ोल्डर खोलें के साथ डाउनलोड पूरा"
-  },
-  "3512eeafea5246da": {
-   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). When the window thread is already back in the event loop by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
-   "text": "<g1>समस्याओं को पकड़ना।</g1> जब MDM क्रैश होता है (Windows पर अपवाद, Linux पर सिग्नल, macOS पर Mach अपवाद), पैनिक होता है, या फ्रीज़ होता है, तो यह मॉनिटर से डंप मांगता है। फ्रीज़ का मतलब है कि विंडो का एक फ्रेम 8 सेकंड से अधिक समय तक चल रहा है, जिसे एक वॉचडॉग थ्रेड देखता है जो स्लीप में बिताए गए समय को अनदेखा करता है। यह एक फ्रेम के दोनों हिस्सों का समय मापता है: MDM क्या संभालता है (आने वाले कमांड, डाउनलोड की घड़ी, कतारें और शेड्यूलर), जो मिनिमाइज़ होने पर भी चलता है, और ड्राइंग; फ्रेम के बीच के इंतजार को कभी नहीं। वॉचडॉग यह भी मापता है कि इस बीच विंडो थ्रेड को कितना प्रोसेसर समय मिला, और रिपोर्ट बताती है कि इसका क्या मतलब है: यह लगातार चल रहा था (एक लूप), यह एक लॉक में या I/O पर इंतजार कर रहा था (एक डेडलॉक), या यह सामान्य कोड में मुश्किल से चला, जिसका मतलब है कि कंप्यूटर MDM चलाने के लिए बहुत व्यस्त है या डिस्क से इसे लोड करने में धीमा है, जो शायद MDM का बग नहीं है (वे एक ही सिग्नेचर साझा करते हैं, <x2/>)। जब डंप लिखे जाने तक विंडो थ्रेड पहले से ही इवेंट लूप में वापस आ जाता है, तो स्नैपशॉट से पहले फ्रीज़ खत्म हो गया था, इसलिए इसका स्टैक इसे समझा नहीं सकता; वे रिपोर्ट ऐसा कहती हैं और सिग्नेचर <x3/> साझा करती हैं। macOS अभी इसे नहीं मापता है। मॉनिटर फिर <x5/> और <x6/> के माध्यम से बाहर से हर थ्रेड का <g4>मिनीडंप</g4> लिखता है। एक क्रैश हुई प्रक्रिया कभी भी अपना डंप नहीं लिखती है, जो कि Firefox, Crashpad और Sentry भी इसी तरह करते हैं।"
   },
   "3513f93cb0fa7d72": {
    "source": "<g1>Far</g1> (red): over 150 ms, usually another continent. A far server is often slower, and more connections help it most.",
@@ -3681,6 +3689,10 @@
   "377dbb7411c44fb3": {
    "source": ".AppImage",
    "text": ".AppImage"
+  },
+  "37a51fbe4037e117": {
+   "source": "<g1>Any system</g1>, Deno for your user alone: <x2/> (on Windows, in PowerShell: <x3/>)",
+   "text": "<g1>कोई भी सिस्टम</g1>, केवल आपके उपयोगकर्ता के लिए Deno: <x2/> (Windows पर, PowerShell में: <x3/>)"
   },
   "37a82a5012e58c8d": {
    "source": "(the lighter background)",
@@ -4170,6 +4182,10 @@
    "source": "It works as a kill switch. When the adapter disconnects, running torrents stop with \"… is not connected; it goes on when it is back\", and they start again through the adapter when it is. Until MDM notices (within a second), the engine's sockets are still bound to an address that is gone, so nothing can leave another way. A torrent added while the adapter isn't connected doesn't start, and says why. Tracker names are still looked up by the system's DNS.",
    "text": "यह किल स्विच की तरह काम करता है। एडाप्टर डिस्कनेक्ट होने पर चल रहे टॉरेंट \"… कनेक्ट नहीं है; कनेक्शन वापस आने पर फिर शुरू होगा\" संदेश के साथ रुक जाते हैं। एडाप्टर का कनेक्शन वापस आने पर वे उसी के ज़रिए फिर शुरू होते हैं। MDM को इसका पता चलने तक (एक सेकंड के भीतर), इंजन के सॉकेट उस पते से जुड़े रहते हैं जो अब उपलब्ध नहीं है, इसलिए कुछ भी दूसरे रास्ते से बाहर नहीं जा सकता। एडाप्टर कनेक्ट न होने पर जोड़ा गया टॉरेंट शुरू नहीं होता और इसकी वजह बताई जाती है। ट्रैकर के नाम अब भी सिस्टम के DNS से खोजे जाते हैं।"
   },
+  "3e956985953c6c3e": {
+   "source": "<g1>Videos that need you signed in</g1>: the button over the video hands MDM the page's own cookies, so you're signed in as in the browser. For pasted links and playlists, <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, from the profile you choose: a separate one with a spare account works well. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works. <g3>The help</g3> says more.",
+   "text": "<g1>वीडियो जिनके लिए आपको साइन इन करना होगा</g1>: वीडियो के ऊपर वाला बटन MDM को पेज की अपनी कुकीज़ देता है, ताकि आप ब्राउज़र की तरह साइन इन रहें। चिपकाए गए लिंक और प्लेलिस्ट के लिए, <g2>विकल्प → साइट लॉगिन → वीडियो साइटों के लिए कुकीज़</g2> yt-dlp को आपके चुने हुए प्रोफ़ाइल से ब्राउज़र की कुकीज़ पढ़ने देता है: एक अलग प्रोफ़ाइल जिसमें एक अतिरिक्त खाता हो, वह अच्छा काम करता है। Chrome, Edge और Brave Windows पर अपनी कुकीज़ लॉक करते हैं, और विंडो में यह बताया गया है; Firefox काम करता है। <g3>सहायता</g3> में और जानकारी है।"
+  },
   "3e9e6b7b10d78723": {
    "source": "<g1>Start</g1> adds the ticked links to the <g2>Main download queue</g2> and starts the queue. It downloads as many files at once as the queue allows.",
    "text": "<g1>शुरू करें</g1> टिक किए गए लिंक को <g2>मुख्य डाउनलोड कतार</g2> में जोड़ता है और कतार शुरू करता है। यह एक साथ उतनी फ़ाइलें डाउनलोड करता है जितनी कतार अनुमति देती है।"
@@ -4189,6 +4205,10 @@
   "3ebf8f1307545f42": {
    "source": "Download manager command line and automation API — Mister Download Manager",
    "text": "डाउनलोड मैनेजर कमांड लाइन और ऑटोमेशन API — Mister Download Manager"
+  },
+  "3ec0fd3706431045": {
+   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download, so you're signed in as you are in the browser. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
+   "text": "<g1>वीडियो के ऊपर डाउनलोड वीडियो बटन</g1> उस पेज की कुकीज़ को पास करता है, उस विंडो और प्रोफ़ाइल से जिसमें आप हैं (एक निजी विंडो, एक Firefox कंटेनर), लुक-अप और डाउनलोड के लिए, ताकि आप ब्राउज़र में जैसे साइन इन हैं, वैसे ही रहें। कुछ भी सेट अप करने की आवश्यकता नहीं है। प्रत्येक कुकी उस डोमेन के साथ जाती है जिसके लिए ब्राउज़र उसे रखता है, इसलिए YouTube Music (music.youtube.com) या YouTube की मोबाइल साइट पर साइन-इन www.youtube.com तक भी पहुंचता है।"
   },
   "3ec9f591006bbd23": {
    "source": "The installer. Pick this one unless you have a reason not to. It can set up browser integration and open <x1/> files and magnet links with MDM.",
@@ -4490,6 +4510,10 @@
    "source": "Links that work only once no longer fail with \"403 Forbidden\".",
    "text": "जो लिंक केवल एक बार काम करते हैं, वे अब \"403 Forbidden\" के साथ विफल नहीं होते।"
   },
+  "43510d0cf7beac55": {
+   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep and the first minute after the computer wakes, while its disk, network and screen come back: a stall then is written to the log, and reported only if it lasts past that minute. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). Each report also names what the frame was doing when it stopped (the tray icon, the downloads' progress, drawing the main window). When the window thread is already back in the event loop, or in the pause after a frame of a hidden window, by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
+   "text": "<g1>समस्याओं को पकड़ना।</g1> जब MDM क्रैश होता है (Windows अपवाद, Linux पर सिग्नल, macOS पर Mach अपवाद), पैनिक करता है, या फ्रीज़ होता है, तो यह मॉनिटर से डंप मांगता है। फ्रीज़ तब होता है जब विंडो 8 सेकंड से अधिक समय तक चलती है, जिसे एक वॉचडॉग थ्रेड देखता है जो स्लीप में बिताए गए समय और कंप्यूटर के जागने के बाद के पहले मिनट को अनदेखा करता है, जबकि उसकी डिस्क, नेटवर्क और स्क्रीन वापस आती है: तब एक स्टॉल लॉग में लिखा जाता है, और केवल तभी रिपोर्ट किया जाता है जब वह उस मिनट से आगे रहता है। यह एक फ्रेम के दोनों हिस्सों का समय मापता है: MDM क्या संभालता है (आने वाले कमांड, डाउनलोड की घड़ी, कतारें और शेड्यूलर), जो मिनिमाइज्ड होने पर भी चलता है, और ड्राइंग; फ्रेम के बीच का इंतजार कभी नहीं। वॉचडॉग यह भी मापता है कि विंडो थ्रेड को इस बीच कितना प्रोसेसर समय मिला, और रिपोर्ट बताती है कि इसका क्या मतलब है: यह लगातार चल रहा था (एक लूप), यह एक लॉक में या I/O पर इंतजार कर रहा था (एक डेडलॉक), या यह सामान्य कोड में मुश्किल से चला, जिसका मतलब है कि कंप्यूटर MDM चलाने के लिए बहुत व्यस्त है या डिस्क से इसे लोड करने में धीमा है, जो शायद MDM का बग नहीं है (वे एक ही सिग्नेचर साझा करते हैं, <x2/>)। प्रत्येक रिपोर्ट यह भी बताती है कि फ्रेम रुकने पर क्या कर रहा था (ट्रे आइकन, डाउनलोड की प्रगति, मुख्य विंडो को ड्रॉ करना)। जब डंप लिखा जाता है, तब तक विंडो थ्रेड पहले से ही इवेंट लूप में वापस आ जाता है, या एक छिपी हुई विंडो के फ्रेम के बाद के विराम में होता है, तो फ्रीज़ स्नैपशॉट से पहले ही खत्म हो गया था, इसलिए उसका स्टैक इसे समझा नहीं सकता; वे रिपोर्ट ऐसा कहती हैं और <x3/> सिग्नेचर साझा करती हैं। macOS अभी इसे नहीं मापता है। मॉनिटर तब <x5/> और <x6/> के माध्यम से, बाहर से प्रत्येक थ्रेड का एक <g4>मिनीडंप</g4> लिखता है। एक क्रैश हुई प्रक्रिया कभी भी अपना डंप नहीं लिखती है, जैसा कि Firefox, Crashpad और Sentry भी करते हैं।"
+  },
   "436bac2c4f3d3f4c": {
    "source": "<g1>Downloads → Start queue</g1> and <g2>Downloads → Stop queue</g2> list them too.",
    "text": "<g1>डाउनलोड → कतार शुरू करें</g1> और <g2>डाउनलोड → कतार रोकें</g2> भी उन्हें सूचीबद्ध करते हैं।"
@@ -4545,6 +4569,10 @@
   "4447a34a8cbe1ae6": {
    "source": "<g1>The Categories pane and the menus</g1> (<g2>#113</g2>): the pane reads as a tree (each category named with its count, open or shut, selected), the menu bar and every right-click menu as menus whose items can be run, and <g3>Shift+F10</g3> or the <g4>Menu</g4> key opens the selected category's menu. A menu opened from the keyboard no longer stays invisible until the mouse moves.",
    "text": "<g1>श्रेणियाँ फलक और मेनू</g1> (<g2>#113</g2>): फलक एक ट्री के रूप में पढ़ा जाता है (प्रत्येक श्रेणी उसके गिनती के साथ नामित, खुली या बंद, चयनित), मेनू बार और हर राइट-क्लिक मेनू मेनू के रूप में जिनके आइटम चलाए जा सकते हैं, और <g3>Shift+F10</g3> या <g4>Menu</g4> कुंजी चयनित श्रेणी का मेनू खोलती है। कीबोर्ड से खोला गया मेनू अब माउस हिलने तक अदृश्य नहीं रहता है।"
+  },
+  "44502a7e800ed659": {
+   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you. On Linux it makes MDM your desktop's default app for them; on macOS, their default app (Finder offers MDM in <g5>Open With</g5> for <x6/> files either way, and a double-click opens them in MDM when no other app is their default).",
+   "text": "इनमें से किसी एक द्वारा रोका गया टोरेंट अपने इवेंट लॉग में ऐसा बताता है, और MDM शुरू होने पर उसे फिर से साझा नहीं किया जाता है। इसे फिर से साझा करने के लिए सीमा बढ़ाएँ या बंद करें। - <g1>सभी टोरेंट के लिए अपलोडिंग को इस पर सीमित करें</g1> — डिफ़ॉल्ट रूप से बंद। यह आपकी सभी टोरेंट द्वारा अन्य पीयर को भेजी जाने वाली कुल मात्रा को सीमित करता है, जब वे डाउनलोड करते हैं और जब वे साझा करते हैं। टोरेंट की अपनी अपलोड सीमा, उसके प्रगति विंडो में, इसके ऊपर लागू होती है। - <g2>मैग्नेट लिंक और .torrent फ़ाइलें Mister Download Manager के साथ खोलें</g2> — Windows तब आपके ब्राउज़र में मैग्नेट लिंक और Explorer में <x3/> फ़ाइलें MDM के साथ खोलता है। यह केवल आपके Windows खाते के लिए है; Windows के <g4>इसके साथ खोलें</g4> में आपके द्वारा चुना गया प्रोग्राम पहले रहता है। सेटअप इसे आपके लिए चालू कर सकता है। Linux पर यह MDM को उनके लिए आपके डेस्कटॉप का डिफ़ॉल्ट ऐप बनाता है; macOS पर, उनका डिफ़ॉल्ट ऐप (Finder <x6/> फ़ाइलों के लिए <g5>इसके साथ खोलें</g5> में MDM को वैसे भी प्रदान करता है, और जब कोई अन्य ऐप उनका डिफ़ॉल्ट नहीं होता है तो डबल-क्लिक करने पर वे MDM में खुलते हैं)।"
   },
   "445e6378c12f1e16": {
    "source": "<g1>Image gallery support:</g1> download whole galleries (Flickr, Imgur, DeviantArt and more) with gallery-dl.",
@@ -4766,6 +4794,10 @@
    "source": "The extension now installs from your browser's store, updates itself, and catches more of what you download.",
    "text": "एक्सटेंशन अब आपके ब्राउज़र के स्टोर से इंस्टॉल होता है, खुद को अपडेट करता है, और आपके द्वारा डाउनलोड की जाने वाली अधिक चीज़ों को पकड़ता है।"
   },
+  "483cd37a4558c14a": {
+   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier while a window changes.",
+   "text": "यदि कोई भी शुरू नहीं हो पाता है, तो MDM एक सॉफ़्टवेयर रेंडरर (Windows पर Microsoft का, Linux पर Mesa का) के साथ ड्रा करता है, इसलिए विंडो फिर भी खुल जाती है (रिमोट डेस्कटॉप, ग्राफ़िक्स ड्राइवर के बिना एक वर्चुअल मशीन)। यह काम करता है, लेकिन जब कोई विंडो बदलती है तो प्रोसेसर को अधिक व्यस्त रखता है।"
+  },
   "487a0af4191d3496": {
    "source": "<g1><g2>Its site says so</g2></g1><g3>its site says</g3>",
    "text": "<g1><g2>इसकी साइट ऐसा कहती है</g2></g1><g3>इसकी साइट कहती है</g3>"
@@ -4893,10 +4925,6 @@
   "4a575d95633d11ec": {
    "source": "Free Download Manager",
    "text": "Free Download Manager"
-  },
-  "4a68031b1da16fe4": {
-   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and the page as the referrer.",
-   "text": "किसी लिंक, वीडियो, ऑडियो या तस्वीर पर राइट-क्लिक करें और <g1>Mister Download Manager से डाउनलोड करें</g1> चुनें। MDM उसे किसी भी प्रकार का होने पर डाउनलोड करता है: आपने खुद डाउनलोड करने को कहा है, इसलिए फ़ाइल प्रकारों की सूची और बहिष्कृत साइटें यहाँ लागू नहीं होतीं (वे सिर्फ़ यह तय करती हैं कि MDM अपने आप कौन-से डाउनलोड लेता है)। स्ट्रीम के रूप में चलने वाला वीडियो <g2>वीडियो डाउनलोड करें</g2> विंडो में खुलता है। इसमें उसके प्लेयर द्वारा लोड की गई स्ट्रीम (HLS या DASH) होती है, ठीक वैसे ही जैसे <g3>वीडियो के ऊपर का बटन</g3> उसे भेजता है। साथ में स्ट्रीम के सर्वर की आपकी कुकीज़ और रेफ़रर के रूप में पृष्ठ भी भेजे जाते हैं।"
   },
   "4a736a6235625512": {
    "source": "Connections and resuming in detail →",
@@ -5173,6 +5201,10 @@
   "4e56d054c4ea1845": {
    "source": "<g1>A minimized MDM keeps working</g1>: with the main window minimized (not to the notification area), queues didn't start their next file, the Scheduler's starts and stops didn't fire, download limits, the network adapter's kill switch, the clipboard monitor, the update check, the taskbar's progress and saving the list all waited until the window was restored. They run in every window state now, and their windows (Download complete, a limit's notice) open at once.",
    "text": "<g1>एक छोटा किया गया MDM काम करता रहता है</g1>: मुख्य विंडो को छोटा करने पर (सूचना क्षेत्र में नहीं), कतारें अपनी अगली फ़ाइल शुरू नहीं करती थीं, शेड्यूलर के शुरू और बंद नहीं होते थे, डाउनलोड सीमाएँ, नेटवर्क एडेप्टर का किल स्विच, क्लिपबोर्ड मॉनिटर, अपडेट जाँच, टास्कबार की प्रगति और सूची को सहेजना सभी तब तक इंतजार करते थे जब तक विंडो को बहाल नहीं किया जाता था। अब वे हर विंडो स्थिति में चलते हैं, और उनकी विंडो (डाउनलोड पूरा, एक सीमा की सूचना) तुरंत खुल जाती हैं।"
+  },
+  "4ea06c1b2a86d1c8": {
+   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like, and any link whose look-up found a web page): they are neither shown nor downloaded.",
+   "text": "<g1>वेब पेज छिपाएँ</g1> (डिफ़ॉल्ट रूप से चालू) पेज के लिंक को छोड़ देता है (<x2/>, <x3/> और इसी तरह, और कोई भी लिंक जिसका लुक-अप एक वेब पेज मिला): उन्हें न तो दिखाया जाता है और न ही डाउनलोड किया जाता है।"
   },
   "4f07dda13d242d23": {
    "source": "Options on its Connection page: connections per download, per-server exceptions, Download limits and the DNS list",
@@ -5762,6 +5794,10 @@
    "source": "<g1>Needs a login</g1>: the server wants a user name and password, or the page's cookies.",
    "text": "<g1>लॉगिन चाहिए</g1>: सर्वर एक उपयोगकर्ता नाम और पासवर्ड, या पृष्ठ की कुकीज़ चाहता है।"
   },
+  "57d55935c79c75f6": {
+   "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
+   "text": "उनमें से किसी एक को स्थापित करें, कोई भी काम करेगा, फिर वीडियो को फिर से देखें। MDM Deno, Node.js (nvm के साथ स्थापित भी) और Bun को अपने आप ढूंढ लेता है। यदि यह अभी भी ऐसा कहता है, तो नए प्रोग्राम का फ़ोल्डर <x1/> MDM के साथ शुरू नहीं हुआ है (Windows के इंस्टॉलर उन्हें बाद में शुरू होने वाले प्रोग्रामों के लिए जोड़ते हैं): MDM से बाहर निकलें (<g2>कार्य → बाहर निकलें</g2>) और इसे फिर से शुरू करें।"
+  },
   "57df30288a29fe94": {
    "source": "Made possible by these amazing humans",
    "text": "इन अद्भुत लोगों ने इसे संभव बनाया"
@@ -5881,6 +5917,10 @@
   "594222b0d8ddd185": {
    "source": "Add URL.",
    "text": "URL जोड़ें।"
+  },
+  "598886119cab837f": {
+   "source": "<g1>A web page's address.</g1> Paste or copy the address of a page (<x2/>) and MDM reads the page and lists the links on it, as the browser's <g3>Download all links</g3> does, in a package named after the page. The page itself is left unticked. This works for addresses that came on their own (pasted, copied, typed, in a list), not for the links found on a page, so MDM never wanders off through a site. MDM reads only what the page itself holds: links a page's scripts add after it loads come only through the browser.",
+   "text": "<g1>किसी वेब पेज का पता।</g1> किसी पेज का पता (<x2/>) चिपकाएँ या कॉपी करें और MDM उस पेज को पढ़ता है और उस पर मौजूद लिंक को सूचीबद्ध करता है, जैसा कि ब्राउज़र का <g3>सभी लिंक डाउनलोड करें</g3> करता है, पेज के नाम पर एक पैकेज में। पेज को अनटिक छोड़ दिया जाता है। यह उन पतों के लिए काम करता है जो अपने आप आए थे (चिपकाए गए, कॉपी किए गए, टाइप किए गए, एक सूची में), पेज पर पाए गए लिंक के लिए नहीं, इसलिए MDM कभी भी किसी साइट पर भटकता नहीं है। MDM केवल वही पढ़ता है जो पेज में ही है: पेज के स्क्रिप्ट द्वारा लोड होने के बाद जोड़े गए लिंक केवल ब्राउज़र के माध्यम से आते हैं।"
   },
   "59920ff7101c276f": {
    "source": "Fix the translation in the row's third column and delete its <x1/> line.",
@@ -6526,6 +6566,10 @@
    "source": "The layout is familiar on purpose: the toolbar, the categories, the download list, the progress window with every connection, queues and the scheduler. The differences: MDM is free and open source, downloads BitTorrent and magnet links in the same list, finished faster in <g1>our benchmark</g1>, speaks 86 languages and has builds for Linux and macOS. IDM is the more mature product, refined over many years. See the full <g2>comparison</g2>.",
    "text": "लेआउट जान-पहचाना जानबूझकर रखा गया है: टूलबार, श्रेणियाँ, डाउनलोड सूची, हर कनेक्शन के साथ प्रगति विंडो, कतारें और शेड्यूलर। अंतर ये हैं: MDM मुफ़्त और ओपन सोर्स है, एक ही सूची में BitTorrent और मैग्नेट लिंक डाउनलोड करता है, <g1>हमारे बेंचमार्क</g1> में तेज़ी से पूरा हुआ, 86 भाषाएँ बोलता है और Linux तथा macOS के लिए बिल्ड हैं। IDM एक अधिक परिपक्व उत्पाद है, जिसे कई वर्षों में परिष्कृत किया गया है। पूरी <g2>तुलना</g2> देखें।"
   },
+  "626d6a7f553a1946": {
+   "source": "<g1>macOS</g1>: <x2/>, or",
+   "text": "<g1>macOS</g1>: <x2/>, या"
+  },
   "62e049f954021405": {
    "source": "Control it from your phone or your browser",
    "text": "इसे अपने फ़ोन या ब्राउज़र से नियंत्रित करें"
@@ -6714,10 +6758,6 @@
    "source": "The video download button moves to a free corner instead of covering a control of the page, such as a thumbnail's watch-later button (<g1>#421</g1>). Dragging it still puts it where you want it.",
    "text": "वीडियो डाउनलोड बटन पृष्ठ के नियंत्रण को कवर करने के बजाय एक खाली कोने में चला जाता है, जैसे थंबनेल का बाद में देखें बटन (<g1>#421</g1>)। इसे खींचने से यह अभी भी वहीं रहता है जहाँ आप इसे चाहते हैं।"
   },
-  "65da44cc551abd0f": {
-   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
-   "text": "<g1>डाउनलोड पूरा</g1> फ़ाइल का आकार, उसका पता और सहेजने की जगह दिखाता है। <g2>खोलें</g2>, <g3>इसके साथ खोलें...</g3>, <g4>फ़ोल्डर खोलें</g4> या <g5>बंद करें</g5> चुनें। Windows पर आप नीचे दाईं ओर के छोटे बॉक्स को Explorer, ईमेल या चैट में खींचकर फ़ाइल वहाँ छोड़ भी सकते हैं। यह विंडो आपके दूसरे प्रोग्रामों के ऊपर तब तक दिखाई देती है, जब तक आप इस पर क्लिक नहीं करते। यह उस प्रोग्राम से कीबोर्ड का नियंत्रण नहीं लेती जिसमें आप टाइप कर रहे हैं।"
-  },
   "662e8cdda4078826": {
    "source": "32 MiB, one connection in three crawls at 128 KB/s",
    "text": "32 MiB, 128 KB/s पर तीन क्रॉल में एक कनेक्शन"
@@ -6769,10 +6809,6 @@
   "66f0d356afa03754": {
    "source": "Two helpers, checked before use",
    "text": "दो सहायक, उपयोग से पहले जाँच किए गए"
-  },
-  "66f7530c7179f562": {
-   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
-   "text": "<g1>वीडियो के ऊपर “वीडियो डाउनलोड करें” बटन</g1> उस पेज की कुकीज़ को, उस विंडो और प्रोफ़ाइल से पास करता है जिसमें आप हैं (एक निजी विंडो, एक Firefox कंटेनर), लुक-अप और डाउनलोड के लिए। कुछ भी सेट अप करने की आवश्यकता नहीं है। प्रत्येक कुकी उस डोमेन के साथ जाती है जिसके लिए ब्राउज़र उसे रखता है, इसलिए YouTube Music (music.youtube.com) या YouTube की मोबाइल साइट पर साइन-इन www.youtube.com तक भी पहुँचता है।"
   },
   "670bb10cde757ad1": {
    "source": "MDM never writes the token to its event log, crash reports, the automation API or the command line's output.",
@@ -6962,6 +6998,10 @@
    "source": "Contribute — Mister Download Manager",
    "text": "योगदान करें — Mister Download Manager"
   },
+  "6a404128afe84a22": {
+   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why; MDM then remembers the freeze and draws with WARP from the next start.",
+   "text": "एक फ़्रीज़ जिसकी रिपोर्ट ग्राफ़िक्स ड्राइवर के अंदर विंडो थ्रेड को एक फ़्रेम दिखाते हुए दिखाती है (<x1/> या <x2/> Intel के लिए, <x3/> NVIDIA के लिए, <x4/> AMD के लिए, <x5/> के तहत) ड्राइवर का OpenGL अटका हुआ है, MDM नहीं: Windows पर, <g6>देखें → इसके साथ ड्रा करें → Direct3D</g6> (डिफ़ॉल्ट) चुनें और MDM को पुनरारंभ करें, और ग्राफ़िक्स ड्राइवर को अपडेट करें। यदि <g7>इसके साथ ड्रा करें</g7> कहता है कि Direct3D वहाँ शुरू नहीं हुआ, तो उसके नीचे की पंक्ति कारण बताती है; MDM फिर फ़्रीज़ को याद रखता है और अगली बार शुरू होने पर WARP के साथ ड्रा करता है।"
+  },
   "6a658020a3c19e30": {
    "source": "Other systems and files",
    "text": "अन्य सिस्टम और फ़ाइलें"
@@ -7069,6 +7109,10 @@
   "6bde01e223d4005d": {
    "source": "Every run and the raw data",
    "text": "हर रन और कच्चा डेटा"
+  },
+  "6be8a7107f3f9737": {
+   "source": "Choose <g1>Subtitles</g1> if you want them (see below). <g2>Embed chapters</g2> is ticked: see <g3>Chapters</g3>.",
+   "text": "यदि आप उपशीर्षक चाहते हैं तो <g1>उपशीर्षक</g1> चुनें (नीचे देखें)। <g2>अध्याय एम्बेड करें</g2> पर टिक किया गया है: <g3>अध्याय</g3> देखें।"
   },
   "6c054ced98124c36": {
    "source": "Options, Connection: connections per download and per-server exceptions.",
@@ -7281,6 +7325,10 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "रोकें अब yt-dlp को भी रोकता है, जो पहले पृष्ठभूमि में डाउनलोड करता रहता था।"
+  },
+  "6f06002d2161cba3": {
+   "source": "Last updated 2026-11-13",
+   "text": "अंतिम अपडेट: 13-11-2026"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7510,6 +7558,10 @@
    "source": "Paste a Google Drive link as it is, the one <g1>Share → Copy link</g1> gives:",
    "text": "Google Drive के लिंक को उसी रूप में चिपकाएँ, जैसा <g1>शेयर करें → लिंक कॉपी करें</g1> से मिलता है:"
   },
+  "7297ca101de5145e": {
+   "source": "The list couldn't be read from GitHub when this page was built. Everyone is on GitHub meanwhile, in the project's <g1>pull requests</g1> and <g2>issues</g2>.",
+   "text": "इस पृष्ठ के बनने के समय GitHub से सूची नहीं पढ़ी जा सकी। इस बीच, सभी लोग प्रोजेक्ट के <g1>पुल रिक्वेस्ट</g1> और <g2>इश्यू</g2> में GitHub पर हैं।"
+  },
   "729a19fc6ce418f9": {
    "source": "Reporting problems",
    "text": "समस्याओं की रिपोर्ट करना"
@@ -7722,6 +7774,10 @@
    "source": "End-to-end medians with interquartile ranges, the ratio with its 95% interval, and the Mann–Whitney test, as <x1/> writes them.",
    "text": "अंतरचतुर्थक परास के साथ शुरू से अंत तक की माध्यिकाएँ, 95% अंतराल सहित अनुपात और Mann–Whitney परीक्षण, जैसा <x1/> इन्हें लिखता है।"
   },
+  "75b26b8aac083dec": {
+   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, puts the chapters into the file, and converts the sound for an MP3, Opus or FLAC choice.",
+   "text": "फिर yt-dlp वही करता है जो वह डाउनलोड के बाद करता है: यह वीडियो और उसकी ध्वनि को ffmpeg के साथ एक MP4 में जोड़ता है, उपशीर्षक को सहेजता या एम्बेड करता है, अध्यायों को फ़ाइल में डालता है, और MP3, Opus या FLAC विकल्प के लिए ध्वनि को परिवर्तित करता है।"
+  },
   "75c5e88776534271": {
    "source": "Adding a link again after its finished file was moved or deleted starts a new download, instead of asking about a duplicate that isn't there (<g1>#342</g1>).",
    "text": "एक लिंक को फिर से जोड़ने के बाद उसकी पूर्ण फ़ाइल को स्थानांतरित या हटा दिया गया था, एक नया डाउनलोड शुरू होता है, बजाय इसके कि एक डुप्लिकेट के बारे में पूछे जो वहाँ नहीं है (<g1>#342</g1>)।"
@@ -7781,10 +7837,6 @@
   "76e020dc2c735bdd": {
    "source": "From top to bottom:",
    "text": "ऊपर से नीचे तक:"
-  },
-  "76e8fe34285e22ca": {
-   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download.",
-   "text": "<g1>विकल्प → संग्रह → लिंक आने पर उन्हें देखें</g1> में लिंक की जानकारी देखना बंद करें। कुछ फ़ाइल होस्ट जानकारी देखने को भी डाउनलोड मानते हैं।"
   },
   "7704f35f9d60deac": {
    "source": "Our benchmark, replayed: the same PC, the same test server, the median of alternating runs.",
@@ -7978,10 +8030,6 @@
    "source": "<g1>The window no longer freezes when the system's sleep or keychain service is slow</g1> (follows <g2>#222</g2>): a queue set to <g3>Wake the computer to run this queue</g3> asks the system to keep the computer awake while it runs. On Linux that is logind, which can be slow to answer just after the computer wakes, exactly when such a queue starts, and MDM waited for it on the window's own thread (asking again every 5 seconds while it refused). It is now asked in the background, on every system; the queue's downloads, retries and log lines are the same. A keyring that doesn't answer at start (a stopped GNOME Keyring) is now waited for once, at most 5 seconds, instead of once per saved password, and saving the list no longer asks it at all. On Linux the check for a tray to hide windows in, and in Download File Info the check that <g4>Save As</g4> isn't a folder (slow on a network share that doesn't answer), no longer run on the window's thread on every frame.",
    "text": "<g1>सिस्टम के स्लीप या कीचेन सेवा के धीमे होने पर अब विंडो फ्रीज़ नहीं होती</g1> ( <g2>#222</g2> का अनुसरण करता है): एक कतार जिसे <g3>इस कतार को चलाने के लिए कंप्यूटर को जगाएँ</g3> पर सेट किया गया है, सिस्टम से कंप्यूटर को तब तक जगाए रखने के लिए कहता है जब तक वह चलता है। Linux पर वह logind है, जो कंप्यूटर के जागने के ठीक बाद जवाब देने में धीमा हो सकता है, ठीक उसी समय जब ऐसी कतार शुरू होती है, और MDM विंडो के अपने थ्रेड पर उसका इंतजार करता था (जब तक वह मना करता था तब तक हर 5 सेकंड में फिर से पूछता था)। अब इसे हर सिस्टम पर बैकग्राउंड में पूछा जाता है; कतार के डाउनलोड, पुनः प्रयास और लॉग लाइनें समान हैं। एक कीरिंग जो शुरू होने पर जवाब नहीं देती है (एक रुका हुआ GNOME Keyring) का अब एक बार, अधिकतम 5 सेकंड तक इंतजार किया जाता है, बजाय हर सहेजे गए पासवर्ड के लिए एक बार, और सूची को सहेजने पर अब उसे बिल्कुल भी नहीं पूछा जाता है। Linux पर विंडो को छिपाने के लिए एक ट्रे की जाँच, और डाउनलोड फ़ाइल जानकारी में यह जाँच कि <g4>इस रूप में सहेजें</g4> एक फ़ोल्डर नहीं है (एक नेटवर्क शेयर पर धीमा जो जवाब नहीं देता है), अब हर फ्रेम पर विंडो के थ्रेड पर नहीं चलती है।"
   },
-  "7a431c024b9ed18e": {
-   "source": "Choose <g1>Subtitles</g1> if you want them (see below).",
-   "text": "उपशीर्षक चाहिए हों, तो <g1>उपशीर्षक</g1> चुनें (नीचे देखें)।"
-  },
   "7a5b7ab31d5f22cb": {
    "source": "Click <g1>Add Torrent</g1> on the toolbar to open a <x2/> file, or use the arrow next to it for <g3>Add magnet link...</g3>. A magnet link pasted into <g4>Add URL</g4> works too. Torrents land in the same list as your other downloads, marked <g5>Torrent</g5> in the <g6>Source</g6> column, and go into queues and the Scheduler like them.",
    "text": "<g1>टॉरेंट जोड़ें</g1> पर क्लिक करें टूलबार पर एक <x2/> फ़ाइल खोलने के लिए, या <g3>मैग्नेट लिंक जोड़ें...</g3> के लिए उसके बगल वाले तीर का उपयोग करें। <g4>URL जोड़ें</g4> में पेस्ट किया गया मैग्नेट लिंक भी काम करता है। टॉरेंट आपकी अन्य डाउनलोड की तरह ही सूची में आते हैं, <g6>स्रोत</g6> कॉलम में <g5>टॉरेंट</g5> के रूप में चिह्नित होते हैं, और उनके जैसे ही कतारों और शेड्यूलर में जाते हैं।"
@@ -8093,10 +8141,6 @@
   "7bde548eabfafc71": {
    "source": "Eight per download by default, and up to 32 if you choose in Options → Connection, or 128 after ticking Allow more than 32 connections there. MDM uses fewer when a server allows fewer, and only one when a server can't send parts of a file at all.",
    "text": "डिफ़ॉल्ट रूप से हर डाउनलोड के लिए 8 कनेक्शन इस्तेमाल होते हैं। आप विकल्प → कनेक्शन में यह संख्या 32 तक चुन सकते हैं, या वहाँ 32 से अधिक कनेक्शन की अनुमति दें चुनकर इसे 128 तक बढ़ा सकते हैं। सर्वर जितने कनेक्शन की अनुमति देता है, MDM उससे अधिक इस्तेमाल नहीं करता। अगर सर्वर फ़ाइल के हिस्से भेज ही नहीं सकता, तो MDM सिर्फ़ 1 कनेक्शन इस्तेमाल करता है।"
-  },
-  "7beb76c0e99ab62c": {
-   "source": "<g1>Videos that need you signed in</g1>: <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, for pasted links. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works, and so does the button over the video.",
-   "text": "<g1>वे वीडियो जिनके लिए आपको साइन इन करने की आवश्यकता है</g1>: <g2>विकल्प → साइट लॉगिन → वीडियो साइटों के लिए कुकीज़</g2> yt-dlp को चिपकाए गए लिंक के लिए ब्राउज़र की कुकीज़ पढ़ने देता है। Chrome, Edge और Brave Windows पर अपनी कुकीज़ लॉक करते हैं, और विंडो ऐसा कहती है; Firefox काम करता है, और वीडियो के ऊपर वाला बटन भी।"
   },
   "7bf940f9155b4bce": {
    "source": "<x1/> <g2>Open source · Apache-2.0</g2>",
@@ -8537,6 +8581,10 @@
   "810aeb3bcab43ab3": {
    "source": "A torrent: what it has sent to peers against what it took.",
    "text": "एक टॉरेंट: इसने पीयर को कितना भेजा और उनसे कितना लिया।"
+  },
+  "810e3acee25be1c6": {
+   "source": "YouTube hides most of a video's qualities behind small puzzles that yt-dlp solves with a JavaScript runtime: <g1>Deno</g1>, <g2>Node.js</g2> or <g3>Bun</g3>. Without one, the list is short, sometimes only the sound and a low quality, and MDM says so: <g4>YouTube needs a JavaScript runtime to list its video qualities</g4>. Other sites don't need one.",
+   "text": "YouTube वीडियो की अधिकांश गुणवत्ता को छोटी पहेलियों के पीछे छिपाता है जिन्हें yt-dlp एक JavaScript रनटाइम के साथ हल करता है: <g1>Deno</g1>, <g2>Node.js</g2> या <g3>Bun</g3>। इनके बिना, सूची छोटी होती है, कभी-कभी केवल ध्वनि और कम गुणवत्ता होती है, और MDM ऐसा कहता है: <g4>YouTube को अपने वीडियो की गुणवत्ता सूचीबद्ध करने के लिए एक JavaScript रनटाइम की आवश्यकता है</g4>। अन्य साइटों को इसकी आवश्यकता नहीं होती।"
   },
   "8144fd9d669ebeed": {
    "source": "Does it download torrents? — Mister Download Manager",
@@ -9178,10 +9226,6 @@
    "source": "<g1>Themes</g1><g2>Nine looks, light and dark, from Classic to Aqua, or your own in a text file.</g2>",
    "text": "<g1>थीम</g1><g2>नौ रूप, हल्के और गहरे, क्लासिक से Aqua तक, या अपनी खुद की एक टेक्स्ट फ़ाइल में।</g2>"
   },
-  "8b93f9dffbe6efdb": {
-   "source": "If Direct3D, Vulkan or Metal can't start on your computer (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
-   "text": "यदि Direct3D, Vulkan या Metal आपके कंप्यूटर पर शुरू नहीं हो पाता है (इसके लिए कोई ड्राइवर नहीं है, कुछ वर्चुअल मशीनें), या इसकी पहली विंडो अपने आप 10 सेकंड के भीतर नहीं दिखती है (MDM द्वारा आपकी सूची और उसके आइकन लोड करने में लगने वाला समय इसमें शामिल नहीं है, चाहे कंप्यूटर शुरू होने के तुरंत बाद कितना भी धीमा क्यों न हो), तो MDM OpenGL के साथ ड्रा करता है, और <g1>देखें → इसके साथ ड्रा करें</g1> ऐसा बताता है और कारण भी। इसे फिर से चुनने पर अगली शुरुआत में इसे फिर से आज़माया जाता है।"
-  },
   "8b95ee287644fd4f": {
    "source": "Mister Download Manager's link grabber collects a page's links, sorts them into packages, checks which are online and extracts the archives they bring.",
    "text": "Mister Download Manager का लिंक ग्रैबर एक पेज के लिंक एकत्र करता है, उन्हें पैकेजों में छाँटता है, जाँचता है कि कौन से ऑनलाइन हैं और वे जो संग्रह लाते हैं उन्हें निकालता है।"
@@ -9229,6 +9273,10 @@
   "8c6583c8229f13c3": {
    "source": "Downloads and torrents in one app, stable on Android",
    "text": "एक ही ऐप में डाउनलोड और टोरेंट, Android पर स्थिर"
+  },
+  "8c714d229ab4b2fb": {
+   "source": "They go into a video (MP4, MKV, WebM) and into the sound as the site has it (<g1>Audio only, original</g1>), not into an MP3, Opus or FLAC file.",
+   "text": "वे एक वीडियो (MP4, MKV, WebM) और ध्वनि में जाते हैं जैसा कि साइट पर है (<g1>केवल ऑडियो, मूल गुणवत्ता</g1>), MP3, Opus या FLAC फ़ाइल में नहीं।"
   },
   "8c7321b31cd98d97": {
    "source": "<g1>Toolbar.</g1> <g2>Add URL</g2>, <g3>Add Torrent</g3>, <g4>Resume</g4>, <g5>Stop</g5>, <g6>Stop All</g6>, <g7>Delete</g7>, <g8>Delete Completed</g8>, <g9>Options</g9>, <g10>Scheduler</g10>, <g11>Start Queue</g11>, <g12>Stop Queue</g12>. The small arrow next to <g13>Add Torrent</g13>, <g14>Start Queue</g14> and <g15>Stop Queue</g15> opens more choices.",
@@ -9937,6 +9985,10 @@
   "9757a8b628979f6a": {
    "source": "The list shows each quality with its size, best first, and the sound alone at the end. Check <g1>Save to</g1> and <g2>File name</g2>, then click <g3>Download Now</g3>, or <g4>Later</g4> to put it in the list for later. The video gets its own row and progress window, like any other download.",
    "text": "सूची प्रत्येक गुणवत्ता को उसके आकार के साथ दिखाती है, सबसे अच्छी पहले, और अंत में केवल ध्वनि। <g1>इसमें सहेजें</g1> और <g2>फ़ाइल का नाम</g2> जाँचें, फिर <g3>अभी डाउनलोड करें</g3> पर क्लिक करें, या बाद के लिए सूची में डालने के लिए <g4>बाद में</g4> पर क्लिक करें। वीडियो को अपनी पंक्ति और प्रगति विंडो मिलती है, जैसे किसी अन्य डाउनलोड को।"
+  },
+  "9763111f0a019af1": {
+   "source": "If Direct3D, Vulkan or Metal can't start on your graphics card (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
+   "text": "यदि Direct3D, Vulkan या Metal आपके ग्राफ़िक्स कार्ड पर शुरू नहीं हो पाते हैं (इसके लिए कोई ड्राइवर नहीं है, कुछ वर्चुअल मशीनें), या इसकी पहली विंडो 10 सेकंड के भीतर नहीं दिखती है (MDM द्वारा आपकी सूची और उसके आइकन लोड करने में लगने वाला समय इसमें शामिल नहीं है, चाहे कंप्यूटर शुरू होने के तुरंत बाद कितना भी धीमा क्यों न हो), तो MDM OpenGL के साथ ड्रा करता है, और <g1>देखें → इसके साथ ड्रा करें</g1> ऐसा कहता है और कारण भी बताता है। इसे फिर से चुनने पर अगली बार शुरू होने पर यह फिर से कोशिश करता है।"
   },
   "976e1bc04dee0c02": {
    "source": "Both the address you clicked and the one its redirects led to are checked, so a site you excluded stays excluded even when it sends you to another server. Everything else stays with the browser. Changes in Options reach the browser within a minute; you don't need to restart it.",
@@ -10689,6 +10741,10 @@
   "a23e572b5c83c41e": {
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "उस आकार पर स्क्रीन से बड़ी विंडो (1366 × 768 स्क्रीन पर 200 % पर विकल्प) उतनी बड़ी खुलती है जितनी स्क्रीन अनुमति देती है, और बाकी स्क्रॉल होता है: स्क्रॉल बार, माउस व्हील, या अगले नियंत्रण पर <g1>Tab</g1> के साथ।"
+  },
+  "a24bd8fd730a41d0": {
+   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows पर, OpenGL का 3.0 से पुराना संस्करण (जैसे Intel के पहले HD ग्राफ़िक्स का पुराना ग्राफ़िक्स कार्ड ड्राइवर, जिसका OpenGL 2.1 है) MDM को ड्रा नहीं कर सकता: उसकी विंडो गलत दिखती हैं। MDM इसे शुरू होते ही पहचान लेता है और फिर Microsoft के सॉफ़्टवेयर रेंडरर (WARP) पर Direct3D के साथ फिर से शुरू होता है, और <g1>देखें → इसके साथ ड्रा करें</g1> ऐसा बताता है। वहाँ <g2>OpenGL</g2> चुनने पर यह फिर से कोशिश करता है।"
   },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
@@ -11710,6 +11766,10 @@
    "source": "<g1>Crash reports</g1><g2>Mister Download Manager</g2>",
    "text": "<g1>क्रैश रिपोर्ट</g1><g2>Mister Download Manager</g2>"
   },
+  "b1a0ed24728365e7": {
+   "source": "The command line (<x1/>) puts them in too, whenever ffmpeg is there.",
+   "text": "कमांड लाइन (<x1/>) भी उन्हें डालती है, जब भी ffmpeg वहां होता है।"
+  },
   "b1aebd102c185a01": {
    "source": "RSS feeds for torrents, with download rules — Mister Download Manager",
    "text": "टॉरेंट के लिए RSS फ़ीड, डाउनलोड नियमों के साथ — Mister Download Manager"
@@ -11717,10 +11777,6 @@
   "b1b2249661e1c4a9": {
    "source": "Keep changes focused and match the code around them. A few rules hold everywhere:",
    "text": "बदलावों को केंद्रित रखें और उनके आसपास के कोड से मेल खाएं। कुछ नियम हर जगह लागू होते हैं:"
-  },
-  "b1cfb9dac9c38d80": {
-   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, and converts the sound for an MP3, Opus or FLAC choice.",
-   "text": "फिर yt-dlp वह करता है जो वह डाउनलोड के बाद करता है: यह ffmpeg के साथ वीडियो और उसकी आवाज़ को एक MP4 में जोड़ता है, उपशीर्षक सहेजता या एम्बेड करता है, और MP3, Opus या FLAC विकल्प के लिए आवाज़ को परिवर्तित करता है।"
   },
   "b1d90b3e9d2a1cd5": {
    "source": "runs unit tests and end-to-end downloads against <x1/> with injected faults (slow, dropped and refused connections, servers without ranges, changing files). <x2/> runs the published speed comparison; its raw data is in <x3/>.",
@@ -11745,6 +11801,10 @@
   "b2181eccf65e86be": {
    "source": "This <g1>website</g1> counts visits with <g2>Statcounter</g2>, which sets a cookie and sees your IP address; it runs only on the website, never in the app.",
    "text": "यह <g1>वेबसाइट</g1> विज़िट की गिनती <g2>Statcounter</g2> से करती है। Statcounter एक कुकी सेट करता है और आपका IP पता देखता है। यह केवल वेबसाइट पर चलता है, ऐप में कभी नहीं।"
+  },
+  "b21b0cc3853450de": {
+   "source": "On Windows, when OpenGL fails on a card without Direct3D 12, MDM draws with Direct3D on Microsoft's software renderer (WARP) from the next start, and <g1>View → Draw with</g1> says why: OpenGL couldn't start, it is too old to draw MDM (older than 3.0, such as Intel's first HD Graphics, whose OpenGL 2.1 drew MDM's windows as garbage), its first window didn't show within 10 seconds, or MDM froze inside the graphics driver while OpenGL showed a frame (the older Intel HD Graphics and AMD Radeon cards' drivers did). Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows पर, जब Direct3D 12 के बिना किसी कार्ड पर OpenGL विफल हो जाता है, तो MDM अगली बार शुरू होने पर Microsoft के सॉफ़्टवेयर रेंडरर (WARP) पर Direct3D के साथ ड्रा करता है, और <g1>देखें → इसके साथ ड्रा करें</g1> कारण बताता है: OpenGL शुरू नहीं हो सका, यह MDM को ड्रा करने के लिए बहुत पुराना है (3.0 से पुराना, जैसे Intel का पहला HD Graphics, जिसका OpenGL 2.1 MDM की विंडोज़ को कचरे के रूप में ड्रा करता था), इसकी पहली विंडो 10 सेकंड के भीतर नहीं दिखी, या OpenGL एक फ़्रेम दिखाते समय MDM ग्राफ़िक्स ड्राइवर के अंदर फ़्रीज़ हो गया (पुराने Intel HD Graphics और AMD Radeon कार्ड के ड्राइवर ऐसा करते थे)। वहाँ <g2>OpenGL</g2> चुनने पर यह फिर से कोशिश करता है।"
   },
   "b23baab9a4561a1d": {
    "source": "Pauses running downloads.",
@@ -11773,6 +11833,10 @@
   "b26bf4af67d50f02": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: it is free and open source, laid out like IDM, imports your IDM list, and also downloads torrents and videos. Free Download Manager, AB Download Manager, Motrix, Neat Download Manager, Prism, JDownloader 2, Xtreme Download Manager and Gopeed are free too, each with its own strengths.",
    "text": "यदि आप Internet Download Manager का लेआउट बिना उसकी कीमत के चाहते हैं, तो Mister Download Manager: यह मुफ्त और ओपन सोर्स है, IDM जैसा दिखता है, आपकी IDM सूची को इम्पोर्ट करता है, और टॉरेंट और वीडियो भी डाउनलोड करता है। Free Download Manager, AB Download Manager, Motrix, Neat Download Manager, Prism, JDownloader 2, Xtreme Download Manager और Gopeed भी मुफ्त हैं, प्रत्येक की अपनी ताकतें हैं।"
+  },
+  "b26c000488bb45a1": {
+   "source": "<g1>Windows</g1>: <x2/>, or <x3/>. The installers on <g4>deno.com</g4> and <g5>nodejs.org</g5> work too.",
+   "text": "<g1>Windows</g1>: <x2/>, या <x3/>। <g4>deno.com</g4> और <g5>nodejs.org</g5> पर इंस्टॉलर भी काम करते हैं।"
   },
   "b26fdfb3218b9d13": {
    "source": "Many more: the checksum dialog, the progress window's completion options and speed limit, the torrent and video windows (Stop a look-up, stale video choices), Batch's letter ranges, addresses without http://, duplicate links arriving together, imports that doubled downloads, menu titles that shared access letters in French and other languages, and more.",
@@ -11893,6 +11957,10 @@
   "b3ca971adc7126d9": {
    "source": "View → Theme switches at once, keeping the layout.",
    "text": "देखें → थीम लेआउट को बनाए रखते हुए तुरंत बदल जाता है।"
+  },
+  "b3d7bbeea9ab71d3": {
+   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). With ffmpeg, the video's chapters go into the file too, as Download video's <g19>Embed chapters</g19> does. <x20/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x21/>; when it isn't connected, nothing starts.",
+   "text": "एक वीडियो डाउनलोड करें; <x1/> <x2/> से गुणवत्ता चयनकर्ता लेता है (<x3/> = सबसे अच्छी एकल फ़ाइल; <x4/> = साइट पर उपलब्ध ध्वनि, परिवर्तित नहीं; <x5/>, <x6/>, <x7/> या <x8/> = उस बिटरेट पर MP3 के रूप में ध्वनि, <x9/> अपनी सर्वोत्तम परिवर्तनीय गुणवत्ता पर; <x10/> = Opus के रूप में; <x11/> = FLAC के रूप में, दोषरहित लेकिन साइट की ध्वनि से बेहतर नहीं; रूपांतरण के लिए ffmpeg की आवश्यकता होती है)। <x12/>: MDM का अपना डाउनलोडर yt-dlp द्वारा पाए गए प्रत्येक स्ट्रीम को इतने कनेक्शनों (डिफ़ॉल्ट रूप से 8, 1 से 128 तक) पर लाता है, एक स्ट्रीम को टुकड़ों में (HLS, DASH) एक साथ इतने टुकड़ों में। <x13/> इसके साथ उपशीर्षक सहेजता है: <x14/> (<x15/>) से भाषा कोड, या अपलोडर द्वारा दिए गए प्रत्येक के लिए <x16/>; <x17/> इसके बजाय साइट के स्वचालित कैप्शन लेता है; <x18/> उन्हें वीडियो में डालता है (ffmpeg, MP4 या MKV की आवश्यकता होती है)। ffmpeg के साथ, वीडियो के अध्याय भी फ़ाइल में जाते हैं, जैसा कि वीडियो डाउनलोड करें का <g19>अध्याय एम्बेड करें</g19> करता है। <x20/> डाउनलोड के कनेक्शन, और yt-dlp (और ffmpeg) के कनेक्शन, एक नेटवर्क एडाप्टर के माध्यम से भेजता है, जैसा कि <x21/> के लिए; जब यह कनेक्ट नहीं होता है, तो कुछ भी शुरू नहीं होता है।"
   },
   "b3f1633383cc8b77": {
    "source": "Open <g1>Downloads → Options</g1>, or click <g2>Options</g2> on the toolbar. The window has twelve pages on two rows of tabs. <g3>OK</g3> saves your changes; closing the window or pressing <g4>Esc</g4> throws them away.",
@@ -12177,6 +12245,10 @@
   "b86face263e9f2af": {
    "source": "We'd rather you knew. IDM has a site grabber that follows a whole website's pages (MDM's link grabber takes the links of one page), and many years of polish and compatibility fixes. MDM is new; if something you rely on is missing, <g1>ask for it</g1>.",
    "text": "हम चाहते हैं कि आप जानें। IDM में एक साइट ग्रैबर है जो पूरी वेबसाइट के पेजों को फॉलो करता है (MDM का लिंक ग्रैबर एक पेज के लिंक लेता है), और कई सालों की पॉलिश और संगतता सुधार। MDM नया है; यदि आपकी कोई महत्वपूर्ण चीज़ गायब है, तो <g1>उसके लिए पूछें</g1>।"
+  },
+  "b886cc5ff82424bc": {
+   "source": "<g1>A spare account, in a profile of its own</g1>: you don't have to lend yt-dlp your main account. Make a second profile in your browser, sign in to the site there with a spare account, and put that profile in <g2>Profile</g2> (its name, or its folder with <g3>...</g3>). yt-dlp reads that profile's cookies only. yt-dlp's developers advise this too: a site may limit an account it sees used by a program.",
+   "text": "<g1>एक अतिरिक्त खाता, अपनी खुद की प्रोफ़ाइल में</g1>: आपको yt-dlp को अपना मुख्य खाता उधार देने की आवश्यकता नहीं है। अपने ब्राउज़र में एक दूसरी प्रोफ़ाइल बनाएं, वहां एक अतिरिक्त खाते के साथ साइट पर साइन इन करें, और उस प्रोफ़ाइल को <g2>प्रोफ़ाइल</g2> में डालें (उसका नाम, या <g3>...</g3> के साथ उसका फ़ोल्डर)। yt-dlp केवल उस प्रोफ़ाइल की कुकीज़ पढ़ता है। yt-dlp के डेवलपर्स भी इसकी सलाह देते हैं: एक साइट एक खाते को सीमित कर सकती है जिसे वह किसी प्रोग्राम द्वारा उपयोग किए जाने के रूप में देखती है।"
   },
   "b88a67e39c494a61": {
    "source": "The server runs on the app's Tokio runtime, one listener per local network address. Each request is checked (<x1/>, <x2/>, token), turned into an <x3/> marked <x4/> (a field no request line can set) and handed to the app through the same channel as the command line's; the app answers it on its next frame, as it answers the automation API. Its page is built in (<x5/>) and its texts come from the app's catalogs (<x6/>).",
@@ -12782,10 +12854,6 @@
    "source": "Choose before you add",
    "text": "जोड़ने से पहले चुनें"
   },
-  "c20a850dfc745632": {
-   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier.",
-   "text": "अगर इनमें से कोई भी शुरू नहीं हो पाता, तो MDM सॉफ़्टवेयर रेंडरर से विंडो बनाता है (Windows पर Microsoft का, Linux पर Mesa का), इसलिए विंडो फिर भी खुल जाती है (जैसे रिमोट डेस्कटॉप या ग्राफ़िक्स ड्राइवर के बिना वर्चुअल मशीन पर)। यह काम करता है, लेकिन प्रोसेसर पर ज़्यादा भार डालता है।"
-  },
   "c21ae87a328182aa": {
    "source": "<g1>Link grabber</g1><g2>A page's links gathered, sorted into packages and checked online, then the archives unpacked when they arrive.</g2>",
    "text": "<g1>लिंक ग्रैबर</g1><g2>एक पेज के लिंक इकट्ठे किए जाते हैं, पैकेजों में छांटे जाते हैं और ऑनलाइन जांचे जाते हैं, फिर संग्रह आने पर अनपैक किए जाते हैं।</g2>"
@@ -12930,6 +12998,10 @@
    "source": "The download manager you already know, rebuilt to be faster. Free, open source and written from scratch in Rust.",
    "text": "वह डाउनलोड मैनेजर जिसे आप पहले से जानते हैं, तेज़ होने के लिए फिर से बनाया गया है। मुफ़्त, ओपन सोर्स और Rust में शुरू से लिखा गया।"
   },
+  "c4d8ea1c0d48428a": {
+   "source": "It needs ffmpeg, which writes them. A video without chapters is saved as it is.",
+   "text": "इसे ffmpeg की आवश्यकता होती है, जो उन्हें लिखता है। अध्यायों के बिना एक वीडियो जैसा है वैसा ही सहेजा जाता है।"
+  },
   "c4eff53dc61fce12": {
    "source": "Your rights",
    "text": "आपके अधिकार"
@@ -13001,6 +13073,10 @@
   "c5980664ded251b8": {
    "source": "<g1>The system:</g1> MDM's version and how you installed it, your operating system and its version, the processor, the language and theme, and how many downloads and queues you have. These are counts only.",
    "text": "<g1>सिस्टम:</g1> MDM का संस्करण और इसे इंस्टॉल करने का तरीका, आपका ऑपरेटिंग सिस्टम और उसका संस्करण, प्रोसेसर, भाषा और थीम, और डाउनलोड तथा कतारों की संख्या। इसमें केवल गिनती होती है।"
+  },
+  "c5a292e743078486": {
+   "source": "A distribution's yt-dlp can also be too old for YouTube: if the list stays short, click <g1>Use MDM's own copy</g1> beside yt-dlp in <g2>Helpers...</g2>.",
+   "text": "एक डिस्ट्रीब्यूशन का yt-dlp भी YouTube के लिए बहुत पुराना हो सकता है: यदि सूची छोटी रहती है, तो <g2>सहायक...</g2> में yt-dlp के बगल में <g1>MDM की अपनी कॉपी का उपयोग करें</g1> पर क्लिक करें।"
   },
   "c5b1d8d5e4be4a3b": {
    "source": "How the pictures come down",
@@ -13166,6 +13242,10 @@
    "source": "Checked before you download",
    "text": "डाउनलोड करने से पहले जाँच की गई"
   },
+  "c845f9239d5bddd5": {
+   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and what the browser sent with the stream (its referrer and origin, else the page as the referrer).",
+   "text": "किसी लिंक, वीडियो, ध्वनि या चित्र पर राइट-क्लिक करें और <g1>Mister Download Manager से डाउनलोड करें</g1> चुनें। MDM इसे किसी भी प्रकार का होने पर डाउनलोड करता है: आपने इसके लिए कहा है, इसलिए फ़ाइल प्रकारों की सूची और बहिष्कृत साइटें यहाँ लागू नहीं होती हैं (वे केवल यह तय करती हैं कि MDM किन डाउनलोड को स्वयं लेता है)। एक वीडियो जो स्ट्रीम के रूप में चलता है, वह <g2>वीडियो डाउनलोड करें</g2> विंडो में जाता है, जिसमें उसके प्लेयर द्वारा लोड की गई स्ट्रीम (HLS या DASH) होती है, जैसा कि <g3>वीडियो पर बटन</g3> इसे भेजता है, जिसमें स्ट्रीम के सर्वर के लिए आपकी कुकीज़ और ब्राउज़र द्वारा स्ट्रीम के साथ भेजा गया डेटा (उसका रेफ़रर और ओरिजिन, अन्यथा पेज को रेफ़रर के रूप में) शामिल होता है।"
+  },
   "c84f2046978e476a": {
    "source": "A title bar MDM draws itself",
    "text": "एक टाइटल बार जिसे MDM खुद बनाता है"
@@ -13309,10 +13389,6 @@
   "ca67cb26c4c8dabb": {
    "source": "View → Theme changes how MDM looks at once and keeps everything where it was. Pick one of the built-in looks, each with a light and a dark side, or make your own in a text file.",
    "text": "देखें → थीम MDM के रूप को तुरंत बदल देता है और सब कुछ वहीं रखता है जहाँ वह था। बिल्ट-इन लुक्स में से कोई एक चुनें, प्रत्येक में एक हल्का और एक गहरा पक्ष है, या एक टेक्स्ट फ़ाइल में अपना खुद का बनाएं।"
-  },
-  "ca722db87f0d3bad": {
-   "source": "Last updated 2026-11-12 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "पिछली बार अपडेट किया गया 2026-11-12 · ऐप, ब्राउज़र एक्सटेंशन और misterdownloadmanager.com पर लागू होता है"
   },
   "ca7a6b77fb1e5a3c": {
    "source": "strengthens every edge and text colour on top.",
@@ -13850,6 +13926,10 @@
    "source": "Maturity",
    "text": "परिपक्वता"
   },
+  "d2fc243b93084d12": {
+   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one. And YouTube sometimes asks any viewer from a network it doubts (a VPN, a shared or cloud address) to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
+   "text": "कुछ वीडियो केवल साइन-इन किए गए दर्शक के लिए चलते हैं: एक सदस्य का या एक निजी वीडियो, एक आयु-प्रतिबंधित वीडियो। और YouTube कभी-कभी किसी ऐसे नेटवर्क से किसी भी दर्शक से पूछता है जिस पर उसे संदेह है (एक VPN, एक साझा या क्लाउड पता) कि \"आप बॉट नहीं हैं, इसकी पुष्टि करने के लिए साइन इन करें\"। yt-dlp को तब आपके ब्राउज़र की कुकीज़ की आवश्यकता होती है, वे छोटी फ़ाइलें जो आपको साइन इन रखती हैं।"
+  },
   "d30e4557ff06a9ab": {
    "source": "Reports, translations and help",
    "text": "रिपोर्ट, अनुवाद और सहायता"
@@ -13977,6 +14057,10 @@
   "d4c9212e6107e470": {
    "source": "Playlists and channels",
    "text": "प्लेलिस्ट और चैनल"
+  },
+  "d4ce3b34f58e526c": {
+   "source": "<g1>Ubuntu and Debian</g1>:",
+   "text": "<g1>Ubuntu और Debian</g1>:"
   },
   "d4d2535439e2c024": {
    "source": "Coming from IDM?",
@@ -15090,6 +15174,10 @@
    "source": "Press <g1>F3</g1> to jump to the next match. The search wraps round to the top.",
    "text": "अगले मिलान पर जाने के लिए <g1>F3</g1> दबाएँ। खोज ऊपर से फिर से शुरू होती है।"
   },
+  "e71e432fdd540d5b": {
+   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download. With the look-ups off, MDM asks nothing of the network until you start, so a web page's address isn't read for its links either.",
+   "text": "<g1>विकल्प → संग्रह → लिंक आने पर देखें</g1> में लुक-अप बंद करें। कुछ फ़ाइल होस्ट लुक-अप को डाउनलोड के रूप में गिनते हैं। लुक-अप बंद होने पर, MDM तब तक नेटवर्क से कुछ भी नहीं पूछता जब तक आप शुरू नहीं करते, इसलिए वेब पेज का पता भी उसके लिंक के लिए नहीं पढ़ा जाता है।"
+  },
   "e7281739beb4476f": {
    "source": "A download manager can fill your whole connection. These steps cap MDM so that browsing, video calls and games stay smooth.",
    "text": "डाउनलोड मैनेजर आपका पूरा कनेक्शन इस्तेमाल कर सकता है। इन चरणों से MDM की गति सीमित करें, ताकि ब्राउज़िंग, वीडियो कॉल और गेम बिना रुकावट चलें।"
@@ -15157,10 +15245,6 @@
   "e7d58a9cc03da7fd": {
    "source": "Point at the video in your browser and click the Download video button that appears over it, or paste the page's address into Tasks → Download video from a…",
    "text": "अपने ब्राउज़र में वीडियो पर पॉइंट करें और उस पर दिखने वाले वीडियो डाउनलोड करें बटन पर क्लिक करें, या पृष्ठ का पता कार्य → एक पृष्ठ से वीडियो डाउनलोड करें… में पेस्ट करें।"
-  },
-  "e7e684a8f8aec6c8": {
-   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like): they are neither shown nor downloaded.",
-   "text": "<g1>वेब पेज छिपाएँ</g1> (डिफ़ॉल्ट रूप से चालू) पृष्ठों के लिंक (<x2/>, <x3/> आदि) छोड़ देता है: वे न दिखाए जाते हैं, न डाउनलोड होते हैं।"
   },
   "e7f203ecd75caead": {
    "source": "Can my AI assistant use MDM? — Mister Download Manager",
@@ -15414,6 +15498,10 @@
    "source": "Note",
    "text": "ध्यान दें"
   },
+  "eb9f527d55414228": {
+   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "अंतिम अपडेट 2026-11-13 · ऐप, ब्राउज़र एक्सटेंशन और misterdownloadmanager.com पर लागू होता है"
+  },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
    "text": "<g1>जो लिंक केवल एक बार काम करते हैं</g1> (या होस्ट जो एक समय में एक डाउनलोड की अनुमति देते हैं) डाउनलोड फ़ाइल जानकारी द्वारा उन्हें देखने के बाद \"403 Forbidden\" के साथ विफल हो जाते थे (<g2>#28</g2>): विंडो की खोज और डाउनलोड दोनों ने सर्वर से पूछा। डाउनलोड अब उस उत्तर से जारी रहता है जो विंडो को मिला था, और केवल तभी फिर से पूछता है जब वह कनेक्शन इस बीच बंद हो गया हो।"
@@ -15465,10 +15553,6 @@
   "ec83076f0311f20e": {
    "source": "A theme is one small text file in <g1>TOML</g1> (or JSON, <x2/>; or a <g3>colour scheme</g3>, <x4/>). It names only what it changes; everything else comes from the theme it <x5/>:",
    "text": "एक थीम <g1>TOML</g1> (या JSON, <x2/>; या एक <g3>रंग योजना</g3>, <x4/>) में एक छोटी टेक्स्ट फ़ाइल होती है। यह केवल वही नाम देती है जिसे वह बदलती है; बाकी सब उस थीम से आता है जिसे वह <x5/> करती है:"
-  },
-  "ec8dbbc2dc38cd32": {
-   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you.",
-   "text": "इनमें से किसी सीमा के कारण रोका गया टॉरेंट अपने इवेंट लॉग में यह दिखाता है और MDM शुरू होने पर फिर से साझा नहीं किया जाता। इसे फिर से साझा करने के लिए सीमा बढ़ाएँ या बंद करें। - <g1>सभी टोरेंट के लिए अपलोडिंग को इस पर सीमित करें</g1> — डिफ़ॉल्ट रूप से बंद। यह आपके सभी टोरेंट द्वारा अन्य पीयर को भेजे जाने वाले डेटा की कुल मात्रा सीमित करता है, चाहे वे डाउनलोड कर रहे हों या साझा कर रहे हों। टोरेंट की अपनी अपलोड सीमा, उसकी प्रगति विंडो में, इस सीमा के अतिरिक्त लागू होती है। - <g2>मैग्नेट लिंक और .torrent फ़ाइलें Mister Download Manager के साथ खोलें</g2> — इसके बाद Windows, मैग्नेट लिंक आपके ब्राउज़र में और <x3/> फ़ाइलें Explorer में MDM के साथ खोलता है। यह केवल आपके Windows खाते पर लागू होता है; Windows के <g4>इसके साथ खोलें</g4> में आपके चुने हुए प्रोग्राम को प्राथमिकता मिलती है। सेटअप इसे आपके लिए चालू कर सकता है।"
   },
   "ec99486fc82e0b86": {
    "source": "Options",
@@ -15541,6 +15625,10 @@
   "ed1e476b363fc15b": {
    "source": "What protects you",
    "text": "आपको क्या बचाता है"
+  },
+  "ed30bf8c293519f0": {
+   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. As when you drag a file in Explorer, a folder on the same drive gets the file moved there and another drive gets a copy (hold <g6>Shift</g6> to move it, <g7>Ctrl</g7> to copy it). The download follows a moved file: the list and <g8>Open</g8> find it in its new place. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
+   "text": "<g1>डाउनलोड पूरा</g1> फ़ाइल का आकार, उसका पता और उसे कहाँ सहेजा गया था, दिखाता है। <g2>खोलें</g2>, <g3>इसके साथ खोलें...</g3>, <g4>फ़ोल्डर खोलें</g4> या <g5>बंद करें</g5> चुनें। Windows पर आप नीचे दाईं ओर के छोटे बॉक्स को Explorer, ईमेल या चैट में खींचकर फ़ाइल को वहाँ छोड़ सकते हैं। जैसे आप Explorer में किसी फ़ाइल को खींचते हैं, उसी ड्राइव पर एक फ़ोल्डर में फ़ाइल को वहाँ ले जाया जाता है और दूसरी ड्राइव पर एक प्रतिलिपि मिलती है (<g6>Shift</g6> दबाकर उसे ले जाएँ, <g7>Ctrl</g7> दबाकर उसकी प्रतिलिपि बनाएँ)। डाउनलोड एक स्थानांतरित फ़ाइल का अनुसरण करता है: सूची और <g8>खोलें</g8> उसे उसके नए स्थान पर पाते हैं। यह विंडो आपके अन्य प्रोग्रामों के ऊपर तब तक दिखाई देती है जब तक आप उस पर क्लिक नहीं करते, बिना आपके टाइपिंग वाले प्रोग्राम से कीबोर्ड लिए।"
   },
   "ed39bbda605ca874": {
    "source": "Every file finds its folder",
@@ -15774,6 +15862,10 @@
    "source": "Image galleries — Mister Download Manager help",
    "text": "इमेज गैलरी — Mister Download Manager सहायता"
   },
+  "f02ad447917b29c8": {
+   "source": "<g1>Fedora</g1>:",
+   "text": "<g1>Fedora</g1>:"
+  },
   "f0332c2aa7cd2077": {
    "source": "<g1>A download's progress file could be written again just after it stopped</g1> (<g2>#106</g2>), and <g3>a download could fail as it finished, with \"part file still in use\"</g3> (<g4>#116</g4>). MDM saves a download's progress every few seconds, in a file beside it. A download paused or finished during one of those saves could stop before the save was done; that save then wrote an old progress file a moment later, or, when the last bytes arrived during it, still held the file. A download now stops only once its save is done.",
    "text": "<g1>एक डाउनलोड की प्रगति फ़ाइल उसके रुकने के ठीक बाद फिर से लिखी जा सकती थी</g1> (<g2>#106</g2>), और <g3>एक डाउनलोड उसके पूरा होने पर विफल हो सकता था, \"पार्ट फ़ाइल अभी भी उपयोग में है\" के साथ</g3> (<g4>#116</g4>)। MDM हर कुछ सेकंड में एक डाउनलोड की प्रगति को उसके बगल में एक फ़ाइल में सहेजता है। उन सहेजने में से एक के दौरान रोका गया या पूरा किया गया डाउनलोड सहेजने के पूरा होने से पहले रुक सकता था; वह सहेज फिर थोड़ी देर बाद एक पुरानी प्रगति फ़ाइल लिखता था, या, जब अंतिम बाइट्स उसके दौरान आती थीं, तो फ़ाइल को अभी भी पकड़े रहता था। एक डाउनलोड अब तभी रुकता है जब उसका सहेज पूरा हो जाता है।"
@@ -15985,10 +16077,6 @@
   "f3664543700a7df7": {
    "source": "Download File Info",
    "text": "फ़ाइल जानकारी डाउनलोड करें"
-  },
-  "f385c86abe758db3": {
-   "source": "Last updated 2026-11-12",
-   "text": "पिछली बार अपडेट किया गया: 2026-11-12"
   },
   "f3901fedc4a7dd52": {
    "source": "<g1>Browser extension</g1><g2>Downloads you click in Chrome, Edge, Brave, Opera, Vivaldi or Firefox go straight to MDM, sign-in included.</g2>",
@@ -16268,7 +16356,7 @@
   },
   "f89c54d71eb189a4": {
    "source": "If the graphics card is reset while MDM runs (a driver update), MDM starts again by itself. Lost twice in 10 minutes, it goes back to OpenGL, and <g1>View → Draw with</g1> says why.",
-   "text": "यदि MDM चलते समय ग्राफिक्स कार्ड रीसेट हो जाता है (एक ड्राइवर अपडेट), तो MDM अपने आप फिर से शुरू हो जाता है। 10 मिनट में दो बार खो जाने पर, यह OpenGL पर वापस चला जाता है, और <g1>देखें → इसके साथ ड्रा करें</g1> बताता है कि क्यों।"
+   "text": "यदि MDM चलते समय ग्राफ़िक्स कार्ड रीसेट हो जाता है (एक ड्राइवर अपडेट), तो MDM अपने आप फिर से शुरू हो जाता है। 10 मिनट में दो बार खो जाने पर, यह OpenGL पर वापस चला जाता है, और <g1>देखें → इसके साथ ड्रा करें</g1> कारण बताता है।"
   },
   "f8b52274ed125d5f": {
    "source": "Tick <g1>Wake the computer to run this queue</g1> and a sleeping computer is woken a minute before the start time, so the network is back when the queue begins. It stays awake while the queue runs; afterwards its own sleep settings apply again. The line under the option says when the next wake is, or why there can't be one.",
@@ -16537,10 +16625,6 @@
   "fbba8f18d2fae06e": {
    "source": "A text box's bottom line while it can be typed in",
    "text": "एक टेक्स्ट बॉक्स की निचली रेखा जब उसमें टाइप किया जा सकता हो"
-  },
-  "fbc41fd4efa0fd9a": {
-   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). <x19/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x20/>; when it isn't connected, nothing starts.",
-   "text": "एक वीडियो डाउनलोड करें; <x1/> <x2/> से गुणवत्ता चयनकर्ता लेता है (<x3/> = सबसे अच्छी एकल फ़ाइल; <x4/> = साइट पर उपलब्ध ध्वनि, परिवर्तित नहीं; <x5/>, <x6/>, <x7/> या <x8/> = उस बिटरेट पर MP3 के रूप में ध्वनि, <x9/> अपनी सर्वोत्तम परिवर्तनीय गुणवत्ता पर; <x10/> = Opus के रूप में; <x11/> = FLAC के रूप में, दोषरहित लेकिन साइट की ध्वनि से बेहतर नहीं; रूपांतरणों के लिए ffmpeg की आवश्यकता होती है)। <x12/>: MDM का अपना डाउनलोडर yt-dlp द्वारा पाए गए प्रत्येक स्ट्रीम को इतने कनेक्शनों (डिफ़ॉल्ट रूप से 8, 1 से 128 तक) पर लाता है, एक स्ट्रीम को टुकड़ों में (HLS, DASH) एक साथ इतने टुकड़ों में। <x13/> इसके साथ उपशीर्षक सहेजता है: <x14/> (<x15/>) से भाषा कोड, या अपलोडर द्वारा दिए गए प्रत्येक के लिए <x16/>; <x17/> इसके बजाय साइट के स्वचालित कैप्शन लेता है; <x18/> उन्हें वीडियो में डालता है (ffmpeg, MP4 या MKV की आवश्यकता होती है)। <x19/> डाउनलोड के कनेक्शन, और yt-dlp के (और ffmpeg के), एक नेटवर्क एडाप्टर के माध्यम से भेजता है, जैसे <x20/> के लिए; जब यह कनेक्ट नहीं होता है, तो कुछ भी शुरू नहीं होता है।"
   },
   "fbc5c79e5fad811f": {
    "source": "<g1>VS Code</g1>: in <x2/>, or <g3>MCP: Add Server</g3> in the command palette:",

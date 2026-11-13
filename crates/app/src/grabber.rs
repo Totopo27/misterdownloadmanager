@@ -1195,24 +1195,26 @@ mod tests {
     #[test]
     fn a_long_list_is_added_at_once_each_link_once() {
         // #805: 20,000 links, each compared with every other, held the window's thread.
-        let many: Vec<Imported> = (0..20_000)
-            .map(|i| link(&format!("https://dl.example.com/f/{i}.zip"), None))
-            .collect();
-        let mut g = grabber();
-        let t = std::time::Instant::now();
-        g.add(many.clone(), "list.txt".into(), |_| false);
-        // Added again (and with a #fragment): nothing more.
-        let again: Vec<Imported> = many
-            .iter()
-            .map(|d| link(&format!("{}#again", d.url), None))
-            .collect();
-        g.add(again, "list.txt".into(), |_| false);
+        let lists = |n: usize| {
+            let many: Vec<Imported> = (0..n)
+                .map(|i| link(&format!("https://dl.example.com/f/{i}.zip"), None))
+                .collect();
+            // Added again (and with a #fragment): nothing more.
+            let again: Vec<Imported> = many
+                .iter()
+                .map(|d| link(&format!("{}#again", d.url), None))
+                .collect();
+            (grabber(), many, again)
+        };
+        let add = |(mut g, many, again): (Grabber, Vec<Imported>, Vec<Imported>)| {
+            g.add(many, "list.txt".into(), |_| false);
+            g.add(again, "list.txt".into(), |_| false);
+            g
+        };
+        // Each link compared once: 8 times the links cost about 8 times as long (not 64).
+        mdm_labserver::growth::assert_linear(1_000, &lists, &add);
+        let g = add(lists(20_000));
         assert_eq!(g.links.len(), 20_000);
-        assert!(
-            t.elapsed() < std::time::Duration::from_secs(10),
-            "{:?}",
-            t.elapsed()
-        );
         // Settled as before: one package of archives, to extract.
         assert_eq!(g.packages.len(), 1);
         assert!(g.packages[0].extract);

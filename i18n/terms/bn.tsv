@@ -1,0 +1,58 @@
+# Bangla termbase: English term, then its translation, then when to use it.
+# Read by tools/i18n/translate.py and tools/website/translate_site.py (lingo.py). Rows a
+# person wrote or checked; tools/i18n/learn.py proposes more from reviewed catalog rows.
+queue	সারি	never কিউ
+category	শ্রেণি	one word for the concept; never ক্যাটাগরি, বিভাগ, শ্রেণী or শ্রেণীবিভাগ
+pause	বিরতি দিন	command; the state is বিরতি দেওয়া হয়েছে; never থামান, which is stop
+stop	থামান	command; the state is থেমে গেছে; never বন্ধ করুন, which is close and turn off
+close	বন্ধ করুন	also turn off and shut down; turn on is চালু করুন
+resume	পুনরায় শুরু করুন	never আবার শুরু, which belongs to redownload
+redownload	আবার ডাউনলোড করুন	never পুনরায় ডাউনলোড
+Options	বিকল্প	the Options window; never বিকল্পসমূহ, বিকল্পগুলি or অপশন; kept apart from Settings, both sit in one menu
+settings	সেটিংস	kept apart from Options (বিকল্প)
+delete	মুছুন	in a sentence মুছে ফেলুন; never সরান; Delete from a queue or a list, which only takes it off, is বাদ দিন
+remove	বাদ দিন	from a list or a queue; in a sentence তালিকা থেকে বাদ দিন; never সরান, which is move
+move	সরান	moved is সরানো
+rename	নাম পরিবর্তন করুন	never পুনর্নামকরণ or পুনঃনামকরণ
+scheduler	শিডিউলার	the Scheduler window; a queue's schedule is সময়সূচি
+schedule	সময়সূচি	spelled with ি, never সময়সূচী
+speed limiter	স্পিড লিমিটার	the feature's name as IDM users say it
+status	অবস্থা	never স্থিতি, which reads as a balance in Bangladesh
+completed	সম্পূর্ণ হওয়া	before a noun: সম্পূর্ণ হওয়া ডাউনলোড, since সম্পূর্ণ ডাউনলোড also reads as the whole download; as a state সম্পূর্ণ
+link	লিংক	Bangla Academy spelling; never লিঙ্ক
+web page	ওয়েব পেজ	never পৃষ্ঠা, which is a page of a book; home page is হোম পেজ
+path	পাথ	never পথ, which is a road
+export	এক্সপোর্ট করুন	never রপ্তানি, which is exporting goods
+import	ইম্পোর্ট করুন	never আমদানি
+extract	এক্সট্র্যাক্ট করুন	an archive, as WinRAR and 7-Zip users say it
+preview	প্রিভিউ	the button is প্রিভিউ দেখুন; never পূর্বরূপ
+piece	খণ্ড	a torrent's piece; a download's part is অংশ
+part	অংশ	a part or segment of a download
+peer	পিয়ার	no English plural -s; never পিয়ার্স
+merge	একত্র করুন	a video's picture and sound joined into one file; the narrow status is একত্রীকরণ; never একত্রিত or মার্জ
+checksum	চেকসাম	never চেকমার্ক, which is a tick
+verify	যাচাই করুন	the narrow status is যাচাই
+details	বিস্তারিত	never বিবরণ; a description is বর্ণনা
+description	বর্ণনা	kept apart from details (বিস্তারিত)
+properties	বৈশিষ্ট্য	Windows' word
+save as	এই নামে সংরক্ষণ	the Save As field; never হিসাবে সংরক্ষণ
+open with	অ্যাপ দিয়ে খুলুন	never এর সাথে খুলুন
+choose	বেছে নিন	or নির্বাচন করুন; never চয়ন করুন
+select	নির্বাচন করুন	or বেছে নিন; never চয়ন করুন
+invalid	ভুল	in a sentence সঠিক নয়; never অবৈধ, which means illegal
+find	খুঁজুন	the command; a search field's label is অনুসন্ধান
+time left	বাকি সময়	never অবশিষ্ট সময়
+transfer rate	স্থানান্তর হার	the column and the sort command say the same
+file type	ফাইলের ধরন	never ফাইলের প্রকার
+snooze	স্নুজ করুন	as on phones; never স্থগিত
+info hash	ইনফো হ্যাশ	a fixed BitTorrent term; never তথ্য হ্যাশ
+Music	সংগীত	the category; never সঙ্গীত
+Documents	ডকুমেন্ট	the category; no plural
+Compressed	সংকুচিত	the category
+all	সব	never সমস্ত in a menu; in all (a total) is মোট
+already	ইতোমধ্যে	Bangla Academy spelling; never ইতিমধ্যে; আগে থেকেই where it reads better (Files already there: আগে থেকেই থাকা ফাইল)
+check for updates	আপডেট খুঁজুন	never আপডেটগুলির জন্য পরীক্ষা করুন
+reset	রিসেট করুন	never পুনরায় সেট করুন
+help	সহায়তা	never সাহায্য
+exit	প্রস্থান করুন	the menu and the tray say the same
+connecting	সংযোগ করা হচ্ছে	never সংযুক্ত হচ্ছে

@@ -145,7 +145,7 @@ impl CategoryDialog {
                     // From the folder typed, when there is one.
                     let typed = Path::new(self.folder.trim()).to_path_buf();
                     winui::start_pick(ui.ctx(), "category-folder", move || {
-                        let mut pick = rfd::FileDialog::new().set_title(title);
+                        let mut pick = crate::winui::file_dialog(&title);
                         if typed.is_dir() {
                             pick = pick.set_directory(&typed);
                         }

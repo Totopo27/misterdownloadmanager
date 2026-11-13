@@ -802,7 +802,7 @@ impl Scheduler {
         if browse && f.open_on {
             let title = crate::i18n::t("Open the following file when done").to_owned();
             winui::start_pick(ui.ctx(), "sched-open-file", move || {
-                rfd::FileDialog::new().set_title(title).pick_file()
+                crate::winui::file_dialog(&title).pick_file()
             });
         }
         if let Some(path) = winui::picked(ui.ctx(), "sched-open-file") {

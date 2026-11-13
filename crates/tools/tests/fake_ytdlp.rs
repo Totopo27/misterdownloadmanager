@@ -188,6 +188,57 @@ fn fake_ytdlp() -> ExitCode {
         );
         return ExitCode::FAILURE;
     }
+    // #736: a video and its sound, merged as yt-dlp's ffmpeg does: into `<stem>.temp.mp4`,
+    // growing for a while, then renamed. Said first when asked (`post_process:` print). Halfway,
+    // the file is empty for a while (written again from the start): what is said of the merge
+    // must not go back with it. Whole, it stays a while before the rename, long enough to be
+    // read on a slow machine.
+    if mode == "merge" {
+        use std::io::Write;
+        println!("MDMQ 137+140 1920x1080");
+        println!("MDMP 3000 3000 NA 1000 137");
+        println!("MDMP 1000 1000 NA 1000 140");
+        let video = template.replace("%(ext)s", "mp4").replace("%%", "%");
+        if args.iter().any(|a| a.starts_with("post_process:MDMM")) {
+            println!("MDMM {video}");
+        }
+        let temp = video.replace(".mp4", ".temp.mp4");
+        let mut file = std::fs::File::create(&temp).unwrap();
+        for k in 1..=10u64 {
+            if k == 6 {
+                file.set_len(0).unwrap();
+                std::thread::sleep(Duration::from_millis(600));
+                file = std::fs::File::create(&temp).unwrap();
+                file.write_all(&[0u8; 2000]).unwrap();
+            }
+            file.write_all(&[0u8; 400]).unwrap();
+            file.flush().unwrap();
+            std::thread::sleep(Duration::from_millis(300));
+        }
+        drop(file);
+        std::thread::sleep(Duration::from_millis(1200));
+        std::fs::rename(&temp, &video).unwrap();
+        println!("MDMF {video}");
+        return ExitCode::SUCCESS;
+    }
+    // A merge that fails (a stream ffmpeg can't read): the streams stay, whole, as yt-dlp leaves
+    // them, and the merge's file half written.
+    if mode == "merge-fails" {
+        println!("MDMQ 137+aud-English 1920x1080");
+        println!("MDMP 3000 3000 NA 1000 137");
+        println!("MDMP 1000 1000 NA 1000 aud-English");
+        let video = template.replace("%(ext)s", "mp4").replace("%%", "%");
+        std::fs::write(video.replace(".mp4", ".f137.mp4"), [0u8; 3000]).unwrap();
+        // An HLS sound, named as yt-dlp names its rendition.
+        std::fs::write(video.replace(".mp4", ".faud-English.mp4"), [0u8; 1000]).unwrap();
+        if args.iter().any(|a| a.starts_with("post_process:MDMM")) {
+            println!("MDMM {video}");
+        }
+        std::fs::write(video.replace(".mp4", ".temp.mp4"), [0u8; 1200]).unwrap();
+        std::thread::sleep(Duration::from_millis(300));
+        eprintln!("ERROR: Postprocessing: Conversion failed!");
+        return ExitCode::FAILURE;
+    }
     println!("MDMP 1024 4096 NA 1000 18");
     println!("MDMQ 18 640x360");
     // #79: it falls over mid-way, leaving a helper running (Windows: the launcher's child).
@@ -212,25 +263,6 @@ fn fake_ytdlp() -> ExitCode {
     // #79: silent for a while, as when ffmpeg merges a long video.
     if let Some(secs) = mode.strip_prefix("quiet:") {
         std::thread::sleep(Duration::from_secs(secs.trim().parse().unwrap_or(1)));
-    }
-    // #736: a video and its sound, merged as yt-dlp's ffmpeg does: into `<stem>.temp.mp4`,
-    // growing for a while, then renamed. Said first when asked (`post_process:` print).
-    if mode == "merge" {
-        println!("MDMQ 137+140 1920x1080");
-        println!("MDMP 3000 3000 NA 1000 137");
-        println!("MDMP 1000 1000 NA 1000 140");
-        let video = template.replace("%(ext)s", "mp4").replace("%%", "%");
-        if args.iter().any(|a| a.starts_with("post_process:MDMM")) {
-            println!("MDMM {video}");
-        }
-        let temp = video.replace(".mp4", ".temp.mp4");
-        for k in 1..=10u64 {
-            std::fs::write(&temp, vec![0u8; (k * 400) as usize]).unwrap();
-            std::thread::sleep(Duration::from_millis(300));
-        }
-        std::fs::rename(&temp, &video).unwrap();
-        println!("MDMF {video}");
-        return ExitCode::SUCCESS;
     }
     let langs = after("--sub-langs").unwrap_or_default();
     for lang in langs.split(',').filter(|l| !l.is_empty()) {
@@ -520,9 +552,35 @@ fn merge_checks(me: &Path) {
         known.iter().any(|f| *f > 0.0 && *f < 1.0),
         "a share done was said: {seen:?}"
     );
+    // Never back, though the file was empty a while halfway; and on to its whole size, 4000 bytes
+    // of the streams' 4000, held short of the end until the rename (99 %).
     assert!(
         known.windows(2).all(|w| w[0] <= w[1]),
         "it only goes forward: {known:?}"
+    );
+    assert_eq!(known.last(), Some(&0.99), "it reaches the end: {known:?}");
+
+    // Joining them fails: the video fails at once (no other look-up or server mends it), says
+    // why, keeps the streams for Resume and leaves nothing half joined.
+    let (p, files, out) = download_as(me, "merge-fails", &Subs::default(), "bv*+ba", "Talk");
+    match &p.state {
+        State::Failed(e) => assert!(e.contains("Conversion failed"), "{e}"),
+        other => panic!("merge fails: {other:?}"),
+    }
+    assert_eq!(p.merging, None);
+    let kept = ["Talk.f137.mp4", "Talk.faud-English.mp4"];
+    assert_eq!(files, kept, "the streams stay, the merge's file goes");
+    let named: Vec<String> = p
+        .merge_failed
+        .expect("said to be the merge")
+        .iter()
+        .map(|f| f.file_name().unwrap().to_string_lossy().into_owned())
+        .collect();
+    assert_eq!(named, kept);
+    assert_eq!(
+        std::fs::read_to_string(out.path().join("tries.txt")).unwrap(),
+        "1",
+        "one run"
     );
 }
 

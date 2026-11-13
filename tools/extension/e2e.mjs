@@ -22,14 +22,17 @@
 // nothing and says so, never the feed: sample pages served at LinkedIn's, Facebook's, X's,
 // Instagram's, Reddit's, TikTok's, Vimeo's, Dailymotion's addresses, #689), preview (the video button kept over a hover-to-play
 // preview the page stopped as the pointer went to it, #503), steady (the video button keeping one place over
-// a preview that grows and shows its own buttons while hovered, #560), csp (the video button
+// a preview that grows and shows its own buttons while hovered, #560), player (one place over a
+// player whose settings button comes and goes as the pointer moves, #899), csp (the video button
 // under a strict CSP), hls (the stream a player loaded), streams (HLS and DASH players handed over
 // by the button, the right-click menu and the media list, and read by yt-dlp; #155; also with no
 // .m3u8 or .mpd, served as text/plain or octet-stream, #171), sniffed (#171 without yt-dlp: such
 // streams found only when asked, by the button and the media list, a text decoy never), media (the
 // toolbar button's list of the media a tab loaded: streams, files, a protected stream; #38),
 // scripted (a video a server's program sends, named after its page with its real type: the list,
-// the button, the Download video window; #695, #800),
+// the button, the Download video window; #695, #800), guarded (a stream another site's server
+// serves to its page's player only: looked up and downloaded with the Origin and Referer the
+// browser sent, #900),
 // qualities (the button's menu: a stream's qualities looked up by MDM, with their sizes; the one
 // picked downloads with its progress window only, MDM's main window hidden), page (the menu on a
 // real video page, E2E_VIDEO_PAGE, and the line E2E_VIDEO_PICK downloaded: off by default), video (shown,
@@ -2320,6 +2323,88 @@ const CASES = {
     return `${Math.abs(first.l - b.l) > 2 || Math.abs(first.t - b.t) > 2 ? "moved" : "stayed"} off the preview's sound button, at ${Math.round(b.l - v.l)},${Math.round(b.t - v.t)}; then still for ${seen.length} looks (8 steps there, 2.5 s on it while the preview shrank and hid its button), sent ${address.replace(LAB, "")}`;
   },
 
+  // #899: a site's player shows its own settings button at the top right while the pointer moves
+  // over the player, and hides it a moment after the pointer stops or leaves the player (for the
+  // button, which is no part of it). The button takes a free corner once, and stays there as the
+  // pointer goes to it, rests on it, goes back over the video and stops: it never hops back to
+  // the corner the settings button hid from (0.5.2 did, every time it came and went).
+  async player(t) {
+    await t.session.navigate(`${LAB}/page?video=${encodeURIComponent("/gen/1M/clip.mp4")}`);
+    await t.session.evaluate(`(() => {
+      const v = document.querySelector("#video");
+      const box = document.createElement("div");
+      box.id = "player-box";
+      box.style.cssText = "position:relative;display:inline-block;background:#111";
+      v.replaceWith(box);
+      box.appendChild(v);
+      const gear = document.createElement("button");
+      gear.id = "player-settings";
+      gear.textContent = "settings";
+      gear.style.cssText = "position:absolute;right:8px;top:8px;width:44px;height:36px;z-index:2;display:none";
+      box.appendChild(gear);
+      let idle = 0;
+      const hide = (ms) => {
+        clearTimeout(idle);
+        idle = setTimeout(() => { gear.style.display = "none"; document.body.dataset.hidden = String(Number(document.body.dataset.hidden || 0) + 1); }, ms);
+      };
+      box.addEventListener("mousemove", () => { gear.style.display = "block"; hide(1200); });
+      box.addEventListener("mouseleave", () => hide(250));
+      return true;
+    })()`);
+    const v = await rect(t.session, "#video");
+    const mid = [(v.l + v.r) / 2, (v.t + v.b) / 2];
+    const seen = [];
+    const side = (r) => (r ? ((r.l + r.r) / 2 > mid[0] ? "right" : "left") : "gone");
+    const look = async (what) => {
+      const r = await rect(t.session, "mdm-video-button");
+      seen.push(`${what} ${side(r)}${r ? ` ${Math.round(r.l)},${Math.round(r.t)}` : ""}`);
+      return r;
+    };
+    const glide = async (from, to, steps, what) => {
+      for (let i = 1; i <= steps; i++) {
+        await t.session.mouse(from[0] + ((to[0] - from[0]) * i) / steps, from[1] + ((to[1] - from[1]) * i) / steps);
+        await sleep(60);
+        await look(`${what} ${i}`);
+      }
+    };
+    const rest = async (ms, what) => {
+      for (let n = 0; n < ms / 100; n++) {
+        await sleep(100);
+        await look(`${what} ${n}`);
+      }
+    };
+    // Over the player: its settings button shows, the button shows clear of it.
+    const first = await hover(t.session, v);
+    if (!first) throw new Error("no button over the player");
+    await until("the player's settings button", 3000, () => t.session.evaluate(`document.getElementById("player-settings").style.display === "block"`));
+    await sleep(900);
+    const b = await look("shown");
+    const gear = await rect(t.session, "#player-settings");
+    if (!b) throw new Error("the button went as the player's controls showed");
+    if (gear && b.l < gear.r && b.r > gear.l && b.t < gear.b && b.b > gear.t) throw new Error(`the button covers the player's settings button: ${JSON.stringify({ b, gear })}`);
+    // To the button, and resting on it: the player hides its settings button.
+    const on = [b.l + 14, (b.t + b.b) / 2];
+    await glide(mid, on, 8, "to it");
+    await rest(2000, "on it");
+    // Back over the video, still there while the player's controls show and hide again.
+    await glide(on, mid, 8, "back");
+    await rest(2500, "still");
+    await t.session.mouse(mid[0] + 20, mid[1] + 10);
+    await rest(800, "moved");
+    // And to it again.
+    await glide([mid[0] + 20, mid[1] + 10], on, 8, "again");
+    await rest(1500, "on it again");
+    const hid = await t.session.evaluate("Number(document.body.dataset.hidden || 0)");
+    if (hid < 2) throw new Error(`the player's settings button hid ${hid} time(s): the test's player didn't behave as the issue's`);
+    const sides = seen.map((x) => x.split(" ").find((w) => ["left", "right", "gone"].includes(w)));
+    const flips = sides.filter((x, i) => i > 0 && x !== "gone" && sides[i - 1] !== "gone" && x !== sides[i - 1]).length;
+    // Gone a moment is fine: it fades while the pointer rests still over the video (#480).
+    const kept = seen.filter((x) => !x.includes(side(b)) && !x.endsWith(" gone"));
+    if (flips || kept.length) throw new Error(`the button hopped (${flips} times): ${seen.join("; ")}`);
+    await t.session.mouse(5, 5);
+    return `took the ${side(b)} corner clear of the player's settings button, then kept it for ${seen.length} looks (to it, on it, back over the video, still, moved, on it again) while the player hid its settings button ${hid} times`;
+  },
+
   // A player playing a stream (a blob: in the page): the button sends the manifest it loaded.
   async hls(t) {
     await t.session.navigate(`${LAB}/page?hls=1`);
@@ -2740,6 +2825,78 @@ const CASES = {
       // The next case starts MDM as usual.
       await stopApp();
     }
+  },
+
+  // #900: a stream on another site's server that serves it only to its page's player: every
+  // request, its playlists' and each segment's, must carry that page's Origin and a Referer on it
+  // (the lab's /hlsg/, as a site's video server checks; 403 otherwise). The page is the lab's on
+  // localhost, the stream on 127.0.0.1. The button's look-up finds its qualities, and one picked
+  // in its menu downloads through MDM's engine to its end, every request of MDM's with what the
+  // browser sent (E2E_GUARDED_SHOT: a screenshot of the button's menu then, for a PR's body).
+  async guarded(t) {
+    if (!ytdlp) throw new Skip("no yt-dlp (E2E_YTDLP or PATH)");
+    if (!ffmpeg) throw new Skip("no ffmpeg (E2E_FFMPEG or PATH)");
+    const page = `http://localhost:${PORT}`;
+    const site = `localhost:${PORT}`;
+    await clearLog();
+    await t.session.navigate(`${page}/page?hlsg=127.0.0.1:${PORT}&title=${encodeURIComponent("A guarded stream")}`);
+    const state = await until("the stream player", 15000, () => t.session.evaluate("document.body.dataset.stream || ''"));
+    if (state !== "done") throw new Error(`the page's player: ${state} ${await t.session.evaluate("document.body.dataset.streamError || ''")}`);
+    const guarded = (x) => x.path.startsWith(`/hlsg/${site}/`);
+    const browser = (await (await fetch(`${LAB}/_log`)).json()).filter(guarded);
+    if (!browser.length || browser.some((x) => x.status !== 200)) throw new Error(`the browser's own requests: ${browser.map((x) => `${x.path} ${x.status}`).join(", ")}`);
+    // Without the page's Origin, the stream's server refuses it, as the issue's did.
+    const bare = await fetch(`${LAB}/hlsg/${site}/master.m3u8`, { headers: { Referer: `${page}/page` } });
+    if (bare.status !== 403) throw new Error(`the guarded stream answered ${bare.status} without the page's Origin`);
+    const earlier = (await mdmList()).filter((d) => d.url.startsWith(`${LAB}/hlsg/`)).map((d) => d.id);
+    if (earlier.length) await ipc({ action: "delete", ids: earlier });
+    await clearLog();
+    const v = await rect(t.session, "#player");
+    const b = await hover(t.session, v);
+    if (!b) throw new Error("no button over the stream's player");
+    const before = new Set((await mdmList()).map((d) => d.id));
+    const mdm = async () => (await (await fetch(`${LAB}/_log`)).json()).filter(guarded);
+    const refused = async () => (await mdm()).filter((x) => x.status !== 200).map((x) => `${x.path} ${x.status} (origin ${x.origin || "none"}, referer ${x.referer || "none"})`);
+    // The look-up: its chip names the best quality (a failed one names none).
+    let last = null;
+    const pill = await until("the best quality on the button's chip", 60000, async () => {
+      last = await t.session.pill(PILL_STATE);
+      return last && last.state === "ready" && last.chip ? last : null;
+    }).catch(async () => {
+      throw new Error(`no quality found (the button: ${last && last.state} "${last && last.text}"); the stream's server refused: ${(await refused()).join(", ") || "nothing"}`);
+    });
+    // Its menu: the sound's "original" line, one stream, downloaded by MDM's engine to its end
+    // (no merge: the lab's tracks carry sound only, which yt-dlp's merge with some ffmpeg
+    // builds refuses, whatever the request).
+    await clickArrow(t.session);
+    const m = await until("the qualities in the menu", 30000, async () => {
+      const p = await t.session.picks("row");
+      return p && p.rows.length ? p : null;
+    });
+    if (process.env.E2E_GUARDED_SHOT && t.session.shot) {
+      await sleep(400);
+      await t.session.shot(process.env.E2E_GUARDED_SHOT, { l: Math.min(v.l, m.box.l) - 10, t: Math.min(v.t, m.box.t) - 10, r: Math.max(v.r, m.box.r) + 10, b: Math.max(v.b, m.box.b) + 10 });
+    }
+    const row = m.rows.find((r) => r.kind === "audio" && /original/i.test(r.name));
+    if (!row) throw new Error(`no original sound in the menu: ${JSON.stringify(m.rows.map((r) => r.name))}`);
+    await t.session.mouse(row.x, row.y, "click");
+    const item = await until("the stream, in MDM's list", 60000, async () => (await mdmList()).find((d) => !before.has(d.id)));
+    const done = await until("the download's end", 120000, async () => {
+      const d = (await mdmList()).find((x) => x.id === item.id);
+      if (d && d.status === "Error") throw new Error(`the download failed: ${d.error}; refused: ${(await refused()).join(", ")}`);
+      return d && d.status === "Complete" ? d : null;
+    });
+    // Every request of MDM's (yt-dlp's look-up and the engine's playlists and segments): 200,
+    // with the page's Origin and Referer.
+    const asked = await mdm();
+    const segments = asked.filter((x) => x.path.endsWith(".ts"));
+    const bad = await refused();
+    if (bad.length) throw new Error(`refused: ${bad.join(", ")}`);
+    const lacking = asked.filter((x) => x.origin !== page || !(x.referer || "").startsWith(`${page}/`));
+    if (lacking.length) throw new Error(`without the page's Origin and Referer: ${lacking.map((x) => `${x.path} (${x.origin}, ${x.referer})`).join(", ")}`);
+    if (segments.length < 3) throw new Error(`only ${segments.length} segments asked for: ${asked.map((x) => x.path).join(", ")}`);
+    await t.session.mouse(5, 5);
+    return `chip "${pill.chip}"; "${row.name}" picked: ${done.file} (${fs.statSync(done.path).size} bytes); MDM's ${asked.length} requests (${asked.length - segments.length} playlists, ${segments.length} segments) all 200 with Origin ${page} and its Referer`;
   },
 
   // E2E_VIDEO_PAGE=<a video's page>: the button's qualities' menu on a real site (a pull

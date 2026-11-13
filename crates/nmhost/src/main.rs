@@ -144,6 +144,47 @@ struct Message {
     video_lookup: Option<LookupAsk>,
     video_poll: Option<PollAsk>,
     video_pick: Option<PickAsk>,
+    /// With `video` and `videoLookup`: what the browser sent with `src` as its page's player
+    /// asked for it (#900), sent again with it and each of its pieces. An older extension sends
+    /// none: the page is the stream's Referer then, as before.
+    fetched_with: FetchedWith,
+}
+
+/// The headers the browser sent with a stream (`Message::fetched_with`): its Referer and Origin.
+#[derive(Debug, Default, Deserialize, PartialEq)]
+#[serde(default)]
+struct FetchedWith {
+    referer: Option<String>,
+    origin: Option<String>,
+}
+
+impl FetchedWith {
+    /// The Referer for `src` (some) fetched from `page`: the one the browser sent, else the page.
+    /// None without `src` (the page itself is looked up).
+    fn referer(&self, src: Option<&str>, page: &str) -> Option<String> {
+        src?;
+        Some(
+            web_header(self.referer.as_deref())
+                .unwrap_or(page)
+                .to_owned(),
+        )
+    }
+
+    /// The Origin the browser sent with `src`, if any (only with `src`).
+    fn origin(&self, src: Option<&str>) -> Option<String> {
+        src?;
+        web_header(self.origin.as_deref()).map(str::to_owned)
+    }
+}
+
+/// `v` when it is a web address fit for a header (http or https, no space or control character,
+/// at most 8 KB): what the extension takes from the browser's own request.
+fn web_header(v: Option<&str>) -> Option<&str> {
+    v.map(str::trim).filter(|v| {
+        (v.starts_with("http://") || v.starts_with("https://"))
+            && v.len() <= 8192
+            && !v.chars().any(|c| c.is_whitespace() || c.is_control())
+    })
 }
 
 /// The quality menu's look-up: the video's page (as the button's click sends it), the video's
@@ -514,10 +555,13 @@ fn video_command(
         .src
         .clone()
         .filter(|s| s.starts_with("http://") || s.starts_with("https://"));
+    // A stream or file of the page's, fetched as the browser fetched it (#900): with the Referer
+    // and Origin its player sent, else from the page.
     let referer = match &src {
-        Some(_) => Some(m.url.clone()),
+        Some(s) => m.fetched_with.referer(Some(s), &m.url),
         None => m.referrer.clone().filter(|r| !r.is_empty()),
     };
+    let origin = m.fetched_with.origin(src.as_deref());
     // The button over a plain file (#703): that file, as a file.
     let direct = m.direct && src.is_some();
     Ok(mdm_ipc::Command {
@@ -527,6 +571,7 @@ fn video_command(
         video_page: Some(src.unwrap_or_else(|| m.url.clone())),
         video_title: m.title.clone().filter(|t| !t.trim().is_empty()),
         referer,
+        origin,
         cookies: m.cookies.clone().filter(|c| !c.is_empty()),
         cookie_jar: m.cookie_jar.clone(),
         user_agent: m.user_agent.clone(),
@@ -592,9 +637,10 @@ fn menu_command(
             // knows only by its address is named by it, #345).
             let src = l.src.clone().filter(|s| web(s));
             let referer = match &src {
-                Some(_) => Some(l.page.clone()),
+                Some(s) => m.fetched_with.referer(Some(s), &l.page),
                 None => l.referrer.clone().filter(|r| !r.is_empty()),
             };
+            let origin = m.fetched_with.origin(src.as_deref());
             let title = l
                 .title
                 .as_deref()
@@ -608,6 +654,7 @@ fn menu_command(
                     store_id: store(&l.store_id),
                 }),
                 referer,
+                origin,
                 cookies: m.cookies.clone().filter(|c| !c.is_empty()),
                 cookie_jar: m.cookie_jar.clone(),
                 user_agent: m.user_agent.clone(),
@@ -1710,6 +1757,58 @@ mod tests {
             !json.contains("videoLookup") && !json.contains("lookup"),
             "{json}"
         );
+    }
+
+    /// #900: a stream goes with the Referer and Origin its page's player sent for it (the
+    /// extension's `fetchedWith`), in the menu's look-up and the window's click alike; without
+    /// them (an older extension), or with what isn't a web address, the page is its Referer and
+    /// no Origin goes. Only for a stream or file: a page looked up keeps its own referrer.
+    #[test]
+    fn a_stream_goes_with_the_referer_and_origin_the_browser_sent() {
+        let rules = mdm_ipc::capture::CaptureRules::default();
+        let page = "https://anime.test/watch/12";
+        let src = "https://cdn.video.test/manifest/x.m3u8?sec=abc";
+        let fetched = r#""fetchedWith":{"referer":"https://player.video.test/","origin":"https://player.video.test"}"#;
+        let lookup = |extra: &str, src: &str| -> mdm_ipc::Command {
+            let m: Message = serde_json::from_str(&format!(
+                r#"{{"videoLookup":{{"page":"{page}","src":"{src}","referrer":"https://search.test/"}}{extra}}}"#
+            ))
+            .unwrap();
+            menu_command(MenuAsk::Lookup, &m, &rules, "").unwrap()
+        };
+        let click = |extra: &str, src: &str| -> mdm_ipc::Command {
+            let m: Message = serde_json::from_str(&format!(
+                r#"{{"video":true,"url":"{page}","src":"{src}","referrer":"https://search.test/"{extra}}}"#
+            ))
+            .unwrap();
+            video_command(&m, &rules, "").unwrap()
+        };
+        for cmd in [
+            lookup(&format!(",{fetched}"), src),
+            click(&format!(",{fetched}"), src),
+        ] {
+            assert_eq!(cmd.referer.as_deref(), Some("https://player.video.test/"));
+            assert_eq!(cmd.origin.as_deref(), Some("https://player.video.test"));
+        }
+        // An older extension: from the page, no Origin.
+        for cmd in [lookup("", src), click("", src)] {
+            assert_eq!(cmd.referer.as_deref(), Some(page));
+            assert_eq!(cmd.origin, None);
+        }
+        // Not web addresses (a header's line break, the browser's "null" origin): left out.
+        let odd = r#","fetchedWith":{"referer":"https://x.test/\r\nX-Evil: 1","origin":"null"}"#;
+        for cmd in [lookup(odd, src), click(odd, src)] {
+            assert_eq!(cmd.referer.as_deref(), Some(page));
+            assert_eq!(cmd.origin, None);
+        }
+        // No stream (a player playing from blob:): the page is looked up, with its own referrer.
+        for cmd in [
+            lookup(&format!(",{fetched}"), "blob:https://anime.test/1"),
+            click(&format!(",{fetched}"), "blob:https://anime.test/1"),
+        ] {
+            assert_eq!(cmd.referer.as_deref(), Some("https://search.test/"));
+            assert_eq!(cmd.origin, None);
+        }
     }
 
     /// The quality menu's three messages, as the extension sends them (camelCase, no `url` of

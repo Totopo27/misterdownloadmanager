@@ -348,7 +348,7 @@ fn dialog_window<T>(
     // Hidden until `keep_theme` has given it its theme (see there).
     let mut builder = ViewportBuilder::default()
         .with_visible(false)
-        .with_title(title)
+        .with_title(crate::i18n::os_text(title))
         .with_inner_size(shown)
         // The thin frame trims the sizing borders and keeps the size fixed.
         .with_resizable(drawn)
@@ -394,10 +394,7 @@ fn dialog_window<T>(
                     let hwnd = ui.ctx().data(|d| d.get_temp::<isize>(key.with("hwnd")));
                     match drawn_title(ui, origin, shown[0], title, &buttons, hwnd) {
                         Some(CaptionButton::Close) => caption_close = true,
-                        Some(CaptionButton::Minimize) => {
-                            ui.ctx()
-                                .send_viewport_cmd(egui::ViewportCommand::Minimized(true));
-                        }
+                        Some(CaptionButton::Minimize) => crate::dialogs::minimize(ui.ctx(), hwnd),
                         _ => {}
                     }
                 }
@@ -1476,7 +1473,7 @@ impl FileInfo {
                     // i18n: title of the folder picker
                     let title = crate::i18n::t("Select a folder").to_owned();
                     winui::start_pick(ui.ctx(), "file-info-folder", move || {
-                        let mut pick = rfd::FileDialog::new().set_title(title);
+                        let mut pick = crate::winui::file_dialog(&title);
                         if now.is_dir() {
                             pick = pick.set_directory(&now);
                         }
@@ -2989,6 +2986,19 @@ it from Mister Download Manager list of downloads?",
     }
 }
 
+/// Minimize a window as its title bar's Minimize asks (`hwnd`: the window, once known). On
+/// Windows by the system's own command, as the system's title bar sends it, so a window whose
+/// title bar is ours animates down to the taskbar like any other (#874).
+pub fn minimize(ctx: &egui::Context, hwnd: Option<isize>) {
+    #[cfg(windows)]
+    if let Some(h) = hwnd {
+        crate::win32::minimize(h);
+        return;
+    }
+    let _ = hwnd;
+    ctx.send_viewport_cmd(egui::ViewportCommand::Minimized(true));
+}
+
 /// Select the file in Explorer (Finder, the Linux file manager). A file that is gone: its
 /// folder, if that is still there.
 /// Bring an open window to the front (and back from the taskbar): asked for again, it came
@@ -3085,12 +3095,25 @@ pub fn open_download(path: &Path, moved_away: bool) {
     });
 }
 
+/// Open a file with the system default application. On Windows, uses Win32 ShellExecuteW
+/// to respect user associations (such as 7-Zip for .zip archives) without explorer.exe failures (#811).
+fn open_file_platform(path: &Path) -> Result<(), std::io::Error> {
+    #[cfg(windows)]
+    {
+        crate::win32::open_file_shell(path)
+    }
+    #[cfg(not(windows))]
+    {
+        open::that_detached(path)
+    }
+}
+
 /// [`open_download`], waited for: true when the file was handed to the system. For a thread
 /// other than the window's (Download complete asks it through `launch::Asked`: whether it
 /// failed decides whether the box stays open).
 pub fn open_download_now(path: &Path, moved_away: bool) -> bool {
     hand_over(path, moved_away, |p| {
-        open::that_detached(p).map_err(|e| e.to_string())
+        open_file_platform(p).map_err(|e| e.to_string())
     })
 }
 

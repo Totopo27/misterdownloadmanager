@@ -83,6 +83,9 @@ pub struct LogEntry {
     /// The `Referer` header.
     #[serde(default)]
     pub referer: Option<String>,
+    /// The `Origin` header (#900: a stream's server that checks it).
+    #[serde(default)]
+    pub origin: Option<String>,
     /// The `Sec-Fetch-Mode` header, which browsers send and programs don't (`browser_only`).
     #[serde(default)]
     pub sec_fetch_mode: Option<String>,
@@ -291,6 +294,7 @@ impl Shared {
             authorization: header_str(headers, header::AUTHORIZATION)
                 .map(|a| a.chars().take(11).collect::<String>() + "…"),
             referer: header_str(headers, header::REFERER),
+            origin: header_str(headers, header::ORIGIN),
             sec_fetch_mode: header_str(headers, header::HeaderName::from_static("sec-fetch-mode")),
             accept_encoding: header_str(headers, header::ACCEPT_ENCODING),
             browser_tls: self.browser_tls.lock().unwrap().get(&peer).copied(),
@@ -368,7 +372,10 @@ impl LabServer {
             .route("/cookie", get(pages::cookie))
             .route("/assets/{file}", get(pages::asset))
             .route("/hls/master.m3u8", get(streams::hls_master))
+            .route("/hls/broken-audio.m3u8", get(streams::hls_broken_master))
             .route("/hls/{track}/{file}", get(streams::hls_file))
+            .route("/hlsg/{site}/master.m3u8", get(streams::hlsg_master))
+            .route("/hlsg/{site}/{track}/{file}", get(streams::hlsg_file))
             .route("/dash/manifest.mpd", get(streams::dash_manifest))
             .route("/dash/protected.mpd", get(streams::dash_protected))
             .route("/dash/{rep}/{file}", get(streams::dash_file))
@@ -690,6 +697,9 @@ GET /page?<any of>
                    #player3), which fetches /hls/master.m3u8, /dash/manifest.mpd or
                    /dash/protected.mpd, the first variant's and the audio's playlists and every
                    segment, then sets <body data-stream=done> once all are (or error)
+    hlsg=SITE      a player for http://SITE/hlsg/<this page's host>/master.m3u8 (another site's
+                   address for this page's stream: localhost:PORT for a page on 127.0.0.1, and
+                   back), which serves it only to this page's Origin and Referer (#900)
     hls2=1, dash2=1  the same for /hls2/playlist?id=lab and /dash2/manifest?id=lab (no .m3u8 or
                    .mpd, text/plain and octet-stream, #171); each player first fetches
                    /hls2/config?id=lab, a text/plain answer that is no manifest
@@ -704,15 +714,20 @@ GET /cookie?set=NAME=VALUE&httponly=NAME=VALUE&clear=NAME   (each repeatable) a 
     Set-Cookie: NAME=VALUE; Path=/ (; HttpOnly), or NAME=; Path=/; Max-Age=0
 GET /assets/page.css  /assets/stream.js
 
-STREAMS  3 segments of 4 s per track. HLS: real MPEG-TS, AAC silence on every track (ffmpeg
-    remuxes them); DASH: fake bytes
+STREAMS  3 segments of 4 s per track. HLS: real MPEG-TS, a grey H.264 picture (25 fps) on the
+    video tracks, AAC silence on the audio track (ffmpeg remuxes and merges them); DASH: fake bytes
 GET /hls/master.m3u8   two variants (720p: 1280x720, 1280000 b/s; 360p: 640x360, 640000 b/s)
     and an audio rendition (GROUP-ID="aud"): /hls/{720p,360p,audio}/index.m3u8 -> seg0..2.ts
     of 48128, 24064, 6016 bytes (application/vnd.apple.mpegurl, video/mp2t)
+GET /hls/broken-audio.m3u8  the same, its sound /hls/audio/broken.m3u8 -> broken0..2.ts: seeded
+    bytes, no MPEG-TS, so ffmpeg can't join it with a picture (a video's failed merge)
 GET /dash/manifest.mpd  (application/dash+xml) the same tracks as Representations with a
     SegmentTemplate: /dash/{720p,360p,audio}/init.mp4 and seg1..3.m4s (video/mp4, audio/mp4)
 GET /dash/protected.mpd  the same, each AdaptationSet marked encrypted (CENC, Widevine's
     ContentProtection), as a DRM-protected stream's manifest is
+GET /hlsg/{SITE}/master.m3u8  the HLS stream again (/hlsg/SITE/{720p,360p,audio}/...), only for
+    a page of SITE (host:port): 403 to any request, the playlists' and each segment's, without
+    Origin: http://SITE and a Referer under it, as a site's video server checks (#900)
 GET /hls2/playlist?id=ID  the HLS stream again with no .m3u8 anywhere, all text/plain (#171):
     variants playlist?id=ID&track={720p,360p,audio}, segments seg?id=ID&track=T&i=0..2
     (application/octet-stream)
@@ -740,8 +755,8 @@ GOOGLE DRIVE  a fake one for the engine's tests, on Google's host names (resolve
 
 LOG
 GET /_log   the request log as JSON: method, path, query, range, if_range, user_agent, cookie,
-            referer, req_content_type, req_body_len, req_body_sha256, req_body_head, status,
-            bytes_sent, outcome (complete, head, fault:*, ...)
+            referer, origin, req_content_type, req_body_len, req_body_sha256, req_body_head,
+            status, bytes_sent, outcome (complete, head, fault:*, ...)
 DELETE /_log   clears it
 "#;
 

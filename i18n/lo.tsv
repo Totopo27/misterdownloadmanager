@@ -920,7 +920,7 @@
 #, machine
 	Checking {name} ({n} of {total})...	ກຳລັງກວດສອບ {name} ({n} ຈາກ {total})...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
 #, machine
 	Checking {percent}	ກຳລັງກວດສອບ {percent}
 #. text in the Checksum window; text in the Link grabber window
@@ -2289,6 +2289,16 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	ບໍ່ສາມາດຂຽນໄຟລ໌ຂອງມັນໄດ້: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error})	ບໍ່ສາມາດລວມວິດີໂອ ແລະ ສຽງເຂົ້າເປັນໄຟລ໌ດຽວໄດ້ ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	ບໍ່ສາມາດລວມຮູບພາບ ແລະ ສຽງເຂົ້າເປັນໄຟລ໌ດຽວໄດ້ ({error}). ສິ່ງທີ່ດາວໂຫຼດແລ້ວຈະຢູ່ໃນໂຟນເດີເພື່ອໃຫ້ Resume ລວມອີກຄັ້ງ ({files}); ການລຶບການດາວໂຫຼດດ້ວຍ “ລຶບໄຟລ໌ອອກຈາກແຜ່ນດິດນຳ” ຈະລຶບມັນອອກ
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	ຂໍ້ມູນການປ່ອຍຂອງມັນບໍ່ເປັນໄປຕາມທີ່ຄາດໄວ້: {detail}
@@ -2682,6 +2692,10 @@
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
 	medium	ປານກາງ
+#. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+#, machine
+	Merging {percent}	ກຳລັງລວມ {percent}
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
@@ -5191,6 +5205,7 @@
 #, machine
 	United States Minor Outlying Islands	ໝູ່ເກາະນ້ອຍຮອບນອກຂອງສະຫະລັດ
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	ບໍ່ຮູ້ຈັກ
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5828,14 +5843,6 @@
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{percent} ຢູ່ທີ່ {service}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} ລວມເຂົ້າກັນແລ້ວ
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} ຢັ້ງຢືນແລ້ວ
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -6501,7 +6508,7 @@ menu	&Add new download	ເພີ່ມການດາວໂຫຼດໃ&ໝ່
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&Add new download...	ເພີ່ມການດາວໂຫຼດໃ&ໝ່...
+menu	Add &new download...	ເພີ່ມການດາວໂຫຼດໃ&ໝ່...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6610,7 +6617,7 @@ menu	&Stop Download	ຢຸດການດາວໂຫຼ&ດ
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Text	&ຂໍ້ຄວາມ
+menu	Te&xt	&ຂໍ້ຄວາມ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6721,7 +6728,7 @@ menu	By Save &Path	ຕາມ &Save Path
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	By St&atus	ຕາມສະ&ຖານະ
+menu	By Stat&us	ຕາມສະ&ຖານະ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6769,6 +6776,10 @@ menu	Delete from queue	ລຶບອອກຈາກຄິວ
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
 #, machine
 menu	Direct3D	Direct3D
+#. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+#, machine
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): ກາດຈໍນີ້ບໍ່ມີໄດເວີ Direct3D 12
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
 #, machine
@@ -6918,9 +6929,25 @@ menu	Open with...	ເປີດດ້ວຍ...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#, machine
+menu	OpenGL didn't start here	OpenGL ບໍ່ໄດ້ເລີ່ມຕົ້ນຢູ່ທີ່ນີ້
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#, machine
+menu	OpenGL froze inside the graphics driver here	OpenGL ຄ້າງຢູ່ໃນໄດເວີກຣາຟິກຢູ່ທີ່ນີ້
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
 #, machine
 menu	OpenGL here is too old to draw MDM	OpenGL ເກົ່າເກີນໄປທີ່ຈະແຕ້ມ MDM
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#, machine
+menu	OpenGL's first frame didn't show within 10 seconds	ເຟຣມທຳອິດຂອງ OpenGL ບໍ່ສະແດງພາຍໃນ 10 ວິນາທີ
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#, machine
+menu	OpenGL's last start ended before its first frame	ການເລີ່ມຕົ້ນຄັ້ງສຸດທ້າຍຂອງ OpenGL ສິ້ນສຸດລົງກ່ອນເຟຣມທຳອິດ
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window

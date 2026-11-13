@@ -5,13 +5,11 @@
 #. count in a dialog box
 #. never shown for a single file
 #. {n} = a number (keep the braces as they are)
-#, machine
-@plural	Also delete the {n} file from disk|Also delete the {n} files from disk	ডিস্ক থেকে {n} ফাইলটিও মুছুন|ডিস্ক থেকে {n} ফাইলগুলিও মুছুন
+@plural	Also delete the {n} file from disk|Also delete the {n} files from disk	ডিস্ক থেকে {n}টি ফাইলও মুছুন|ডিস্ক থেকে {n}টি ফাইলও মুছুন
 #. count in a dialog box
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
-#, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	আপনি কি নিশ্চিত যে আপনি Mister Download Manager ডাউনলোড তালিকা থেকে {n} ডাউনলোড মুছে ফেলতে চান?|আপনি কি নিশ্চিত যে আপনি Mister Download Manager ডাউনলোড তালিকা থেকে এই {n} ডাউনলোডগুলি মুছে ফেলতে চান?
+@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	আপনি কি সত্যিই Mister Download Manager-এর ডাউনলোড তালিকা থেকে {n}টি ডাউনলোড মুছে ফেলতে চান?|আপনি কি সত্যিই Mister Download Manager-এর ডাউনলোড তালিকা থেকে এই {n}টি ডাউনলোড মুছে ফেলতে চান?
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -42,18 +40,15 @@
 #. count in a dialog box
 #. Cancel in Download File Info with downloads waiting behind it
 #. {n} = a number (keep the braces as they are)
-#, machine
-@plural	There is {n} more download waiting. Cancel it too?|There are {n} more downloads waiting. Cancel them too?	আরও {n}টি ডাউনলোড অপেক্ষমাণ আছে। এটিও বাতিল করবেন?|আরও {n}টি ডাউনলোড অপেক্ষমাণ আছে। সেগুলিও বাতিল করবেন?
+@plural	There is {n} more download waiting. Cancel it too?|There are {n} more downloads waiting. Cancel them too?	আরও {n}টি ডাউনলোড অপেক্ষায় আছে। এটিও বাতিল করবেন?|আরও {n}টি ডাউনলোড অপেক্ষায় আছে। সেগুলোও বাতিল করবেন?
 #. count in a dialog box
 #. under the first failed downloads in the summary of a group of downloads: {n} more failed (Show in list shows them all)
 #. {n} = a number (keep the braces as they are)
-#, machine
 @plural	and {n} more|and {n} more	এবং আরও {n}টি|এবং আরও {n}টি
 #. count in a dialog box
 #. "files already there" question, under the first path: {n} = how many more
 #. {n} = a number (keep the braces as they are)
-#, machine
-@plural	and {n} other file|and {n} other files	এবং {n} অন্য ফাইল|এবং {n} অন্য ফাইল
+@plural	and {n} other file|and {n} other files	এবং আরও {n}টি ফাইল|এবং আরও {n}টি ফাইল
 #. count in a download's progress window
 #. a connection closed because the server allows only that many
 #. {host} = a server name such as "example.com"; {n} = a number (keep the braces as they are)
@@ -74,7 +69,6 @@
 #. count in a dialog box
 #. the summary of downloads added together (the Downloads complete window; the tip of the tray icon): {n} of them finished
 #. {n} = a number (keep the braces as they are)
-#, machine
 @plural	{n} download finished|{n} downloads finished	{n}টি ডাউনলোড সম্পূর্ণ হয়েছে|{n}টি ডাউনলোড সম্পূর্ণ হয়েছে
 #. count in the main window
 #. {n} = a number (keep the braces as they are)
@@ -88,7 +82,6 @@
 #. count in a dialog box
 #. the summary of downloads added together; after "12 downloads finished": {n} of them failed
 #. {n} = a number (keep the braces as they are)
-#, machine
 @plural	{n} failed|{n} failed	{n}টি ব্যর্থ হয়েছে|{n}টি ব্যর্থ হয়েছে
 #. count in the Batch download window; count in the Link grabber window; count in the Add torrent window; count in torrentfiles.rs
 #. how many files the pattern gives in all
@@ -212,15 +205,13 @@
 #, machine
 	7z and RAR archives need 7-Zip, which isn't installed	7z এবং RAR আর্কাইভের জন্য 7-Zip প্রয়োজন, যা ইনস্টল করা নেই
 #. text in a download's progress window
-#, machine
-	<< Hide details	<< বিবরণ লুকান
+	<< Hide details	<< বিস্তারিত লুকান
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
 	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	একটি ডিব্রিড পরিষেবা আপনার নিজস্ব অর্থপ্রদত্ত অ্যাকাউন্ট ব্যবহার করে একটি ফাইল হোস্টের লিঙ্ক ডাউনলোড করে এবং MDM-কে একটি সরাসরি লিঙ্ক দেয়। শুধুমাত্র আপনার নিজস্ব অ্যাকাউন্ট ব্যবহার করুন: একটি অ্যাকাউন্ট বা এর লিঙ্কগুলি শেয়ার করলে পরিষেবার শর্তাবলী লঙ্ঘন হয় এবং এটি স্থগিত হতে পারে। ব্রাউজার দ্বারা ইতিমধ্যে শুরু করা ডাউনলোডগুলি যেমন আছে তেমনই থাকবে।
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
-#, machine
 	A file name cannot end with a dot	ফাইলের নাম বিন্দু দিয়ে শেষ হতে পারে না
 #. text in errors.rs
 #. a torrent through a debrid service: one of its files has a name that would be written outside its folder; nothing was written. {name} the file's name as the service gave it
@@ -309,7 +300,6 @@
 #, machine
 	Add an account	একটি অ্যাকাউন্ট যোগ করুন
 #. text in the tray icon's menu
-#, machine
 	Add batch download	ব্যাচ ডাউনলোড যোগ করুন
 #. message or event log entry in the main window; text in the tray icon's menu
 #. title of the note when Tasks → Add batch download from clipboard finds nothing to download
@@ -320,8 +310,7 @@
 #, machine
 	Add browser...	ব্রাউজার যোগ করুন...
 #. text in categories.rs
-#, machine
-	Add category	ক্যাটাগরি যোগ করুন
+	Add category	শ্রেণি যোগ করুন
 #. button in rssdlg.rs
 #. RSS feeds window: button that subscribes to the feed whose address is typed
 #, machine
@@ -364,8 +353,7 @@
 #, machine
 	Add to queue	কিউতে যোগ করুন
 #. text in a dialog box
-#, machine
-	Add to queue:	কিউতে যোগ করুন:
+	Add to queue:	সারিতে যোগ করুন:
 #. message or event log entry in the main window; window title in the Add torrent window
 #, machine
 	Add torrent	টরেন্ট যোগ করুন
@@ -485,7 +473,6 @@
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	ক্র্যাশ ডেটা (.dmp) সংযুক্ত করুন: এতে ঠিকানা, কুকি এবং পাসওয়ার্ড থাকতে পারে
 #. text in a dialog box
-#, machine
 	Also delete the file from disk	ডিস্ক থেকে ফাইলটিও মুছুন
 #. checkbox in the Options window
 #, machine
@@ -565,8 +552,7 @@
 	Archives and Link grabber	আর্কাইভ এবং লিঙ্ক গ্র্যাবার
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
-#, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	আপনি কি নিশ্চিত যে আপনি Mister Download Manager ডাউনলোড তালিকা থেকে "{name}" মুছে ফেলতে চান?
+	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	আপনি কি সত্যিই Mister Download Manager-এর ডাউনলোড তালিকা থেকে “{name}” মুছে ফেলতে চান?
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -826,11 +812,9 @@
 	Category	শ্রেণী
 #. text in categories.rs
 #. title of the folder picker of the category dialog
-#, machine
-	Category folder	ক্যাটাগরি ফোল্ডার
+	Category folder	শ্রেণির ফোল্ডার
 #. text in categories.rs
-#, machine
-	Category properties	শ্রেণীর বৈশিষ্ট্য
+	Category properties	শ্রেণির বৈশিষ্ট্য
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -920,9 +904,8 @@
 #, machine
 	Checking {name} ({n} of {total})...	{name} ({total}-এর মধ্যে {n}) পরীক্ষা করা হচ্ছে...
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while its files are read and checked; {percent} is how much is checked, e.g. "42%"
-#, machine
-	Checking {percent}	{percent} যাচাই করা হচ্ছে
+#. the list's Status column while a torrent's files or a finished file are checked (against the torrent's hashes or a checksum); {percent} how much is checked, e.g. "42%". One short word: the column is narrow
+	Checking {percent}	যাচাই {percent}
 #. text in the Checksum window; text in the Link grabber window
 #. the trailing ... means it is still going on: keep it
 #, machine
@@ -940,11 +923,9 @@
 #, machine
 	Choose a .torrent file	একটি .torrent ফাইল বেছে নিন
 #. text in langpick.rs
-#, machine
-	Choose a language	একটি ভাষা চয়ন করুন
+	Choose a language	ভাষা বেছে নিন
 #. text in langpick.rs
-#, machine
-	Choose the language Mister Download Manager shows its windows in:	ভাষা নির্বাচন করুন Mister Download Manager যে ভাষায় তার উইন্ডোগুলি দেখায়:
+	Choose the language Mister Download Manager shows its windows in:	Mister Download Manager-এর উইন্ডোগুলো কোন ভাষায় দেখাবে, তা বেছে নিন:
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -963,7 +944,6 @@
 	Clear	পরিষ্কার করুন
 #. text in a download's progress window
 #. column title: the peer's torrent program
-#, machine
 	Client	ক্লায়েন্ট
 #. message or event log entry in the main window
 #. Link grabber: where the links came from: the clipboard (Tasks → Add batch download from clipboard)
@@ -1011,7 +991,6 @@
 	Complete	সম্পূর্ণ
 #. text in the download list (sizes, speeds, status)
 #. category name: compressed archives (zip, rar, 7z)
-#, machine
 	Compressed	সংকুচিত
 #. text in the Options window
 #. Options → DNS settings: NextDNS's own configuration ID (optional)
@@ -1019,14 +998,12 @@
 	Configuration ID:	কনফিগারেশন আইডি:
 #. text in a download's progress window
 #. verb: button that saves the deferred rename in the progress window
-#, machine
 	Confirm	নিশ্চিত করুন
 #. text in the Options window
 #, machine
 	Confirm before deleting downloads	ডাউনলোড মুছে ফেলার আগে নিশ্চিতকরণ চাই
 #. window title in a dialog box
-#, machine
-	Confirm deletion of downloads	ডাউনলোডগুলি মুছে ফেলার বিষয়টি নিশ্চিত করুন
+	Confirm deletion of downloads	ডাউনলোড মোছা নিশ্চিত করুন
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1040,8 +1017,7 @@
 	Connected: downloads from your browser now come here.	সংযুক্ত: আপনার ব্রাউজার থেকে ডাউনলোডগুলি এখন এখানে আসে।
 #. text in a download's progress window
 #. the trailing ... means it is still going on: keep it
-#, machine
-	Connecting...	সংযুক্ত হচ্ছে...
+	Connecting...	সংযোগ করা হচ্ছে...
 #. text in the Options window
 #. tab title: connection settings
 #, machine
@@ -1103,7 +1079,6 @@
 #, machine
 	Couldn't extract {name}: {why}	{name} এক্সট্র্যাক্ট করা যায়নি: {why}
 #. window title in a dialog box
-#, machine
 	Create folder	ফোল্ডার তৈরি করুন
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -1189,15 +1164,13 @@
 #, machine
 	Delete archives after extracting	এক্সট্র্যাক্ট করার পর আর্কাইভগুলো রিসাইকেল বিনে পাঠান
 #. window title in a dialog box
-#, machine
-	Delete category	বিভাগ মুছুন
+	Delete category	শ্রেণি মুছুন
 #. message or event log entry in the main window; text in the Scheduler window
 #, machine
 	Delete queue	সারি মুছুন
 #. text in a dialog box
 #. {category} = a category name such as "Music" (keep the braces as they are)
-#, machine
-	Delete the category "{category}"? Its files stay where they are.	আপনি কি “{category}” বিভাগটি মুছে ফেলতে চান? এর ফাইলগুলো যেখানে আছে সেখানেই থাকবে।
+	Delete the category "{category}"? Its files stay where they are.	আপনি কি “{category}” শ্রেণিটি মুছে ফেলতে চান? এর ফাইলগুলো যেখানে আছে সেখানেই থাকবে।
 #. text in remote.rs
 #. remote control page (on a phone): checkbox when removing a download: delete its file from the computer too
 #, machine
@@ -1218,7 +1191,6 @@
 #, machine
 	Denmark	ডেনমার্ক
 #. text in a dialog box
-#, machine
 	Description	বর্ণনা
 #. checkbox in the Find window
 #, machine
@@ -1264,12 +1236,10 @@
 #, machine
 	Do not start downloading, only add files to the queue	ডাউনলোড শুরু করবেন না, শুধুমাত্র কিউতে ফাইল যোগ করুন
 #. text in a dialog box
-#, machine
 	Do you want to create it?	আপনি কি এটি তৈরি করতে চান?
 #. text in the download list (sizes, speeds, status)
 #. category name: documents (pdf, doc…)
-#, machine
-	Documents	ডকুমেন্টস
+	Documents	ডকুমেন্ট
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1329,17 +1299,14 @@
 #, machine
 	Download failed	ডাউনলোড ব্যর্থ হয়েছে
 #. window title in a dialog box
-#, machine
-	Download File Info	ফাইল তথ্য ডাউনলোড করুন
+	Download File Info	ডাউনলোড ফাইলের তথ্য
 #. text in the Add torrent window
 #. Add torrent, a checkbox: download the files from their start, to watch a video while it downloads
 #, machine
 	Download in order	ক্রমানুসারে ডাউনলোড করুন
 #. button in a dialog box
-#, machine
 	Download Later	পরে ডাউনলোড করুন
 #. window title in a dialog box
-#, machine
 	Download later	পরে ডাউনলোড করুন
 #. window title in a dialog box; text in the Options window; checkbox in the Options window; text in the Scheduler window
 #. the Scheduler's page (and checkbox) that caps how much is downloaded in a time
@@ -1363,8 +1330,7 @@
 	Download rules	ডাউনলোড নিয়মাবলী
 #. text in a download's progress window
 #. tab title: how the download is going
-#, machine
-	Download status	ডাউনলোড স্থিতি
+	Download status	ডাউনলোডের অবস্থা
 #. checkbox in the Options window
 #. Options → Accounts: checkbox: links of the file hosts these services support are downloaded through the accounts
 #, machine
@@ -1374,8 +1340,7 @@
 	Download the links in the clipboard (Add batch download from clipboard)	ক্লিপবোর্ডের লিঙ্কগুলি ডাউনলোড করুন (ক্লিপবোর্ড থেকে ব্যাচ ডাউনলোড যোগ করুন)
 #. text in a dialog box
 #. Download File Info: a check box, ticked when the download goes through the user's debrid account; {service} the service and the account, "Real-Debrid (labuser)". Unticked: downloaded directly
-#, machine
-	Download through {service}	{service} এর মাধ্যমে ডাউনলোড করুন
+	Download through {service}	{service}-এর মাধ্যমে ডাউনলোড করুন
 #. window title in the Download video window
 #, machine
 	Download video from a page	একটি পৃষ্ঠা থেকে ভিডিও ডাউনলোড করুন
@@ -1395,14 +1360,12 @@
 #. text in a download's progress window
 #. label before the amount received so far
 #. column title: bytes this connection received
-#, machine
 	Downloaded	ডাউনলোড করা হয়েছে
 #. page title in the Options window
 #, machine
 	Downloaded file types	ডাউনলোড করা ফাইলের প্রকার
 #. text in a dialog box
 #. {size} = a file size such as "4.2 MB"; {bytes} = a number of bytes (keep the braces as they are)
-#, machine
 	Downloaded {size} ({bytes} Bytes)	{size} ({bytes} বাইট) ডাউনলোড করা হয়েছে
 #. item in the Categories tree in the download list; value in a column's filter list in the download list; text in remote.rs
 #. a download's status (state it is in, not a command)
@@ -1443,16 +1406,13 @@
 	Downloads	ডাউনলোডগুলি
 #. window title in a dialog box
 #. title of the window that sums up downloads added together (a playlist, a batch) once all are done
-#, machine
 	Downloads complete	ডাউনলোড সম্পূর্ণ হয়েছে
 #. text in the tray icon's menu
 #. tray menu: a submenu of the downloads now running; choosing one shows its progress window
-#, machine
-	Downloads in progress	চলমান ডাউনলোডগুলি
+	Downloads in progress	চলমান ডাউনলোড
 #. text in a dialog box
 #. {time} = a time of day (keep the braces as they are)
-#, machine
-	Downloads stopped and will resume automatically at {time}.	ডাউনলোড থেমে গেছে এবং {time}-এ স্বয়ংক্রিয়ভাবে আবার শুরু হবে।
+	Downloads stopped and will resume automatically at {time}.	ডাউনলোড থেমে গেছে এবং {time}-এ স্বয়ংক্রিয়ভাবে পুনরায় শুরু হবে।
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1466,8 +1426,7 @@
 	Drag links here to download them	ডাউনলোড করতে এখানে লিঙ্কগুলি টেনে আনুন
 #. text in a dialog box
 #. tooltip of the handle in Download complete: drag it to drop the downloaded file somewhere
-#, machine
-	Drag the file into a folder or an app	ফাইলটি একটি ফোল্ডার বা অ্যাপে টেনে আনুন
+	Drag the file into a folder or an app	ফাইলটি টেনে কোনো ফোল্ডার বা অ্যাপে নিয়ে যান
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to a place MDM couldn't learn	ডাউনলোড সম্পূর্ণ তালিকা থেকে টেনে বের করে এমন একটি স্থানে সরানো হয়েছে যা MDM শনাক্ত করতে পারেনি
@@ -1479,8 +1438,7 @@
 #, machine
 	Dropped links	ছেড়ে দেওয়া লিঙ্ক
 #. window title in a dialog box
-#, machine
-	Duplicate download link	ডুপ্লিকেট ডাউনলোড লিঙ্ক
+	Duplicate download link	ডুপ্লিকেট ডাউনলোড লিংক
 #. text in the Options window
 #. Options → Network adapter: what "Any" means
 #, machine
@@ -1546,7 +1504,6 @@
 #, machine
 	Enter a tracker's address, one a line	একটি ট্র্যাকারের ঠিকানা লিখুন, প্রতি লাইনে একটি
 #. window title in a dialog box
-#, machine
 	Enter new address to download	ডাউনলোড করার জন্য নতুন ঠিকানা লিখুন
 #. window title in the Scheduler window
 #, machine
@@ -1576,7 +1533,6 @@
 #. text in a download's progress window
 #. a download's status: it failed, with the reason
 #. {error} = an error message (keep the braces as they are)
-#, machine
 	Error: {error}	ত্রুটি: {error}
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -1613,7 +1569,6 @@
 	Exceptions:	ব্যতিক্রমগুলি:
 #. text in the tray icon's menu
 #. verb: quit the app
-#, machine
 	Exit	প্রস্থান করুন
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
@@ -1641,8 +1596,7 @@
 #, machine
 	Extend the availability of Manifest 2 Chrome extensions	ম্যানিফেস্ট 2 Chrome এক্সটেনশনগুলির প্রাপ্যতা বাড়ান
 #. text in categories.rs
-#, machine
-	Extensions separated by spaces, for example MP4 MKV R0*	স্পেস দ্বারা পৃথক করা এক্সটেনশনগুলি, উদাহরণস্বরূপ MP4 MKV R0*
+	Extensions separated by spaces, for example MP4 MKV R0*	স্পেস দিয়ে আলাদা করা এক্সটেনশন, যেমন MP4 MKV R0*
 #. button in extracting archives (a download's log, the Archive password window)
 #. button: extract the archive with the password typed
 #, machine
@@ -1666,7 +1620,6 @@
 	Extracting...	এক্সট্র্যাক্ট করা হচ্ছে...
 #. text in a dialog box
 #. label over the list of the downloads of the group that failed
-#, machine
 	Failed:	ব্যর্থ হয়েছে:
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -1728,21 +1681,18 @@
 #, machine
 	File Properties	ফাইলের বৈশিষ্ট্য
 #. text in a download's progress window
-#, machine
 	File size	ফাইলের আকার
 #. text in the Options window
 #. tab title
 #, machine
 	File types	ফাইলের ধরন
 #. text in categories.rs
-#, machine
 	File types:	ফাইলের ধরন:
 #. text in a download's progress window; text in the Add torrent window
 #. tab title: the torrent's files
 #, machine
 	Files	ফাইল
 #. window title in a dialog box
-#, machine
 	Files already there	আগে থেকেই থাকা ফাইল
 #. text in gallerydlg.rs
 #. label before the box for how many of a gallery's files to download at most
@@ -1796,7 +1746,6 @@
 #. text in a download's progress window
 #. a download's status: every byte is in, the file is being written out and given its name
 #. the trailing ... means it is still going on: keep it
-#, machine
 	Finishing...	শেষ করা হচ্ছে...
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -1813,7 +1762,6 @@
 #, machine
 	FLAC keeps the sound exactly, but it can't add quality the site's sound doesn't have: the file is only bigger.	FLAC শব্দকে হুবহু রাখে, কিন্তু সাইটের শব্দের যে গুণমান নেই তা যোগ করতে পারে না: ফাইলটি কেবল বড় হয়।
 #. text in categories.rs
-#, machine
 	Folder:	ফোল্ডার:
 #. text in finish.rs
 #. Snooze menu of the Download complete window: show no Download complete window for this long
@@ -1987,7 +1935,6 @@
 	Gibraltar	জিব্রাল্টার
 #. text in a download's progress window
 #. a torrent's sharing, when Torrent settings keep it on
-#, machine
 	Goes on after the download finishes	ডাউনলোড শেষ হওয়ার পরেও চলতে থাকে
 #. text in errors.rs
 #. a download's error; {message} = Google Drive's own explanation, in the language Google chose (often: too many people downloaded the file lately)
@@ -2042,7 +1989,6 @@
 	Hang up modem when done	কাজ শেষ হলে মডেমের সংযোগ বিচ্ছিন্ন করুন
 #. text in a download's progress window
 #. legend: pieces downloaded
-#, machine
 	Have	আছে
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -2177,12 +2123,10 @@
 	Indonesia	ইন্দোনেশিয়া
 #. text in a download's progress window
 #. column title: what the connection is doing
-#, machine
 	Info	তথ্য
 #. text in a download's progress window
 #. the torrent's identifier
-#, machine
-	Info hash	তথ্য হ্যাশ
+	Info hash	ইনফো হ্যাশ
 #. text in extracting archives (a download's log, the Archive password window)
 #. in the "7-Zip needed" window, under why
 #, machine
@@ -2217,8 +2161,7 @@
 #, machine
 	Into a folder named after it, when it holds several things	এর নামে একটি ফোল্ডারে, যখন এটি একাধিক জিনিস ধারণ করে
 #. text in a dialog box
-#, machine
-	Invalid address	অবৈধ ঠিকানা
+	Invalid address	ভুল ঠিকানা
 #. text in the Options window
 #. Options → DNS over HTTPS: label before the server's IP addresses, which may be left empty
 #, machine
@@ -2289,6 +2232,14 @@
 #. {error} = an error message (keep the braces as they are)
 #, machine
 	its files could not be written: {error}	এর ফাইলগুলি লেখা যায়নি: {error}
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English
+#. {error} = an error message (keep the braces as they are)
+	its picture and sound couldn't be joined into one file ({error})	এর ভিডিও ও অডিও একটি ফাইলে একত্র করা যায়নি ({error})
+#. text in the download list (sizes, speeds, status)
+#. why a video download failed: ffmpeg couldn't join its picture and sound into one file; {error} = ffmpeg's reason, in English; {files} = the downloaded parts' file names, kept in the download folder; "Also delete the file from disk" is the Delete box's choice
+#. {error} = an error message (keep the braces as they are)
+	its picture and sound couldn't be joined into one file ({error}). What was downloaded stays in the folder for Resume to join again ({files}); deleting the download with "Also delete the file from disk" removes it	এর ভিডিও ও অডিও একটি ফাইলে একত্র করা যায়নি ({error})। ডাউনলোড হওয়া অংশগুলো ({files}) ফোল্ডারেই থাকে, যাতে “পুনরায় শুরু করুন” সেগুলো আবার একত্র করতে পারে; “ডিস্ক থেকে ফাইলটিও মুছুন” বেছে ডাউনলোডটি মুছলে সেগুলোও মুছে যায়
 #. text in errors.rs
 #, machine
 	its release information is not as expected: {detail}	এর রিলিজের তথ্য প্রত্যাশিত নয়: {detail}
@@ -2375,7 +2326,6 @@
 	Kyrgyzstan	কিরগিজস্তান
 #. text in langpick.rs
 #. window title (the interface language)
-#, machine
 	Language	ভাষা
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -2444,7 +2394,6 @@
 	Limit all downloads together to	একসাথে সব ডাউনলোড সীমিত করুন
 #. text in a download's progress window
 #. a torrent's progress window, Speed Limiter tab: a limit for what this torrent sends to others
-#, machine
 	Limit uploading	আপলোড সীমিত করুন
 #. text in the Add torrent window
 #. Torrent settings: an upload speed limit for all torrents together, followed by a box with the speed and "KBytes/sec"
@@ -2632,14 +2581,11 @@
 	Maximize	সর্বোচ্চ করুন
 #. text in a dialog box
 #. {kb} is an input box (kilobytes per second), drawn where it stands in the translation
-#, machine
 	Maximum download speed for one file {kb} KBytes/sec	একটি ফাইলের জন্য সর্বোচ্চ ডাউনলোড গতি {kb} কিলোবাইট/সেকেন্ড
 #. text in a download's progress window
-#, machine
 	Maximum download speed:	সর্বোচ্চ ডাউনলোড গতি:
 #. text in a download's progress window
 #. a torrent's progress window, Speed Limiter tab: label above the upload speed box
-#, machine
 	Maximum upload speed:	সর্বোচ্চ আপলোড গতি:
 #. text in the Scheduler window
 #. the month (the fifth of the year)
@@ -2683,14 +2629,15 @@
 #, machine
 	medium	মাঝারি
 #. text in the download list (sizes, speeds, status)
+#. the list's Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%". One short word: the column is narrow
+	Merging {percent}	একত্রীকরণ {percent}
+#. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg)
 #. the trailing ... means it is still going on: keep it
-#, machine
-	Merging...	একত্রিত হচ্ছে...
+	Merging...	একত্র করা হচ্ছে...
 #. text in the download list (sizes, speeds, status)
 #. a video's status while its picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%"
-#, machine
-	Merging... ({percent})	একত্রিত হচ্ছে... ({percent})
+	Merging... ({percent})	একত্র করা হচ্ছে... ({percent})
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2714,8 +2661,7 @@
 	minutes	মিনিট
 #. text in a download's progress window
 #. legend: pieces not downloaded yet
-#, machine
-	Missing	হারিয়ে গেছে
+	Missing	নেই
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Mister Download Manager	Mister Download Manager
@@ -2820,8 +2766,7 @@
 	Move down	নিচে সরান
 #. text in a dialog box
 #. choice in Delete category: what happens to the category's downloads
-#, machine
-	Move its downloads to General	এর ডাউনলোডগুলি সাধারণে সরান
+	Move its downloads to General	এর ডাউনলোডগুলো সাধারণ শ্রেণিতে সরান
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Move or rename the selected download	নির্বাচিত ডাউনলোড সরান বা নাম পরিবর্তন করুন
@@ -2857,8 +2802,7 @@
 	much slower than the other connections; reconnecting	অন্যান্য সংযোগের চেয়ে অনেক ধীর; পুনরায় সংযোগ করা হচ্ছে
 #. text in the download list (sizes, speeds, status)
 #. category name: audio files
-#, machine
-	Music	সঙ্গীত
+	Music	সংগীত
 #. text in rssdlg.rs
 #. RSS feeds window, Download rules: words the article's title must contain
 #, machine
@@ -2876,8 +2820,7 @@
 	Myanmar	মিয়ানমার
 #. text in a download's progress window
 #. column title: connection number (abbreviation of Number)
-#, machine
-	N.	নং।
+	N.	নং
 #. text in the Link grabber window; text in the Add torrent window
 #. column title: file name
 #, machine
@@ -2971,8 +2914,7 @@
 #, machine
 	No	না
 #. text in a dialog box
-#, machine
-	No addresses yet	এখনও কোনো ঠিকানা নেই
+	No addresses yet	এখনো কোনো ঠিকানা নেই
 #. text in extension.rs
 #. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
@@ -3013,17 +2955,14 @@
 #, machine
 	No downloads yet	এখনো কোনো ডাউনলোড নেই
 #. text in a dialog box
-#, machine
-	No folders yet	এখনও কোনো ফোল্ডার নেই
+	No folders yet	এখনো কোনো ফোল্ডার নেই
 #. text in a dialog box
-#, machine
-	No goes back, to choose another folder.	না চাপলে অন্য ফোল্ডার বেছে নিতে ফিরে যাবে।
+	No goes back, to choose another folder.	“না” চাপলে ফিরে গিয়ে অন্য ফোল্ডার বেছে নিতে পারবেন।
 #. tooltip (why a control is greyed) in langpick.rs
 #. tooltip of the greyed OK button in the language picker
 #, machine
 	No language matches the search	অনুসন্ধানের সঙ্গে মেলে এমন কোনো ভাষা নেই
 #. text in langpick.rs
-#, machine
 	No language matches.	কোনো ভাষা মেলেনি।
 #. text in the Options window
 #. Options → Remote → Status: on, but the computer has no local network address now
@@ -3081,7 +3020,6 @@
 #, machine
 	None ticked: every feed.	কোনোটিই টিক দেওয়া হয়নি: প্রতিটি ফিড।
 #. text in a download's progress window
-#, machine
 	None: peers come from the DHT and other peers	কিছুই নয়: পিয়ার DHT এবং অন্যান্য পিয়ার থেকে আসে
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -3147,8 +3085,7 @@
 	Not used: file parts are written next to the file	ব্যবহৃত নয়: ফাইলের অংশগুলি ফাইলের পাশে লেখা হয়
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
-#, machine
-	Note: Internet servers may break connection when the speed is too limited! Thus it's not\nrecommended to use Speed Limiter to download from servers that do not support\n"resume" feature.	দ্রষ্টব্য: গতি খুব সীমিত হলে ইন্টারনেট সার্ভার সংযোগ বিচ্ছিন্ন করতে পারে! তাই "পুনরায় শুরু" বৈশিষ্ট্য সমর্থন করে না এমন সার্ভার থেকে ডাউনলোড করার জন্য স্পিড লিমিটার ব্যবহার করার সুপারিশ করা হয় না।
+	Note: Internet servers may break connection when the speed is too limited! Thus it's not\nrecommended to use Speed Limiter to download from servers that do not support\n"resume" feature.	দ্রষ্টব্য: গতি খুব বেশি সীমিত করলে ইন্টারনেট সার্ভার সংযোগ কেটে দিতে পারে!\nতাই যেসব সার্ভার “পুনরায় শুরু” সুবিধা সমর্থন করে না, সেগুলো থেকে ডাউনলোড করতে\nস্পিড লিমিটার ব্যবহার না করাই ভালো।
 #. text in the Options window
 #, machine
 	Note: These settings don't relate to queue processing	দ্রষ্টব্য: এই সেটিংস সারি প্রক্রিয়াকরণের সাথে সম্পর্কিত নয়
@@ -3200,8 +3137,7 @@
 #, machine
 	On battery, Windows' power options don't allow wake timers	ব্যাটারিতে, Windows-এর পাওয়ার অপশন ওয়েক টাইমার অনুমোদন করে না
 #. text in a download's progress window
-#, machine
-	on download stop/resume	ডাউনলোড বন্ধ/পুনরায় শুরু হলে
+	on download stop/resume	ডাউনলোড থামলে/পুনরায় শুরু হলে
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue" (macOS): scheduling a wake needs an administrator's password
 #, machine
@@ -3279,13 +3215,11 @@
 	Open folder	ফোল্ডার খুলুন
 #. text in a download's progress window
 #. button in a download's progress window when the site sent a web page (a waiting page, a captcha) instead of the file: opens the download's link in the web browser
-#, machine
 	Open in browser	ব্রাউজারে খুলুন
 #. checkbox in the Add torrent window
 #, machine
 	Open magnet links and .torrent files with Mister Download Manager	Mister Download Manager দিয়ে ম্যাগনেট লিঙ্ক এবং .torrent ফাইল খুলুন
 #. text in the tray icon's menu
-#, machine
 	Open Mister Download Manager	Mister Download Manager খুলুন
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
@@ -3320,16 +3254,13 @@
 	Open torrent file	টরেন্ট ফাইল খুলুন
 #. button in a dialog box
 #. the trailing ... means it opens a window: keep it
-#, machine
-	Open with...	এর সাথে খুলুন...
+	Open with...	অ্যাপ দিয়ে খুলুন...
 #. text in the tray icon's menu
 #. plural noun: opens the Options window (settings)
-#, machine
-	Options	সেটিংস
+	Options	বিকল্প
 #. text in a download's progress window
 #. tab title: what happens when the download finishes
-#, machine
-	Options on completion	সম্পূর্ণ হলে বিকল্প
+	Options on completion	সম্পূর্ণ হলে করণীয়
 #. text in the Options window
 #. Options → Add an account: label before the field for the service's API token (the other way to sign in)
 #, machine
@@ -3427,11 +3358,9 @@
 	Pause the download first	প্রথমে ডাউনলোডটি থামান
 #. text in a download's progress window
 #. a download's status (state it is in, not a command): stopped for now
-#, machine
 	Paused	বিরতি দেওয়া হয়েছে
 #. text in a download's progress window
 #. tab title: the other computers sharing the torrent
-#, machine
 	Peers	পিয়ার
 #. text in the Add torrent window
 #. a magnet link's lookup, after 30 seconds: peers are known but none answered
@@ -3450,8 +3379,7 @@
 	Philippines	ফিলিপাইন
 #. text in a download's progress window
 #. tab title: the parts the torrent is made of
-#, machine
-	Pieces	পিস
+	Pieces	খণ্ড
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -3498,25 +3426,21 @@
 	premium, {days} days left	প্রিমিয়াম, {days} দিন বাকি
 #. button in a dialog box
 #. verb: open the part already downloaded
-#, machine
-	Preview	পূর্বরূপ
+	Preview	প্রিভিউ দেখুন
 #. text in a dialog box
 #. tooltip of the greyed Preview button in Download File Info
-#, machine
-	Preview isn't available yet	পূর্বরূপ এখনো উপলব্ধ নয়
+	Preview isn't available yet	এখনো প্রিভিউ দেখা যাবে না
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: label before the browser profile's name or folder (may stay empty)
 #, machine
 	Profile (optional):	প্রোফাইল (ঐচ্ছিক):
 #. text in the download list (sizes, speeds, status)
 #. category name: programs and installers (exe, msi)
-#, machine
 	Programs	প্রোগ্রাম
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Properties of the selected download	নির্বাচিত ডাউনলোডের বৈশিষ্ট্য
 #. text in a download's progress window
-#, machine
 	Property	বৈশিষ্ট্য
 #. text in errors.rs; text in the Options window
 #. tab title
@@ -3607,11 +3531,9 @@
 	Reannounce failed: {error}	পুনরায় ঘোষণা ব্যর্থ হয়েছে: {error}
 #. text in a download's progress window
 #. column title: how much came from the peer
-#, machine
 	Received	প্রাপ্ত
 #. text in a download's progress window
 #. the trailing ... means it is still going on: keep it
-#, machine
 	Receiving data...	ডেটা গ্রহণ করা হচ্ছে...
 #. message or event log entry in the main window
 #. event log entry: Recheck failed, with the reason
@@ -3638,12 +3560,10 @@
 #, machine
 	Regular expressions	নিয়মিত এক্সপ্রেশন
 #. text in a download's progress window
-#, machine
 	Remember Speed Limiter settings for this file	এই ফাইলের জন্য স্পিড লিমিটার সেটিংস মনে রাখুন
 #. text in a dialog box
 #. {category} = a category name such as "Music" (keep the braces as they are)
-#, machine
-	Remember this path for "{category}" category	"{category}" ক্যাটাগরির জন্য এই পথটি মনে রাখুন
+	Remember this path for "{category}" category	“{category}” শ্রেণির জন্য এই পাথটি মনে রাখুন
 #. text in the Options window
 #. tab title: control MDM from a phone or another computer on the local network
 #, machine
@@ -3663,8 +3583,7 @@
 	Remove from the queue	সারি থেকে সরান
 #. text in a dialog box
 #. choice in Delete category: its downloads leave the list (not their files; running ones move to General)
-#, machine
-	Remove its downloads from the list (running ones move to General)	তালিকা থেকে এর ডাউনলোডগুলি সরান (চলমানগুলি সাধারণে চলে যাবে)
+	Remove its downloads from the list (running ones move to General)	তালিকা থেকে এর ডাউনলোডগুলো বাদ দিন (চলমানগুলো সাধারণ শ্রেণিতে চলে যাবে)
 #. text in remote.rs
 #. remote control page (on a phone): question before removing a download; {name} its file name
 #. {name} = a file name (keep the braces as they are)
@@ -3672,8 +3591,7 @@
 	Remove {name} from the list?	তালিকা থেকে {name} সরিয়ে ফেলবেন?
 #. text in a download's progress window
 #. noun: label before the deferred new file or folder name in the progress window
-#, machine
-	Rename	পুনর্নামকরণ
+	Rename	নাম পরিবর্তন
 #. text in the Batch download window
 #. group box title: what the * in the address is replaced with (numbers or letters)
 #, machine
@@ -3691,12 +3609,10 @@
 	Result: {result}	ফলাফল: {result}
 #. text in a download's progress window
 #. verb: continue the download
-#, machine
 	Resume	পুনরায় শুরু করুন
 #. text in a download's progress window
 #. label: whether the server lets a stopped download continue (Yes / No)
-#, machine
-	Resume capability	পুনরায় শুরু করার ক্ষমতা
+	Resume capability	পুনরায় শুরু করা যায়
 #. text in the Options window
 #. link after "Download complete is snoozed until 14:30": ends the snooze now
 #, machine
@@ -3712,7 +3628,6 @@
 #. text in a download's progress window
 #. a connection's state: it failed and tries again, with the reason
 #. {error} = an error message (keep the braces as they are)
-#, machine
 	Retrying: {error}	পুনরায় চেষ্টা করা হচ্ছে: {error}
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -3793,8 +3708,7 @@
 #, machine
 	Saudi Arabia	সৌদি আরব
 #. text in a dialog box
-#, machine
-	Save As	হিসাবে সংরক্ষণ করুন
+	Save As	এই নামে সংরক্ষণ
 #. text in gallerydlg.rs; text in the Options window; text in the Add torrent window; text in the Download video window
 #. tab title: where downloads are saved
 #, machine
@@ -3813,7 +3727,6 @@
 	Save to:	এতে সংরক্ষণ করুন:
 #. text in a download's progress window
 #. status shown in green beside the Rename box once the new name is saved
-#, machine
 	Saved	সংরক্ষিত
 #. text in a dialog box; text in a download's progress window
 #. label over the folder the downloads were saved in
@@ -3830,14 +3743,12 @@
 #, machine
 	Scheduler	সময়সূচী
 #. text in langpick.rs
-#, machine
 	Search:	অনুসন্ধান:
 #. text in the Batch download window
 #, machine
 	Second file:	দ্বিতীয় ফাইল:
 #. text in a dialog box
 #. title of the folder picker
-#, machine
 	Select a folder	একটি ফোল্ডার নির্বাচন করুন
 #. button in playlistdlg.rs; button in the Add torrent window; text in torrentfiles.rs
 #. button in Download video for a playlist: tick every video
@@ -3894,7 +3805,6 @@
 #. text in a download's progress window
 #. column title: how much went to the peer
 #. how much was sent to other peers
-#, machine
 	Sent	প্রেরিত
 #. text in the Scheduler window
 #, machine
@@ -3957,15 +3867,12 @@
 	Seychelles	সেশেলস
 #. text in a download's progress window
 #. sent divided by received
-#, machine
 	Share ratio	শেয়ার অনুপাত
 #. text in a download's progress window
 #. a torrent's General tab: how long it has been shared once finished, in all
-#, machine
-	Shared for	শেয়ার করার সময়
+	Shared for	মোট শেয়ারের সময়
 #. text in a download's progress window
 #. noun: sharing the torrent with others after it is downloaded
-#, machine
 	Sharing	শেয়ারিং
 #. message or event log entry in the main window
 #. event log entry, past tense: a finished torrent stopped being shared to others after the time set in Torrent settings; {time} = e.g. 1 hour(s) 15 min
@@ -4002,14 +3909,12 @@
 #, machine
 	Show all downloads	সমস্ত ডাউনলোড দেখান
 #. text in a download's progress window
-#, machine
 	Show details >>	বিস্তারিত দেখান >>
 #. checkbox in the Options window; checkbox in a download's progress window
 #, machine
 	Show download complete dialog	ডাউনলোড সম্পূর্ণ হলে ডায়ালগ দেখান
 #. button in a dialog box
 #. button: shows these downloads in MDM's list, selected
-#, machine
 	Show in list	তালিকায় দেখান
 #. text in extension.rs
 #. button in the browser extension's window: open the tutorial that adds the extension
@@ -4028,7 +3933,6 @@
 #, machine
 	Show warning before stopping downloads	ডাউনলোড বন্ধ করার আগে সতর্কতা দেখান
 #. text in a download's progress window
-#, machine
 	Shown while the torrent is downloading.	টরেন্ট ডাউনলোড হওয়ার সময় দেখানো হয়।
 #. text in the queues
 #. what the computer does when the queue is done (verb: shut down the computer)
@@ -4121,8 +4025,7 @@
 	Slovenia	স্লোভেনিয়া
 #. text in a dialog box
 #. button in the Download complete window: opens a menu of how long no Download complete window shows (30 minutes, 1 hour...)
-#, machine
-	Snooze	স্থগিত করুন
+	Snooze	স্নুজ করুন
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4133,11 +4036,9 @@
 	Somalia	সোমালিয়া
 #. text in a download's progress window
 #. legend: pieces partly downloaded
-#, machine
-	Some	কিছু
+	Some	আংশিক
 #. text in a dialog box
-#, machine
-	Some of the torrent's files are already in this folder:	টরেন্টের কিছু ফাইল ইতিমধ্যেই এই ফোল্ডারে আছে:
+	Some of the torrent's files are already in this folder:	টরেন্টের কিছু ফাইল ইতোমধ্যে এই ফোল্ডারে আছে:
 #. text in the Options window
 #, machine
 	Sound file	সাউন্ড ফাইল
@@ -4182,7 +4083,6 @@
 #, machine
 	Speed Limiter	স্পিড লিমিটার
 #. window title in a dialog box
-#, machine
 	Speed Limiter settings	স্পিড লিমিটার সেটিংস
 #. message or event log entry in the main window
 #. tooltip on the disabled Rename box when the file is one part of a split archive (.part1.rar, .7z.001…)
@@ -4198,7 +4098,6 @@
 #, machine
 	Start	শুরু করুন
 #. button in a dialog box
-#, machine
 	Start Download	ডাউনলোড শুরু করুন
 #. text in the Scheduler window; checkbox in the Scheduler window
 #, machine
@@ -4210,15 +4109,13 @@
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	"ফাইল তথ্য ডাউনলোড করুন" ডায়ালগ দেখানোর সময় অবিলম্বে ডাউনলোড শুরু করুন
 #. text in the tray icon's menu
-#, machine
-	Start main download queue	প্রধান ডাউনলোড কিউ শুরু করুন
+	Start main download queue	প্রধান ডাউনলোড সারি শুরু করুন
 #. text in remote.rs
 #. remote control page (on a phone): "When" choice: start the download at once
 #, machine
 	Start now	এখনই শুরু করুন
 #. text in a download's progress window
-#, machine
-	Start positions and download progress by connections	সংযোগ দ্বারা শুরু অবস্থান এবং ডাউনলোড অগ্রগতি
+	Start positions and download progress by connections	প্রতিটি সংযোগের শুরুর অবস্থান ও ডাউনলোডের অগ্রগতি
 #. checkbox in a dialog box
 #, machine
 	Start the queue now	এখনই কিউ শুরু করুন
@@ -4276,8 +4173,7 @@
 #, machine
 	Stop listing	তালিকাভুক্তি বন্ধ করুন
 #. text in the tray icon's menu
-#, machine
-	Stop main download queue	প্রধান ডাউনলোড কিউ বন্ধ করুন
+	Stop main download queue	প্রধান ডাউনলোড সারি থামান
 #. text in the Add torrent window
 #. Torrent settings, under "Keep sharing": or stop sharing a finished torrent after sharing it for the number of minutes in the box after it
 #, machine
@@ -4312,8 +4208,7 @@
 #, machine
 	Stopped: {adapter} is not connected; it goes on when it is back	বন্ধ হয়েছে: {adapter} সংযুক্ত নয়; এটি ফিরে এলে আবার চলবে
 #. text in a download's progress window
-#, machine
-	Stops when the download finishes	ডাউনলোড শেষ হলে বন্ধ হয়
+	Stops when the download finishes	ডাউনলোড শেষ হলে থেমে যায়
 #. text in the Options window
 #. Options → Archives: where extracted files go
 #, machine
@@ -4328,16 +4223,13 @@
 	Subtitles	সাবটাইটেল
 #. text in the download list (sizes, speeds, status)
 #. after a video download: {language} = a language's name; its subtitles were to go inside the video, but came on a second try, so they're a separate file beside it
-#, machine
-	Subtitles in {language} came on a second try: they're beside the video, not in it.	{language} ভাষার সাবটাইটেল দ্বিতীয় চেষ্টায় এসেছে: এগুলি ভিডিওর ভিতরে নেই, ভিডিওর পাশে আছে।
+	Subtitles in {language} came on a second try: they're beside the video, not in it.	{language} ভাষার সাবটাইটেল দ্বিতীয় চেষ্টায় এসেছে: এগুলো ভিডিওর ভেতরে নেই, পাশে আছে।
 #. text in the download list (sizes, speeds, status)
 #. after a video download: {language} = a language's name, {reason} = the helper program's own (English) words
-#, machine
 	Subtitles in {language} couldn't be downloaded: {reason}	{language} ভাষার সাবটাইটেল ডাউনলোড করা যায়নি: {reason}
 #. text in the download list (sizes, speeds, status)
 #. after a video download: {language} = a language's name, {site} = a web site's name (youtube.com); the site refused because it was asked too often
 #. {site} = a web site's name such as "example.com" (keep the braces as they are)
-#, machine
 	Subtitles in {language} couldn't be downloaded: {site} refused (too many requests).	{language} ভাষার সাবটাইটেল ডাউনলোড করা যায়নি: {site} প্রত্যাখ্যান করেছে (অনেক বেশি অনুরোধ)।
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -4487,7 +4379,6 @@
 	The column filters hide every download in this view.	কলাম ফিল্টারগুলি এই দৃশ্যের সব ডাউনলোড আড়াল করছে।
 #. text in a dialog box
 #. {error} = an error message (keep the braces as they are)
-#, machine
 	The computer could not be turned off: {error}	কম্পিউটার বন্ধ করা যায়নি: {error}
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
@@ -4500,15 +4391,12 @@
 	The computer will be woken on {date} at {time}	কম্পিউটার {date} তারিখে {time} সময়ে জাগানো হবে
 #. text in a dialog box
 #. {n} = a number (keep the braces as they are)
-#, machine
 	The computer will go to sleep in {n} seconds.	কম্পিউটার {n} সেকেন্ডের মধ্যে স্লিপ মোডে চলে যাবে।
 #. text in a dialog box
 #. {n} = a number (keep the braces as they are)
-#, machine
 	The computer will hibernate in {n} seconds.	কম্পিউটার {n} সেকেন্ডের মধ্যে হাইবারনেট করবে।
 #. text in a dialog box
 #. {n} = a number (keep the braces as they are)
-#, machine
 	The computer will shut down in {n} seconds.	কম্পিউটার {n} সেকেন্ডের মধ্যে বন্ধ হয়ে যাবে।
 #. text in errors.rs
 #, machine
@@ -4539,7 +4427,6 @@
 	The download isn't complete yet	ডাউনলোড এখনো সম্পূর্ণ হয়নি
 #. text in a dialog box
 #. {mb} = a number of megabytes; {hours} = a number of hours (keep the braces as they are)
-#, machine
 	The download limit ({mb} MBytes every {hours} hours) has been reached.	ডাউনলোড সীমা ({hours} ঘণ্টায় {mb} মেগাবাইট) পূরণ হয়েছে।
 #. text in errors.rs
 #, machine
@@ -4552,8 +4439,7 @@
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	আপনি ইতিমধ্যে যে ডাউনলোড ম্যানেজারটি জানেন, সেটি দ্রুত করার জন্য পুনর্গঠিত হয়েছে। GNU GPL, সংস্করণ 3 বা তার পরে বিনামূল্যে এবং ওপেন সোর্স। ভিডিওগুলি yt-dlp দ্বারা পাওয়া যায়; টরেন্টগুলি librqbit-এ চলে।
 #. text in a dialog box
-#, machine
-	The download queue is done.	ডাউনলোড কিউ সম্পূর্ণ হয়েছে।
+	The download queue is done.	ডাউনলোড সারি সম্পূর্ণ হয়েছে।
 #. text in errors.rs
 #, machine
 	the downloaded program doesn't match its signed checksum	ডাউনলোড করা প্রোগ্রাম এর স্বাক্ষরিত চেকসামের সাথে মেলে না
@@ -4590,11 +4476,9 @@
 #, machine
 	The file matches ({algorithm})	ফাইলটি মেলে ({algorithm})
 #. text in a dialog box
-#, machine
-	The file saved as	ফাইলটি হিসাবে সংরক্ষিত হয়েছে
+	The file saved as	ফাইলটি এই নামে সংরক্ষিত হয়েছে
 #. text in the download list (sizes, speeds, status)
-#, machine
-	The file types that are not listed in any other category	অন্য কোনো ক্যাটাগরিতে তালিকাভুক্ত নয় এমন ফাইলের প্রকার
+	The file types that are not listed in any other category	অন্য কোনো শ্রেণিতে নেই এমন ফাইলের ধরন
 #. text in the Checksum window
 #. tooltip of the box showing the checksum the file really has
 #, machine
@@ -4609,7 +4493,6 @@
 	The files could not be chosen: {error}	ফাইলগুলি বেছে নেওয়া যায়নি: {error}
 #. text in a dialog box
 #. {error} = an error message (keep the braces as they are)
-#, machine
 	The folder could not be created: {error}	ফোল্ডারটি তৈরি করা যায়নি: {error}
 #. text in errors.rs
 #, machine
@@ -4635,7 +4518,6 @@
 	the local network	স্থানীয় নেটওয়ার্ক
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name exceeds the length limit
-#, machine
 	The name is too long	নামটি অনেক বেশি লম্বা
 #. text in errors.rs; text in torrent downloads
 #. an error: the network adapter chosen in Options (a VPN's, usually) is off or gone; {adapter} its name
@@ -4681,8 +4563,7 @@
 	the secure connection to {host} failed: an antivirus's web filter or a proxy may be reading HTTPS	{host} এর সাথে সুরক্ষিত সংযোগ ব্যর্থ হয়েছে: একটি অ্যান্টিভাইরাসের ওয়েব ফিল্টার বা একটি প্রক্সি HTTPS পড়তে পারে
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
-#, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	নির্বাচিত ডাউনলোডটি সম্পূর্ণ হয়নি। আপনি কি নিশ্চিত যে আপনি এটি Mister Download Manager-এর ডাউনলোড তালিকা থেকে মুছে ফেলতে চান?
+	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	নির্বাচিত ডাউনলোডটি সম্পূর্ণ হয়নি। আপনি কি সত্যিই Mister Download Manager-এর ডাউনলোড তালিকা\nথেকে এটি মুছে ফেলতে চান?
 #. text in errors.rs
 #, machine
 	the server answered {status}	সার্ভার {status} উত্তর দিয়েছে
@@ -4776,27 +4657,23 @@
 #, machine
 	Then move the archives to the Trash	তারপর আর্কাইভগুলি ট্র্যাশে সরান
 #. text in categories.rs
-#, machine
-	There is already a category with this name	এই নামে একটি বিভাগ ইতিমধ্যেই আছে
+	There is already a category with this name	এই নামে একটি শ্রেণি ইতোমধ্যে আছে
 #. text in the Scheduler window
 #. why OK is greyed when naming a new queue
 #, machine
 	There is already a queue with this name	এই নামে ইতিমধ্যেই একটি সারি আছে
 #. text in a download's progress window
-#, machine
-	These settings are unavailable when "Show download complete dialog" is turned on	"ডাউনলোড সম্পূর্ণ ডায়ালগ দেখান" চালু থাকলে এই সেটিংসগুলি অনুপলব্ধ
+	These settings are unavailable when "Show download complete dialog" is turned on	“ডাউনলোড সম্পূর্ণ হলে ডায়ালগ দেখান” চালু থাকলে এই সেটিংস ব্যবহার করা যায় না
 #. text in helpers.rs
 #, machine
 	They keep downloading if you close this window.	আপনি এই উইন্ডোটি বন্ধ করলেও সেগুলো ডাউনলোড হতে থাকবে।
 #. text in a dialog box
-#, machine
-	This address is already in the list of downloads:	এই ঠিকানাটি ইতিমধ্যেই ডাউনলোডের তালিকায় আছে:
+	This address is already in the list of downloads:	এই ঠিকানাটি ইতোমধ্যে ডাউনলোডের তালিকায় আছে:
 #. message or event log entry in the main window
 #. in the empty download list, under its title
 #, machine
 	This category or queue holds no downloads yet.	এই বিভাগ বা সারিতে এখনো কোনো ডাউনলোড নেই।
 #. text in a download's progress window
-#, machine
 	This character is not allowed in a file name	ফাইলের নামে এই অক্ষরটি অনুমোদিত নয়
 #. text in the Options window
 #. Options → Remote → Pair a device: the code ran out (10 minutes, or 5 wrong tries)
@@ -4839,8 +4716,7 @@
 #, machine
 	This file is too large to be a torrent.	এই ফাইলটি টরেন্ট হওয়ার জন্য খুব বড়।
 #. text in a dialog box
-#, machine
-	This folder does not exist:	এই ফোল্ডারটি বিদ্যমান নেই:
+	This folder does not exist:	এই ফোল্ডারটি নেই:
 #. message or event log entry in the main window
 #. tooltip on the disabled Rename box when the folder already holds files this download did not write
 #, machine
@@ -4878,8 +4754,7 @@
 	This magnet link names no trackers and the DHT is off, so no peer can be found.	এই ম্যাগনেট লিঙ্কে কোনো ট্র্যাকার নেই এবং DHT বন্ধ আছে, তাই কোনো পিয়ার খুঁজে পাওয়া যাচ্ছে না।
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name is a reserved device name on Windows (CON, NUL, COM1…)
-#, machine
-	This name is reserved by Windows	এই নামটি Windows দ্বারা সংরক্ষিত
+	This name is reserved by Windows	এই নামটি Windows নিজের জন্য রেখেছে
 #. tooltip (why a control is greyed) in the Download video window
 #. why "Embed chapters" is greyed: ffmpeg (a helper program) is not installed
 #. why "Put them into the video" is greyed: ffmpeg (a helper program) is not installed
@@ -4903,7 +4778,6 @@
 #, machine
 	this site lets only browsers through; Alt+click the link	এই সাইটটি শুধুমাত্র ব্রাউজারগুলিকে অনুমতি দেয়; লিঙ্কটিতে Alt+ক্লিক করুন
 #. text in a download's progress window
-#, machine
 	This system has no dial-up connections to hang up	এই সিস্টেমে বন্ধ করার মতো কোনো ডায়াল-আপ সংযোগ নেই
 #. text in errors.rs
 #. {name} = a file name (keep the braces as they are)
@@ -4990,8 +4864,7 @@
 #, machine
 	Torrent	টরেন্ট
 #. text in the download list (sizes, speeds, status)
-#, machine
-	Torrent downloads (magnet links and .torrent files)	টরেন্ট ডাউনলোড (ম্যাগনেট লিঙ্ক এবং .torrent ফাইল)
+	Torrent downloads (magnet links and .torrent files)	টরেন্ট ডাউনলোড (ম্যাগনেট লিংক ও .torrent ফাইল)
 #. message or event log entry in the main window; text in the Add torrent window; window title in torrentfiles.rs
 #. the kind of file the Open dialog lists
 #. title of the separate window listing a torrent's files
@@ -5006,7 +4879,6 @@
 	Torrent settings say to use the proxy, but Proxy / Socks has no SOCKS5 proxy	টরেন্ট সেটিংসে প্রক্সি ব্যবহার করতে বলা হয়েছে, কিন্তু প্রক্সি / সক্স-এ কোনো SOCKS5 প্রক্সি নেই
 #. text in the download list (sizes, speeds, status)
 #. category name: torrent downloads (BitTorrent)
-#, machine
 	Torrents	টরেন্ট
 #. text in torrent downloads
 #. an error, with the reason
@@ -5015,11 +4887,9 @@
 	torrents could not start: {error}	টরেন্ট শুরু করা যায়নি: {error}
 #. text in a download's progress window
 #. column title: a server that lists the peers
-#, machine
 	Tracker	ট্র্যাকার
 #. text in a download's progress window
 #. tab title: the servers that list the peers
-#, machine
 	Trackers	ট্র্যাকার
 #. text in the Add torrent window
 #. Add trackers: above the box; {name} is the torrent's name
@@ -5027,7 +4897,6 @@
 #, machine
 	Trackers to add to {name}, one address a line:	{name}-এ যোগ করার জন্য ট্র্যাকার, প্রতি লাইনে একটি ঠিকানা:
 #. text in a download's progress window
-#, machine
 	Transfer rate	স্থানান্তর হার
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -5066,21 +4935,17 @@
 	Turks and Caicos Islands	টার্কস ও কাইকোস দ্বীপপুঞ্জ
 #. text in the tray icon's menu
 #. verb: turn the Speed Limiter off
-#, machine
 	Turn off	বন্ধ করুন
 #. text in a dialog box
 #. title of the message when shutting down / sleep / hibernate failed
-#, machine
 	Turn off computer	কম্পিউটার বন্ধ করুন
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
 	Turn off computer when done	কাজ শেষ হলে কম্পিউটার বন্ধ করুন
 #. button in a dialog box
-#, machine
 	Turn off now	এখনই বন্ধ করুন
 #. text in the tray icon's menu
 #. verb: turn the Speed Limiter on
-#, machine
 	Turn on	চালু করুন
 #. text in extension.rs
 #. step 6 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
@@ -5131,8 +4996,7 @@
 	Type the category's name	ক্যাটাগরির নাম টাইপ করুন
 #. text in a dialog box
 #. why Start Download is greyed in Download File Info
-#, machine
-	Type the file's name in Save As	হিসাবে সংরক্ষণ করুন-এ ফাইলের নাম টাইপ করুন
+	Type the file's name in Save As	“এই নামে সংরক্ষণ” ঘরে ফাইলের নাম লিখুন
 #. text in the settings
 #. Options → DNS over TLS: the server's name (as its certificate shows it) is missing
 #, machine
@@ -5191,6 +5055,7 @@
 #, machine
 	United States Minor Outlying Islands	মার্কিন যুক্তরাষ্ট্রের ক্ষুদ্র দূরবর্তী দ্বীপপুঞ্জ
 #. text in a download's Properties window
+#. the web page is not known
 #, machine
 	Unknown	অজানা
 #. text in a dialog box; text in a download's progress window; text in whereis.rs
@@ -5220,7 +5085,6 @@
 #, machine
 	Updates could not be checked: {error}	আপডেট চেক করা যায়নি: {error}
 #. text in a dialog box
-#, machine
 	URL	URL
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -5270,7 +5134,6 @@
 #, machine
 	Use the token	টোকেন ব্যবহার করুন
 #. text in a dialog box
-#, machine
 	Use them for this torrent? What matches it is kept, the rest replaced.	এই টরেন্টের জন্য এগুলো ব্যবহার করবেন? যেগুলো মেলে সেগুলো রাখা হবে, বাকিগুলো প্রতিস্থাপন করা হবে।
 #. label in the Options window
 #, machine
@@ -5303,7 +5166,6 @@
 #, machine
 	Uzbekistan	উজবেকিস্তান
 #. text in a download's progress window
-#, machine
 	Value	মান
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -5331,11 +5193,9 @@
 #. text in the download list (sizes, speeds, status)
 #. a download's status while the finished file is checked against its checksum
 #. the trailing ... means it is still going on: keep it
-#, machine
 	Verifying...	যাচাই করা হচ্ছে...
 #. text in the download list (sizes, speeds, status)
 #. a download's status while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%"
-#, machine
 	Verifying... ({percent})	যাচাই করা হচ্ছে... ({percent})
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
@@ -5343,7 +5203,6 @@
 	Version {version} ({commit})	সংস্করণ {version} ({commit})
 #. text in the download list (sizes, speeds, status)
 #. category name: video files
-#, machine
 	Video	ভিডিও
 #. text in the Download video window
 #, machine
@@ -5454,13 +5313,10 @@
 	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows ক্রেডেনশিয়াল ম্যানেজার উত্তর দেয়নি, তাই সাইন-ইন এবং পাসওয়ার্ডগুলি MDM-এর সেটিংসে রাখা হয়েছে, যা আপনার Windows অ্যাকাউন্টের জন্য এনক্রিপ্ট করা হয়েছে।
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
-#, machine
 	Windows refused	Windows প্রত্যাখ্যান করেছে
 #. text in langpick.rs
-#, machine
 	Windows' language	Windows-এর ভাষা
 #. text in langpick.rs
-#, machine
 	Windows' language ({language})	Windows-এর ভাষা ({language})
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue" (Windows): its power option "Allow wake timers" is off
@@ -5577,23 +5433,18 @@
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp {browser}-এর কুকিজ পড়তে পারেনি: {error}
 #. text in a download's progress window
 #. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
-#, machine
 	yt-dlp downloads it itself	yt-dlp নিজেই এটি ডাউনলোড করে
 #. text in a download's progress window
 #. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
-#, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp নিজেই এটি ডাউনলোড করে: একটি লাইভ স্ট্রিম
 #. text in a download's progress window
 #. progress window, a video's line: a stream sent in many small pieces of a rare kind (Adobe HDS, Smooth Streaming), which the helper program yt-dlp downloads itself
-#, machine
 	yt-dlp downloads it itself: a stream in pieces	yt-dlp নিজেই এটি ডাউনলোড করে: টুকরো টুকরো একটি স্ট্রিম
 #. text in a download's progress window
 #. progress window, a video's line: the stream is copy-protected (DRM), left to the helper program yt-dlp, which refuses it
-#, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp নিজেই এটি ডাউনলোড করে: সুরক্ষিত (DRM)
 #. text in a download's progress window
 #. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
-#, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp নিজেই এটি ডাউনলোড করে: {protocol}
 #. text in the Download video window
 #. the Download video window: the browser chosen in Options has no cookies on this computer (not installed, or another profile); {browser} = its name
@@ -5688,22 +5539,19 @@
 	{file} could not be deleted from the disk: {error}	{file} ডিস্ক থেকে মুছে ফেলা যায়নি: {error}
 #. text in a dialog box
 #. {error} = an error message (keep the braces as they are)
-#, machine
 	{file} could not be opened: {error}	{file} খোলা যায়নি: {error}
 #. text in the Checksum window
 #, machine
 	{file} could not be read to check it	যাচাই করার জন্য {file} পড়া যায়নি
 #. text in a dialog box
-#, machine
-	{file} is no longer where it was saved (moved or deleted). Redownload, in its right-click menu, gets it again.	{file} আর যেখানে সংরক্ষণ করা হয়েছিল সেখানে নেই (সরানো বা মুছে ফেলা হয়েছে)। ডান-ক্লিক মেনুতে থাকা পুনরায় ডাউনলোড বিকল্পটি এটি আবার ডাউনলোড করবে।
+	{file} is no longer where it was saved (moved or deleted). Redownload, in its right-click menu, gets it again.	{file} যেখানে সংরক্ষণ করা হয়েছিল সেখানে আর নেই (সরানো বা মুছে ফেলা হয়েছে)। ডান-ক্লিক মেনুর “আবার ডাউনলোড করুন” দিয়ে এটি আবার পাবেন।
 #. message or event log entry in the main window
 #. Import refused a file; {size} = its size and {limit} = the largest Import reads, like "4.50 GB" and "64.00 MB"
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
 #, machine
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} ঠিকানাগুলির তালিকা হওয়ার জন্য খুব বড় ({size})। আমদানি {limit} পর্যন্ত পাঠ্য ফাইল, ওয়েব পৃষ্ঠা এবং .ef2 রপ্তানি পড়ে।
 #. text in a dialog box
-#, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} ডাউনলোড সম্পূর্ণ তালিকা থেকে টেনে বের করে অন্য কোথাও সরানো হয়েছে, এবং MDM সেটি কোথায় সরানো হয়েছে তা শনাক্ত করতে পারেনি। আপনি যেখানে এটি রেখেছিলেন সেখানে এটি খুঁজুন।
+	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} “ডাউনলোড সম্পূর্ণ” উইন্ডো থেকে টেনে অন্য কোথাও নেওয়া হয়েছে, আর MDM জানতে পারেনি কোথায়। যেখানে ছেড়েছিলেন সেখানে খুঁজে দেখুন।
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5715,12 +5563,10 @@
 #. text in a download's progress window
 #. {have} and {total} = numbers of pieces; {size} = one piece's size
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
-#, machine
-	{have} of {total} ({size} each)	{total} এর {have} (প্রতিটি {size})
+	{have} of {total} ({size} each)	{total}টির মধ্যে {have}টি ({size} করে)
 #. text in a download's progress window
 #. {have} and {total} = numbers of pieces; {size} = one piece's size
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
-#, machine
 	{have} of {total} pieces ({size} each)	{total}টি খণ্ডের মধ্যে {have}টি ({size} করে)
 #. text in errors.rs
 #. a helper (yt-dlp, ffmpeg) couldn't be downloaded: its server ({host}) answered with an HTTP error ({status}, such as "404 Not Found")
@@ -5753,7 +5599,6 @@
 	{host} refused the request ({status}): too many requests from your network for now	{host} অনুরোধ প্রত্যাখ্যান করেছে ({status}): আপনার নেটওয়ার্ক থেকে আপাতত অনেক বেশি অনুরোধ
 #. text in the download list (sizes, speeds, status)
 #. {h} = hours; {m} = minutes (keep the braces as they are)
-#, machine
 	{h} hour(s) {m} min	{h} ঘণ্টা {m} মিনিট
 #. text in errors.rs
 #. an error: the server's address is IPv6 (or IPv4) and the chosen network adapter has none of that kind; {ip} the address, {adapter} the adapter's name
@@ -5765,7 +5610,6 @@
 	{language}, automatic	{language}, স্বয়ংক্রিয়ভাবে তৈরি
 #. text in a download's progress window
 #. {live} = peers connected now; {known} = peers heard of
-#, machine
 	{live} connected, {known} known	{live}টি সংযুক্ত, {known}টি পরিচিত
 #. text in the Scheduler window
 #. the calendar's title: {month} = a month's name, {year} = its year
@@ -5773,7 +5617,6 @@
 	{month} {year}	{month} {year}
 #. text in the download list (sizes, speeds, status)
 #. {m} = minutes; {s} = seconds (keep the braces as they are)
-#, machine
 	{m} min {s} sec	{m} মিনিট {s} সেকেন্ড
 #. text in the Add torrent window
 #. the torrent's name, then {files} = "3 files" and {size} = its total size
@@ -5808,7 +5651,6 @@
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
-#, machine
 	{name}: {error}	{name}: {error}
 #. text in the Options window
 #. a number of connections the app learned by itself for a server
@@ -5826,16 +5668,7 @@
 	{n} of {total} selected	{total} এর {n} নির্বাচিত
 #. text in the download list (sizes, speeds, status)
 #. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
-#, machine
 	{percent} at {service}	{service}-এ {percent}
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while a video's picture and sound are joined into one file (ffmpeg); {percent} how far, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} merged	{percent} মার্জ করা হয়েছে
-#. text in the download list (sizes, speeds, status)
-#. the list's narrow Status column while the finished file is checked against its checksum; {percent} how much is checked, e.g. "45%": keep it first, the column is narrow
-#, machine
-	{percent} verified	{percent} যাচাই করা হয়েছে
 #. text in errors.rs
 #, machine
 	{problem} ({cause})	{problem} ({cause})
@@ -5912,7 +5745,6 @@
 #. text in a dialog box
 #. under "12 downloads finished": {size} the finished files' size together, like "1.25 GB"
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
-#, machine
 	{size} in all	মোট {size}
 #. text in errors.rs
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5920,7 +5752,6 @@
 	{size} is too big for this {file_system} drive (files up to 4 GB)	{size} এই {file_system} ড্রাইভের জন্য খুব বড় (4 GB পর্যন্ত ফাইল)
 #. text in the download list (sizes, speeds, status)
 #. {s} = seconds (keep the braces as they are)
-#, machine
 	{s} sec	{s} সেকেন্ড
 #. message or event log entry in the main window
 #. RSS feeds window, under the rules: {title} was added by the rule {rule}
@@ -5950,55 +5781,42 @@
 	{what} could not be installed: {error}	{what} ইনস্টল করা যায়নি: {error}
 #. column title in the download list in the download list
 #. past participle: when the download was added
-#, machine
-column	Added	যোগ করা হয়েছে
+column	Added	যোগ করার তারিখ
 #. column title in the download list in the download list
 #. noun: the download's description
-#, machine
 column	Description	বর্ণনা
 #. column title in the download list in the download list
-#, machine
 column	File Name	ফাইলের নাম
 #. column title in the download list in the download list
-#, machine
 column	Last Try Date	শেষ চেষ্টার তারিখ
 #. column title in the download list in the download list
 #. column title: how many peers a torrent is connected to now (seeders and leechers)
-#, machine
-column	Peers	পিয়ার্স
+column	Peers	পিয়ার
 #. column title in the download list in the download list
 #. column title: one letter for Queue (the column is narrow)
-#, machine
-column	Q	কিউ
+column	Q	সারি
 #. column title in the main window; column title in the download list
 #. tooltip of the narrow "Q" column's title
 #, machine
 column	Queue	সারি
 #. column title in the download list in the download list
 #. column title: what a torrent has sent to peers against what it took
-#, machine
 column	Share ratio	শেয়ার অনুপাত
 #. column title in the download list in the download list
 #. noun: the file's size
-#, machine
 column	Size	আকার
 #. column title in the download list in the download list
 #. noun: where the download comes from (Web or Torrent)
-#, machine
 column	Source	উৎস
 #. column title in the download list in the download list
 #. noun: the download's state or progress
-#, machine
-column	Status	স্থিতি
+column	Status	অবস্থা
 #. column title in the download list in the download list
-#, machine
 column	Time left	বাকি সময়
 #. column title in the download list in the download list
-#, machine
 column	Transfer rate	স্থানান্তর হার
 #. column title in the download list in the download list
 #. column title: what a torrent sends to peers, bytes per second
-#, machine
 column	Upload speed	আপলোড গতি
 #. text in the browser extension
 #. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
@@ -6495,22 +6313,18 @@ key	Type a name	একটি নাম টাইপ করুন
 key	Up / Down	Up / Down
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&About Mister Download Manager	Mister Download Manager স&ম্পর্কে
+menu	&About Mister Download Manager	Mister Download Manager সম্পর্কে(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Add new download	নতুন ডাউনলোড &যোগ করুন
+menu	&Add new download	নতুন ডাউনলোড যোগ করুন(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	&Add new download...	নতুন ডাউনলোড &যোগ করুন...
+menu	Add &new download...	নতুন ডাউনলোড যোগ করুন(&N)...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Classic	&ক্লাসিক
+menu	&Classic	ক্লাসিক(&C)
 #. menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6521,77 +6335,62 @@ menu	&Copy	ক&পি করুন
 menu	&Delete	&মুছুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Delete All Completed	সম্পন্ন হওয়া সব &মুছুন
+menu	&Delete All Completed	সম্পূর্ণ হওয়া সব ডাউনলোড মুছুন(&D)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Download Now	এখ&নই ডাউনলোড করুন
+menu	&Download Now	এখনই ডাউনলোড করুন(&D)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Exit	প্র&স্থান
+menu	&Exit	প্রস্থান করুন(&E)
 #. menu command in the main window
 #. verb: load downloads from a file
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Import	&ইম্পোর্ট করুন
+menu	&Import	ইম্পোর্ট করুন(&I)
 #. menu command in the main window
 #. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Interface size	ইন্টারফেসের &আকার
+menu	&Interface size	ইন্টারফেসের আকার(&I)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Keyboard shortcuts	কিবোর্ড শর্টকা&ট
+menu	&Keyboard shortcuts	কিবোর্ড শর্টকাট(&K)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	&Language...	&ভাষা...
+menu	&Language...	ভাষা(&L)...
 #. menu command in the main window
 #. Tasks menu: open Link grabber (links in packages, to tick before adding)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	&Link grabber...	লিঙ্ক গ্র্যাবার(&L)...
+menu	&Link grabber...	লিংক গ্র্যাবার(&L)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Options	&বিকল্প
+menu	&Options	বিকল্প(&O)
 #. menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Paste	&পেস্ট করুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Pause All	সব &বিরতি দিন
+menu	&Pause All	সব ডাউনলোডে বিরতি দিন(&P)
 #. menu command in the main window
 #. verb: removes the selected download from the list
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Remove	&সরান
+menu	&Remove	বাদ দিন(&R)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Report a problem	একটি সমস্যা &রিপোর্ট করুন
+menu	&Report a problem	সমস্যা জানান(&R)
 #. menu command in the main window
 #. header menu: put the columns back as they first were (order, widths, all shown)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Reset columns	কলাম &পুনরায় সেট করুন
+menu	&Reset columns	কলাম রিসেট করুন(&R)
 #. menu command in the main window
 #. Tasks menu: the RSS feeds window (feeds of torrents, and rules that add them)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	&RSS feeds...	&RSS ফিডগুলি...
+menu	&RSS feeds...	RSS ফিড(&R)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Scheduler and queues	শিডিউলার ও &কিউ
+menu	&Scheduler and queues	শিডিউলার ও সারি(&S)
 #. menu command in a download's progress window
 #. right-click menu of a download window's tab row: bring back the tabs taken off with "Hide tab"
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6600,397 +6399,316 @@ menu	&Show hidden tabs	লুকানো ট্যাবগুলি দেখ�
 #. menu command in the main window
 #. View → Text: letters drawn smooth, as Windows' modern apps draw them, anti-aliased at any size
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Smooth	&মসৃণ
+menu	&Smooth	মসৃণ(&S)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Stop All	সব &বন্ধ করুন
+menu	&Stop All	সব ডাউনলোড থামান(&S)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Stop Download	ডাউনলোড &বন্ধ করুন
+menu	&Stop Download	ডাউনলোড থামান(&S)
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Text	&টেক্সট
+menu	Te&xt	টেক্সট(&X)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Tray icon	&ট্রে আইকন
+menu	&Tray icon	ট্রে আইকন(&T)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Tutorials	&টিউটোরিয়াল
+menu	&Tutorials	টিউটোরিয়াল(&T)
 #. menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Undo	&পূর্বাবস্থায় ফিরিয়ে আনুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	&Video downloads	&ভিডিও ডাউনলোড
+menu	&Video downloads	ভিডিও ডাউনলোড(&V)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Add &batch download	ব্যাচ ডাউনলোড &যোগ করুন
+menu	Add &batch download	ব্যাচ ডাউনলোড যোগ করুন(&B)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Add &magnet link...	ম্যাগনেট লিঙ্ক &যোগ করুন...
+menu	Add &magnet link...	ম্যাগনেট লিংক যোগ করুন(&M)...
 #. menu command in the main window
 #. View → Theme: picks a theme file or a Base16 or pywal colour scheme, copies it into the themes folder and uses it
-#, machine
 menu	Add a theme file…	একটি থিম ফাইল যোগ করুন…
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Add batch download from &clipboard	ক্লিপবোর্ড থেকে ব্যাচ ডাউনলোড যোগ করুন(&c)
+menu	Add batch download from &clipboard	ক্লিপবোর্ড থেকে ব্যাচ ডাউনলোড যোগ করুন(&C)
 #. menu command in the main window
-#, machine
-menu	Add category	শ্রেণী যোগ করুন
+menu	Add category	শ্রেণি যোগ করুন
 #. menu command in the main window
 #. the trailing ... means it opens a window: keep it
-#, machine
 menu	Add trackers...	ট্র্যাকার যোগ করুন...
 #. menu command in the main window
 #. View → Theme: a style theme's name (GNOME's look, the Linux desktop), a name: keep "Adwaita" as written
-#, machine
 menu	Adwaita	Adwaita
 #. menu command in the main window
 #. View → Theme: a style theme's name (Windows 7's glassy look), a name: keep "Aero" as written
-#, machine
 menu	Aero	Aero
 #. menu command in the main window
 #. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
-#, machine
-menu	Applies the next time MDM starts	পরবর্তীবার MDM চালু হলে প্রযোজ্য হবে
+menu	Applies the next time MDM starts	পরের বার MDM চালু হলে কার্যকর হবে
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
-#, machine
 menu	Aqua	Aqua
 #. menu command in the main window
-#, machine
-menu	Arrange files	ফাইলগুলি সাজান
+menu	Arrange files	ফাইলগুলো সাজান
 #. menu command in the main window
 #. View → Theme: a style theme's name (KDE Plasma's look, the Linux desktop), a name: keep "Breeze" as written
-#, machine
 menu	Breeze	Breeze
 #. menu command in the main window
 #. verb: opens this category's download folder
-#, machine
 menu	Browse	ফোল্ডার খুলুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By &Description	বর্ণনা অনুসারে(&D)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By &File Name	ফাইলের নাম অনুসারে(&F)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By &Last Try Date	শেষ চেষ্টার তারিখ অনুসারে(&L)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By &Order Of Addition	যোগ করার ক্রম অনুসারে(&O)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By &Size	আকার অনুসারে(&S)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	By &Time Left	অবশিষ্ট সময় অনুসারে(&T)
+menu	By &Time Left	বাকি সময় অনুসারে(&T)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By Date &Added	যোগ করার তারিখ অনুসারে(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	By Parent &Web Page	প্যারেন্ট ওয়েব পৃষ্ঠা অনুসারে(&W)
+menu	By Parent &Web Page	মূল ওয়েব পেজ অনুসারে(&W)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	By R&eferer	রেফারার অনুসারে(&e)
+menu	By R&eferer	রেফারার অনুসারে(&E)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	By Save &Path	সংরক্ষণ পাথ অনুসারে(&P)
+menu	By Save &Path	সংরক্ষণের পাথ অনুসারে(&P)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	By St&atus	স্থিতি অনুসারে(&a)
+menu	By Stat&us	অবস্থা অনুসারে(&U)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menu	By Transfer &Rate	স্থানান্তর হার অনুসারে(&R)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	C&ustomize URL List...	URL তালিকা কাস্টমাইজ করুন(&u)...
+menu	C&ustomize URL List...	URL তালিকা কাস্টমাইজ করুন(&U)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Check for &updates...	আপডেটগুলির জন্য পরীক্ষা করুন(&u)...
+menu	Check for &updates...	আপডেট খুঁজুন(&U)...
 #. menu command in the main window
 #. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
-#, machine
 menu	Classic	ক্লাসিক
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Clear all &filters	সমস্ত ফিল্টার সাফ করুন(&f)
+menu	Clear all &filters	সব ফিল্টার সাফ করুন(&F)
 #. menu command in the main window
-#, machine
-menu	Copy magnet link	ম্যাগনেট লিঙ্ক কপি করুন
+menu	Copy magnet link	ম্যাগনেট লিংক কপি করুন
 #. menu command in the main window
-#, machine
 menu	Create new queue	নতুন সারি তৈরি করুন
 #. menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	Cu&t	কা&টুন
 #. menu command in the main window
-#, machine
 menu	Dark Mode support	ডার্ক মোড সমর্থন
 #. menu command in the main window
 #. verb: deletes the category
 #. verb: deletes the queue
-#, machine
 menu	Delete	মুছুন
 #. menu command in the main window
-#, machine
-menu	Delete from queue	সারি থেকে মুছুন
+menu	Delete from queue	সারি থেকে বাদ দিন
 #. menu command in the main window
 #. View → Draw with: a graphics system's name (Microsoft's), usually kept as is
-#, machine
 menu	Direct3D	Direct3D
 #. menu command in the main window
+#. View → Draw with: a greyed note; what draws the windows and why: Direct3D 12 through Windows' own software renderer (WARP, keep the name), because this computer's graphics card has no Direct3D 12 driver
+menu	Direct3D 12 (WARP): this graphics card has no Direct3D 12 driver	Direct3D 12 (WARP): এই গ্রাফিক্স কার্ডে কোনো Direct3D 12 ড্রাইভার নেই
+#. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D failed on this computer, so OpenGL draws the windows
-#, machine
 menu	Direct3D didn't start here: OpenGL draws	এখানে Direct3D চালু হয়নি: OpenGL দিয়ে আঁকা হচ্ছে
 #. menu command in the main window
 #. View → Draw with: a greyed note; Direct3D draws the windows through Windows' own software renderer (WARP) instead of a graphics card
-#, machine
 menu	Direct3D draws with Windows' software renderer (WARP)	Direct3D Windows-এর সফটওয়্যার রেন্ডারার (WARP) দিয়ে আঁকে
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Download &video from a page...	একটি পৃষ্ঠা থেকে ভিডিও ডাউনলোড করুন(&v)...
+menu	Download &video from a page...	পেজ থেকে ভিডিও ডাউনলোড করুন(&V)...
 #. menu command in the main window
 #. right-click → Torrent, a choice with a check mark: download the torrent's files from their start, to watch a video while it downloads
-#, machine
 menu	Download in order	ক্রমানুসারে ডাউনলোড করুন
 #. menu command in the main window
 #. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
-#, machine
 menu	Draw with	আঁকার মাধ্যম
 #. menu command in the main window
 #. verb: save the download list to a file
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	E&xport	রপ্তানি করুন(&x)
+menu	E&xport	এক্সপোর্ট করুন(&X)
 #. menu command in the main window
-#, machine
 menu	Edit queue	সারি সম্পাদনা করুন
 #. menu command in the main window
 #. View → Theme: a style theme's name (a white canvas, emerald fills, 6-point corners), a name: keep "Emerald" as written
-#, machine
-menu	Emerald	এমারাল্ড
+menu	Emerald	Emerald
 #. menu command in the main window
 #. verb: unpack the downloaded archive (zip, 7z, rar) into its folder
-#, machine
-menu	Extract	আর্কাইভ খুলুন
+menu	Extract	এক্সট্র্যাক্ট করুন
 #. menu command in the main window
 #. right-click → Torrent submenu: open the selected torrent's file list
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Files...	ফাইলসমূহ...
+menu	Files...	ফাইলগুলো...
 #. menu command in the main window
-#, machine
-menu	Find (Ctrl-F)	অনুসন্ধান করুন (Ctrl-F)
+menu	Find (Ctrl-F)	খুঁজুন (Ctrl-F)
 #. menu command in the main window
-#, machine
 menu	Find Next (F3)	পরবর্তী খুঁজুন (F3)
 #. menu command in the main window
 #. right-click → Torrent, a choice with a check mark (with Download in order): each file's first and last pieces first, which a video player needs to start
-#, machine
-menu	First and last pieces first	প্রথমে প্রথম ও শেষ অংশগুলি
+menu	First and last pieces first	প্রথম ও শেষ খণ্ড আগে
 #. menu command in the main window
 #. noun: the list's font (submenu)
-#, machine
 menu	Font	ফন্ট
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	From &IDM export file...	IDM রপ্তানি ফাইল থেকে(&I)...
+menu	From &IDM export file...	IDM-এর এক্সপোর্ট ফাইল থেকে(&I)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	From &text file...	টেক্সট ফাইল থেকে(&t)...
+menu	From &text file...	টেক্সট ফাইল থেকে(&T)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	H&elp contents	সহায়তা বিষয়বস্তু(&H)
+menu	H&elp contents	সহায়তার বিষয়বস্তু(&E)
 #. menu command in the main window
-#, machine
 menu	Hide drop target	ড্রপ টার্গেট লুকান
 #. menu command in the main window
 #. View → Theme: black and white with strong edges, for low vision
-#, machine
 menu	High contrast	উচ্চ বৈসাদৃশ্য
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
-#, machine
-menu	It couldn't start: the log says why	এটি শুরু হতে পারেনি: লগে কারণটি উল্লেখ আছে
+menu	It couldn't start: the log says why	চালু হতে পারেনি: কারণ লগে লেখা আছে
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
-#, machine
-menu	Its first frame didn't show within 10 seconds	এর প্রথম ফ্রেম 10 সেকেন্ডের মধ্যে দেখা যায়নি
+menu	Its first frame didn't show within 10 seconds	এর প্রথম ফ্রেম ১০ সেকেন্ডের মধ্যে দেখা যায়নি
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
-#, machine
-menu	Its last start ended before its first frame	এর সর্বশেষ চালু হওয়ার সময় প্রথম ফ্রেম দেখানোর আগেই শেষ হয়েছে
+menu	Its last start ended before its first frame	শেষবার চালুর সময় প্রথম ফ্রেম দেখানোর আগেই এটি বন্ধ হয়ে গিয়েছিল
 #. menu command in the main window
 #. View → Theme: a style theme's name (Windows XP's look), a name: keep "Luna" as written
-#, machine
 menu	Luna	Luna
 #. menu command in the main window
 #. View → Draw with: a graphics system's name (Apple's), usually kept as is
-#, machine
 menu	Metal	Metal
 #. menu command in the main window
 #. View → Draw with: a greyed note; Metal failed on this computer, so OpenGL draws the windows
-#, machine
-menu	Metal didn't start here: OpenGL draws	Metal এখানে শুরু হয়নি: OpenGL ড্র করে
+menu	Metal didn't start here: OpenGL draws	এখানে Metal চালু হয়নি: OpenGL দিয়ে আঁকা হচ্ছে
 #. menu command in the main window
 #. View → Draw with: a greyed note; Metal draws the windows through a software renderer instead of a graphics card
-#, machine
 menu	Metal draws with a software renderer	Metal একটি সফটওয়্যার রেন্ডারার দিয়ে আঁকে
 #. menu command in the main window
 #. View → Theme: a style theme's name (Windows 8's flat look); keep "Metro" unless your language writes it otherwise
-#, machine
-menu	Metro	মেট্রো
+menu	Metro	Metro
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager &হোম পেজ
+menu	Mister Download Manager &Home Page	Mister Download Manager হোম পেজ(&H)
 #. menu command in the main window
-#, machine
-menu	Move/Rename (Ctrl-M)	সরান/পুনঃনামকরণ করুন (Ctrl-M)
+menu	Move/Rename (Ctrl-M)	সরান/নাম পরিবর্তন করুন (Ctrl-M)
 #. menu command in the main window
 #. View → Theme: the system's own colours (its accent colour, its high contrast)
-#, machine
 menu	Native	সিস্টেমের নিজস্ব
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: no graphics card here has a driver for that graphics system ("it")
-#, machine
 menu	No graphics card here has a driver for it	এখানে কোনো গ্রাফিক্স কার্ডে এর জন্য ড্রাইভার নেই
 #. menu command in the main window
-#, machine
 menu	On Double click	ডাবল-ক্লিকে
 #. menu command in the main window
 #. verb: opens the downloaded file
 #. what double-clicking a download does — verb: open the file
-#, machine
 menu	Open	খুলুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Open &torrent file...	টরেন্ট ফাইল &খুলুন...
+menu	Open &torrent file...	টরেন্ট ফাইল খুলুন(&T)...
 #. menu command in the main window
-#, machine
 menu	Open folder	ফোল্ডার খুলুন
 #. menu command in the main window
 #. View → Theme: opens the folder where theme files go (TOML or JSON)
-#, machine
 menu	Open themes folder	থিম ফোল্ডার খুলুন
 #. menu command in the main window
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Open with...	এর সাথে খুলুন...
+menu	Open with...	অ্যাপ দিয়ে খুলুন...
 #. menu command in the main window
 #. View → Draw with: a graphics system's name, usually kept as is
-#, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+menu	OpenGL didn't start here	এই কম্পিউটারে OpenGL চালু হয়নি
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+menu	OpenGL froze inside the graphics driver here	OpenGL এখানে গ্রাফিক্স ড্রাইভারের মধ্যে আটকে গিয়েছিল
+#. menu command in the main window
 #. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
-#, machine
-menu	OpenGL here is too old to draw MDM	MDM আঁকার জন্য এখানকার OpenGL অনেক পুরনো
+menu	OpenGL here is too old to draw MDM	MDM আঁকার জন্য এখানকার OpenGL অনেক পুরোনো
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+menu	OpenGL's first frame didn't show within 10 seconds	OpenGL-এর প্রথম ফ্রেম ১০ সেকেন্ডের মধ্যে দেখা যায়নি
+#. menu command in the main window
+#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+menu	OpenGL's last start ended before its first frame	শেষবার চালুর সময় প্রথম ফ্রেম দেখানোর আগেই OpenGL বন্ধ হয়ে গিয়েছিল
 #. menu command in the main window
 #. what double-clicking a download does — noun: show its properties
 #. noun: opens the download's Properties window
 #. noun: opens the category's properties
-#, machine
 menu	Properties	বৈশিষ্ট্য
 #. menu command in the main window
 #. View → Theme: the colours of pywal (a program making colour schemes from the wallpaper), followed as they change; a name: keep "pywal" as written
-#, machine
-menu	pywal	পাইওয়াল
+menu	pywal	pywal
 #. menu command in the main window
 #. verb: download the file again from the start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	R&edownload	আবার &ডাউনলোড করুন
+menu	R&edownload	আবার ডাউনলোড করুন(&E)
 #. menu command in the main window
 #. right-click → Torrent: ask the torrent's trackers for peers again now
-#, machine
 menu	Reannounce	ট্র্যাকারকে আবার ঘোষণা করুন
 #. menu command in the main window
 #. right-click → Torrent: read every piece of the torrent's files again and check it
-#, machine
-menu	Recheck files	ফাইলগুলি আবার যাচাই করুন
+menu	Recheck files	ফাইলগুলো আবার যাচাই করুন
 #. menu command in the main window
 #. verb: download the file again from the start
-#, machine
-menu	Redownload	পুনরায় ডাউনলোড করুন
+menu	Redownload	আবার ডাউনলোড করুন
 #. menu command in the main window
-#, machine
 menu	Refresh download address	ডাউনলোডের ঠিকানা রিফ্রেশ করুন
 #. menu command in the main window
 #. verb: removes the download from the list
-#, machine
-menu	Remove	সরান
+menu	Remove	বাদ দিন
 #. menu command in the main window
 #. verb: removes the selected download from the list and its file from the disk
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Remove with &files	&ফাইল সহ সরান
+menu	Remove with &files	ফাইলসহ বাদ দিন(&F)
 #. menu command in the main window
 #. verb: removes the download from the list and its file from the disk
-#, machine
-menu	Remove with files	ফাইলসহ সরান
+menu	Remove with files	ফাইলসহ বাদ দিন
 #. menu command in the main window
-#, machine
-menu	Resume Download	ডাউনলোড আবার শুরু করুন
+menu	Resume Download	ডাউনলোড পুনরায় শুরু করুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	S&cheduler	সময়সূচী(&c)
+menu	S&cheduler	শিডিউলার(&C)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	S&ettings...	সেটিংস(&S)...
+menu	S&ettings...	সেটিংস(&E)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	S&top queue	সারি বন্ধ করুন(&p)
+menu	S&top queue	সারি থামান(&T)
 #. menu command in the main window
 #. command: opens this queue's schedule (when it starts and stops)
-#, machine
 menu	Schedule	সময়সূচি
 #. menu command in the main window; menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -6998,91 +6716,69 @@ menu	Schedule	সময়সূচি
 menu	Select &all	সব &নির্বাচন করুন
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Show &drop target	ড্রপ টার্গেট দেখান(&d)
+menu	Show &drop target	ড্রপ টার্গেট দেখান(&D)
 #. menu command in the main window
-#, machine
 menu	Show Mister Download Manager	Mister Download Manager দেখান
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Speed &Limiter	গতি সীমিতকরণ(&L)
+menu	Speed &Limiter	স্পিড লিমিটার(&L)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Start &queue	সারি &শুরু করুন
+menu	Start &queue	সারি শুরু করুন(&Q)
 #. menu command in the main window
-#, machine
 menu	Start now	এখনই শুরু করুন
 #. menu command in the main window
 #. verb: stops the queue
-#, machine
 menu	Stop	থামান
 #. menu command in the main window
-#, machine
 menu	Stop Download	ডাউনলোড থামান
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Support &MDM	MDM সমর্থন করুন(&M)
+menu	Support &MDM	MDM-কে সমর্থন করুন(&M)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Tell a &friend	একজন বন্ধুকে বলুন(&f)
+menu	Tell a &friend	বন্ধুকে জানান(&F)
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: the graphics card stopped working twice (a driver update or reset)
-#, machine
-menu	The graphics card was lost twice in 10 minutes	10 মিনিটের মধ্যে গ্রাফিক্স কার্ড দুবার কাজ করা বন্ধ করে দিয়েছে
+menu	The graphics card was lost twice in 10 minutes	১০ মিনিটের মধ্যে গ্রাফিক্স কার্ড দুবার কাজ করা বন্ধ করে দিয়েছে
 #. menu command in the main window
 #. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
-#, machine
 menu	Theme	থিম
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	To &IDM export file...	IDM এক্সপোর্ট ফাইলে(&I)...
+menu	To &IDM export file...	IDM-এর এক্সপোর্ট ফাইলে(&I)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	To &text file...	টেক্সট ফাইলে(&t)...
+menu	To &text file...	টেক্সট ফাইলে(&T)...
 #. menu command in the main window
 #. noun: the toolbar (submenu of View with its settings)
-#, machine
 menu	Toolbar	টুলবার
 #. menu command in the main window
 #. right-click menu: the submenu of a torrent's own commands
-#, machine
 menu	Torrent	টরেন্ট
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
-#, machine
-menu	Torrent setti&ngs...	টরেন্ট সেটিংস(&n)...
+menu	Torrent setti&ngs...	টরেন্ট সেটিংস(&N)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Turn o&n	চালু করুন(&n)
+menu	Turn o&n	চালু করুন(&N)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
-menu	Turn of&f	বন্ধ করুন(&f)
+menu	Turn of&f	বন্ধ করুন(&F)
 #. menu command in the main window
 #. the trailing ... means it opens a window: keep it
-#, machine
 menu	Verify checksum...	চেকসাম যাচাই করুন...
 #. menu command in the main window
 #. View → Draw with: a graphics system's name (Khronos', used on Linux), usually kept as is
-#, machine
 menu	Vulkan	Vulkan
 #. menu command in the main window
 #. View → Draw with: a greyed note; Vulkan failed on this computer, so OpenGL draws the windows
-#, machine
-menu	Vulkan didn't start here: OpenGL draws	Vulkan এখানে শুরু হয়নি: OpenGL ড্র করে
+menu	Vulkan didn't start here: OpenGL draws	এখানে Vulkan চালু হয়নি: OpenGL দিয়ে আঁকা হচ্ছে
 #. menu command in the main window
 #. View → Draw with: a greyed note; Vulkan draws the windows through a software renderer instead of a graphics card
-#, machine
 menu	Vulkan draws with a software renderer	Vulkan একটি সফটওয়্যার রেন্ডারার দিয়ে আঁকে
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7105,43 +6801,32 @@ menubar	&Tasks	&কাজগুলি
 #, machine
 menubar	&View	&দেখুন
 #. toolbar button in the main window
-#, machine
 toolbar	Add Torrent	টরেন্ট যোগ করুন
 #. toolbar button in the main window
-#, machine
 toolbar	Add URL	URL যোগ করুন
 #. toolbar button in the main window
 #. verb: delete the selected downloads
-#, machine
 toolbar	Delete	মুছুন
 #. toolbar button in the main window
-#, machine
-toolbar	Delete Completed	সম্পূর্ণ হওয়া ডাউনলোডগুলি মুছুন
+toolbar	Delete Completed	সম্পূর্ণগুলো মুছুন
 #. toolbar button in the main window
 #. plural noun: opens the Options window (settings)
-#, machine
-toolbar	Options	বিকল্পগুলি
+toolbar	Options	বিকল্প
 #. toolbar button in the main window
 #. verb: continue the selected downloads
-#, machine
 toolbar	Resume	পুনরায় শুরু করুন
 #. toolbar button in the main window
 #. noun: the tool that starts and stops queues on time
-#, machine
-toolbar	Scheduler	সময়সূচী
+toolbar	Scheduler	শিডিউলার
 #. toolbar button in the main window
-#, machine
 toolbar	Start Queue	সারি শুরু করুন
 #. toolbar button in the main window
 #. verb: stop the selected downloads
-#, machine
-toolbar	Stop	বন্ধ করুন
+toolbar	Stop	থামান
 #. toolbar button in the main window
-#, machine
-toolbar	Stop All	সব বন্ধ করুন
+toolbar	Stop All	সব থামান
 #. toolbar button in the main window
-#, machine
-toolbar	Stop Queue	সারি বন্ধ করুন
+toolbar	Stop Queue	সারি থামান
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
 #, machine

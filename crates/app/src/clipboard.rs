@@ -7,8 +7,15 @@
 //! that open with a copied link and Add batch download from clipboard ([`Prefill`]) ask ([`ask`]) and take the answer on a later
 //! frame ([`answer`]); the window is woken when it comes. A read that never answers holds up
 //! nothing but the next read.
+//!
+//! The watch for copied links (Options → General, [`watch`]) looks at the clipboard from its own
+//! thread, once a second, and wakes the window only when a new text was copied: an idle MDM
+//! draws no frame for it (each one cost the processor much on a software renderer, #847). On
+//! Windows it reads the clipboard only when its sequence number changed.
 
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Condvar, Mutex, MutexGuard, OnceLock, PoisonError};
+use std::time::Duration;
 
 /// One ask for the clipboard's text, answered by a read that starts after it.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -30,6 +37,8 @@ struct State {
     /// The newest ask, and the newest one a read has answered.
     asked: u64,
     answered: u64,
+    /// The newest ask whose answer wakes the window (the watch's don't, [`Reader::ask_quietly`]).
+    loud: u64,
     /// What the last read found.
     text: Option<String>,
     closed: bool,
@@ -69,12 +78,16 @@ impl Reader {
                     };
                     // Not under the lock: an ask is never held up by the read under way.
                     let text = read();
-                    {
+                    let woken = {
                         let mut s = worker.lock();
                         s.text = text;
+                        let woken = s.loud > s.answered;
                         s.answered = ask;
+                        woken
+                    };
+                    if woken {
+                        wake();
                     }
-                    wake();
                 }
             });
         if let Err(e) = spawned {
@@ -83,8 +96,19 @@ impl Reader {
         Reader { shared }
     }
 
-    /// Ask for the clipboard's text, at once (never waits for a read).
+    /// Ask for the clipboard's text, at once (never waits for a read); the window is woken when
+    /// the answer comes.
     pub fn ask(&self) -> Ask {
+        let mut s = self.shared.lock();
+        s.asked += 1;
+        s.loud = s.asked;
+        self.shared.asked.notify_one();
+        Ask(s.asked)
+    }
+
+    /// [`Reader::ask`], without waking the window for the answer (the watch's: it wakes the
+    /// window itself, only for a new text).
+    pub fn ask_quietly(&self) -> Ask {
         let mut s = self.shared.lock();
         s.asked += 1;
         self.shared.asked.notify_one();
@@ -145,6 +169,104 @@ pub fn answer(ask: Ask) -> Option<Option<String>> {
 /// [`Reader::latest`] of the system clipboard.
 pub fn latest() -> Option<String> {
     reader().latest()
+}
+
+// ---- The watch for copied links -------------------------------------------------------------
+
+/// How often the watch looks at the clipboard.
+const WATCH_EVERY: Duration = Duration::from_secs(1);
+/// How long a look waits for its read (an owner that never answers: the next look asks again).
+const READ_WITHIN: Duration = Duration::from_secs(5);
+
+/// What the watch has seen.
+#[derive(Default)]
+struct Watch {
+    /// The clipboard's change number at the last read (Windows'), so an unchanged clipboard
+    /// isn't read at all.
+    changes: Option<u64>,
+    /// The text the last read found (None inside: no text); None before the first read, which
+    /// only notes what is there: turning the watch on doesn't take a link copied earlier.
+    seen: Option<Option<String>>,
+}
+
+impl Watch {
+    /// One look: `changes` is the clipboard's change number now (None where the system keeps
+    /// none: read at every look), `read` reads it (None: no answer in time). A new text, trimmed,
+    /// if one was copied since the last look.
+    fn look(
+        &mut self,
+        changes: Option<u64>,
+        read: impl FnOnce() -> Option<Option<String>>,
+    ) -> Option<String> {
+        if changes.is_some() && changes == self.changes && self.seen.is_some() {
+            return None;
+        }
+        let text = read()?.map(|t| t.trim().to_owned());
+        self.changes = changes;
+        let before = self.seen.replace(text.clone())?;
+        text.filter(|t| Some(t) != before.as_ref())
+    }
+}
+
+/// The watch is on (Options → General → Offer to download links copied to the clipboard).
+static WATCHING: AtomicBool = AtomicBool::new(false);
+/// A text copied since the window last took one ([`copied`]).
+static COPIED: Mutex<Option<String>> = Mutex::new(None);
+
+/// Turn the watch for copied links on or off (each frame, from the setting). Its thread starts
+/// with the first `true`; off, it forgets what it saw, so turning it on again takes no old link.
+pub fn watch(on: bool) {
+    WATCHING.store(on, Ordering::Relaxed);
+    if !on {
+        return;
+    }
+    static STARTED: OnceLock<()> = OnceLock::new();
+    STARTED.get_or_init(|| {
+        let spawned = std::thread::Builder::new()
+            .name("clipboard watch".into())
+            .spawn(watching);
+        if let Err(e) = spawned {
+            tracing::warn!("clipboard: no thread to watch it ({e}), copied links aren't offered");
+        }
+    });
+}
+
+/// The text copied since the last call, if any (the watch woke the window for it).
+pub fn copied() -> Option<String> {
+    COPIED.lock().unwrap_or_else(PoisonError::into_inner).take()
+}
+
+/// The watch's thread: a look each second while it is on, through the reader (one read at a
+/// time in MDM), quietly: the window is woken only for a new text.
+fn watching() {
+    let mut seen = Watch::default();
+    loop {
+        std::thread::sleep(WATCH_EVERY);
+        if !WATCHING.load(Ordering::Relaxed) {
+            seen = Watch::default();
+            continue;
+        }
+        let new = seen.look(crate::clipboard_changes(), || {
+            let reader = reader();
+            let ask = reader.ask_quietly();
+            let until = std::time::Instant::now() + READ_WITHIN;
+            loop {
+                if let Some(text) = reader.answer(ask) {
+                    return Some(text);
+                }
+                if std::time::Instant::now() > until {
+                    return None;
+                }
+                std::thread::sleep(Duration::from_millis(20));
+            }
+        });
+        if let Some(text) = new {
+            *COPIED.lock().unwrap_or_else(PoisonError::into_inner) = Some(text);
+            if let Some(ctx) = WINDOW.get() {
+                ctx.request_ui_pass(egui::ViewportId::ROOT);
+            }
+        }
+    }
 }
 
 /// A dialog's box filled from the clipboard as it opens (Add URL, Batch download, Add torrent,
@@ -251,6 +373,61 @@ mod tests {
             Some("https://late.example/a.zip")
         );
         assert_eq!(prefill.take(), None, "handed over once");
+    }
+
+    /// The watch's asks don't wake the window; an ask that does is answered with a wake.
+    #[test]
+    fn a_quiet_ask_wakes_nothing() {
+        let (woke, woken) = std::sync::mpsc::channel::<()>();
+        let r = Reader::new(
+            || Some("text".to_owned()),
+            move || {
+                let _ = woke.send(());
+            },
+        );
+        let quiet = r.ask_quietly();
+        assert_eq!(wait(&r, quiet), Some(Some("text".into())));
+        assert!(woken.recv_timeout(Duration::from_millis(200)).is_err());
+        let loud = r.ask();
+        assert!(wait(&r, loud).is_some());
+        woken.recv_timeout(Duration::from_secs(5)).unwrap();
+    }
+
+    /// The watch: the first look only notes what is there; a new text is handed over once; an
+    /// unchanged clipboard (the same change number) isn't read at all; where the system keeps
+    /// no number, every look reads, and the same text again is nothing new.
+    #[test]
+    fn the_watch_hands_over_a_new_text_once() {
+        let mut w = Watch::default();
+        let text = |t: &'static str| move || Some(Some(t.to_owned()));
+        assert_eq!(w.look(Some(1), text("https://old.example/a.zip")), None);
+        let unread = || -> Option<Option<String>> { panic!("an unchanged clipboard is read") };
+        assert_eq!(w.look(Some(1), unread), None);
+        assert_eq!(
+            w.look(Some(2), text("  https://new.example/b.zip\n"))
+                .as_deref(),
+            Some("https://new.example/b.zip")
+        );
+        assert_eq!(w.look(Some(2), unread), None);
+        // A change that isn't text (an image), then the same link copied again: new again.
+        assert_eq!(w.look(Some(3), || Some(None)), None);
+        assert_eq!(
+            w.look(Some(4), text("https://new.example/b.zip"))
+                .as_deref(),
+            Some("https://new.example/b.zip")
+        );
+        // No answer in time: looked at again next time.
+        assert_eq!(w.look(Some(5), || None), None);
+        assert_eq!(
+            w.look(Some(5), text("https://late.example/c.zip"))
+                .as_deref(),
+            Some("https://late.example/c.zip")
+        );
+        // No change number (Linux, macOS): read at every look.
+        let mut w = Watch::default();
+        assert_eq!(w.look(None, text("a")), None);
+        assert_eq!(w.look(None, text("a")), None);
+        assert_eq!(w.look(None, text("b")).as_deref(), Some("b"));
     }
 
     /// An ask is answered by a read that started after it: a text copied just before a dialog

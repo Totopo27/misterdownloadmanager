@@ -575,17 +575,18 @@ function folderOf(url) {
   return /^https?:\/\/[^/]+\/.+/i.test(dir) ? dir : null;
 }
 
-function noteMedia(d, found) {
+function noteMedia(d, found, sent) {
   const tab = media.get(d.tabId) || { page: null, items: [] };
   const old = tab.items.find((it) => it.url === d.url);
   if (old) {
     if (found.size && !old.size) old.size = found.size;
+    if (sent) old.sent = sent;
     return;
   }
   // A file in a stream's own folder is one of its pieces (a DASH init segment, a fragment).
   const inStream = (it) => isStream(it) && folderOf(it.url) && d.url.startsWith(folderOf(it.url));
   if (!isStream(found) && tab.items.some(inStream)) return;
-  tab.items.push({ url: d.url, kind: found.kind, frameId: d.frameId || 0, mime: found.mime, size: found.size });
+  tab.items.push({ url: d.url, kind: found.kind, frameId: d.frameId || 0, mime: found.mime, size: found.size, ...(sent ? { sent } : {}) });
   // Over the cap: the oldest go, but each frame's first stream stays (the button sends it).
   while (tab.items.length > MEDIA_MAX) {
     const firsts = new Set();
@@ -607,11 +608,11 @@ function noteMedia(d, found) {
 }
 
 // A response that may be a manifest (#171), noted apart: the newest MAYBE_MAX of the tab.
-function noteMaybe(d, found) {
+function noteMaybe(d, found, sent) {
   const tab = media.get(d.tabId) || { page: null, items: [] };
   if (tab.items.some((it) => it.url === d.url)) return;
   tab.maybe = (tab.maybe || []).filter((m) => m.url !== d.url);
-  tab.maybe.push({ url: d.url, frameId: d.frameId || 0, mime: found.mime });
+  tab.maybe.push({ url: d.url, frameId: d.frameId || 0, mime: found.mime, ...(sent ? { sent } : {}) });
   if (tab.maybe.length > MAYBE_MAX) tab.maybe.splice(0, tab.maybe.length - MAYBE_MAX);
   if (!media.has(d.tabId)) {
     media.set(d.tabId, tab);
@@ -673,7 +674,7 @@ function sniffTab(tabId, frames) {
     // The tab went to another page meanwhile: its old page's answers don't count.
     if (media.get(tabId) !== tab) return;
     asked.forEach((m, i) => {
-      if (kinds[i]) noteMedia({ tabId, url: m.url, frameId: m.frameId }, { kind: kinds[i], mime: m.mime, size: 0 });
+      if (kinds[i]) noteMedia({ tabId, url: m.url, frameId: m.frameId }, { kind: kinds[i], mime: m.mime, size: 0 }, m.sent);
     });
     keepMedia();
   };
@@ -681,6 +682,50 @@ function sniffTab(tabId, frames) {
   sniffing.set(tabId, next);
   next.finally(() => sniffing.get(tabId) === next && sniffing.delete(tabId)).catch(() => {});
   return next;
+}
+
+// #900: what the browser sent with each of a tab's requests for media and data (its Referer, Origin
+// and Cookie headers), by request, until its answer starts: a stream's stay with it, and go to the
+// app with it, which asks for the stream, its playlists and each of its pieces as the page's
+// player did. A site's video server may serve its own pages' players only (their Origin and
+// Referer), and a player in another site's frame may have cookies no store lists (a browser that
+// keeps a frame's cookies apart, for that page only). In memory only, as long as `media`.
+const SENT_HEADERS = ["referer", "origin", "cookie"];
+const sentWith = new Map();
+const SENT_MAX = 512;
+const SENT_TYPES = { urls: ["<all_urls>"], types: ["xmlhttprequest", "media", "other"] };
+if (ext.webRequest && ext.webRequest.onSendHeaders) {
+  try {
+    ext.webRequest.onSendHeaders.addListener(
+      (d) => {
+        if (d.tabId < 0) return;
+        const sent = {};
+        for (const h of d.requestHeaders || []) {
+          const name = String(h.name).toLowerCase();
+          if (SENT_HEADERS.includes(name) && typeof h.value === "string" && h.value) sent[name] = h.value;
+        }
+        // A redirect's next request is the one answered.
+        sentWith.delete(d.requestId);
+        if (Object.keys(sent).length) sentWith.set(d.requestId, sent);
+        // Requests never answered (cancelled, failed before an answer) don't pile up.
+        while (sentWith.size > SENT_MAX) sentWith.delete(sentWith.keys().next().value);
+      },
+      SENT_TYPES,
+      // Chromium shows a request's Referer, Origin and Cookie to extensions that ask for its
+      // extra headers only; Firefox shows them all and knows no such option.
+      FIREFOX ? ["requestHeaders"] : ["requestHeaders", "extraHeaders"],
+    );
+  } catch {
+    // A browser without extraHeaders: streams go with their page as the Referer, as before.
+  }
+}
+const takeSent = (requestId) => {
+  const sent = sentWith.get(requestId);
+  sentWith.delete(requestId);
+  return sent;
+};
+if (ext.webRequest && ext.webRequest.onErrorOccurred) {
+  ext.webRequest.onErrorOccurred.addListener((d) => sentWith.delete(d.requestId), SENT_TYPES);
 }
 
 if (ext.webRequest && ext.webRequest.onResponseStarted) {
@@ -694,8 +739,9 @@ if (ext.webRequest && ext.webRequest.onResponseStarted) {
         }
         return;
       }
+      const sent = takeSent(d.requestId);
       const found = mediaKind(d);
-      if (found) mediaBack.then(() => (found.kind === "maybe" ? noteMaybe(d, found) : noteMedia(d, found)));
+      if (found) mediaBack.then(() => (found.kind === "maybe" ? noteMaybe(d, found, sent) : noteMedia(d, found, sent)));
     },
     { urls: ["<all_urls>"], types: ["main_frame", "sub_frame", "xmlhttprequest", "media", "other"] },
     ["responseHeaders"],
@@ -1092,7 +1138,7 @@ async function mediaDownload(tabId, url) {
       src: it.url,
       title: String(tab.title || "").slice(0, 300),
       referrer: tab.url && tab.url !== page ? tab.url : "",
-      ...(await videoCookies(it.url, ctx)),
+      ...(await streamContext(tabId, it.url, ctx)),
       ...(ctx.incognito ? { private: true } : {}),
     });
   }
@@ -1142,6 +1188,45 @@ async function videoCookies(url, ctx) {
     ...(typeof c.expirationDate === "number" ? { expirationDate: c.expirationDate } : {}),
   }));
   return { cookies: header(list), cookieJar };
+}
+
+// The cookies of a tab's stream (`videoCookies`) and what the browser sent with it (#900): the
+// Referer and Origin its player asked for it with (`fetchedWith`: the app sends them again with
+// its playlists and pieces), and the cookies that went with it that no store lists (a frame's
+// own, kept for its page only), added for its host. Nothing more for an address the tab didn't
+// load (a page's).
+async function streamContext(tabId, url, ctx) {
+  const c = await videoCookies(url, ctx);
+  const tab = media.get(tabId);
+  const it = tab && [...tab.items, ...(tab.maybe || [])].find((x) => x.url === url);
+  const sent = (it && it.sent) || {};
+  const web = (v) => typeof v === "string" && /^https?:\/\/\S+$/i.test(v) && v.length <= URL_MAX;
+  const fetchedWith = {
+    ...(web(sent.referer) ? { referer: sent.referer } : {}),
+    ...(web(sent.origin) ? { origin: sent.origin } : {}),
+  };
+  if (typeof sent.cookie === "string" && sent.cookie) {
+    let host = "";
+    let secure = false;
+    try {
+      const u = new URL(url);
+      host = u.hostname;
+      secure = u.protocol === "https:";
+    } catch {
+      // Not an address: no cookie of its own.
+    }
+    const known = new Set(c.cookieJar.map((x) => x.name));
+    for (const pair of sent.cookie.split(/;\s*/)) {
+      const at = pair.indexOf("=");
+      const name = at > 0 ? pair.slice(0, at).trim() : "";
+      if (!host || !name || known.has(name)) continue;
+      known.add(name);
+      c.cookieJar.push({ name, value: pair.slice(at + 1), domain: host, hostOnly: true, path: "/", secure });
+    }
+    // The header the browser sent for this very address.
+    c.cookies = sent.cookie;
+  }
+  return Object.keys(fetchedWith).length ? { ...c, fetchedWith } : c;
 }
 
 // Has the user left this extension the site? With access limited ("On click", some sites), its
@@ -1927,7 +2012,8 @@ ext.contextMenus.onClicked.addListener(async (info, tab) => {
     // window, which reads streams (a manifest downloaded as a file is only a short list).
     // The manifest's own cookies (its server may not be the page's), as the media list sends.
     if (url && MANIFEST.test(url)) {
-      const reply = await native({ video: true, explicit: true, url: info.pageUrl, src: url, title, ...(await videoCookies(url, { incognito, storeId })), private: incognito });
+      await mediaBack;
+      const reply = await native({ video: true, explicit: true, url: info.pageUrl, src: url, title, ...(await streamContext(tab && tab.id, url, { incognito, storeId })), private: incognito });
       if (!reply.ok && reply.why !== "options") explain(reply.why);
       return;
     }
@@ -1947,7 +2033,7 @@ ext.contextMenus.onClicked.addListener(async (info, tab) => {
         ...(src ? { src } : {}),
         ...(title ? { title } : {}),
         referrer: info.pageUrl && info.pageUrl !== page ? info.pageUrl : "",
-        ...(await videoCookies(src || page, { incognito, storeId })),
+        ...(await streamContext(tab && tab.id, src || page, { incognito, storeId })),
         private: incognito,
       });
       if (!reply.ok && reply.why !== "options") explain(reply.why);
@@ -2170,8 +2256,9 @@ async function videoTarget(m, page, sender) {
     title: typeof m.title === "string" && !post && !feed ? m.title.slice(0, 300) : "",
     referrer: tab.url && tab.url !== own ? tab.url : "",
     // The cookies of what yt-dlp is given (the app files them under its host): the stream's
-    // own server may not be the page's, and the page's cookies are not for it.
-    ...(await videoCookies(src || own, { incognito: tab.incognito, storeId: tab.cookieStoreId })),
+    // own server may not be the page's, and the page's cookies are not for it. With a stream's,
+    // what the browser sent with it (#900).
+    ...(await streamContext(tab.id, src || own, { incognito: tab.incognito, storeId: tab.cookieStoreId })),
   };
 }
 
@@ -2208,6 +2295,7 @@ async function videoLookup(m, page, sender) {
     },
     cookies: v.cookies,
     cookieJar: v.cookieJar,
+    ...(v.fetchedWith ? { fetchedWith: v.fetchedWith } : {}),
     private: Boolean(tab.incognito),
   });
   // `show`: the address MDM lists a download of it under (the button's "Show"); `post`: the
@@ -2294,6 +2382,7 @@ async function pageMessage(m, sender) {
       referrer: v.referrer,
       cookies: v.cookies,
       cookieJar: v.cookieJar,
+      ...(v.fetchedWith ? { fetchedWith: v.fetchedWith } : {}),
       ...(tab.incognito ? { private: true } : {}),
     });
     return { ok: Boolean(reply.ok), why: reply.why, ...(reply.ok && direct ? { show: v.src } : {}) };

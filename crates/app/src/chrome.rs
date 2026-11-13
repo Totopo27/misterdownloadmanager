@@ -407,6 +407,20 @@ fn plain(label: &str) -> (String, Option<usize>) {
     (out, mnemonic)
 }
 
+/// The access key of `label`: the letter after its `&`, in lower case (None without one). An
+/// open menu runs its first enabled item with the key pressed.
+pub fn access_key(label: &str) -> Option<String> {
+    let (text, at) = plain(label);
+    at.and_then(|at| text.chars().nth(at))
+        .map(|c| c.to_lowercase().to_string())
+}
+
+/// The menu bar's titles, in English (their translations: context "menubar").
+#[cfg(test)]
+pub fn bar_titles() -> Vec<&'static str> {
+    MENUS.iter().map(|m| m.0).collect()
+}
+
 pub enum PopupResult<C> {
     Open,
     Chosen(C),
@@ -594,10 +608,7 @@ fn keyboard<C: Clone>(
                 if name.chars().count() == 1 {
                     target = level.iter().position(|e| {
                         entry_label(e).is_some_and(|(l, en)| {
-                            let (t, m) = plain(crate::i18n::tc("menu", l));
-                            en && m
-                                .and_then(|m| t.chars().nth(m))
-                                .is_some_and(|c| c.to_lowercase().to_string() == name)
+                            en && access_key(crate::i18n::tc("menu", l)).is_some_and(|k| k == name)
                         })
                     });
                 }
@@ -731,8 +742,11 @@ pub fn popup<C: Clone>(
     // gives that window the focus, and must not count as clicking away.
     let focused = ctx.input(|i| i.viewport().focused) == Some(true)
         || ctx.data(|d| d.get_temp::<bool>(window_focus).unwrap_or(false));
-    // (first pass, last pass, the focus): focus is only *lost* if it was had, and only when no
-    // window of ours gets it back within FOCUS_GRACE (#250).
+    // Away from our windows, the system may say who has it now: another program (#859).
+    let elsewhere = !focused && another_program_in_front();
+    // (first pass, last pass, the focus): focus is only *lost* if it was had, and then at once
+    // when another program has it, else when no window of ours gets it back within FOCUS_GRACE
+    // (#250).
     let now = ctx.input(|i| i.time);
     let (first, verdict) = ctx.data_mut(|d| {
         let (first, last, seen) = d.get_temp::<(u64, u64, MenuFocus)>(shown).unwrap_or((
@@ -745,7 +759,7 @@ pub fn popup<C: Clone>(
         } else {
             (first, seen)
         };
-        let verdict = seen.pass(focused, now);
+        let verdict = seen.pass(focused, elsewhere, now);
         d.insert_temp(shown, (first, pass, seen));
         (first == pass, verdict)
     });
@@ -776,12 +790,31 @@ pub fn popup<C: Clone>(
     PopupResult::Open
 }
 
-/// How long the focus may be away from every window of ours before an open menu counts as left.
+/// How long the focus may be away from every window of ours before an open menu counts as left,
+/// when the system doesn't say that another program has it ([`another_program_in_front`]).
 /// On Linux a window manager may give a menu's window the focus (KWin, sway, and GNOME under
 /// Wayland give it to a submenu's as it opens). When that submenu closes (the pointer back on
 /// another item of its parent), its window passes the focus on, and for a frame or more no
 /// window of ours has it: counted as the app losing the focus, it closed the whole menu (#250).
 const FOCUS_GRACE: f64 = 0.4;
+
+/// Whether the system says another program's window is in front now: the click that took the
+/// focus away landed outside MDM (the desktop, the taskbar, another program's window), and an
+/// open menu closes on this pass, as Win32's own menus do. Waiting FOCUS_GRACE for it kept a
+/// menu on the screen 0.4 s after such a click (#859): a menu's window never takes the focus on
+/// Windows (WS_EX_NOACTIVATE), so there the grace only ever delayed the close.
+fn another_program_in_front() -> bool {
+    #[cfg(windows)]
+    {
+        crate::win32::foreground_is_another_program()
+    }
+    // Linux and macOS: a program isn't told whose window has the focus (Wayland never says; X11
+    // and macOS would, through calls MDM doesn't make), so FOCUS_GRACE decides there, as before.
+    #[cfg(not(windows))]
+    {
+        false
+    }
+}
 
 /// Whether an open menu still has the focus: the main window's or one of the menu's windows'.
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -803,8 +836,9 @@ enum FocusVerdict {
 }
 
 impl MenuFocus {
-    /// After a pass at `now`: `focused` is whether one of our windows had the focus in it.
-    fn pass(&mut self, focused: bool, now: f64) -> FocusVerdict {
+    /// After a pass at `now`: `focused` is whether one of our windows had the focus in it, and
+    /// `elsewhere` whether the system said another program has it.
+    fn pass(&mut self, focused: bool, elsewhere: bool, now: f64) -> FocusVerdict {
         if focused {
             self.had = true;
             self.away_since = None;
@@ -812,6 +846,10 @@ impl MenuFocus {
         }
         if !self.had {
             return FocusVerdict::Here;
+        }
+        // Another program has it: no window of ours is about to take it back (#859).
+        if elsewhere {
+            return FocusVerdict::Left;
         }
         let since = *self.away_since.get_or_insert(now);
         let away = now - since;
@@ -932,7 +970,7 @@ pub enum PopupLook {
 /// makes it a plain popup ([`style_popup`]) and [`show_popup`] shows it then.
 pub fn popup_viewport(title: &str) -> egui::ViewportBuilder {
     egui::ViewportBuilder::default()
-        .with_title(title)
+        .with_title(crate::i18n::os_text(title))
         .with_decorations(false)
         .with_resizable(false)
         .with_taskbar(false)
@@ -1177,7 +1215,10 @@ fn popup_level<C: Clone>(
             o.y + size.y - 1.0,
             POPUP_BG(),
         );
-        let pointer = ui.ctx().pointer_hover_pos();
+        // Where the pointer is, or was on this pass: a tap on a touch screen ends with the pointer
+        // gone (egui-winit lets go of it as the finger lifts, so nothing stays lit), in the very
+        // pass that releases it, where the hover position is none and no item was chosen (#733).
+        let pointer = ui.input(|i| i.pointer.hover_pos().or(i.pointer.interact_pos()));
         // The item under the pointer (none on a separator or the padding): one item is lit at a
         // time, so an open submenu's entry gives up its light to it (#579).
         let under = pointer.and_then(|p| item_at(entries, o, w, p));
@@ -2385,10 +2426,35 @@ mod tests {
         assert_eq!(steps, [Some(0), Some(1), Some(1), Some(2)]);
     }
 
-    /// The focus over a menu's passes (`(focused, time)` each), as `MenuFocus` judges it.
+    /// The focus over a menu's passes (`(focused, time)` each), as `MenuFocus` judges it, the
+    /// system saying nothing of who has it (Linux, macOS).
     fn focus_run(passes: &[(bool, f64)]) -> Vec<FocusVerdict> {
         let mut f = MenuFocus::default();
-        passes.iter().map(|&(on, t)| f.pass(on, t)).collect()
+        passes.iter().map(|&(on, t)| f.pass(on, false, t)).collect()
+    }
+
+    /// #859: a click on the desktop (Windows 10's video), the taskbar or another program's window
+    /// while a menu is open. The system says another program is in front: the menu closes on
+    /// the very pass that learns the focus left, not FOCUS_GRACE later.
+    #[test]
+    fn a_click_in_another_program_closes_the_menu_at_once() {
+        let mut f = MenuFocus::default();
+        assert_eq!(f.pass(true, false, 0.0), FocusVerdict::Here);
+        assert_eq!(f.pass(true, false, 0.5), FocusVerdict::Here);
+        assert_eq!(f.pass(false, true, 1.0), FocusVerdict::Left);
+        // Away from our windows without another program in front (focus passing between our
+        // own windows): the grace, as on Linux.
+        let mut f = MenuFocus::default();
+        f.pass(true, false, 0.0);
+        assert_eq!(
+            f.pass(false, false, 1.0),
+            FocusVerdict::Away { wait: FOCUS_GRACE }
+        );
+        assert_eq!(f.pass(false, true, 1.01), FocusVerdict::Left);
+        // A menu opened while another program was in front (a tray menu): nothing to lose.
+        let mut f = MenuFocus::default();
+        assert_eq!(f.pass(false, true, 0.0), FocusVerdict::Here);
+        assert_eq!(f.pass(false, true, 5.0), FocusVerdict::Here);
     }
 
     /// #250: Tasks open, Import's submenu open with the focus (KWin, sway), the pointer back
@@ -2604,6 +2670,92 @@ mod tests {
         let x = o.x + (right - o.x) * 0.9 - o.x;
         frame(at(x, 80.0));
         assert_eq!(open(&ctx), Some(3), "kept on the way into it");
+    }
+
+    /// #733: a tap on a touch screen chooses the item under the finger. egui-winit makes the
+    /// tap a press and a release of the pointer, then lets go of it (PointerGone) as the finger
+    /// lifts, in the same pass as the release (in one pass with the press too, for a quick tap):
+    /// the item was looked for under a pointer that was gone, and none was chosen.
+    #[test]
+    fn a_tap_chooses_the_item_under_the_finger() {
+        let [a, b, c] = ["a", "b", "c"]; // not texts to translate (tools/i18n/extract.py)
+        let entries: Vec<MenuEntry<u8>> = vec![
+            MenuEntry::Item(a, 0, true, false),
+            MenuEntry::Sep,
+            MenuEntry::Item(b, 1, true, false),
+            MenuEntry::Item(c, 2, true, false),
+        ];
+        // Each pass's events; what the menu chose.
+        let run = |passes: &[&dyn Fn(egui::Pos2) -> Vec<egui::Event>]| {
+            let ctx = egui::Context::default();
+            let sub_key = egui::Id::unique(("popup-sub", "t733"));
+            let mut t = 0.0;
+            let mut chosen = None;
+            let mut pass = |events: Vec<egui::Event>| {
+                t += 0.016;
+                let raw = egui::RawInput {
+                    time: Some(t),
+                    screen_rect: Some(Rect::from_min_size(
+                        pos2(0.0, 0.0),
+                        egui::vec2(1200.0, 800.0),
+                    )),
+                    events,
+                    ..Default::default()
+                };
+                let mut out = ctx.run_ui(raw, |ui| {
+                    let mut result = None;
+                    super::popup_level(
+                        ui.ctx(),
+                        MenuKind::Context,
+                        "t733",
+                        pos2(100.0, 100.0),
+                        None,
+                        &entries,
+                        sub_key,
+                        &mut result,
+                        0,
+                        &|_| None,
+                    );
+                    if result.is_some() {
+                        chosen = result;
+                    }
+                });
+                out.textures_delta.clear();
+            };
+            pass(Vec::new());
+            let o = ctx
+                .data(|d| d.get_temp::<egui::Pos2>(sub_key.with(("origin", 0usize))))
+                .expect("drawn");
+            // "b": below "a" (3..25) and the separator (25..34), at 34..56.
+            let on_b = o + egui::vec2(60.0, 45.0);
+            for p in passes {
+                pass(p(on_b));
+            }
+            chosen
+        };
+        let button = |pos, pressed| egui::Event::PointerButton {
+            pos,
+            button: egui::PointerButton::Primary,
+            pressed,
+            modifiers: Default::default(),
+        };
+        let down = |p: egui::Pos2| vec![egui::Event::PointerMoved(p), button(p, true)];
+        let up_gone = |p: egui::Pos2| vec![button(p, false), egui::Event::PointerGone];
+        let tap = |p: egui::Pos2| {
+            vec![
+                egui::Event::PointerMoved(p),
+                button(p, true),
+                button(p, false),
+                egui::Event::PointerGone,
+            ]
+        };
+        let up = |p: egui::Pos2| vec![button(p, false)];
+        // A tap: the finger down in one pass, up (and the pointer gone) in the next.
+        assert_eq!(run(&[&down, &up_gone]), Some(1));
+        // A quick tap, all in one pass.
+        assert_eq!(run(&[&tap]), Some(1));
+        // The mouse, as before.
+        assert_eq!(run(&[&down, &up]), Some(1));
     }
 
     /// #579: the entry under the pointer, separators and padding none.

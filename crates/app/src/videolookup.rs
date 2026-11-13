@@ -104,6 +104,7 @@ struct Key {
     cookies: Option<String>,
     jar: Vec<mdm_ipc::BrowserCookie>,
     referer: Option<String>,
+    origin: Option<String>,
     user_agent: Option<String>,
     merge: bool,
 }
@@ -117,6 +118,7 @@ impl Key {
             cookies: context.cookies.clone(),
             jar: context.cookie_jar.clone(),
             referer: context.referer.clone(),
+            origin: context.origin.clone(),
             user_agent: context.user_agent.clone(),
             merge,
         }
@@ -409,6 +411,7 @@ pub fn context_of(ask: &mdm_ipc::VideoLookup, cmd: &mdm_ipc::Command) -> mdm_ipc
             .filter(|t| !t.is_empty())
             .map(|t| cut(t, TITLE_MAX)),
         referer: cmd.referer.clone(),
+        origin: cmd.origin.clone(),
         cookies: cmd.cookies.clone(),
         cookie_jar: cmd.cookie_jar.clone(),
         user_agent: cmd.user_agent.clone(),

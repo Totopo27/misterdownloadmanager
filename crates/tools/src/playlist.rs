@@ -311,22 +311,25 @@ mod tests {
     /// skipped, the list capped at MAX_ENTRIES, and quickly (no quadratic step).
     #[test]
     fn a_long_list_is_read_in_order_and_capped() {
-        let mut text = String::new();
-        for i in 1..=MAX_ENTRIES + 500 {
-            text.push_str(&format!(
-                r#"{{"url": "https://v.example/{i}", "title": "Video {i}", "playlist_index": {i}}}"#
-            ));
-            text.push('\n');
-            if i == 3 {
+        let lines = |n: usize, giant: bool| {
+            let mut text = String::new();
+            for i in 1..=n {
                 text.push_str(&format!(
-                    "{{\"title\": \"{}\"}}\n",
-                    "x".repeat(MAX_LINE * 2)
+                    r#"{{"url": "https://v.example/{i}", "title": "Video {i}", "playlist_index": {i}}}"#
                 ));
-                text.push_str("garbage\n");
+                text.push('\n');
+                if giant && i == 3 {
+                    text.push_str(&format!(
+                        "{{\"title\": \"{}\"}}\n",
+                        "x".repeat(MAX_LINE * 2)
+                    ));
+                    text.push_str("garbage\n");
+                }
             }
-        }
+            text
+        };
+        let text = lines(MAX_ENTRIES + 500, true);
         let shared = Mutex::new(Shared::default());
-        let t = std::time::Instant::now();
         read(text.as_bytes(), &shared, 1);
         let sh = shared.lock().unwrap();
         assert_eq!(sh.entries.len(), MAX_ENTRIES);
@@ -335,10 +338,11 @@ mod tests {
             sh.entries[3].title, "Video 4",
             "the giant line skipped, order kept"
         );
-        assert!(
-            t.elapsed() < std::time::Duration::from_secs(5),
-            "{:?}",
-            t.elapsed()
+        // 8 times the lines cost about 8 times as long (not 64), on any machine.
+        mdm_labserver::growth::assert_linear(
+            MAX_ENTRIES / 10,
+            |n| (lines(n, false), Mutex::new(Shared::default())),
+            |(text, shared)| read(text.as_bytes(), &shared, 1),
         );
     }
 }

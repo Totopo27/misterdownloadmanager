@@ -74,6 +74,10 @@
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "Evet. MDM indirme ilerlemesini kaydeder. Bu nedenle bağlantı kesilirse, program çökerse veya bilgisayar yeniden başlatılırsa indirme kaldığı yerden sürer. İndirme sürdürülmeden önce sunucudaki dosyanın değişmediği kontrol edilir. İndirme adresinin süresi dolduğunda, <g1>İndirme adresini yenile</g1> seçeneğiyle yeni bir adres girip verileri koruyabilirsiniz. Bkz. <g2>Kesintiye uğramış bir indirmeyi sürdürme</g2>."
   },
+  "0168c749ceaa28cd": {
+   "source": "Many videos are split into chapters on their page: YouTube's list under the player, with a title and a start time for each part. With <g1>Embed chapters</g1> ticked, under <g2>Subtitles</g2>, they go into the video file, so players such as VLC, MPV, MPC-HC and Windows' Media Player list them and skip from one to the next.",
+   "text": "Birçok video, sayfalarında bölümlere ayrılmıştır: YouTube'un oynatıcının altındaki listesi, her bölüm için bir başlık ve başlangıç zamanı içerir. <g2>Altyazılar</g2> altında <g1>Bölümleri dosyaya ekle</g1> işaretliyken, bunlar video dosyasına eklenir, böylece VLC, MPV, MPC-HC ve Windows Media Player gibi oynatıcılar bunları listeler ve birinden diğerine atlar."
+  },
   "016a9690b4c55ee5": {
    "source": "Both are kept in a <x1/> folder in MDM's data folder.",
    "text": "Her ikisi de MDM'nin veri klasöründeki <x1/> klasöründe tutulur."
@@ -429,6 +433,10 @@
   "06492aa608ada06d": {
    "source": "<g1>Paused and resumed</g1> like a file, also after quitting MDM: it carries on from the bytes already saved.",
    "text": "Bir dosya gibi, MDM'den çıktıktan sonra bile <g1>duraklatılır ve devam ettirilir</g1>: zaten kaydedilmiş baytlardan devam eder."
+  },
+  "064d85de675962c9": {
+   "source": "A JavaScript runtime for YouTube",
+   "text": "YouTube için bir JavaScript çalışma zamanı"
   },
   "0679d081a8cd40ea": {
    "source": "Turns the API on or off: <x1/>.",
@@ -829,10 +837,6 @@
   "0c4d9a6c3c067798": {
    "source": "The interface is in every language Windows 11 offers. The catalogs in <g1><x2/></g1> were made by machine translation, and each row marked <x3/> waits for a native speaker:",
    "text": "Arayüz, Windows 11'in sunduğu tüm dillerde kullanılabilir. <g1><x2/></g1> içindeki kataloglar makine çevirisiyle oluşturulmuştur ve <x3/> ile işaretlenmiş her satırın ana dili o dil olan bir çevirmen tarafından gözden geçirilmesi beklenmektedir:"
-  },
-  "0c4e47b7b5c8f9f5": {
-   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why.",
-   "text": "Raporu, bir çerçeve gösterirken grafik sürücüsü içindeki pencere iş parçacığını gösteren bir donma (<x1/> veya Intel için <x2/>, NVIDIA için <x3/>, AMD için <x4/>, <x5/> altında) MDM'nin değil, sürücünün OpenGL'sinin takılmasıdır: Windows'ta <g6>Görünüm → Şununla çiz → Direct3D</g6> (varsayılan) seçeneğini belirleyin ve MDM'yi yeniden başlatın, ayrıca grafik sürücüsünü güncelleyin. Eğer <g7>Şununla çiz</g7> Direct3D'nin orada başlamadığını belirtiyorsa, altındaki satır nedenini açıklar."
   },
   "0c6ce890ecccf13e": {
    "source": "For an internet plan with a data cap, select <g1>Download limits</g1> on the left:",
@@ -1946,6 +1950,10 @@
    "source": "The download's log (hover over it in the list) says what happened: <g1>Extracted 12 files to …</g1>, or why not, for example <g2>Couldn't extract movie.7z.001: volume 3 of it is missing</g2>. An encrypted archive without its password opens the <g3>Archive password</g3> window. Type the password and click <g4>Extract</g4>, or <g5>Cancel</g5> to leave the archive as it is.",
    "text": "İndirme günlüğünde (listede öğenin üzerine gelin) ne olduğu yazar: <g1>12 dosya çıkarıldı: …</g1> veya neden çıkarılamadığı; örneğin <g2>movie.7z.001 çıkarılamadı: 3. parçası eksik</g2>. Parolası olmayan şifreli bir arşiv açıldığında <g3>Arşiv parolası</g3> penceresi açılır. Parolayı yazıp <g4>Çıkar</g4>'a tıklayın veya arşivi olduğu gibi bırakmak için <g5>İptal</g5>'e tıklayın."
   },
+  "1d2b4c5972daa383": {
+   "source": "It's ticked to begin with, and stays as you leave it for the next video.",
+   "text": "Başlangıçta işaretlidir ve bir sonraki video için bıraktığınız gibi kalır."
+  },
   "1d4ee2f96c724f0f": {
    "source": "A torrent: what it sends to peers, while it runs.",
    "text": "Bir torrent: çalışırken eşlere gönderdiği veri."
@@ -2450,10 +2458,6 @@
    "source": "A download starts over instead of resuming",
    "text": "İndirme sürdürülmek yerine baştan başlıyor"
   },
-  "24bf3f2f66091d90": {
-   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one, and YouTube sometimes asks any viewer from an address it doubts to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
-   "text": "Bazı videolar yalnızca oturum açmış bir izleyici için oynatılır: bir üyenin veya özel bir video, yaş kısıtlamalı bir video ve YouTube bazen şüpheli bir adresten gelen herhangi bir izleyiciden \"Bot olmadığınızı doğrulamak için oturum açın\" diye sorar. yt-dlp daha sonra tarayıcınızın çerezlerine, yani oturumunuzu açık tutan küçük dosyalara ihtiyaç duyar."
-  },
   "24c00ebf1248106f": {
    "source": "An etched separator's highlight line",
    "text": "Kazınmış bir ayırıcının vurgu çizgisi"
@@ -2553,6 +2557,10 @@
   "26673a8544097ecf": {
    "source": "The highlight under it",
    "text": "Altındaki vurgu"
+  },
+  "266d0ba8f73d462e": {
+   "source": "Chapters",
+   "text": "Bölümler"
   },
   "266f7f0ad3be1761": {
    "source": "Languages →",
@@ -2745,6 +2753,10 @@
   "28b58f9af9a6fed9": {
    "source": "In Chrome, Edge, Brave, Opera or Vivaldi",
    "text": "Chrome, Edge, Brave, Opera veya Vivaldi'de"
+  },
+  "28e42e284885ce6e": {
+   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. A stream goes with what the browser sent when the player asked for it, its referrer, its origin and its cookies (a player embedded from another site may have cookies the browser keeps for that page only), and MDM sends them again with each of its playlists and pieces: a site's video server that serves its own pages' players only lets MDM through as well. Sound players get the button too.",
+   "text": "Tıkladığınız videoyu alır: bir dosya oynatıyorsa kendi dosyasını, aksi takdirde oynatıcının yüklediği akışı (HLS veya DASH) veya sayfayı. Düğme hangisini kastettiğinizi anlayamadığında, araç çubuğu düğmesinin <g1>Bu sayfadaki medya</g1> seçeneği hepsini listeler. Gömülü oynatıcılar da çalışır ve siteye girişiniz, oynatıcıyı gömen sayfa ve tarayıcınızın User-Agent'ı onunla birlikte gider, böylece üyelere özel veya yalnızca onları gömen sitede oynatılan videolar indirilebilir. Bir akış, tarayıcının oynatıcı onu istediğinde gönderdiği bilgilerle, yönlendireniyle, kaynağıyla ve çerezleriyle birlikte gider (başka bir siteden gömülü bir oynatıcı, tarayıcının yalnızca o sayfa için sakladığı çerezlere sahip olabilir) ve MDM bunları her oynatma listesi ve parçasıyla tekrar gönderir: yalnızca kendi sayfalarının oynatıcılarına hizmet veren bir sitenin video sunucusu da MDM'ye izin verir. Ses oynatıcıları da bu düğmeye sahiptir."
   },
   "28eeaa8ad9bf85a3": {
    "source": "Requests",
@@ -3330,6 +3342,10 @@
    "source": "<g1>VPN and proxy support:</g1> send downloads through the browser's proxy or VPN extension (off until you turn it on).",
    "text": "<g1>VPN ve proxy desteği:</g1> indirmeleri tarayıcının proxy'si veya VPN uzantısı aracılığıyla gönderin (siz açana kadar kapalıdır)."
   },
+  "31a94655ff7435c5": {
+   "source": "<g1>Arch</g1>: <x2/>, or",
+   "text": "<g1>Arch</g1>: <x2/> veya"
+  },
   "31c727cb512fbff6": {
    "source": "<g1>Download all links</g1> and <g2>Download selected links</g2> send a page's links to <g3>Link grabber</g3>.",
    "text": "<g1>Tüm bağlantıları indir</g1> ve <g2>Seçili bağlantıları indir</g2> bir sayfanın bağlantılarını <g3>Bağlantı yakalayıcı</g3>'ya gönderir."
@@ -3430,10 +3446,6 @@
    "source": "Choose the subtitles; tick Put them into the video to keep them inside the file.",
    "text": "Altyazıları seçin; dosyanın içine eklemek için Videoya yerleştir seçeneğini işaretleyin."
   },
-  "33cd34762a5593c2": {
-   "source": "It takes the video you clicked: its own file when it plays one, or the stream the player loaded (HLS or DASH), else the page. When the button can't tell which one you mean, the toolbar button's <g1>Media on this page</g1> lists them all. Embedded players work too, and your sign-in for the site, the page that embeds the player and your browser's User-Agent go with it, so videos for members, or that play only on the site that embeds them, can be downloaded. Sound players get the button too.",
-   "text": "Tıkladığınız videoyu alır: bir dosya oynatıyorsa kendi dosyasını veya oynatıcının yüklediği akışı (HLS veya DASH), aksi takdirde sayfayı. Düğme hangisini kastettiğinizi anlayamadığında, araç çubuğu düğmesinin <g1>Bu sayfadaki medya</g1> tümünü listeler. Gömülü oynatıcılar da çalışır ve siteye girişiniz, oynatıcıyı gömen sayfa ve tarayıcınızın User-Agent'ı da onunla birlikte gider, böylece üyeler için veya yalnızca onları gömen sitede oynatılan videolar indirilebilir. Ses oynatıcıları da düğmeyi alır."
-  },
   "33e74c2131bce5b0": {
    "source": "Torrents share the cap fairly",
    "text": "Torrentler sınırı adil bir şekilde paylaşır"
@@ -3525,10 +3537,6 @@
   "35092e177f7efaa5": {
    "source": "Download complete with Open and Open folder",
    "text": "Aç ve Klasörü aç seçenekleriyle İndirme tamamlandı"
-  },
-  "3512eeafea5246da": {
-   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). When the window thread is already back in the event loop by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
-   "text": "<g1>Sorunları yakalama.</g1> MDM çöktüğünde (Windows'ta bir özel durum, Linux'ta bir sinyal, macOS'ta bir Mach özel durumu), paniklediğinde veya donduğunda, monitörden bir döküm ister. Donma, pencerenin 8 saniyeden fazla çalıştığı bir kare olup, uyku süresini göz ardı eden bir izleyici iş parçacığı tarafından görülür. Bir karenin her iki bölümünü de zamanlar: MDM'nin işlediği (gelen komutlar, indirmelerin saati, kuyruklar ve Zamanlayıcı), bu da küçültülmüş olarak çalışır, ve çizim; kareler arasındaki bekleme süresini asla. İzleyici ayrıca pencere iş parçacığının bu arada ne kadar işlemci süresi aldığını da ölçer ve rapor bunun ne anlama geldiğini söyler: sürekli çalıştı (bir döngü), bir kilitte veya G/Ç'de bekledi (bir kilitlenme) veya sıradan kodda neredeyse hiç çalışmadı, bu da bilgisayarın MDM'yi çalıştırmak için çok meşgul olduğu veya diskten yüklemek için yavaş olduğu anlamına gelir, büyük olasılıkla MDM'nin hatası değildir (bunlar <x2/> tek bir imzayı paylaşır). Döküm yazıldığı sırada pencere iş parçacığı zaten olay döngüsüne geri dönmüşse, donma anlık görüntüden önce bitmiş demektir, bu nedenle yığını bunu açıklayamaz; bu raporlar bunu belirtir ve <x3/> imzasını paylaşır. macOS henüz bunu ölçmez. Monitör daha sonra <x5/> ve <x6/> aracılığıyla dışarıdan her iş parçacığının bir <g4>minidump'ını</g4> yazar. Çöken bir işlem asla kendi dökümünü yazmaz, Firefox, Crashpad ve Sentry de bunu böyle yapar."
   },
   "3513f93cb0fa7d72": {
    "source": "<g1>Far</g1> (red): over 150 ms, usually another continent. A far server is often slower, and more connections help it most.",
@@ -3681,6 +3689,10 @@
   "377dbb7411c44fb3": {
    "source": ".AppImage",
    "text": ".AppImage"
+  },
+  "37a51fbe4037e117": {
+   "source": "<g1>Any system</g1>, Deno for your user alone: <x2/> (on Windows, in PowerShell: <x3/>)",
+   "text": "<g1>Herhangi bir sistem</g1>, yalnızca kullanıcınız için Deno: <x2/> (Windows'ta, PowerShell'de: <x3/>)"
   },
   "37a82a5012e58c8d": {
    "source": "(the lighter background)",
@@ -4170,6 +4182,10 @@
    "source": "It works as a kill switch. When the adapter disconnects, running torrents stop with \"… is not connected; it goes on when it is back\", and they start again through the adapter when it is. Until MDM notices (within a second), the engine's sockets are still bound to an address that is gone, so nothing can leave another way. A torrent added while the adapter isn't connected doesn't start, and says why. Tracker names are still looked up by the system's DNS.",
    "text": "Bu ayar, bağlantı kesme anahtarı gibi çalışır. Bağdaştırıcı bağlantısı kesilince çalışan torrentler \"… bağlı değil; bağlantı yeniden kurulduğunda devam eder\" mesajıyla durur. Bağdaştırıcı yeniden bağlandığında torrentler onun üzerinden tekrar başlar. MDM durumu fark edene kadar (bir saniye içinde) motorun soketleri artık mevcut olmayan bir adrese bağlı kalır; bu nedenle hiçbir veri başka bir yoldan gönderilemez. Bağdaştırıcı bağlı değilken eklenen torrent başlamaz ve nedenini bildirir. İzleyici adları sistemin DNS'iyle sorgulanmaya devam eder."
   },
+  "3e956985953c6c3e": {
+   "source": "<g1>Videos that need you signed in</g1>: the button over the video hands MDM the page's own cookies, so you're signed in as in the browser. For pasted links and playlists, <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, from the profile you choose: a separate one with a spare account works well. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works. <g3>The help</g3> says more.",
+   "text": "<g1>Oturum açmayı gerektiren videolar</g1>: videonun üzerindeki düğme, sayfanın kendi çerezlerini MDM'ye iletir, böylece tarayıcıdaki gibi oturum açmış olursunuz. Yapıştırılan bağlantılar ve oynatma listeleri için <g2>Seçenekler → Site oturum açma bilgileri → Video siteleri için çerezler</g2> ayarı, yt-dlp'nin seçtiğiniz profilden bir tarayıcının çerezlerini okumasını sağlar: yedek bir hesapla ayrı bir profil iyi çalışır. Chrome, Edge ve Brave, Windows'ta kendi çerezlerini kilitler ve pencere bunu belirtir; Firefox çalışır. <g3>Yardım</g3> daha fazlasını anlatır."
+  },
   "3e9e6b7b10d78723": {
    "source": "<g1>Start</g1> adds the ticked links to the <g2>Main download queue</g2> and starts the queue. It downloads as many files at once as the queue allows.",
    "text": "<g1>Başlat</g1>, işaretli bağlantıları <g2>Ana indirme kuyruğu</g2>na ekler ve kuyruğu başlatır. Kuyruğun izin verdiği sayıda dosyayı aynı anda indirir."
@@ -4189,6 +4205,10 @@
   "3ebf8f1307545f42": {
    "source": "Download manager command line and automation API — Mister Download Manager",
    "text": "İndirme yöneticisi komut satırı ve otomasyon API'si — Mister Download Manager"
+  },
+  "3ec0fd3706431045": {
+   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download, so you're signed in as you are in the browser. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
+   "text": "<g1>Videonun üzerindeki Videoyu indir düğmesi</g1>, içinde bulunduğunuz pencere ve profilden (özel bir pencere, bir Firefox kapsayıcısı) o sayfanın çerezlerini, arama ve indirme için geçirir, böylece tarayıcıda olduğunuz gibi oturum açmış olursunuz. Kurulacak hiçbir şey yok. Her çerez, tarayıcının onu sakladığı alan adıyla birlikte gider, bu nedenle YouTube Music (music.youtube.com) veya YouTube'un mobil sitesinde oturum açma, www.youtube.com'a da ulaşır."
   },
   "3ec9f591006bbd23": {
    "source": "The installer. Pick this one unless you have a reason not to. It can set up browser integration and open <x1/> files and magnet links with MDM.",
@@ -4490,6 +4510,10 @@
    "source": "Links that work only once no longer fail with \"403 Forbidden\".",
    "text": "Yalnızca bir kez çalışan bağlantılar artık \"403 Yasak\" hatasıyla başarısız olmuyor."
   },
+  "43510d0cf7beac55": {
+   "source": "<g1>Catching problems.</g1> When MDM crashes (a Windows exception, a signal on Linux, a Mach exception on macOS), panics, or freezes, it asks the monitor for a dump. A freeze is a frame of the window running more than 8 s, seen by a watchdog thread that ignores time spent asleep and the first minute after the computer wakes, while its disk, network and screen come back: a stall then is written to the log, and reported only if it lasts past that minute. It times both parts of a frame: what MDM handles (the commands that come in, the clock of downloads, queues and the Scheduler), which runs minimized too, and the drawing; never the wait between frames. The watchdog also measures how much processor time the window thread got meanwhile, and the report says what that means: it ran all along (a loop), it waited in a lock or on I/O (a deadlock), or it hardly ran in ordinary code, which is a computer too busy to run MDM or slow to load it from disk, most likely not MDM's bug (those share one signature, <x2/>). Each report also names what the frame was doing when it stopped (the tray icon, the downloads' progress, drawing the main window). When the window thread is already back in the event loop, or in the pause after a frame of a hidden window, by the time the dump is written, the freeze was over before the snapshot, so its stack can't explain it; those reports say so and share the signature <x3/>. macOS doesn't measure it yet. The monitor then writes a <g4>minidump</g4> of every thread from outside, through <x5/> and <x6/>. A crashed process never writes its own dump, which is how Firefox, Crashpad and Sentry do it too.",
+   "text": "<g1>Sorunları yakalama.</g1> MDM çöktüğünde (Windows'ta bir özel durum, Linux'ta bir sinyal, macOS'ta bir Mach özel durumu), paniklediğinde veya donduğunda, monitörden bir döküm ister. Donma, pencerenin 8 saniyeden fazla çalıştığı bir kare olup, uyku modunda geçirilen süreyi ve bilgisayar uyandıktan sonraki ilk dakikayı, disk, ağ ve ekran geri gelirken göz ardı eden bir izleyici iş parçacığı tarafından görülür: bir takılma günlüğe yazılır ve yalnızca bu dakikayı aşarsa rapor edilir. Bir karenin her iki bölümünü de zamanlar: MDM'nin ele aldığı (gelen komutlar, indirmelerin saati, kuyruklar ve Zamanlayıcı), bu da küçültülmüş olarak çalışır ve çizim; kareler arasındaki beklemeyi asla zamanlamaz. İzleyici ayrıca pencere iş parçacığının bu arada ne kadar işlemci süresi aldığını da ölçer ve rapor bunun ne anlama geldiğini belirtir: sürekli çalıştı (bir döngü), bir kilitte veya G/Ç'de bekledi (bir kilitlenme) veya sıradan kodda neredeyse hiç çalışmadı, bu da bilgisayarın MDM'yi çalıştırmak için çok meşgul olduğu veya diskten yüklemek için yavaş olduğu anlamına gelir, büyük olasılıkla MDM'nin hatası değildir (bunlar <x2/> tek bir imzayı paylaşır). Her rapor ayrıca durduğunda karenin ne yaptığını da belirtir (tepsi simgesi, indirmelerin ilerlemesi, ana pencereyi çizme). Döküm yazıldığı sırada pencere iş parçacığı zaten olay döngüsüne geri döndüyse veya gizli bir pencerenin karesinden sonraki duraklamadaysa, donma anlık görüntüden önce sona ermiş demektir, bu nedenle yığını bunu açıklayamaz; bu raporlar bunu belirtir ve <x3/> imzasını paylaşır. macOS henüz bunu ölçmüyor. Monitör daha sonra <x5/> ve <x6/> aracılığıyla dışarıdan her iş parçacığının bir <g4>minidump</g4>'ını yazar. Çöken bir işlem asla kendi dökümünü yazmaz, Firefox, Crashpad ve Sentry de bunu böyle yapar."
+  },
   "436bac2c4f3d3f4c": {
    "source": "<g1>Downloads → Start queue</g1> and <g2>Downloads → Stop queue</g2> list them too.",
    "text": "<g1>İndirilenler → Kuyruğu başlat</g1> ve <g2>İndirilenler → Kuyruğu durdur</g2> da bunları listeler."
@@ -4545,6 +4569,10 @@
   "4447a34a8cbe1ae6": {
    "source": "<g1>The Categories pane and the menus</g1> (<g2>#113</g2>): the pane reads as a tree (each category named with its count, open or shut, selected), the menu bar and every right-click menu as menus whose items can be run, and <g3>Shift+F10</g3> or the <g4>Menu</g4> key opens the selected category's menu. A menu opened from the keyboard no longer stays invisible until the mouse moves.",
    "text": "<g1>Kategoriler bölmesi ve menüler</g1> (<g2>#113</g2>): bölme bir ağaç olarak okunuyor (her kategori sayısıyla adlandırılmış, açık veya kapalı, seçili), menü çubuğu ve her sağ tıklama menüsü öğeleri çalıştırılabilen menüler olarak okunuyor ve <g3>Shift+F10</g3> veya <g4>Menü</g4> tuşu seçili kategorinin menüsünü açıyor. Klavyeden açılan bir menü, fare hareket edene kadar artık görünmez kalmıyor."
+  },
+  "44502a7e800ed659": {
+   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you. On Linux it makes MDM your desktop's default app for them; on macOS, their default app (Finder offers MDM in <g5>Open With</g5> for <x6/> files either way, and a double-click opens them in MDM when no other app is their default).",
+   "text": "Bu sınırlamalardan biri nedeniyle durdurulan bir torrent, olay günlüğünde bunu belirtir ve MDM başladığında tekrar paylaşılmaz. Tekrar paylaşmak için sınırı yükseltin veya kapatın. - <g1>Tüm torrentlerde karşıya yükleme hızını şununla sınırla:</g1> — varsayılan olarak kapalıdır. Tüm torrentlerinizin indirme ve paylaşım sırasında diğer eşlere birlikte gönderdiği veriyi sınırlar. Bir torrentin kendi ilerleme penceresindeki karşıya yükleme sınırı, bunun üzerine uygulanır. - <g2>Mister Download Manager ile magnet bağlantılarını ve .torrent dosyalarını aç</g2> — Windows daha sonra tarayıcınızdaki magnet bağlantılarını ve Gezgin'deki <x3/> dosyalarını MDM ile açar. Bu yalnızca Windows hesabınız içindir; Windows'un <g4>Birlikte aç</g4> seçeneğinde seçtiğiniz bir program öncelikli kalır. Kurulum bunu sizin için açabilir. Linux'ta MDM'yi bunlar için masaüstünüzün varsayılan uygulaması yapar; macOS'ta, bunların varsayılan uygulaması (Finder, <x6/> dosyaları için <g5>Birlikte Aç</g5> seçeneğinde MDM'yi her iki durumda da sunar ve başka hiçbir uygulama varsayılan değilse çift tıklama onları MDM'de açar)."
   },
   "445e6378c12f1e16": {
    "source": "<g1>Image gallery support:</g1> download whole galleries (Flickr, Imgur, DeviantArt and more) with gallery-dl.",
@@ -4766,6 +4794,10 @@
    "source": "The extension now installs from your browser's store, updates itself, and catches more of what you download.",
    "text": "Uzantı artık tarayıcınızın mağazasından yükleniyor, kendini güncelliyor ve indirdiğiniz daha fazla şeyi yakalıyor."
   },
+  "483cd37a4558c14a": {
+   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier while a window changes.",
+   "text": "İkisi de başlatılamazsa, MDM bir yazılım oluşturucuyla (Windows'ta Microsoft'un, Linux'ta Mesa'nın) çizim yapar, böylece pencere yine de açılır (Uzak Masaüstü, grafik sürücüsü olmayan bir sanal makine). Çalışır, ancak bir pencere değişirken işlemciyi daha meşgul eder."
+  },
   "487a0af4191d3496": {
    "source": "<g1><g2>Its site says so</g2></g1><g3>its site says</g3>",
    "text": "<g1><g2>Sitesinde öyle yazıyor</g2></g1><g3>sitesinde öyle yazıyor</g3>"
@@ -4893,10 +4925,6 @@
   "4a575d95633d11ec": {
    "source": "Free Download Manager",
    "text": "Free Download Manager"
-  },
-  "4a68031b1da16fe4": {
-   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and the page as the referrer.",
-   "text": "Bir bağlantıya, videoya, ses dosyasına veya resme sağ tıklayın ve <g1>Mister Download Manager ile İndir</g1>'i seçin. MDM, türü ne olursa olsun seçtiğiniz içeriği indirir. İndirmeyi siz başlattığınız için dosya türleri listesi ve hariç tutulan siteler burada geçerli değildir (bunlar yalnızca MDM'nin kendiliğinden devralacağı indirmeleri belirler). Akış olarak oynatılan bir video, oynatıcının yüklediği akışla (HLS veya DASH) birlikte <g2>Videoyu indir</g2> penceresinde açılır. <g3>Videoların üzerindeki düğme</g3> de aynı şekilde çalışır. Akışın sunucusuna çerezleriniz ve yönlendiren sayfa olarak bu sayfa gönderilir."
   },
   "4a736a6235625512": {
    "source": "Connections and resuming in detail →",
@@ -5173,6 +5201,10 @@
   "4e56d054c4ea1845": {
    "source": "<g1>A minimized MDM keeps working</g1>: with the main window minimized (not to the notification area), queues didn't start their next file, the Scheduler's starts and stops didn't fire, download limits, the network adapter's kill switch, the clipboard monitor, the update check, the taskbar's progress and saving the list all waited until the window was restored. They run in every window state now, and their windows (Download complete, a limit's notice) open at once.",
    "text": "<g1>Küçültülmüş bir MDM çalışmaya devam eder</g1>: ana pencere küçültüldüğünde (bildirim alanına değil), kuyruklar bir sonraki dosyalarını başlatmadı, Zamanlayıcı'nın başlatmaları ve durdurmaları tetiklenmedi, indirme limitleri, ağ bağdaştırıcısının kapatma anahtarı, pano monitörü, güncelleme kontrolü, görev çubuğunun ilerlemesi ve listenin kaydedilmesi, pencere geri yüklenene kadar bekledi. Artık her pencere durumunda çalışırlar ve pencereleri (İndirme tamamlandı, bir limit bildirimi) hemen açılır."
+  },
+  "4ea06c1b2a86d1c8": {
+   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like, and any link whose look-up found a web page): they are neither shown nor downloaded.",
+   "text": "<g1>Web sayfalarını gizle</g1> (varsayılan olarak açık), sayfalara olan bağlantıları (<x2/>, <x3/> ve benzerleri ile araması bir web sayfası bulan tüm bağlantıları) dışarıda bırakır: bunlar ne gösterilir ne de indirilir."
   },
   "4f07dda13d242d23": {
    "source": "Options on its Connection page: connections per download, per-server exceptions, Download limits and the DNS list",
@@ -5762,6 +5794,10 @@
    "source": "<g1>Needs a login</g1>: the server wants a user name and password, or the page's cookies.",
    "text": "<g1>Oturum açma gerekiyor</g1>: sunucu bir kullanıcı adı ve parola veya sayfanın çerezlerini istiyor."
   },
+  "57d55935c79c75f6": {
+   "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
+   "text": "Bunlardan birini kurun, hepsi çalışır, ardından videoyu tekrar arayın. MDM, Deno, Node.js (nvm ile kurulu olan da dahil) ve Bun'u kendiliğinden bulur. Eğer hala aynı uyarıyı veriyorsa, yeni programın klasörü MDM'nin başladığı <x1/> üzerinde değildir (Windows'un yükleyicileri, kendilerinden sonra başlatılan programlar için bunu ekler): MDM'den çıkın (<g2>Görevler → Çıkış</g2>) ve tekrar başlatın."
+  },
   "57df30288a29fe94": {
    "source": "Made possible by these amazing humans",
    "text": "Bu harika insanlar sayesinde mümkün oldu"
@@ -5881,6 +5917,10 @@
   "594222b0d8ddd185": {
    "source": "Add URL.",
    "text": "URL Ekle."
+  },
+  "598886119cab837f": {
+   "source": "<g1>A web page's address.</g1> Paste or copy the address of a page (<x2/>) and MDM reads the page and lists the links on it, as the browser's <g3>Download all links</g3> does, in a package named after the page. The page itself is left unticked. This works for addresses that came on their own (pasted, copied, typed, in a list), not for the links found on a page, so MDM never wanders off through a site. MDM reads only what the page itself holds: links a page's scripts add after it loads come only through the browser.",
+   "text": "<g1>Bir web sayfasının adresi.</g1> Bir sayfanın adresini (<x2/>) yapıştırın veya kopyalayın; MDM sayfayı okur ve tarayıcının <g3>Tüm bağlantıları indir</g3> seçeneğinin yaptığı gibi, sayfanın adını taşıyan bir paketteki bağlantıları listeler. Sayfanın kendisi işaretlenmemiş olarak kalır. Bu, kendi başına gelen adresler (yapıştırılan, kopyalanan, yazılan, bir listedeki) için çalışır, bir sayfada bulunan bağlantılar için değil, bu nedenle MDM asla bir sitede dolaşmaz. MDM yalnızca sayfanın kendisinin içerdiği şeyleri okur: bir sayfanın komut dosyalarının yüklendikten sonra eklediği bağlantılar yalnızca tarayıcı aracılığıyla gelir."
   },
   "59920ff7101c276f": {
    "source": "Fix the translation in the row's third column and delete its <x1/> line.",
@@ -6526,6 +6566,10 @@
    "source": "The layout is familiar on purpose: the toolbar, the categories, the download list, the progress window with every connection, queues and the scheduler. The differences: MDM is free and open source, downloads BitTorrent and magnet links in the same list, finished faster in <g1>our benchmark</g1>, speaks 86 languages and has builds for Linux and macOS. IDM is the more mature product, refined over many years. See the full <g2>comparison</g2>.",
    "text": "Araç çubuğu, kategoriler, indirme listesi, her bağlantının ilerleme penceresi, kuyruklar ve zamanlayıcı gibi düzen bilerek tanıdık yapıldı. Farklar: MDM ücretsiz ve açık kaynaklıdır, BitTorrent ve magnet bağlantılarını aynı listede indirir, <g1>kendi karşılaştırmamızda</g1> daha hızlı tamamlandı, 86 dil konuşur ve Linux ile macOS için sürümleri vardır. IDM, uzun yıllar boyunca geliştirilmiş, daha olgun bir üründür. Tam <g2>karşılaştırmaya</g2> bakın."
   },
+  "626d6a7f553a1946": {
+   "source": "<g1>macOS</g1>: <x2/>, or",
+   "text": "<g1>macOS</g1>: <x2/> veya"
+  },
   "62e049f954021405": {
    "source": "Control it from your phone or your browser",
    "text": "Telefonunuzdan veya tarayıcınızdan kontrol edin"
@@ -6714,10 +6758,6 @@
    "source": "The video download button moves to a free corner instead of covering a control of the page, such as a thumbnail's watch-later button (<g1>#421</g1>). Dragging it still puts it where you want it.",
    "text": "Video indirme düğmesi, sayfanın bir kontrolünü (örneğin bir küçük resmin daha sonra izle düğmesi gibi) kapatmak yerine boş bir köşeye taşınır (<g1>#421</g1>). Sürüklemek hala istediğiniz yere koyar."
   },
-  "65da44cc551abd0f": {
-   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
-   "text": "<g1>İndirme tamamlandı</g1> penceresi dosyanın boyutunu, adresini ve kaydedildiği yeri gösterir. <g2>Aç</g2>, <g3>Birlikte aç...</g3>, <g4>Klasörü aç</g4> veya <g5>Kapat</g5> seçeneklerinden birini belirleyin. Windows'ta, sağ alttaki küçük kutuyu Explorer'a, bir e-postaya veya sohbete sürükleyerek dosyayı oraya bırakabilirsiniz. Bu pencere, siz tıklayana kadar diğer programlarınızın üzerinde görünür ve yazdığınız programın klavyesini devralmaz."
-  },
   "662e8cdda4078826": {
    "source": "32 MiB, one connection in three crawls at 128 KB/s",
    "text": "32 MiB, 128 KB/s hızında üç taramada tek bağlantı"
@@ -6769,10 +6809,6 @@
   "66f0d356afa03754": {
    "source": "Two helpers, checked before use",
    "text": "Kullanmadan önce kontrol edilen iki yardımcı"
-  },
-  "66f7530c7179f562": {
-   "source": "<g1>The Download video button over the video</g1> passes that page's cookies, from the window and profile you're in (a private window, a Firefox container), for the look-up and the download. Nothing to set up. Each cookie goes with the domain the browser keeps it for, so a sign-in on YouTube Music (music.youtube.com) or YouTube's mobile site reaches www.youtube.com too.",
-   "text": "<g1>Videonun üzerindeki Videoyu indir düğmesi</g1>, içinde bulunduğunuz pencereden ve profilden (gizli pencere, Firefox kapsayıcısı) o sayfanın çerezlerini arama ve indirme için iletir. Kuruluma gerek yoktur. Her çerez, tarayıcının onu sakladığı alan adıyla birlikte gider, bu nedenle YouTube Music (music.youtube.com) veya YouTube'un mobil sitesindeki bir oturum açma işlemi www.youtube.com'a da ulaşır."
   },
   "670bb10cde757ad1": {
    "source": "MDM never writes the token to its event log, crash reports, the automation API or the command line's output.",
@@ -6962,6 +6998,10 @@
    "source": "Contribute — Mister Download Manager",
    "text": "Katkıda Bulun — Mister Download Manager"
   },
+  "6a404128afe84a22": {
+   "source": "A freeze whose report shows the window thread inside the graphics driver as it shows a frame (<x1/> or <x2/> for Intel, <x3/> for NVIDIA, <x4/> for AMD, under <x5/>) is the driver's OpenGL stuck, not MDM: on Windows, choose <g6>View → Draw with → Direct3D</g6> (the default) and restart MDM, and update the graphics driver. If <g7>Draw with</g7> says Direct3D didn't start there, the line under it says why; MDM then remembers the freeze and draws with WARP from the next start.",
+   "text": "Raporu, bir kare gösterirken grafik sürücüsünün içindeki pencere iş parçacığını gösteren bir donma (<x1/> veya <x2/> Intel için, <x3/> NVIDIA için, <x4/> AMD için, <x5/> altında) sürücünün OpenGL'inin takılmasıdır, MDM'nin değil: Windows'ta, <g6>Görünüm → Şununla çiz → Direct3D</g6> (varsayılan) seçeneğini seçin ve MDM'yi yeniden başlatın, ayrıca grafik sürücüsünü güncelleyin. Eğer <g7>Şununla çiz</g7> Direct3D'nin orada başlamadığını söylüyorsa, altındaki satır nedenini belirtir; MDM daha sonra donmayı hatırlar ve bir sonraki başlangıçtan itibaren WARP ile çizim yapar."
+  },
   "6a658020a3c19e30": {
    "source": "Other systems and files",
    "text": "Diğer sistemler ve dosyalar"
@@ -7069,6 +7109,10 @@
   "6bde01e223d4005d": {
    "source": "Every run and the raw data",
    "text": "Her test çalıştırması ve ham veriler"
+  },
+  "6be8a7107f3f9737": {
+   "source": "Choose <g1>Subtitles</g1> if you want them (see below). <g2>Embed chapters</g2> is ticked: see <g3>Chapters</g3>.",
+   "text": "İsterseniz <g1>Altyazılar</g1>'ı seçin (aşağıya bakın). <g2>Bölümleri dosyaya ekle</g2> işaretlidir: <g3>Bölümler</g3>'e bakın."
   },
   "6c054ced98124c36": {
    "source": "Options, Connection: connections per download and per-server exceptions.",
@@ -7281,6 +7325,10 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "Dur düğmesi artık arka planda indirmeye devam eden yt-dlp'yi de durduruyor."
+  },
+  "6f06002d2161cba3": {
+   "source": "Last updated 2026-11-13",
+   "text": "Son güncelleme 13.11.2026"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7510,6 +7558,10 @@
    "source": "Paste a Google Drive link as it is, the one <g1>Share → Copy link</g1> gives:",
    "text": "Google Drive bağlantısını olduğu gibi yapıştırın. <g1>Paylaş → Bağlantıyı kopyala</g1> seçeneği şu bağlantıyı verir:"
   },
+  "7297ca101de5145e": {
+   "source": "The list couldn't be read from GitHub when this page was built. Everyone is on GitHub meanwhile, in the project's <g1>pull requests</g1> and <g2>issues</g2>.",
+   "text": "Bu sayfa oluşturulurken liste GitHub'dan okunamadı. Bu arada herkes projenin <g1>çekme istekleri</g1> ve <g2>sorunları</g2> bölümünde GitHub'da."
+  },
   "729a19fc6ce418f9": {
    "source": "Reporting problems",
    "text": "Sorun Bildirme"
@@ -7722,6 +7774,10 @@
    "source": "End-to-end medians with interquartile ranges, the ratio with its 95% interval, and the Mann–Whitney test, as <x1/> writes them.",
    "text": "Uçtan uca medyanlar ve çeyrekler arası aralıklar, %95 güven aralıklı oran ve <x1/>'nin yazdığı Mann–Whitney testi."
   },
+  "75b26b8aac083dec": {
+   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, puts the chapters into the file, and converts the sound for an MP3, Opus or FLAC choice.",
+   "text": "Ardından yt-dlp, indirme işleminden sonra yaptığı şeyi yapar: videoyu ve sesini ffmpeg ile tek bir MP4'te birleştirir, altyazıları kaydeder veya dosyaya ekler, bölümleri dosyaya yerleştirir ve MP3, Opus veya FLAC seçimi için sesi dönüştürür."
+  },
   "75c5e88776534271": {
    "source": "Adding a link again after its finished file was moved or deleted starts a new download, instead of asking about a duplicate that isn't there (<g1>#342</g1>).",
    "text": "Tamamlanmış dosyası taşındıktan veya silindikten sonra bir bağlantıyı tekrar eklemek, orada olmayan bir kopyayı sormak yerine yeni bir indirme başlatır (<g1>#342</g1>)."
@@ -7781,10 +7837,6 @@
   "76e020dc2c735bdd": {
    "source": "From top to bottom:",
    "text": "Yukarıdan aşağıya:"
-  },
-  "76e8fe34285e22ca": {
-   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download.",
-   "text": "Aramaları <g1>Seçenekler → Arşivler → Bağlantılar geldiğinde ara</g1> bölümünden kapatın. Bazı dosya barındırıcıları bir aramayı indirme olarak sayar."
   },
   "7704f35f9d60deac": {
    "source": "Our benchmark, replayed: the same PC, the same test server, the median of alternating runs.",
@@ -7978,10 +8030,6 @@
    "source": "<g1>The window no longer freezes when the system's sleep or keychain service is slow</g1> (follows <g2>#222</g2>): a queue set to <g3>Wake the computer to run this queue</g3> asks the system to keep the computer awake while it runs. On Linux that is logind, which can be slow to answer just after the computer wakes, exactly when such a queue starts, and MDM waited for it on the window's own thread (asking again every 5 seconds while it refused). It is now asked in the background, on every system; the queue's downloads, retries and log lines are the same. A keyring that doesn't answer at start (a stopped GNOME Keyring) is now waited for once, at most 5 seconds, instead of once per saved password, and saving the list no longer asks it at all. On Linux the check for a tray to hide windows in, and in Download File Info the check that <g4>Save As</g4> isn't a folder (slow on a network share that doesn't answer), no longer run on the window's thread on every frame.",
    "text": "<g1>Sistemin uyku veya anahtarlık hizmeti yavaş olduğunda pencere artık donmuyor</g1> ( <g2>#222</g2> devamı): <g3>Bu kuyruğu çalıştırmak için bilgisayarı uyandır</g3> olarak ayarlanmış bir kuyruk, çalışırken bilgisayarı uyanık tutmasını sistemden ister. Linux'ta bu, bilgisayar uyandıktan hemen sonra, tam da böyle bir kuyruk başladığında yavaş yanıt verebilen logind'dir ve MDM, pencerenin kendi iş parçacığında yanıtını beklerdi (reddedildiğinde her 5 saniyede bir tekrar sorarak). Artık her sistemde arka planda sorulur; kuyruğun indirmeleri, yeniden denemeleri ve günlük satırları aynıdır. Başlangıçta yanıt vermeyen bir anahtarlık (durdurulmuş bir GNOME Keyring) artık kaydedilen her parola için bir kez yerine, en fazla 5 saniye boyunca bir kez beklenir ve listenin kaydedilmesi artık hiç sormaz. Linux'ta pencereleri gizlemek için bir tepsi olup olmadığını kontrol etme ve Dosya Bilgilerini İndir'de <g4>Farklı Kaydet</g4>'in bir klasör olmadığını kontrol etme (yanıt vermeyen bir ağ paylaşımında yavaş), artık her karede pencerenin iş parçacığında çalışmaz."
   },
-  "7a431c024b9ed18e": {
-   "source": "Choose <g1>Subtitles</g1> if you want them (see below).",
-   "text": "Altyazı istiyorsanız <g1>Altyazılar</g1>'ı seçin (aşağıya bakın)."
-  },
   "7a5b7ab31d5f22cb": {
    "source": "Click <g1>Add Torrent</g1> on the toolbar to open a <x2/> file, or use the arrow next to it for <g3>Add magnet link...</g3>. A magnet link pasted into <g4>Add URL</g4> works too. Torrents land in the same list as your other downloads, marked <g5>Torrent</g5> in the <g6>Source</g6> column, and go into queues and the Scheduler like them.",
    "text": "Bir <x2/> dosyasını açmak için araç çubuğundaki <g1>Torrent Ekle</g1> düğmesine tıklayın veya <g3>Magnet bağlantısı ekle...</g3> seçeneği için yanındaki oku kullanın. <g4>URL Ekle</g4> alanına yapıştırılan bir magnet bağlantısı da çalışır. Torrentler, diğer indirmelerinizle aynı listeye düşer, <g6>Kaynak</g6> sütununda <g5>Torrent</g5> olarak işaretlenir ve onlar gibi kuyruklara ve Zamanlayıcı'ya girer."
@@ -8093,10 +8141,6 @@
   "7bde548eabfafc71": {
    "source": "Eight per download by default, and up to 32 if you choose in Options → Connection, or 128 after ticking Allow more than 32 connections there. MDM uses fewer when a server allows fewer, and only one when a server can't send parts of a file at all.",
    "text": "Varsayılan olarak her indirme için 8 bağlantı kullanır. Seçenekler → Bağlantı bölümünden bu sayıyı 32'ye kadar çıkarabilir veya aynı yerde 32'den fazla bağlantıya izin ver seçeneğini işaretleyerek 128'e kadar çıkarabilirsiniz. Sunucu daha az bağlantıya izin veriyorsa MDM daha az bağlantı kullanır. Sunucu dosyayı parçalara ayırarak gönderemiyorsa yalnızca 1 bağlantı kullanır."
-  },
-  "7beb76c0e99ab62c": {
-   "source": "<g1>Videos that need you signed in</g1>: <g2>Options → Sites Logins → Cookies for video sites</g2> lets yt-dlp read a browser's cookies, for pasted links. Chrome, Edge and Brave lock theirs on Windows, and the window says so; Firefox works, and so does the button over the video.",
-   "text": "<g1>Oturum açmanızı gerektiren videolar</g1>: <g2>Seçenekler → Site oturum açma bilgileri → Video siteleri için çerezler</g2>, yt-dlp'nin yapıştırılan bağlantılar için bir tarayıcının çerezlerini okumasına izin verir. Chrome, Edge ve Brave Windows'ta çerezlerini kilitler ve pencere bunu belirtir; Firefox çalışır ve videonun üzerindeki düğme de çalışır."
   },
   "7bf940f9155b4bce": {
    "source": "<x1/> <g2>Open source · Apache-2.0</g2>",
@@ -8537,6 +8581,10 @@
   "810aeb3bcab43ab3": {
    "source": "A torrent: what it has sent to peers against what it took.",
    "text": "Bir torrent'in eşlere gönderdiği veri miktarı ile aldığı veri miktarı arasındaki oran."
+  },
+  "810e3acee25be1c6": {
+   "source": "YouTube hides most of a video's qualities behind small puzzles that yt-dlp solves with a JavaScript runtime: <g1>Deno</g1>, <g2>Node.js</g2> or <g3>Bun</g3>. Without one, the list is short, sometimes only the sound and a low quality, and MDM says so: <g4>YouTube needs a JavaScript runtime to list its video qualities</g4>. Other sites don't need one.",
+   "text": "YouTube, çoğu video kalitesini yt-dlp'nin bir JavaScript çalışma zamanı ile çözdüğü küçük bulmacaların arkasına gizler: <g1>Deno</g1>, <g2>Node.js</g2> veya <g3>Bun</g3>. Bunlardan biri olmadan liste kısa olur, bazen yalnızca ses ve düşük kalite sunulur ve MDM bunu belirtir: <g4>YouTube, video kalitelerini listelemek için bir JavaScript çalışma zamanına ihtiyaç duyar</g4>. Diğer siteler buna ihtiyaç duymaz."
   },
   "8144fd9d669ebeed": {
    "source": "Does it download torrents? — Mister Download Manager",
@@ -9178,10 +9226,6 @@
    "source": "<g1>Themes</g1><g2>Nine looks, light and dark, from Classic to Aqua, or your own in a text file.</g2>",
    "text": "<g1>Temalar</g1><g2>Klasik'ten Aqua'ya kadar dokuz görünüm, açık ve koyu, veya kendi temanız bir metin dosyasında.</g2>"
   },
-  "8b93f9dffbe6efdb": {
-   "source": "If Direct3D, Vulkan or Metal can't start on your computer (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
-   "text": "Bilgisayarınızda Direct3D, Vulkan veya Metal başlatılamazsa (sürücüsü yoksa, bazı sanal makinelerde), veya ilk penceresi 10 saniye içinde açılmazsa (MDM'nin listenizi ve simgelerini yüklemesi için harcadığı süre sayılmaz, bilgisayar başlangıçta ne kadar yavaş olursa olsun), MDM OpenGL ile çizim yapar ve <g1>Görünüm → Şununla çiz</g1> bu durumu ve nedenini belirtir. Tekrar seçmek, bir sonraki başlangıçta tekrar denemesini sağlar."
-  },
   "8b95ee287644fd4f": {
    "source": "Mister Download Manager's link grabber collects a page's links, sorts them into packages, checks which are online and extracts the archives they bring.",
    "text": "Mister Download Manager'ın bağlantı yakalayıcısı bir sayfanın bağlantılarını toplar, bunları paketler halinde sıralar, hangilerinin çevrimiçi olduğunu denetler ve getirdikleri arşivleri çıkarır."
@@ -9229,6 +9273,10 @@
   "8c6583c8229f13c3": {
    "source": "Downloads and torrents in one app, stable on Android",
    "text": "Tek bir uygulamada indirmeler ve torrentler, Android'de kararlı"
+  },
+  "8c714d229ab4b2fb": {
+   "source": "They go into a video (MP4, MKV, WebM) and into the sound as the site has it (<g1>Audio only, original</g1>), not into an MP3, Opus or FLAC file.",
+   "text": "Bunlar bir videoya (MP4, MKV, WebM) ve sitenin sahip olduğu sese (<g1>Yalnızca ses, orijinal</g1>) eklenir, MP3, Opus veya FLAC dosyasına eklenmez."
   },
   "8c7321b31cd98d97": {
    "source": "<g1>Toolbar.</g1> <g2>Add URL</g2>, <g3>Add Torrent</g3>, <g4>Resume</g4>, <g5>Stop</g5>, <g6>Stop All</g6>, <g7>Delete</g7>, <g8>Delete Completed</g8>, <g9>Options</g9>, <g10>Scheduler</g10>, <g11>Start Queue</g11>, <g12>Stop Queue</g12>. The small arrow next to <g13>Add Torrent</g13>, <g14>Start Queue</g14> and <g15>Stop Queue</g15> opens more choices.",
@@ -9937,6 +9985,10 @@
   "9757a8b628979f6a": {
    "source": "The list shows each quality with its size, best first, and the sound alone at the end. Check <g1>Save to</g1> and <g2>File name</g2>, then click <g3>Download Now</g3>, or <g4>Later</g4> to put it in the list for later. The video gets its own row and progress window, like any other download.",
    "text": "Liste, her kaliteyi boyutuyla birlikte, en iyiden başlayarak ve en sonda yalnızca sesi gösterir. <g1>Kaydedileceği yer</g1> ve <g2>Dosya adı</g2> seçeneklerini kontrol edin, ardından <g3>Şimdi İndir</g3> düğmesine tıklayın veya daha sonra indirme listesine eklemek için <g4>Sonra</g4> seçeneğini kullanın. Video, diğer indirmeler gibi kendi satırına ve ilerleme penceresine sahip olur."
+  },
+  "9763111f0a019af1": {
+   "source": "If Direct3D, Vulkan or Metal can't start on your graphics card (no driver for it, some virtual machines), or its first window doesn't show within 10 seconds of its own (the time MDM spends loading your list and its icons doesn't count, however slow the computer is just after it starts), MDM draws with OpenGL, and <g1>View → Draw with</g1> says so and why. Choosing it again tries it again at the next start.",
+   "text": "Grafik kartınızda Direct3D, Vulkan veya Metal başlatılamazsa (sürücüsü yoksa, bazı sanal makinelerde), veya ilk penceresi kendi başına 10 saniye içinde görünmezse (MDM'nin listenizi ve simgelerini yüklemesi için harcadığı süre sayılmaz, bilgisayar başlangıçta ne kadar yavaş olursa olsun), MDM OpenGL ile çizim yapar ve <g1>Görünüm → Şununla çiz</g1> bunu ve nedenini belirtir. Tekrar seçmek, bir sonraki başlangıçta tekrar denemesini sağlar."
   },
   "976e1bc04dee0c02": {
    "source": "Both the address you clicked and the one its redirects led to are checked, so a site you excluded stays excluded even when it sends you to another server. Everything else stays with the browser. Changes in Options reach the browser within a minute; you don't need to restart it.",
@@ -10689,6 +10741,10 @@
   "a23e572b5c83c41e": {
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "Bu boyutta ekrandan daha büyük bir pencere (1366 × 768 ekranında yüzde 200'de Seçenekler), ekranın izin verdiği kadar büyük açılır ve geri kalanı kaydırılır: kaydırma çubukları, fare tekerleği veya bir sonraki denetime <g1>Tab</g1> tuşuyla geçiş yapılabilir."
+  },
+  "a24bd8fd730a41d0": {
+   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows'ta, OpenGL 3.0'dan daha eski bir sürüm (Intel'in ilk HD Graphics gibi eski bir ekran kartı sürücüsü, OpenGL sürümü 2.1'dir) MDM'yi çizemez: pencereleri bozuk görünür. MDM bunu başlangıçta fark eder ve Microsoft'un yazılım oluşturucusu (WARP) üzerinde Direct3D ile yeniden başlar, bundan sonra <g1>Görünüm → Şununla çiz</g1> bunu belirtir. Orada <g2>OpenGL</g2> seçmek tekrar dener."
   },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
@@ -11710,6 +11766,10 @@
    "source": "<g1>Crash reports</g1><g2>Mister Download Manager</g2>",
    "text": "<g1>Çökme raporları</g1><g2>Mister Download Manager</g2>"
   },
+  "b1a0ed24728365e7": {
+   "source": "The command line (<x1/>) puts them in too, whenever ffmpeg is there.",
+   "text": "Komut satırı (<x1/>) da, ffmpeg mevcut olduğunda bunları ekler."
+  },
   "b1aebd102c185a01": {
    "source": "RSS feeds for torrents, with download rules — Mister Download Manager",
    "text": "Torrentler için RSS akışları, indirme kurallarıyla — Mister Download Manager"
@@ -11717,10 +11777,6 @@
   "b1b2249661e1c4a9": {
    "source": "Keep changes focused and match the code around them. A few rules hold everywhere:",
    "text": "Değişiklikleri odaklanmış tutun ve etraflarındaki kodla eşleştirin. Birkaç kural her yerde geçerlidir:"
-  },
-  "b1cfb9dac9c38d80": {
-   "source": "Then yt-dlp does what it does after a download: it joins the video and its sound with ffmpeg into one MP4, saves or embeds the subtitles, and converts the sound for an MP3, Opus or FLAC choice.",
-   "text": "Ardından yt-dlp, indirme sonrası yaptığı şeyi yapar: videoyu ve sesini ffmpeg ile tek bir MP4'te birleştirir, altyazıları kaydeder veya gömer ve bir MP3, Opus veya FLAC seçeneği için sesi dönüştürür."
   },
   "b1d90b3e9d2a1cd5": {
    "source": "runs unit tests and end-to-end downloads against <x1/> with injected faults (slow, dropped and refused connections, servers without ranges, changing files). <x2/> runs the published speed comparison; its raw data is in <x3/>.",
@@ -11745,6 +11801,10 @@
   "b2181eccf65e86be": {
    "source": "This <g1>website</g1> counts visits with <g2>Statcounter</g2>, which sets a cookie and sees your IP address; it runs only on the website, never in the app.",
    "text": "Bu <g1>web sitesi</g1>, bir çerez ayarlayan ve IP adresinizi gören <g2>Statcounter</g2> ile ziyaretleri sayar; yalnızca web sitesinde çalışır, uygulamada asla çalışmaz."
+  },
+  "b21b0cc3853450de": {
+   "source": "On Windows, when OpenGL fails on a card without Direct3D 12, MDM draws with Direct3D on Microsoft's software renderer (WARP) from the next start, and <g1>View → Draw with</g1> says why: OpenGL couldn't start, it is too old to draw MDM (older than 3.0, such as Intel's first HD Graphics, whose OpenGL 2.1 drew MDM's windows as garbage), its first window didn't show within 10 seconds, or MDM froze inside the graphics driver while OpenGL showed a frame (the older Intel HD Graphics and AMD Radeon cards' drivers did). Choosing <g2>OpenGL</g2> there tries it again.",
+   "text": "Windows'ta, Direct3D 12 olmayan bir kartta OpenGL başarısız olursa, MDM bir sonraki başlangıçtan itibaren Microsoft'un yazılım oluşturucusu (WARP) üzerinde Direct3D ile çizim yapar ve <g1>Görünüm → Şununla çiz</g1> nedenini belirtir: OpenGL başlatılamadı, MDM'yi çizmek için çok eski (3.0'dan eski, örneğin Intel'in ilk HD Graphics'i, OpenGL 2.1'i MDM pencerelerini çöp olarak çiziyordu), ilk penceresi 10 saniye içinde görünmedi veya OpenGL bir kare gösterirken MDM grafik sürücüsünün içinde dondu (eski Intel HD Graphics ve AMD Radeon kartlarının sürücüleri bunu yapıyordu). Orada <g2>OpenGL</g2> seçeneğini seçmek tekrar denemesini sağlar."
   },
   "b23baab9a4561a1d": {
    "source": "Pauses running downloads.",
@@ -11773,6 +11833,10 @@
   "b26bf4af67d50f02": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: it is free and open source, laid out like IDM, imports your IDM list, and also downloads torrents and videos. Free Download Manager, AB Download Manager, Motrix, Neat Download Manager, Prism, JDownloader 2, Xtreme Download Manager and Gopeed are free too, each with its own strengths.",
    "text": "Internet Download Manager'ın düzenini ücret ödemeden kullanmak istiyorsanız Mister Download Manager'ı tercih edebilirsiniz. Ücretsiz ve açık kaynaklıdır, IDM'ye benzer bir düzene sahiptir, IDM listenizi içe aktarır ve torrentleri ve videoları da indirir. Free Download Manager, AB Download Manager, Motrix, Neat Download Manager, Prism, JDownloader 2, Xtreme Download Manager ve Gopeed de ücretsizdir ve her birinin kendine özgü güçlü yanları vardır."
+  },
+  "b26c000488bb45a1": {
+   "source": "<g1>Windows</g1>: <x2/>, or <x3/>. The installers on <g4>deno.com</g4> and <g5>nodejs.org</g5> work too.",
+   "text": "<g1>Windows</g1>: <x2/> veya <x3/>. <g4>deno.com</g4> ve <g5>nodejs.org</g5> adreslerindeki yükleyiciler de çalışır."
   },
   "b26fdfb3218b9d13": {
    "source": "Many more: the checksum dialog, the progress window's completion options and speed limit, the torrent and video windows (Stop a look-up, stale video choices), Batch's letter ranges, addresses without http://, duplicate links arriving together, imports that doubled downloads, menu titles that shared access letters in French and other languages, and more.",
@@ -11893,6 +11957,10 @@
   "b3ca971adc7126d9": {
    "source": "View → Theme switches at once, keeping the layout.",
    "text": "Görünüm → Tema düzeni koruyarak hemen değiştirir."
+  },
+  "b3d7bbeea9ab71d3": {
+   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). With ffmpeg, the video's chapters go into the file too, as Download video's <g19>Embed chapters</g19> does. <x20/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x21/>; when it isn't connected, nothing starts.",
+   "text": "Bir video indirir; <x1/>, <x2/> içinden bir kalite seçici alır (<x3/> = en iyi tek dosya; <x4/> = sitenin sunduğu haliyle, dönüştürülmemiş ses; <x5/>, <x6/>, <x7/> veya <x8/> = o bit hızında MP3 olarak ses, <x9/> en iyi değişken bit hızında; <x10/> = Opus olarak; <x11/> = FLAC olarak, kayıpsız ancak sitenin sesinden daha iyi değil; dönüştürmeler için ffmpeg gerekir). <x12/>: MDM'nin kendi indiricisi, yt-dlp'nin bulduğu her akışı bu kadar bağlantı üzerinden (varsayılan olarak 8, 1 ila 128), bir akışı parçalar halinde (HLS, DASH) aynı anda bu kadar parça halinde getirir. <x13/> altyazıları yanına kaydeder: <x14/> (<x15/>) dil kodları veya yükleyicinin verdiği her biri için <x16/>; <x17/> bunun yerine sitenin otomatik altyazılarını alır; <x18/> bunları videoya yerleştirir (ffmpeg, MP4 veya MKV gerekir). ffmpeg ile videonun bölümleri de dosyaya eklenir, tıpkı Videoyu indir'in <g19>Bölümleri dosyaya ekle</g19> seçeneği gibi. <x20/> indirmelerin bağlantılarını ve yt-dlp'nin (ve ffmpeg'in) bağlantılarını <x21/> için olduğu gibi tek bir ağ bağdaştırıcısı üzerinden gönderir; bağlı değilse hiçbir şey başlamaz."
   },
   "b3f1633383cc8b77": {
    "source": "Open <g1>Downloads → Options</g1>, or click <g2>Options</g2> on the toolbar. The window has twelve pages on two rows of tabs. <g3>OK</g3> saves your changes; closing the window or pressing <g4>Esc</g4> throws them away.",
@@ -12177,6 +12245,10 @@
   "b86face263e9f2af": {
    "source": "We'd rather you knew. IDM has a site grabber that follows a whole website's pages (MDM's link grabber takes the links of one page), and many years of polish and compatibility fixes. MDM is new; if something you rely on is missing, <g1>ask for it</g1>.",
    "text": "Bilmenizi tercih ederiz. IDM'nin tüm web sitesi sayfalarını takip eden bir site yakalayıcısı vardır (MDM'nin bağlantı yakalayıcısı tek bir sayfanın bağlantılarını alır) ve uzun yıllara dayanan iyileştirmeler ve uyumluluk düzeltmeleri mevcuttur. MDM yenidir; güvendiğiniz bir şey eksikse, <g1>isteyin</g1>."
+  },
+  "b886cc5ff82424bc": {
+   "source": "<g1>A spare account, in a profile of its own</g1>: you don't have to lend yt-dlp your main account. Make a second profile in your browser, sign in to the site there with a spare account, and put that profile in <g2>Profile</g2> (its name, or its folder with <g3>...</g3>). yt-dlp reads that profile's cookies only. yt-dlp's developers advise this too: a site may limit an account it sees used by a program.",
+   "text": "<g1>Kendi profiline sahip yedek bir hesap</g1>: yt-dlp'ye ana hesabınızı ödünç vermek zorunda değilsiniz. Tarayıcınızda ikinci bir profil oluşturun, orada yedek bir hesapla siteye giriş yapın ve o profili <g2>Profil</g2>'e (adını veya <g3>...</g3> ile klasörünü) koyun. yt-dlp yalnızca o profilin çerezlerini okur. yt-dlp geliştiricileri de bunu tavsiye eder: bir site, bir program tarafından kullanılan bir hesabı sınırlayabilir."
   },
   "b88a67e39c494a61": {
    "source": "The server runs on the app's Tokio runtime, one listener per local network address. Each request is checked (<x1/>, <x2/>, token), turned into an <x3/> marked <x4/> (a field no request line can set) and handed to the app through the same channel as the command line's; the app answers it on its next frame, as it answers the automation API. Its page is built in (<x5/>) and its texts come from the app's catalogs (<x6/>).",
@@ -12782,10 +12854,6 @@
    "source": "Choose before you add",
    "text": "Eklemeden önce seçin"
   },
-  "c20a850dfc745632": {
-   "source": "If neither can start, MDM draws with a software renderer (Microsoft's on Windows, Mesa's on Linux), so the window still opens (Remote Desktop, a virtual machine without a graphics driver). It works, but keeps the processor busier.",
-   "text": "İkisi de başlatılamazsa MDM, yazılım tabanlı bir çizici kullanır (Windows'ta Microsoft'un, Linux'ta Mesa'nın). Böylece pencere yine de açılır; örneğin Uzak Masaüstü'nde veya grafik sürücüsü olmayan bir sanal makinede. Bu yöntem çalışır, ancak işlemciyi daha fazla meşgul eder."
-  },
   "c21ae87a328182aa": {
    "source": "<g1>Link grabber</g1><g2>A page's links gathered, sorted into packages and checked online, then the archives unpacked when they arrive.</g2>",
    "text": "<g1>Bağlantı yakalayıcı</g1><g2>Bir sayfanın bağlantıları toplanır, paketlere ayrılır ve çevrimiçi kontrol edilir, ardından arşivler geldiklerinde açılır.</g2>"
@@ -12930,6 +12998,10 @@
    "source": "The download manager you already know, rebuilt to be faster. Free, open source and written from scratch in Rust.",
    "text": "Zaten bildiğiniz indirme yöneticisi, daha hızlı olması için baştan tasarlandı. Ücretsiz, açık kaynaklı ve Rust ile sıfırdan yazıldı."
   },
+  "c4d8ea1c0d48428a": {
+   "source": "It needs ffmpeg, which writes them. A video without chapters is saved as it is.",
+   "text": "Bunları yazan ffmpeg'e ihtiyaç duyar. Bölümleri olmayan bir video olduğu gibi kaydedilir."
+  },
   "c4eff53dc61fce12": {
    "source": "Your rights",
    "text": "Haklarınız"
@@ -13001,6 +13073,10 @@
   "c5980664ded251b8": {
    "source": "<g1>The system:</g1> MDM's version and how you installed it, your operating system and its version, the processor, the language and theme, and how many downloads and queues you have. These are counts only.",
    "text": "<g1>Sistem:</g1> MDM'nin sürümü ve nasıl kurduğunuz, işletim sisteminiz ve sürümü, işlemci, dil ve tema ile sahip olduğunuz indirme ve kuyruk sayısı. Bunlar sadece sayılardır."
+  },
+  "c5a292e743078486": {
+   "source": "A distribution's yt-dlp can also be too old for YouTube: if the list stays short, click <g1>Use MDM's own copy</g1> beside yt-dlp in <g2>Helpers...</g2>.",
+   "text": "Bir dağıtımın yt-dlp'si YouTube için çok eski de olabilir: eğer liste kısa kalırsa, <g2>Yardımcılar...</g2> içinde yt-dlp'nin yanındaki <g1>MDM'nin kendi kopyasını kullan</g1> seçeneğine tıklayın."
   },
   "c5b1d8d5e4be4a3b": {
    "source": "How the pictures come down",
@@ -13166,6 +13242,10 @@
    "source": "Checked before you download",
    "text": "İndirmeden önce denetlenir"
   },
+  "c845f9239d5bddd5": {
+   "source": "Right-click a link, a video, a sound or a picture and choose <g1>Download with Mister Download Manager</g1>. MDM downloads it whatever its type: you asked for it, so the file types list and the excluded sites don't apply here (they only decide which downloads MDM takes over by itself). A video that plays as a stream goes to the <g2>Download video</g2> window with the stream its player loaded (HLS or DASH), as the <g3>button over videos</g3> sends it, with your cookies for the stream's server and what the browser sent with the stream (its referrer and origin, else the page as the referrer).",
+   "text": "Bir bağlantıya, videoya, sese veya resme sağ tıklayın ve <g1>Mister Download Manager ile İndir</g1> seçeneğini seçin. MDM, türü ne olursa olsun onu indirir: siz istediğiniz için, dosya türleri listesi ve hariç tutulan siteler burada geçerli değildir (bunlar yalnızca MDM'nin hangi indirmeleri kendiliğinden devralacağına karar verir). Akış olarak oynatılan bir video, oynatıcısının yüklediği akışla (HLS veya DASH) birlikte <g2>Videoyu indir</g2> penceresine gider; <g3>videoların üzerindeki düğme</g3> onu akış sunucusu için çerezlerinizle ve tarayıcının akışla birlikte gönderdiği bilgilerle (yönlendiren ve kaynak, aksi takdirde sayfa yönlendiren olarak) gönderir."
+  },
   "c84f2046978e476a": {
    "source": "A title bar MDM draws itself",
    "text": "MDM'nin kendi çizdiği bir başlık çubuğu"
@@ -13309,10 +13389,6 @@
   "ca67cb26c4c8dabb": {
    "source": "View → Theme changes how MDM looks at once and keeps everything where it was. Pick one of the built-in looks, each with a light and a dark side, or make your own in a text file.",
    "text": "Görünüm → Tema, MDM'nin görünümünü anında değiştirir ve her şeyi yerli yerinde tutar. Yerleşik görünümlerden birini seçin, her birinin açık ve koyu tarafı vardır veya kendi temanızı bir metin dosyasında oluşturun."
-  },
-  "ca722db87f0d3bad": {
-   "source": "Last updated 2026-11-12 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "Son güncelleme 12.11.2026 · uygulama, tarayıcı uzantısı ve misterdownloadmanager.com için geçerlidir"
   },
   "ca7a6b77fb1e5a3c": {
    "source": "strengthens every edge and text colour on top.",
@@ -13850,6 +13926,10 @@
    "source": "Maturity",
    "text": "Olgunluk"
   },
+  "d2fc243b93084d12": {
+   "source": "Some videos play only for a signed-in viewer: a member's or a private video, an age-restricted one. And YouTube sometimes asks any viewer from a network it doubts (a VPN, a shared or cloud address) to \"Sign in to confirm you're not a bot\". yt-dlp then needs your browser's cookies, the small files that keep you signed in.",
+   "text": "Bazı videolar yalnızca oturum açmış bir izleyici için oynatılır: bir üyenin veya özel bir video, yaş kısıtlamalı bir video. Ve YouTube bazen şüphelendiği bir ağdan (bir VPN, paylaşılan veya bulut adresi) herhangi bir izleyiciden \"Bot olmadığınızı onaylamak için oturum açın\" diye sorar. yt-dlp'nin o zaman tarayıcınızın çerezlerine, sizi oturumda tutan küçük dosyalara ihtiyacı vardır."
+  },
   "d30e4557ff06a9ab": {
    "source": "Reports, translations and help",
    "text": "Raporlar, çeviriler ve yardım"
@@ -13977,6 +14057,10 @@
   "d4c9212e6107e470": {
    "source": "Playlists and channels",
    "text": "Oynatma listeleri ve kanallar"
+  },
+  "d4ce3b34f58e526c": {
+   "source": "<g1>Ubuntu and Debian</g1>:",
+   "text": "<g1>Ubuntu ve Debian</g1>:"
   },
   "d4d2535439e2c024": {
    "source": "Coming from IDM?",
@@ -15090,6 +15174,10 @@
    "source": "Press <g1>F3</g1> to jump to the next match. The search wraps round to the top.",
    "text": "Bir sonraki eşleşmeye atlamak için <g1>F3</g1> tuşuna basın. Arama listenin başına döner."
   },
+  "e71e432fdd540d5b": {
+   "source": "Turn the look-ups off in <g1>Options → Archives → Look links up when they arrive</g1>. Some file hosts count a look-up as a download. With the look-ups off, MDM asks nothing of the network until you start, so a web page's address isn't read for its links either.",
+   "text": "Aramaları <g1>Seçenekler → Arşivler → Bağlantılar geldiğinde ara</g1> bölümünden kapatın. Bazı dosya barındırıcıları bir aramayı indirme olarak sayar. Aramalar kapalıyken, siz başlatana kadar MDM ağdan hiçbir şey istemez, bu nedenle bir web sayfasının adresi de bağlantıları için okunmaz."
+  },
   "e7281739beb4476f": {
    "source": "A download manager can fill your whole connection. These steps cap MDM so that browsing, video calls and games stay smooth.",
    "text": "Bir indirme yöneticisi tüm bağlantı hızınızı kullanabilir. Bu adımlarla MDM'ye sınır koyarak internette gezinirken, görüntülü görüşme yaparken ve oyun oynarken bağlantınızın sorunsuz çalışmasını sağlayabilirsiniz."
@@ -15157,10 +15245,6 @@
   "e7d58a9cc03da7fd": {
    "source": "Point at the video in your browser and click the Download video button that appears over it, or paste the page's address into Tasks → Download video from a…",
    "text": "Tarayıcınızda videonun üzerine gelin ve beliren Videoyu indir düğmesine tıklayın veya sayfanın adresini Görevler → Bir sayfadan video indir…"
-  },
-  "e7e684a8f8aec6c8": {
-   "source": "<g1>Hide web pages</g1> (on by default) leaves out links to pages (<x2/>, <x3/> and the like): they are neither shown nor downloaded.",
-   "text": "<g1>Web sayfalarını gizle</g1> (varsayılan olarak açık), sayfalara (<x2/>, <x3/> ve benzerleri) giden bağlantıları listeden çıkarır: bu bağlantılar ne gösterilir ne de indirilir."
   },
   "e7f203ecd75caead": {
    "source": "Can my AI assistant use MDM? — Mister Download Manager",
@@ -15414,6 +15498,10 @@
    "source": "Note",
    "text": "Not"
   },
+  "eb9f527d55414228": {
+   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "Son güncelleme 13.11.2026 · uygulama, tarayıcı uzantısı ve misterdownloadmanager.com için geçerlidir"
+  },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
    "text": "<g1>Yalnızca bir kez çalışan bağlantılar</g1> (veya aynı anda tek indirmeye izin veren sunucular), Dosya Bilgilerini İndir penceresi onları sorguladıktan sonra \"403 Yasak\" hatası veriyordu (<g2>#28</g2>): pencerenin sorgusu ve indirme işlemi sunucuya ayrı ayrı istek gönderiyordu. İndirme şimdi pencerenin aldığı yanıttan devam eder ve yalnızca o bağlantı bu arada kapanmışsa tekrar sorgular."
@@ -15465,10 +15553,6 @@
   "ec83076f0311f20e": {
    "source": "A theme is one small text file in <g1>TOML</g1> (or JSON, <x2/>; or a <g3>colour scheme</g3>, <x4/>). It names only what it changes; everything else comes from the theme it <x5/>:",
    "text": "Bir tema, <g1>TOML</g1> (veya JSON, <x2/>; veya bir <g3>renk şeması</g3>, <x4/>) biçiminde küçük bir metin dosyasıdır. Sadece değiştirdiği şeyleri adlandırır; diğer her şey <x5/> olduğu temadan gelir:"
-  },
-  "ec8dbbc2dc38cd32": {
-   "source": "A torrent stopped by one of these says so in its event log, and isn't shared again when MDM starts. Raise or turn off the limit to share it again. - <g1>Limit uploading for all torrents to</g1> — off by default. Caps what all your torrents together send to other peers, while they download and while they share. A torrent's own upload limit, in its progress window, applies on top of it. - <g2>Open magnet links and .torrent files with Mister Download Manager</g2> — Windows then opens magnet links in your browser and <x3/> files in Explorer with MDM. This is for your Windows account only; a program you chose in Windows' <g4>Open with</g4> stays first. The setup can turn it on for you.",
-   "text": "Bu limitlerden biriyle durdurulan bir torrent, olay günlüğünde bunu belirtir ve MDM başladığında tekrar paylaşılmaz. Tekrar paylaşmak için limiti yükseltin veya kapatın. - <g1>Tüm torrentler için karşıya yüklemeyi şuna sınırla</g1> — varsayılan olarak kapalıdır. Tüm torrentlerinizin indirme ve paylaşma sırasında diğer eşlere gönderdiği toplam veriyi sınırlar. Bir torrentin kendi ilerleme penceresindeki karşıya yükleme limiti, bunun üzerine uygulanır. - <g2>Magnet bağlantılarını ve .torrent dosyalarını Mister Download Manager ile aç</g2> — Windows daha sonra tarayıcınızdaki magnet bağlantılarını ve Gezgin'deki <x3/> dosyalarını MDM ile açar. Bu yalnızca Windows hesabınız içindir; Windows'un <g4>Birlikte aç</g4> ayarında seçtiğiniz bir program ilk sırada kalır. Kurulum bunu sizin için açabilir."
   },
   "ec99486fc82e0b86": {
    "source": "Options",
@@ -15541,6 +15625,10 @@
   "ed1e476b363fc15b": {
    "source": "What protects you",
    "text": "Sizi neler korur"
+  },
+  "ed30bf8c293519f0": {
+   "source": "<g1>Download complete</g1> shows the file's size, its address and where it was saved. Choose <g2>Open</g2>, <g3>Open with...</g3>, <g4>Open folder</g4> or <g5>Close</g5>. On Windows you can also drag the small box at the bottom right into Explorer, an email or a chat to drop the file there. As when you drag a file in Explorer, a folder on the same drive gets the file moved there and another drive gets a copy (hold <g6>Shift</g6> to move it, <g7>Ctrl</g7> to copy it). The download follows a moved file: the list and <g8>Open</g8> find it in its new place. The window shows above your other programs until you click it, without taking the keyboard from the one you're typing in.",
+   "text": "<g1>İndirme tamamlandı</g1> penceresi dosyanın boyutunu, adresini ve kaydedildiği yeri gösterir. <g2>Aç</g2>, <g3>Birlikte aç...</g3>, <g4>Klasörü aç</g4> veya <g5>Kapat</g5> seçeneklerinden birini belirleyin. Windows'ta, sağ alttaki küçük kutuyu Explorer'a, bir e-postaya veya sohbete sürükleyerek dosyayı oraya bırakabilirsiniz. Explorer'da bir dosyayı sürüklediğinizde olduğu gibi, aynı sürücüdeki bir klasöre dosya taşınır ve başka bir sürücüye kopyalanır (<g6>Shift</g6> tuşunu basılı tutarak taşıyabilir, <g7>Ctrl</g7> tuşunu basılı tutarak kopyalayabilirsiniz). İndirme, taşınan dosyayı takip eder: liste ve <g8>Aç</g8> seçeneği dosyayı yeni yerinde bulur. Pencere, siz tıklayana kadar diğer programlarınızın üzerinde görünür ve yazdığınız programın klavyesini devralmaz."
   },
   "ed39bbda605ca874": {
    "source": "Every file finds its folder",
@@ -15774,6 +15862,10 @@
    "source": "Image galleries — Mister Download Manager help",
    "text": "Resim galerileri — Mister Download Manager yardım"
   },
+  "f02ad447917b29c8": {
+   "source": "<g1>Fedora</g1>:",
+   "text": "<g1>Fedora</g1>:"
+  },
   "f0332c2aa7cd2077": {
    "source": "<g1>A download's progress file could be written again just after it stopped</g1> (<g2>#106</g2>), and <g3>a download could fail as it finished, with \"part file still in use\"</g3> (<g4>#116</g4>). MDM saves a download's progress every few seconds, in a file beside it. A download paused or finished during one of those saves could stop before the save was done; that save then wrote an old progress file a moment later, or, when the last bytes arrived during it, still held the file. A download now stops only once its save is done.",
    "text": "<g1>Bir indirmenin ilerleme dosyası, durduktan hemen sonra tekrar yazılabilir</g1> (<g2>#106</g2>) ve <g3>bir indirme, biterken \"kısmi dosya hala kullanımda\" hatasıyla başarısız olabilir</g3> (<g4>#116</g4>). MDM, bir indirmenin ilerlemesini birkaç saniyede bir, yanında bir dosyaya kaydeder. Bu kaydetmelerden biri sırasında duraklatılan veya biten bir indirme, kaydetme tamamlanmadan durabilirdi; bu kaydetme daha sonra bir an sonra eski bir ilerleme dosyası yazdı veya son baytlar o sırada geldiğinde dosyayı hala tutuyordu. Bir indirme artık yalnızca kaydetmesi tamamlandıktan sonra durur."
@@ -15985,10 +16077,6 @@
   "f3664543700a7df7": {
    "source": "Download File Info",
    "text": "Dosya Bilgilerini İndir"
-  },
-  "f385c86abe758db3": {
-   "source": "Last updated 2026-11-12",
-   "text": "Son güncelleme: 12.11.2026"
   },
   "f3901fedc4a7dd52": {
    "source": "<g1>Browser extension</g1><g2>Downloads you click in Chrome, Edge, Brave, Opera, Vivaldi or Firefox go straight to MDM, sign-in included.</g2>",
@@ -16268,7 +16356,7 @@
   },
   "f89c54d71eb189a4": {
    "source": "If the graphics card is reset while MDM runs (a driver update), MDM starts again by itself. Lost twice in 10 minutes, it goes back to OpenGL, and <g1>View → Draw with</g1> says why.",
-   "text": "MDM çalışırken ekran kartı sıfırlanırsa (bir sürücü güncellemesi), MDM kendiliğinden yeniden başlar. 10 dakika içinde iki kez kaybolursa, OpenGL'e geri döner ve <g1>Görünüm → Şununla çiz</g1> nedeni belirtir."
+   "text": "MDM çalışırken grafik kartı sıfırlanırsa (bir sürücü güncellemesi), MDM kendiliğinden tekrar başlar. 10 dakika içinde iki kez kaybolursa, OpenGL'e geri döner ve <g1>Görünüm → Şununla çiz</g1> nedenini belirtir."
   },
   "f8b52274ed125d5f": {
    "source": "Tick <g1>Wake the computer to run this queue</g1> and a sleeping computer is woken a minute before the start time, so the network is back when the queue begins. It stays awake while the queue runs; afterwards its own sleep settings apply again. The line under the option says when the next wake is, or why there can't be one.",
@@ -16537,10 +16625,6 @@
   "fbba8f18d2fae06e": {
    "source": "A text box's bottom line while it can be typed in",
    "text": "Yazılabilir durumdayken metin kutusunun alt çizgisi"
-  },
-  "fbc41fd4efa0fd9a": {
-   "source": "Download a video; <x1/> takes a quality's selector from <x2/> (<x3/> = the best single file; <x4/> = the sound alone as the site has it, not converted; <x5/>, <x6/>, <x7/> or <x8/> = the sound as an MP3 at that bitrate, <x9/> at its best variable one; <x10/> = as Opus; <x11/> = as FLAC, lossless but no better than the site's sound; conversions need ffmpeg). <x12/>: MDM's own downloader brings each stream yt-dlp finds over this many connections (8 by default, 1 to 128), a stream in pieces (HLS, DASH) this many pieces at once. <x13/> saves subtitles beside it: language codes from <x14/> (<x15/>), or <x16/> for every one the uploader gave; <x17/> takes the site's automatic captions instead; <x18/> puts them into the video (needs ffmpeg, MP4 or MKV). <x19/> sends the downloads' connections, and yt-dlp's (and ffmpeg's), through one network adapter, as for <x20/>; when it isn't connected, nothing starts.",
-   "text": "Bir video indir; <x1/>, <x2/> içinden bir kalite seçici alır (<x3/> = en iyi tek dosya; <x4/> = sitenin sunduğu haliyle, dönüştürülmemiş sadece ses; <x5/>, <x6/>, <x7/> veya <x8/> = o bit hızında MP3 olarak ses, <x9/> en iyi değişken bit hızında; <x10/> = Opus olarak; <x11/> = FLAC olarak, kayıpsız ama sitenin sesinden daha iyi değil; dönüştürmeler için ffmpeg gerekir). <x12/>: MDM'nin kendi indiricisi, yt-dlp'nin bulduğu her akışı bu kadar bağlantı üzerinden (varsayılan 8, 1 ila 128), bir akışı parçalar halinde (HLS, DASH) aynı anda bu kadar parça halinde getirir. <x13/> altyazıları yanına kaydeder: <x14/> (<x15/>) dil kodları veya yükleyicinin verdiği her biri için <x16/>; <x17/> bunun yerine sitenin otomatik altyazılarını alır; <x18/> bunları videoya yerleştirir (ffmpeg, MP4 veya MKV gerekir). <x19/> indirmelerin bağlantılarını ve yt-dlp'nin (ve ffmpeg'in) bağlantılarını, <x20/> için olduğu gibi tek bir ağ bağdaştırıcısı üzerinden gönderir; bağlı değilse hiçbir şey başlamaz."
   },
   "fbc5c79e5fad811f": {
    "source": "<g1>VS Code</g1>: in <x2/>, or <g3>MCP: Add Server</g3> in the command palette:",
