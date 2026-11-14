@@ -46,9 +46,9 @@ async fn no_token_in_any_log() {
         let credential = Credential::Token {
             token: TOKEN.into(),
         };
-        // Premium: the service was asked with the token.
+        // Premium (or, Mega-Debrid's key, not said): the service was asked with the token.
         let info = check(&http, service, credential.clone()).await.unwrap();
-        assert!(info.premium, "{service:?}");
+        assert_ne!(info.premium, Some(false), "{service:?}");
         seen.push_str(&format!("{info:?} {credential:?}"));
         let d = Debrid::default();
         d.set_accounts(

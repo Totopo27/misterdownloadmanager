@@ -6,6 +6,11 @@
 #. never shown for a single file
 #. {n} = a number (keep the braces as they are)
 @plural	Also delete the {n} file from disk|Also delete the {n} files from disk	حذف {n} ملف من القرص أيضا|حذف {n} ملف من القرص أيضا|حذف {n} ملفين من القرص أيضا|حذف {n} ملفات من القرص أيضا|حذف {n} ملفا من القرص أيضا|حذف {n} ملف من القرص أيضا
+#. count in cnl.rs
+#. Click'n'Load window: a page whose web site the browser doesn't name, so MDM can't tell which site it is
+#. {n} = a number (keep the braces as they are)
+#, machine
+@plural	An unknown site wants to send {n} link to Link grabber.|An unknown site wants to send {n} links to Link grabber.	يريد موقع غير معروف إرسال {n} رابط إلى ملتقط الروابط.|يريد موقع غير معروف إرسال {n} رابط إلى ملتقط الروابط.|يريد موقع غير معروف إرسال {n} رابطين إلى ملتقط الروابط.|يريد موقع غير معروف إرسال {n} روابط إلى ملتقط الروابط.|يريد موقع غير معروف إرسال {n} رابطا إلى ملتقط الروابط.|يريد موقع غير معروف إرسال {n} رابط إلى ملتقط الروابط.
 #. count in a dialog box
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
@@ -112,6 +117,11 @@
 #. where a magnet's peers came from: {n} = trackers asked; {peers} = "3 peers"
 #. {n} = a number (keep the braces as they are)
 @plural	{n} tracker: {peers}|{n} trackers: {peers}	{n} متتبع: {peers}|{n} متتبع: {peers}|{n} متتبعان: {peers}|{n} متتبعات: {peers}|{n} متتبعا: {peers}|{n} متتبع: {peers}
+#. count in cnl.rs
+#. Click'n'Load window: {site} is a web site's name such as "example.com"
+#. {site} = a web site's name such as "example.com"; {n} = a number (keep the braces as they are)
+#, machine
+@plural	{site} wants to send {n} link to Link grabber.|{site} wants to send {n} links to Link grabber.	يريد {site} إرسال {n} رابط إلى ملتقط الروابط.|يريد {site} إرسال {n} رابط إلى ملتقط الروابط.|يريد {site} إرسال {n} رابطين إلى ملتقط الروابط.|يريد {site} إرسال {n} روابط إلى ملتقط الروابط.|يريد {site} إرسال {n} رابطا إلى ملتقط الروابط.|يريد {site} إرسال {n} رابط إلى ملتقط الروابط.
 #. count in playlistdlg.rs
 #. in Download video: a playlist title then how many videos it has ({count})
 #. {count} = a number (keep the braces as they are)
@@ -229,6 +239,10 @@
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
 #, machine
 	about {size}	حوالي {size}
+#. text in the Options window
+#. Options → Archives → Link grabber check box: Click'n'Load, a link site's button that sends its links to a program on this computer (port 9666, as JDownloader)
+#, machine
+	Accept Click'n'Load from web pages (port 9666)	قبول Click'n'Load من صفحات الويب (المنفذ 9666)
 #. checkbox in the Add torrent window
 #. Torrent settings: other peers may connect to this computer
 	Accept incoming connections	قبول الاتصالات الواردة
@@ -351,6 +365,10 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Afghanistan	أفغانستان
+#. text in the Options window
+#. Options → Add an account: a note under the user name and password fields (Mega-Debrid bans the address for some minutes after a few wrong passwords)
+#, machine
+	After a few wrong passwords the service blocks this connection for some minutes.	بعد عدة كلمات مرور خاطئة تحظر الخدمة هذا الاتصال لبضع دقائق.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Aland Islands	جزر آلاند
@@ -373,10 +391,18 @@
 #. text in the Download video window
 #. in the Subtitles list of Download video: every language the video's uploader gave
 	All the uploader's	كل ما رفعه الناشر
+#. text in cnl.rs
+#. button in the Click'n'Load window: let this site send links (remembered)
+#, machine
+	Allow	السماح
 #. text in the Options window
 #. checkbox under the number of connections per download; {n} is 32
 #. {n} = a number (keep the braces as they are)
 	Allow more than {n} connections	السماح بأكثر من {n} اتصال
+#. text in cnl.rs
+#. Click'n'Load window, under the question: nothing happens to the links before the user adds them in Link grabber
+#, machine
+	Allow only sites you use. Nothing is looked up or downloaded before you add it in Link grabber.	اسمح فقط بالمواقع التي تستخدمها. لا يبحث عن شيء ولا ينزل شيء قبل أن تضيفه في ملتقط الروابط.
 #. text in errors.rs
 	already being downloaded: {path}	قيد التنزيل بالفعل: {path}
 #. text in the Link grabber window
@@ -544,6 +570,10 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Bhutan	بوتان
+#. text in cnl.rs
+#. button in the Click'n'Load window: refuse this site's links (remembered)
+#, machine
+	Block	حظر
 #. text in the Add torrent window
 #. Torrent settings: the address of an IP blocklist (empty: none)
 	Block the addresses in this list (P2P or eMule format):	حظر العناوين في هذه القائمة (صيغة P2P أو eMule):
@@ -749,6 +779,15 @@
 #. button in the download list
 #. verb: clears this filter
 	Clear	مسح
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {port} is 9666; JDownloader is another download manager that uses the same port
+#, machine
+	Click'n'Load can't start: another program (JDownloader?) is using port {port}. Close it, then turn Click'n'Load off and on again in Options.	لا يمكن تشغيل Click'n'Load: برنامج آخر (JDownloader؟) يستخدم المنفذ {port}. أغلقه، ثم أوقف Click'n'Load وشغله مرة أخرى في الخيارات.
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {error} the system's reason
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	Click'n'Load can't start: {error}	لا يمكن تشغيل Click'n'Load: {error}
 #. text in a download's progress window
 #. column title: the peer's torrent program
 	Client	العميل
@@ -2423,6 +2462,10 @@
 #. text in helpers.rs
 #. Video helpers: no copy of this helper yet
 	Not installed yet	لم يتم التثبيت بعد
+#. text in the Link grabber window
+#. Link grabber, a link's status: a web page sent it (Click'n'Load), so it isn't looked up (name, size, online) before it is added
+#, machine
+	Not looked up	لم يبحث عنه
 #. button in helpers.rs
 	Not now	ليس الآن
 #. text in helpers.rs
@@ -2576,6 +2619,10 @@
 #. text in a download's progress window
 #. tab title: what happens when the download finishes
 	Options on completion	خيارات عند الاكتمال
+#. text in the Options window
+#. Options → Add an account: label before the field for an API key the user made at the service (Mega-Debrid: My Account → API Key; the other way to sign in)
+#, machine
+	Or paste an application's API key:	أو الصق مفتاح API لتطبيق:
 #. text in the Options window
 #. Options → Add an account: label before the field for the service's API token (the other way to sign in)
 	Or paste your API token:	أو الصق رمز API الخاص بك:
@@ -3121,6 +3168,10 @@
 #. a country's name (where a download's server is)
 	Sierra Leone	سيراليون
 #. button in the Options window
+#. button: sign in to the debrid service with the user name and password typed in
+#, machine
+	Sign in	تسجيل الدخول
+#. button in the Options window
 #. button: sign in to the debrid service in the browser, by typing a code there
 	Sign in in the browser	تسجيل الدخول في المستعرض
 #. text in the Options window
@@ -3132,6 +3183,10 @@
 #. text in the Options window
 #. Options → Accounts: where the debrid accounts' sign-ins and the other passwords are kept (Windows' own Credential Manager, in Control Panel)
 	Sign-ins and passwords are kept in Windows Credential Manager.	يتم حفظ بيانات تسجيل الدخول وكلمات المرور في مدير بيانات اعتماد Windows.
+#. text in the Options window
+#. Options → Add an account: signed in, the service gives no account name; {state} premium or not
+#, machine
+	Signed in ({state})	تم تسجيل الدخول ({state})
 #. text in the Options window
 #. Options → Add an account: signed in; {user} the account's name, {state} premium or not
 	Signed in as {user} ({state})	تم تسجيل الدخول باسم {user} ({state})
@@ -3623,6 +3678,10 @@
 	the server is busy ({status}); try again later	الخادم مشغول ({status})؛ حاول مرة أخرى لاحقا
 #. text in errors.rs
 	the server sent an unexpected part of the file ({detail})	أرسل الخادم جزءا غير متوقع من الملف ({detail})
+#. text in debrid.rs
+#. Options → Accounts: the service doesn't say whether the account is premium (Mega-Debrid, signed in with an API key); a free account's links are refused when downloading
+#, machine
+	the service doesn't say whether it is premium	لا تذكر الخدمة ما إذا كان الحساب مميزا
 #. text in errors.rs
 #. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
 #, machine
@@ -4085,6 +4144,10 @@
 #. text in the Options window
 #. column title: the user name
 	User	المستخدم
+#. text in the Options window
+#. Options → Add an account: label before the field for the user name at the debrid service
+#, machine
+	User name:	اسم المستخدم:
 #. page title in the Options window
 	User names and passwords for servers/sites	أسماء المستخدمين وكلمات المرور للخوادم/المواقع
 #. text in the Options window

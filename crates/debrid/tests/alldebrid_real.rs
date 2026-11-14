@@ -24,10 +24,10 @@ async fn the_real_service_answers_the_demo_key() {
     .await
     .expect("the account");
     eprintln!(
-        "account: {} premium={} left={:?}",
+        "account: {} premium={:?} left={:?}",
         info.user, info.premium, info.premium_left
     );
-    assert!(info.premium);
+    assert_eq!(info.premium, Some(true));
     let d = Debrid::default();
     d.set_accounts(
         vec![Account {

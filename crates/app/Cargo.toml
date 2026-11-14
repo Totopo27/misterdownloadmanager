@@ -34,6 +34,7 @@ eframe.workspace = true
 egui.workspace = true
 egui-winit.workspace = true
 egui_extras.workspace = true
+skrifa.workspace = true
 image.workspace = true
 craft-i18n.workspace = true
 # misterdownloadmanager-cli's commands: its launcher runs this program for them (main.rs).
@@ -62,6 +63,7 @@ unicode-segmentation = "1.13.3"
 # The text MDM hands to the system: isolates made into marks by each letter's direction (#919).
 unicode-bidi = "0.3.18"
 # Crash and freeze reports: the monitor, minidumps, symbolicated stacks, release logs.
+mdm-cnl.workspace = true
 mdm-crash.workspace = true
 mdm-debrid.workspace = true
 tracing.workspace = true
@@ -108,6 +110,9 @@ zbus = { version = "5.19.0", default-features = false, features = ["async-io", "
 # The settings daemon's theme name (XSETTINGS) when the portal can't say dark or light (unix.rs,
 # #156); already in the tree through winit. Its pure-Rust connection, no extension.
 x11rb = { version = "0.13.2", default-features = false }
+# The GLX vendor that will draw on the X display, before the first window (unix.rs glx_vendor,
+# renderer.rs unpaced_swaps); already in the tree through winit and glutin, loaded at run time.
+x11-dl = "2.21.0"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 # Finder's file icons (unix.rs file_icon); already in the tree through winit and rfd.

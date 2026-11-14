@@ -306,6 +306,9 @@ Everything below ships together, in version 0.5.0.
   built in; 7z and RAR need 7-Zip) extracted when they are downloaded
   ([#37](https://github.com/anefzaoui/misterdownloadmanager/issues/37)); collecting copied links
   comes later
+- ✅ Link grabber: Click'n'Load from link sites, in their packages with their archive passwords;
+  off by default, asked once per site, the links not looked up before they are added
+  ([#37](https://github.com/anefzaoui/misterdownloadmanager/issues/37))
 - ✅ Image galleries with gallery-dl: Wikimedia Commons, Flickr, DeviantArt and many more,
   verified like yt-dlp, or your own copy ([#58](https://github.com/anefzaoui/misterdownloadmanager/issues/58))
 - ✅ Torrents: seeding limits (a share ratio, or a time), off by default, and a finished torrent's
@@ -323,6 +326,8 @@ Everything below ships together, in version 0.5.0.
   HTTP, no peer connections ([#44](https://github.com/anefzaoui/misterdownloadmanager/issues/44))
 - ✅ Debrid accounts (experimental): TorBox, for file-host links and torrents
   ([#391](https://github.com/anefzaoui/misterdownloadmanager/issues/391))
+- ✅ Debrid accounts: Mega-Debrid, with its user name and password or an application's API key
+  ([#44](https://github.com/anefzaoui/misterdownloadmanager/issues/44))
 - ✅ Sign-ins in the system's keychain: Windows Credential Manager, the Secret Service keyring on
   Linux, the macOS keychain; for debrid accounts, Sites Logins and the proxy
   ([#44](https://github.com/anefzaoui/misterdownloadmanager/issues/44))
@@ -558,6 +563,9 @@ Bug fixes from the first days of 0.5.0, a Safari extension, and more file types.
 These ship in the next version.
 
 - ✅ Download panels (the video button): site exclusions support wildcards (`*`) like `*.youtube.*` or `youtube.*` ([#759](https://github.com/anefzaoui/misterdownloadmanager/issues/759))
+- ✅ Linux: no crash when fontconfig offers a font MDM can't draw with (an old bitmap font for
+  Japanese): the best font that scales and MDM can read is used instead
+  ([#931](https://github.com/anefzaoui/misterdownloadmanager/issues/931))
 - ✅ Bangla reviewed by a native speaker: the main window, the list, the progress window, the
   dialogs and the tray, with the menus' letters on English letters
   ([#927](https://github.com/anefzaoui/misterdownloadmanager/pull/927))
@@ -628,6 +636,9 @@ These ship in the next version.
 - ✅ A video of unknown size no longer reads 99.9 % from its first second while yt-dlp downloads it,
   and a video named after a page titled with its file's name gets its extension once (Dropbox's
   `Episode 31.mp4.mp4`) ([#622](https://github.com/anefzaoui/misterdownloadmanager/issues/622))
+- ✅ Tests: the crash reports' end-to-end tests find their crashing example where Rust 1.100's
+  Cargo builds the tests (in its build folder, no longer in deps/), as well as where earlier ones
+  did ([#934](https://github.com/anefzaoui/misterdownloadmanager/issues/934))
 - ✅ Where a download's server is: shown once the server answered, its address and round trip
   together, not a round trip alone (twice too long over https) while a slow server answers; it
   also made a test fail now and then on Linux
@@ -978,6 +989,11 @@ These ship in the next version.
   (part of [#493](https://github.com/anefzaoui/misterdownloadmanager/issues/493))
 - ✅ Windows: **Open folder** uses the file manager set up to open folders, not always Explorer
   ([#446](https://github.com/anefzaoui/misterdownloadmanager/issues/446))
+- ✅ Linux: downloads to an NTFS drive (`ntfs3`) start at once instead of filling the file with
+  zeros first, which held the download at 0% and slowed the whole computer
+- ✅ Linux on Wayland (XWayland) with NVIDIA's driver: typing and clicking no longer lag by 1 to 2
+  seconds; MDM spaces its frames itself instead of waiting for the screen's refresh (other drivers
+  keep the refresh)
 
 ## Being worked on
 

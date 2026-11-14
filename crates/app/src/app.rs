@@ -981,6 +981,8 @@ pub struct App {
     pub remote: Option<mdm_remote::Remote>,
     /// Torrents a paired device sent, their files being looked up (`remote::poll_torrents`).
     pub remote_torrents: Vec<crate::remote::Lookup>,
+    /// Click'n'Load (#37): what pages post waits here, for its site's answer and Link grabber.
+    cnl: crate::cnl::Cnl,
     /// Free space where downloads go, and when it was last looked up (`free_space`).
     free_space: std::sync::Arc<std::sync::Mutex<(Option<Instant>, Option<u64>)>>,
     /// Options → Proxy / Socks → Network adapter (#35): the watch, the route seen last frame, and
@@ -1411,6 +1413,8 @@ impl App {
         if let Some(d) = downloads {
             self.downloads = d;
         }
+        // Nobody to answer Click'n'Load's question or tick Link grabber's packages.
+        let _ = self.cnl.listen(false);
         self
     }
 
@@ -1503,6 +1507,11 @@ impl App {
         app.zoom = zoom;
         app.lang_picker = ask_language.then(|| crate::langpick::Picker::new(true, None));
         app.remote = remote;
+        // Click'n'Load (#37): off unless Options → Archives and Link grabber turned it on.
+        if let Err(why) = app.cnl.listen(app.settings.cnl_on) {
+            // i18n: title of the notice when Click'n'Load couldn't start
+            app.notice = Some((crate::i18n::mark("Click'n'Load"), why));
+        }
         app.rss = crate::rss::Store::path()
             .map(|p| crate::rss::Store::load(&p))
             .unwrap_or_default();
@@ -1562,6 +1571,9 @@ impl App {
             _ => View::All,
         };
         let show_categories = settings.show_categories;
+        // Click'n'Load (#37): made here, listening only once `new` starts it (Options →
+        // Archives and Link grabber turns it on).
+        let cnl = crate::cnl::Cnl::new(rt.clone(), ctx.clone());
         let deferred_torrent_queue: Vec<u64> = items
             .iter()
             .filter(|i| i.status == Status::Complete && i.rename_on_complete.is_some())
@@ -1655,6 +1667,7 @@ impl App {
             torrent_host: crate::torrents::Host::new(),
             remote: None,
             remote_torrents: Vec::new(),
+            cnl,
             free_space: Default::default(),
             netwatch: Default::default(),
             debrid: Default::default(),
@@ -2935,6 +2948,7 @@ impl App {
                     cookies: page_data_for(url, cmd.referer.as_deref(), cmd.cookies.as_deref()),
                     user_agent: cmd.user_agent.clone(),
                     private: cmd.private,
+                    ..Default::default()
                 })
                 .collect();
             // i18n: in Import, where the addresses came from: a page in the browser
@@ -6153,6 +6167,15 @@ impl App {
         if let Some(r) = &self.remote {
             r.apply(crate::remote::config(&self.settings));
         }
+        // Options → Archives and Link grabber: Click'n'Load turned on or off; off forgets the
+        // sites' answers, so a blocked site can be asked again.
+        if !self.settings.cnl_on {
+            self.settings.cnl_sites.clear();
+        }
+        if let Err(why) = self.cnl.listen(self.settings.cnl_on && !self.headless) {
+            // i18n: title of the notice when Click'n'Load couldn't start
+            self.notice = Some((crate::i18n::mark("Click'n'Load"), why));
+        }
         if self.settings.proxy_mode == 2 {
             crate::pacfetch::refresh(&self.settings.proxy_script, &self.rt);
         }
@@ -9181,6 +9204,7 @@ impl App {
                     cookies: None,
                     user_agent: None,
                     private: false,
+                    ..Default::default()
                 })
                 .collect();
             // i18n: in Import, where the addresses came from: dragged onto the window
@@ -9356,6 +9380,19 @@ impl App {
             return;
         }
         self.show_import(found, file);
+    }
+
+    /// What Click'n'Load pages posted: an allowed site's links into Link grabber; the others
+    /// wait for their site's answer (`cnl.ask`). The window comes up for either, once a minute
+    /// for one site.
+    fn poll_cnl(&mut self, ctx: &egui::Context) {
+        let (links, raise) = self.cnl.take(&self.settings.cnl_sites);
+        if raise {
+            self.show_window(ctx);
+        }
+        if !links.is_empty() {
+            self.show_import(links, "Click'n'Load".into());
+        }
     }
 
     /// Links to tick before adding (the browser's page links, Import, dropped links): into Link
@@ -9897,6 +9934,23 @@ impl App {
                     self.grabber = None;
                     self.add_grabbed(start, packages);
                 }
+            }
+        }
+        // Click'n'Load's question about a site; closing it is "Not now".
+        let answer = self.cnl.ask.as_mut().and_then(|d| match d.show(ctx) {
+            Outcome::Open => None,
+            Outcome::Closed => Some(crate::cnl::Answer::NotNow),
+            Outcome::Done(a) => Some(a),
+        });
+        if let Some(answer) = answer {
+            let (links, keep) = self.cnl.answer(answer);
+            if let Some((site, allowed)) = keep {
+                self.settings.cnl_sites.retain(|(s, _)| *s != site);
+                self.settings.cnl_sites.push((site, allowed));
+                self.dirty = true;
+            }
+            if !links.is_empty() {
+                self.show_import(links, "Click'n'Load".into());
             }
         }
         if let Some(d) = &mut self.extracts.needs_7zip
@@ -10717,7 +10771,8 @@ impl eframe::App for App {
     /// is minimized, and a magnet or a download handed over then waited until it was restored
     /// (#162). A command that opens a window gets the UI pass that creates it, minimized or not
     /// (no window is raised or focused for it beyond what the command itself does).
-    fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+    fn logic(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        crate::renderer::present_unpaced(frame);
         // MDM's own work: not counted as the graphics API's time to its first frame (#280).
         crate::renderer::own_work_begin();
         self.tick(ctx);
@@ -10840,6 +10895,7 @@ impl App {
         // Incoming commands and the clock (downloads, queues, Scheduler, saving…): `logic`, just
         // before, which runs minimized too.
         self.poll_picks(&ctx);
+        self.poll_cnl(&ctx);
         self.poll_imports();
         self.drop_target(&ctx);
         self.main_drops(&ctx);

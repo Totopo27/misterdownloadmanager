@@ -457,3 +457,105 @@ pub async fn pm_directdl(headers: HeaderMap, body: Bytes) -> Response {
         Err(_) => pm_error("not_found"),
     }
 }
+
+// ---- Mega-Debrid, as https://www.mega-debrid.eu/index.php?page=api documents it -------------
+//
+// One address, `POST /md/api.php?action=NAME`, the parameters (the token, user name and
+// password too) in the form, as MDM sends them. Every answer has `response_code`: "ok", or the
+// error's code and `response_text`, with HTTP 200. Keys `good` (or `good-…`, premium) and `free`;
+// the user `labuser` (premium) or `freeuser` signs in with the password `labpass`, and each
+// sign-in replaces the user's last token ("valid until the next connection attempt").
+
+static MD_TOKENS: Mutex<Option<HashMap<String, String>>> = Mutex::new(None);
+static MD_SIGNINS: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+
+fn md_error(code: &str, text: &str) -> Response {
+    axum::Json(json!({"response_code": code, "response_text": text})).into_response()
+}
+
+/// Some(premium?) for a token: a key, or a sign-in's token that no newer sign-in replaced.
+fn md_token(form: &HashMap<String, String>) -> Option<bool> {
+    let t = form.get("token")?;
+    if t == "good" || (t.starts_with("good-") && !t.starts_with("good-md-")) {
+        return Some(true);
+    }
+    if t == "free" {
+        return Some(false);
+    }
+    let tokens = MD_TOKENS.lock().unwrap();
+    let user = tokens
+        .as_ref()?
+        .iter()
+        .find(|(_, current)| *current == t)?
+        .0;
+    Some(user == "labuser")
+}
+
+/// `POST /md/api.php?action=…`.
+pub async fn md_api(
+    Query(q): Query<HashMap<String, String>>,
+    headers: HeaderMap,
+    body: Bytes,
+) -> Response {
+    let form: HashMap<String, String> = serde_urlencoded::from_bytes(&body).unwrap_or_default();
+    let action = q.get("action").map(String::as_str).unwrap_or("");
+    let token_error = || md_error("TOKEN_ERROR", "Token error, please log-in");
+    match action {
+        "connectUser" => {
+            let user = form.get("login").cloned().unwrap_or_default();
+            if !matches!(user.as_str(), "labuser" | "freeuser")
+                || form.get("password").map(String::as_str) != Some("labpass")
+            {
+                return md_error("UNKNOWN_USER", "User and password doesn't match");
+            }
+            let n = MD_SIGNINS.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            let token = format!("good-md-{n}");
+            MD_TOKENS
+                .lock()
+                .unwrap()
+                .get_or_insert_default()
+                .insert(user.clone(), token.clone());
+            let now = unix_ms() as i64 / 1000;
+            let vip_end = if user == "labuser" {
+                now + 30 * 86400
+            } else {
+                now - 86400
+            };
+            axum::Json(
+                json!({"response_code": "ok", "response_text": "User logged",
+                "token": token, "vip_end": vip_end.to_string(),
+                "email": format!("{user}@lab.test")}),
+            )
+            .into_response()
+        }
+        "getUserHistory" => match md_token(&form) {
+            Some(_) => axum::Json(json!({"response_code": "ok", "history": []})).into_response(),
+            None => token_error(),
+        },
+        "getHostersList" => axum::Json(json!({"response_code": "ok", "response_text": "",
+            "hosters": [{"name": "hostertest", "url": "Hostertest", "img": "",
+                "domains": [HOSTER], "status": "up", "regexps": [], "type": "file"}]}))
+        .into_response(),
+        "getLink" => {
+            let Some(premium) = md_token(&form) else {
+                return token_error();
+            };
+            if !premium {
+                return md_error("VIP_END", "lab: premium only");
+            }
+            let Some(link) = form.get("link").and_then(|l| url::Url::parse(l).ok()) else {
+                return md_error("PARAMETER_MISSING", "Parameter link is missing");
+            };
+            match direct_for(&headers, &link) {
+                // Quoted, as some of its answers are.
+                Ok((_, _, direct)) => axum::Json(json!({"response_code": "ok",
+                    "response_text": "", "debridLink": format!("\"{direct}\"")}))
+                .into_response(),
+                Err("unsupported") => md_error("UNKNOWN_HOSTER", "lab: unsupported hoster"),
+                Err("down") => md_error("HOSTER_DOWN", "lab: hoster down"),
+                Err(_) => md_error("FILE_NOT_FOUND", "lab: file not found"),
+            }
+        }
+        _ => md_error("UNKNOWN_ACTION", "This action is unknown"),
+    }
+}

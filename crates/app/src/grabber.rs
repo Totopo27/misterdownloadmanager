@@ -64,6 +64,8 @@ pub enum Origin {
     Various,
     /// In the download list already.
     Known,
+    /// Packed by its site (Click'n'Load): the site's package name.
+    Site(String),
 }
 
 impl Origin {
@@ -100,6 +102,7 @@ impl Origin {
             Origin::Various => crate::i18n::t("Various files").to_owned(),
             // i18n: Link grabber: the package of links the download list has already
             Origin::Known => crate::i18n::t("Already in the list").to_owned(),
+            Origin::Site(name) => name.clone(),
         }
     }
 }
@@ -153,11 +156,13 @@ impl Link {
     }
 
     /// A web page given on its own (pasted, copied, typed, in a list), not found on a page: one
-    /// to read for its links (#705). A page's own links aren't read in turn.
+    /// to read for its links (#705). A page's own links aren't read in turn, and a link a web
+    /// page sent (Click'n'Load) never is: reading it is a request the user didn't ask for.
     fn to_read(&self) -> bool {
         self.page
             && self.state == LinkState::Online
             && self.found.referer.is_none()
+            && !self.found.from_page
             && self.read.is_none()
             && !self.known
     }
@@ -268,10 +273,18 @@ impl Grabber {
             let known = known(&url);
             let origin = if known {
                 Origin::Known
+            } else if let Some(site) = d.package.as_deref().filter(|p| !p.trim().is_empty()) {
+                Origin::Site(site.trim().to_owned())
             } else {
                 Origin::of(&url, &name, d.referer.as_deref())
             };
             let pkg = self.package_for(origin);
+            // The site's archive password, unless one is typed already.
+            if let Some(pw) = d.password.as_deref().filter(|p| !p.is_empty())
+                && self.packages[pkg].password.is_empty()
+            {
+                self.packages[pkg].password = pw.to_owned();
+            }
             self.links.push(Link {
                 found: d,
                 url,
@@ -428,8 +441,11 @@ impl Grabber {
                 break;
             }
             let host = l.url.host_str().unwrap_or_default();
+            // A link a web page sent (Click'n'Load) is never looked up: the page chose it, and a
+            // look-up is a request the user didn't ask for.
             if l.state != LinkState::Unchecked
                 || l.known
+                || l.found.from_page
                 || l.magnet
                 || hosts.iter().filter(|h| **h == host).count() >= CHECKS_PER_HOST
             {
@@ -860,7 +876,10 @@ impl Grabber {
                             let glyph = pos2(row.left() + 40.0, top + 2.0);
                             let mut on = l.on;
                             let size = l.size.map(crate::dialogs::dialog_size).unwrap_or_default();
-                            let state = if l.magnet && l.state == LinkState::Unchecked {
+                            let state = if l.found.from_page && l.state == LinkState::Unchecked {
+                                // i18n: Link grabber, a link's status: a web page sent it (Click'n'Load), so it isn't looked up (name, size, online) before it is added
+                                crate::i18n::t("Not looked up").to_owned()
+                            } else if l.magnet && l.state == LinkState::Unchecked {
                                 // i18n: Link grabber, a link's status: a magnet link (a torrent, its files looked up once it is added)
                                 crate::i18n::t("Magnet link").to_owned()
                             } else {
@@ -1193,6 +1212,51 @@ mod tests {
     }
 
     #[test]
+    fn a_sites_packages_keep_its_names_and_password() {
+        let site = |url: &str, pkg: &str, pw: Option<&str>| Imported {
+            url: url.into(),
+            package: Some(pkg.into()),
+            password: pw.map(str::to_owned),
+            from_page: true,
+            ..Default::default()
+        };
+        let mut g = grabber();
+        g.add(
+            vec![
+                // Volumes, but the site packed them: its package, not the volumes'.
+                site("https://h.org/v.part1.rar", "Holiday", Some("secret")),
+                site("https://h.org/v.part2.rar", "Holiday", Some("other")),
+                site("https://h.org/notes.txt", "Notes", None),
+            ],
+            "Click'n'Load".into(),
+            |_| false,
+        );
+        let got: Vec<(&str, &str, usize)> = g
+            .packages
+            .iter()
+            .enumerate()
+            .map(|(k, p)| {
+                (
+                    p.name.as_str(),
+                    p.password.as_str(),
+                    g.links.iter().filter(|l| l.pkg == k).count(),
+                )
+            })
+            .collect();
+        assert_eq!(got, vec![("Holiday", "secret", 2), ("Notes", "", 1)]);
+        assert!(g.packages[0].extract);
+        // Sent by a page: none is looked up; a link the user brought is.
+        assert!(g.to_check().is_empty());
+        g.add(
+            vec![link("https://h.org/mine.zip", None)],
+            String::new(),
+            |_| false,
+        );
+        let check: Vec<String> = g.to_check().iter().map(|(_, u, _)| u.to_string()).collect();
+        assert_eq!(check, vec!["https://h.org/mine.zip"]);
+    }
+
+    #[test]
     fn a_long_list_is_added_at_once_each_link_once() {
         // #805: 20,000 links, each compared with every other, held the window's thread.
         let lists = |n: usize| {
@@ -1325,6 +1389,35 @@ mod tests {
             None,
         );
         assert!(a.same(&c));
+    }
+
+    #[test]
+    fn a_link_a_page_sent_is_never_read_for_its_links() {
+        // A web page's address sent through Click'n'Load: not looked up, and not read either,
+        // even if it ever came to be known as a web page (here: answered as one by hand).
+        let mut g = grabber();
+        g.add(
+            vec![Imported {
+                url: "https://example.com/water/epanet".into(),
+                from_page: true,
+                ..Default::default()
+            }],
+            "Click'n'Load".into(),
+            |_| false,
+        );
+        assert!(g.to_check().is_empty());
+        let slot: Check = Default::default();
+        *slot.lock().unwrap() = Some(Ok(mdm_engine::ProbeInfo {
+            final_url: g.links[0].url.clone(),
+            size: None,
+            file_name: "epanet.html".into(),
+            server: None,
+            web_page: true,
+        }));
+        g.checking(0, slot);
+        g.take_answers();
+        assert_eq!(g.links[0].state, LinkState::Online);
+        assert!(g.to_read().is_empty());
     }
 
     #[test]

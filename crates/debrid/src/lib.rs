@@ -9,10 +9,12 @@
 //! keychain; here they are only in memory, and never written to a log.
 //!
 //! The services: Real-Debrid (`realdebrid`), AllDebrid (`alldebrid`), Premiumize (`premiumize`)
-//! and TorBox (`torbox`), each from its own public API documentation, on one interface
+//! TorBox (`torbox`) and Mega-Debrid (`megadebrid`), each from its own public API
+//! documentation, on one interface
 //! (`ServiceKind`).
 
 pub mod alldebrid;
+pub mod megadebrid;
 pub mod premiumize;
 pub mod realdebrid;
 pub mod torbox;
@@ -36,16 +38,18 @@ pub enum ServiceKind {
     AllDebrid,
     Premiumize,
     TorBox,
+    MegaDebrid,
 }
 
 impl ServiceKind {
     /// Every service, in the order Options lists them: the most asked for first. Add an account
     /// starts on the first.
-    pub const ALL: [ServiceKind; 4] = [
+    pub const ALL: [ServiceKind; 5] = [
         ServiceKind::TorBox,
         ServiceKind::RealDebrid,
         ServiceKind::AllDebrid,
         ServiceKind::Premiumize,
+        ServiceKind::MegaDebrid,
     ];
 
     /// The service's name, as it writes it (not translated).
@@ -55,6 +59,7 @@ impl ServiceKind {
             ServiceKind::AllDebrid => "AllDebrid",
             ServiceKind::Premiumize => "Premiumize",
             ServiceKind::TorBox => "TorBox",
+            ServiceKind::MegaDebrid => "Mega-Debrid",
         }
     }
 
@@ -65,18 +70,33 @@ impl ServiceKind {
             ServiceKind::AllDebrid => "https://alldebrid.com/apikeys",
             ServiceKind::Premiumize => "https://www.premiumize.me/account",
             ServiceKind::TorBox => "https://torbox.app/settings",
+            // Its "API Key" section, where an application (and its key) is made.
+            ServiceKind::MegaDebrid => "https://www.mega-debrid.eu/index.php?page=profil",
         }
     }
 
     /// Whether it signs in by code in the browser (Real-Debrid's device flow, AllDebrid's PIN,
     /// TorBox's device code). Premiumize's needs a client registered by MDM's maintainer: its API
-    /// key is pasted.
+    /// key is pasted. Mega-Debrid has none: its user name and password, or its API key.
     pub fn signs_in_by_code(self) -> bool {
-        !matches!(self, ServiceKind::Premiumize)
+        !matches!(self, ServiceKind::Premiumize | ServiceKind::MegaDebrid)
+    }
+
+    /// Whether it signs in with the user name and password (Mega-Debrid's `connectUser`), the
+    /// other way to its pasted API key.
+    pub fn signs_in_with_password(self) -> bool {
+        matches!(self, ServiceKind::MegaDebrid)
+    }
+
+    /// Whether it downloads torrents for MDM (`torrents`). Mega-Debrid's torrent calls don't
+    /// document the states a torrent goes through, nor its files' links: not yet.
+    pub fn takes_magnets(self) -> bool {
+        !matches!(self, ServiceKind::MegaDebrid)
     }
 
     /// The requests a minute MDM allows itself (each service's published limit, halved or more:
-    /// Real-Debrid 250 a minute, AllDebrid 600; Premiumize publishes none). TorBox: 300 a minute
+    /// Real-Debrid 250 a minute, AllDebrid 600, Mega-Debrid 50 a second; Premiumize publishes
+    /// none). TorBox: 300 a minute
     /// for each endpoint, per API key, and 60 new web downloads (or uncached torrents) an hour
     /// (https://support.torbox.app/en/articles/13726368-api-rate-limits); a refused request
     /// pauses it as any "too many requests" does.
@@ -84,7 +104,7 @@ impl ServiceKind {
         match self {
             ServiceKind::RealDebrid => 120,
             ServiceKind::AllDebrid => 300,
-            ServiceKind::Premiumize => 60,
+            ServiceKind::Premiumize | ServiceKind::MegaDebrid => 60,
             ServiceKind::TorBox => 120,
         }
     }
@@ -97,6 +117,7 @@ pub struct Services {
     pub ad: Url,
     pub pm: Url,
     pub tb: Url,
+    pub md: Url,
 }
 
 impl Default for Services {
@@ -106,6 +127,7 @@ impl Default for Services {
             ad: Url::parse(alldebrid::BASE).expect("constant"),
             pm: Url::parse(premiumize::BASE).expect("constant"),
             tb: Url::parse(torbox::BASE).expect("constant"),
+            md: Url::parse(megadebrid::BASE).expect("constant"),
         }
     }
 }
@@ -118,6 +140,7 @@ impl Services {
             ad: base.join("ad/").expect("relative"),
             pm: base.join("pm/api/").expect("relative"),
             tb: base.join("tb/v1/api/").expect("relative"),
+            md: base.join("md/api.php").expect("relative"),
         }
     }
 }
@@ -134,6 +157,11 @@ pub enum Credential {
         client_secret: String,
         refresh_token: String,
     },
+    /// The user name and password the service signs in with (Mega-Debrid's `connectUser`). The
+    /// password itself is kept (sealed, in the keychain), to sign in again when the token the
+    /// sign-in gave is refused; only that token stays in memory. An application's key
+    /// ([`Credential::Token`]) keeps no password.
+    Login { user: String, password: String },
 }
 
 /// Never print a secret, even in a debug dump.
@@ -142,6 +170,7 @@ impl std::fmt::Debug for Credential {
         match self {
             Credential::Token { .. } => f.write_str("Token(…)"),
             Credential::Oauth { .. } => f.write_str("Oauth(…)"),
+            Credential::Login { .. } => f.write_str("Login(…)"),
         }
     }
 }
@@ -158,7 +187,8 @@ pub struct Account {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct AccountInfo {
     pub user: String,
-    pub premium: bool,
+    /// None: the service doesn't say (Mega-Debrid, for an application's key).
+    pub premium: Option<bool>,
     /// Premium time left.
     pub premium_left: Option<Duration>,
 }
@@ -356,19 +386,37 @@ impl Http {
 const USER_AGENT: &str = concat!("MisterDownloadManager/", env!("CARGO_PKG_VERSION"));
 
 /// One account, signed in: its access token in memory (Real-Debrid's device flow gives tokens
-/// that expire; a pasted token doesn't).
+/// that expire; Mega-Debrid's sign-in one that lasts until the next sign-in; a pasted token
+/// doesn't).
 struct Session {
     account: Account,
     http: Arc<Http>,
     access: tokio::sync::Mutex<Option<(String, Instant)>>,
+    /// Mega-Debrid: what the sign-in behind `access` said (premium's end, Unix time; the
+    /// account's e-mail), so checking the account doesn't sign in again.
+    signed_in: std::sync::Mutex<Option<(i64, String)>>,
 }
 
 impl Session {
-    /// A token to call with: the pasted one, or the device flow's access token, refreshed five
-    /// minutes before it expires (or when `stale`, after a sign-in error).
-    async fn token(&self, stale: bool) -> Result<String, Fault> {
+    /// A token to call with: the pasted one, the device flow's access token, refreshed five
+    /// minutes before it expires, or the sign-in's. `refused`: the one a call just had refused;
+    /// a new one is made only if no other call made one since (on Mega-Debrid each sign-in ends
+    /// the token before it, so two downloads signing in at once would end each other's).
+    async fn token(&self, refused: Option<&str>) -> Result<String, Fault> {
         match &self.account.credential {
             Credential::Token { token } => Ok(token.clone()),
+            Credential::Login { user, password } => {
+                let mut access = self.access.lock().await;
+                if let Some((t, _)) = access.as_ref()
+                    && Some(t.as_str()) != refused
+                {
+                    return Ok(t.clone());
+                }
+                let c = megadebrid::connect(&self.http, user, password).await?;
+                *access = Some((c.token.clone(), Instant::now()));
+                *self.signed_in.lock().unwrap() = Some((c.vip_end, c.email));
+                Ok(c.token)
+            }
             Credential::Oauth {
                 client_id,
                 client_secret,
@@ -376,7 +424,7 @@ impl Session {
             } => {
                 let mut access = self.access.lock().await;
                 if let Some((t, until)) = access.as_ref()
-                    && !stale
+                    && Some(t.as_str()) != refused
                     && *until > Instant::now()
                 {
                     return Ok(t.clone());
@@ -391,17 +439,22 @@ impl Session {
         }
     }
 
-    /// `call` with a token; once more with a fresh one after a sign-in error.
+    /// `call` with a token; once more with a fresh one after a sign-in error (another sign-in
+    /// to the same Mega-Debrid account replaces its token).
     async fn with_token<T, F, Fut>(&self, call: F) -> Result<T, Fault>
     where
         F: Fn(String) -> Fut,
         Fut: std::future::Future<Output = Result<T, Fault>>,
     {
-        match call(self.token(false).await?).await {
+        let token = self.token(None).await?;
+        match call(token.clone()).await {
             Err(Fault::Service(ServiceFault::SignIn))
-                if matches!(self.account.credential, Credential::Oauth { .. }) =>
+                if matches!(
+                    self.account.credential,
+                    Credential::Oauth { .. } | Credential::Login { .. }
+                ) =>
             {
-                call(self.token(true).await?).await
+                call(self.token(Some(&token)).await?).await
             }
             r => r,
         }
@@ -420,7 +473,7 @@ impl Session {
         };
         match self.account.service {
             ServiceKind::AllDebrid => {
-                let key = self.token(false).await?;
+                let key = self.token(None).await?;
                 let u = match alldebrid::unlock(&self.http, &key, link).await {
                     Ok(u) => u,
                     Err(Fault::Unsupported) => return Ok(None),
@@ -470,7 +523,7 @@ impl Session {
                 }))
             }
             ServiceKind::Premiumize => {
-                let key = self.token(false).await?;
+                let key = self.token(None).await?;
                 let d = match premiumize::direct(&self.http, &key, link).await {
                     Ok(d) => d,
                     Err(Fault::Unsupported) => return Ok(None),
@@ -492,7 +545,7 @@ impl Session {
             }
             ServiceKind::TorBox => {
                 use torbox::Kind;
-                let key = self.token(false).await?;
+                let key = self.token(None).await?;
                 let id = match torbox::create(&self.http, &key, Kind::Web, "link", link.as_str())
                     .await
                 {
@@ -545,6 +598,25 @@ impl Session {
                     url,
                     file_name: Some(name).filter(|n| !n.trim().is_empty()),
                     size: (file.size > 0).then_some(file.size),
+                    max_connections: None,
+                    headers: Default::default(),
+                }))
+            }
+            ServiceKind::MegaDebrid => {
+                let l = match self
+                    .with_token(|t| async move { megadebrid::unlock(&self.http, &t, link).await })
+                    .await
+                {
+                    Ok(l) => l,
+                    Err(Fault::Unsupported) => return Ok(None),
+                    Err(e) => return Err(e),
+                };
+                // Its answer has the link only: the name and size come from the download.
+                let url = Url::parse(l.url()).map_err(|_| not_a_file())?;
+                Ok(Some(Unlocked {
+                    url,
+                    file_name: None,
+                    size: None,
                     max_connections: None,
                     headers: Default::default(),
                 }))
@@ -643,6 +715,7 @@ impl Debrid {
                             account,
                             http: http.clone(),
                             access: tokio::sync::Mutex::new(None),
+                            signed_in: std::sync::Mutex::new(None),
                         })
                     })
             })
@@ -666,11 +739,12 @@ impl Debrid {
                 ServiceKind::RealDebrid => realdebrid::domains(&s.http).await,
                 ServiceKind::AllDebrid => alldebrid::domains(&s.http).await,
                 // Premiumize lists its services to signed-in accounts.
-                ServiceKind::Premiumize => match s.token(false).await {
+                ServiceKind::Premiumize => match s.token(None).await {
                     Ok(t) => premiumize::domains(&s.http, &t).await,
                     Err(e) => Err(e),
                 },
                 ServiceKind::TorBox => torbox::domains(&s.http).await,
+                ServiceKind::MegaDebrid => megadebrid::domains(&s.http).await,
             };
             match list {
                 Ok(list) => {
@@ -731,7 +805,7 @@ impl Debrid {
         let Some(s) = self.session(id) else {
             return Ok(());
         };
-        torbox::release(&s.http, &s.token(false).await?, url).await
+        torbox::release(&s.http, &s.token(None).await?, url).await
     }
 
     /// Ask the service about account `id` (Options, after signing in).
@@ -755,25 +829,25 @@ async fn account_info(s: &Session) -> Result<AccountInfo, Fault> {
                 .with_token(|t| async move { realdebrid::user(&s.http, &t).await })
                 .await?;
             Ok(AccountInfo {
-                premium: u.kind == "premium" && u.premium > 0,
+                premium: Some(u.kind == "premium" && u.premium > 0),
                 premium_left: (u.premium > 0).then(|| Duration::from_secs(u.premium as u64)),
                 user: u.username,
             })
         }
         ServiceKind::AllDebrid => {
-            let u = alldebrid::user(&s.http, &s.token(false).await?).await?;
+            let u = alldebrid::user(&s.http, &s.token(None).await?).await?;
             let left = u.premium_until - now_unix();
             Ok(AccountInfo {
-                premium: u.is_premium,
+                premium: Some(u.is_premium),
                 premium_left: (u.is_premium && left > 0).then(|| Duration::from_secs(left as u64)),
                 user: u.username,
             })
         }
         ServiceKind::Premiumize => {
-            let a = premiumize::account(&s.http, &s.token(false).await?).await?;
+            let a = premiumize::account(&s.http, &s.token(None).await?).await?;
             let left = a.premium_until.map(|t| t - now_unix()).filter(|l| *l > 0);
             Ok(AccountInfo {
-                premium: left.is_some(),
+                premium: Some(left.is_some()),
                 premium_left: left.map(|l| Duration::from_secs(l as u64)),
                 // Premiumize gives no user name: its customer ID stands for it.
                 user: match a.customer_id {
@@ -784,7 +858,7 @@ async fn account_info(s: &Session) -> Result<AccountInfo, Fault> {
             })
         }
         ServiceKind::TorBox => {
-            let u = torbox::user(&s.http, &s.token(false).await?).await?;
+            let u = torbox::user(&s.http, &s.token(None).await?).await?;
             let left = u
                 .premium_expires_at
                 .as_deref()
@@ -793,12 +867,60 @@ async fn account_info(s: &Session) -> Result<AccountInfo, Fault> {
                 .filter(|l| *l > 0);
             Ok(AccountInfo {
                 // Plan 0 is the free one.
-                premium: u.plan > 0 && left.is_some(),
+                premium: Some(u.plan > 0 && left.is_some()),
                 premium_left: left.map(|l| Duration::from_secs(l as u64)),
                 // TorBox gives no user name: the account's email stands for it.
                 user: u.email,
             })
         }
+        ServiceKind::MegaDebrid => match &s.account.credential {
+            // Signing in says when premium ends; the account's e-mail stands for its name. The
+            // token the last sign-in gave is checked first: signing in again would end it, and
+            // the downloads using it with it.
+            Credential::Login { user, .. } => {
+                let held = s.access.lock().await.as_ref().map(|(t, _)| t.clone());
+                match held.filter(|_| s.signed_in.lock().unwrap().is_some()) {
+                    Some(t) => match megadebrid::token_works(&s.http, &t).await {
+                        Ok(()) => {}
+                        Err(Fault::Service(ServiceFault::SignIn)) => {
+                            s.token(Some(&t)).await?;
+                        }
+                        Err(e) => return Err(e),
+                    },
+                    // Not signed in yet: this signs in.
+                    None => {
+                        s.token(None).await?;
+                    }
+                }
+                let (vip_end, email) = s
+                    .signed_in
+                    .lock()
+                    .unwrap()
+                    .clone()
+                    .ok_or(Fault::Service(ServiceFault::SignIn))?;
+                let left = vip_end - now_unix();
+                Ok(AccountInfo {
+                    premium: Some(left > 0),
+                    premium_left: (left > 0).then(|| Duration::from_secs(left as u64)),
+                    user: if email.is_empty() {
+                        user.clone()
+                    } else {
+                        email
+                    },
+                })
+            }
+            // An application's key: the API has no call that says whether its account is
+            // premium (read 2026-11-11), so MDM checks that the key works and says no more. A
+            // free account's links are refused, with the service's reason, when downloading.
+            _ => {
+                megadebrid::token_works(&s.http, &s.token(None).await?).await?;
+                Ok(AccountInfo {
+                    premium: None,
+                    premium_left: None,
+                    user: String::new(),
+                })
+            }
+        },
     }
 }
 
@@ -826,6 +948,7 @@ pub async fn check(
             budgets: Mutex::default(),
         }),
         access: tokio::sync::Mutex::new(None),
+        signed_in: std::sync::Mutex::new(None),
     };
     account_info(&s).await
 }
@@ -935,9 +1058,9 @@ pub mod signin {
                     inner: Inner::Tb(c),
                 })
             }
-            ServiceKind::Premiumize => Err(Fault::Service(ServiceFault::Other(
-                "Premiumize signs in with its API key".into(),
-            ))),
+            ServiceKind::Premiumize | ServiceKind::MegaDebrid => Err(Fault::Service(
+                ServiceFault::Other(format!("{} signs in with its API key", service.name())),
+            )),
         }
     }
 
@@ -950,6 +1073,7 @@ pub mod signin {
             ServiceKind::AllDebrid => "alldebrid.com",
             ServiceKind::Premiumize => "premiumize.me",
             ServiceKind::TorBox => "torbox.app",
+            ServiceKind::MegaDebrid => "mega-debrid.eu",
         };
         let ok = url::Url::parse(page).is_ok_and(|u| {
             u.scheme() == "https"
@@ -1034,6 +1158,29 @@ mod tests {
     use super::*;
 
     #[test]
+    fn the_services_with_a_browser_sign_in_keep_it() {
+        // Options' "Sign in in the browser" button: Real-Debrid, AllDebrid and TorBox.
+        let by_code: Vec<_> = ServiceKind::ALL
+            .into_iter()
+            .filter(|s| s.signs_in_by_code())
+            .collect();
+        assert_eq!(
+            by_code,
+            [
+                ServiceKind::TorBox,
+                ServiceKind::RealDebrid,
+                ServiceKind::AllDebrid
+            ]
+        );
+        // Mega-Debrid alone by user name and password; every service also by a pasted key.
+        let by_password: Vec<_> = ServiceKind::ALL
+            .into_iter()
+            .filter(|s| s.signs_in_with_password())
+            .collect();
+        assert_eq!(by_password, [ServiceKind::MegaDebrid]);
+    }
+
+    #[test]
     fn hosts_match_their_domains_and_subdomains_only() {
         let d = vec!["rapidgator.net".to_owned(), "WWW.1fichier.com".to_owned()];
         for yes in [
@@ -1063,14 +1210,18 @@ mod tests {
             refresh_token: "REFRESH".into(),
         };
         let shown = format!(
-            "{c:?} {:?}",
+            "{c:?} {:?} {:?}",
             Credential::Token {
                 token: "TOKEN".into()
+            },
+            Credential::Login {
+                user: "USER".into(),
+                password: "PASSWORD".into()
             }
         );
-        assert!(
-            !shown.contains("SECRET") && !shown.contains("REFRESH") && !shown.contains("TOKEN")
-        );
+        for secret in ["SECRET", "REFRESH", "TOKEN", "USER", "PASSWORD"] {
+            assert!(!shown.contains(secret), "{secret}");
+        }
         let json = serde_json::to_string(&c).unwrap();
         assert!(json.contains(r#""kind":"oauth""#));
         assert_eq!(serde_json::from_str::<Credential>(&json).unwrap(), c);

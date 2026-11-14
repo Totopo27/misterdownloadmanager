@@ -819,10 +819,124 @@ pub fn test_slow_start() {
 /// The start of every main-window pass: the system's API's device checked (see `gpu::poll`).
 /// The pass itself is MDM's own work, not the API's (see [`FirstFrameClock`]).
 pub fn frame_begin() {
+    pace();
     own_work_begin();
     #[cfg(gpu)]
     gpu::poll();
     stall_test();
+}
+
+/// The frames are paced by MDM, not by the screen's refresh (see [`unpaced_swaps`]).
+static PACED: AtomicBool = AtomicBool::new(false);
+
+/// wgpu presents without waiting for the refresh once MDM paces the frames: its surface takes
+/// the present mode from the app's frame, which the first pass has (none while the app is made).
+pub fn present_unpaced(frame: &mut eframe::Frame) {
+    #[cfg(gpu)]
+    if PACED.load(Ordering::Relaxed)
+        && let Some(mut config) = frame.wgpu_surface_config()
+        && config.present_mode != eframe::wgpu::PresentMode::AutoNoVsync
+    {
+        config.present_mode = eframe::wgpu::PresentMode::AutoNoVsync;
+        frame.set_wgpu_surface_config(config);
+    }
+    #[cfg(not(gpu))]
+    let _ = frame;
+}
+
+/// The shortest time between two frames when MDM paces them: 60 a second, as the screen would.
+const FRAME_PACE: std::time::Duration = std::time::Duration::from_micros(16_667);
+
+/// Linux under XWayland (MDM's default in a Wayland session) with NVIDIA's own driver: a swap
+/// that waits for the screen's refresh waited about a second for each window XWayland's
+/// compositor wasn't showing at that moment (the main window behind a dialog, a dialog behind
+/// another), and every window of MDM draws in one pass, so a key typed in Download video's File
+/// name showed 1 to 2 seconds later, and every click the same. Its windows swap at once there,
+/// and MDM spaces its frames itself ([`pace`]). Other drivers under XWayland (Mesa: Intel, AMD,
+/// nouveau) keep the refresh's pacing. `vendor`: the driver's vendor, as it names itself.
+fn unpaced_swaps(xwayland: bool, vendor: &str) -> bool {
+    xwayland && vendor.to_ascii_lowercase().contains("nvidia")
+}
+
+/// MDM's windows are X11's in a Wayland session (XWayland).
+fn on_xwayland() -> bool {
+    #[cfg(target_os = "linux")]
+    return crate::unix::on_xwayland();
+    #[cfg(not(target_os = "linux"))]
+    false
+}
+
+/// OpenGL's swap interval is chosen as its first window is made, before the app knows the
+/// driver: under XWayland, the GLX vendor of the display is asked first (`unix::glx_vendor`).
+fn gl_vendor_before_windows() -> Option<String> {
+    #[cfg(target_os = "linux")]
+    return on_xwayland().then(crate::unix::glx_vendor).flatten();
+    #[cfg(not(target_os = "linux"))]
+    None
+}
+
+/// Once the app is made and its driver is known: whether MDM paces the frames, and the log says
+/// so. OpenGL's windows were made unpaced only if [`configure`] took the GLX vendor for NVIDIA's;
+/// wgpu's adapter says its vendor now, and its present mode follows at the first pass
+/// ([`present_unpaced`]).
+fn pacing_known(cc: &eframe::CreationContext<'_>, swapped_at_once: bool) {
+    let xwayland = on_xwayland();
+    #[cfg(target_os = "linux")]
+    let gl_vendor = cc.gl.as_deref().map(crate::unix::gl_vendor);
+    #[cfg(not(target_os = "linux"))]
+    let gl_vendor: Option<String> = None;
+    #[cfg(gpu)]
+    let gpu_vendor = cc
+        .wgpu_render_state
+        .as_ref()
+        .map(|rs| gpu::vendor_name(&rs.adapter.get_info()));
+    #[cfg(not(gpu))]
+    let gpu_vendor: Option<String> = None;
+    let vendor = gl_vendor.or(gpu_vendor).unwrap_or_default();
+    let unpaced = unpaced_swaps(xwayland, &vendor);
+    if cc.gl.is_some() && unpaced != swapped_at_once {
+        // The GLX vendor and the context's disagree (an offloading setup): the windows keep the
+        // swap they were made with, and MDM paces only when they don't wait for the refresh.
+        tracing::warn!(
+            "OpenGL's vendor is {vendor}, but its windows were made {}",
+            if swapped_at_once {
+                "without waiting for the screen's refresh"
+            } else {
+                "waiting for the screen's refresh"
+            }
+        );
+    }
+    let paced = if cc.gl.is_some() {
+        swapped_at_once
+    } else {
+        unpaced
+    };
+    PACED.store(paced, Ordering::Relaxed);
+    if paced {
+        tracing::info!(
+            "frame pacing: {vendor} under XWayland, so frames don't wait for the screen's refresh; MDM spaces them itself, {} a second at most",
+            (1.0 / FRAME_PACE.as_secs_f64()).round()
+        );
+    }
+}
+
+/// When MDM paces the frames: the next waits until [`FRAME_PACE`] has passed since the last
+/// began (a pass only runs when there is something to draw: an idle window waits as before).
+fn pace() {
+    use std::cell::Cell;
+    use std::time::Instant;
+    thread_local! {
+        static LAST: Cell<Option<Instant>> = const { Cell::new(None) };
+    }
+    if !PACED.load(Ordering::Relaxed) {
+        return;
+    }
+    LAST.with(|last| {
+        if let Some(wait) = last.get().and_then(|t| FRAME_PACE.checked_sub(t.elapsed())) {
+            std::thread::sleep(wait);
+        }
+        last.set(Some(Instant::now()));
+    });
 }
 
 /// The first frame was drawn (presented).
@@ -1018,6 +1132,7 @@ pub fn run<A: eframe::App + 'static>(
         tracing::info!("drawing with {}", attempt.name());
         let make = creator.clone();
         let gl_checked = plan.gl_checked;
+        let swapped_at_once = attempt == Attempt::OpenGl && !opts.glow_options.vsync;
         // Why this way: the plan's reason for its first, the last one's failure for another.
         let why_not = match &instead {
             Some(w) => w.clone(),
@@ -1029,6 +1144,7 @@ pub fn run<A: eframe::App + 'static>(
             Box::new(move |cc| {
                 let make = make.borrow_mut().take().ok_or("the app was already made")?;
                 started(cc, attempt, why_not, gl_checked);
+                pacing_known(cc, swapped_at_once);
                 // Making the app is MDM's own work, not the API's: off the first frame's clock.
                 own_work_begin();
                 let app = make(cc);
@@ -1079,6 +1195,11 @@ fn configure(opts: &mut eframe::NativeOptions, attempt: Attempt) {
         // Not built here (plan() never asks for it).
         #[cfg(not(gpu))]
         Attempt::Gpu(_) => opts.renderer = eframe::Renderer::Glow,
+    }
+    PACED.store(false, Ordering::Relaxed);
+    if attempt == Attempt::OpenGl {
+        let vendor = gl_vendor_before_windows().unwrap_or_default();
+        opts.glow_options.vsync = !unpaced_swaps(on_xwayland(), &vendor);
     }
 }
 
@@ -1373,6 +1494,18 @@ mod gpu {
         }
     }
 
+    /// The adapter's vendor and driver as words ("NVIDIA", "radv", "Intel open-source Mesa
+    /// driver"), for [`super::unpaced_swaps`]: NVIDIA's PCI vendor id said by name too.
+    pub fn vendor_name(info: &wgpu::AdapterInfo) -> String {
+        const NVIDIA: u32 = 0x10de;
+        let said = format!("{} {}", info.driver, info.driver_info);
+        if info.vendor == NVIDIA && !said.to_ascii_lowercase().contains("nvidia") {
+            format!("NVIDIA {said}")
+        } else {
+            said
+        }
+    }
+
     pub fn describe(info: &wgpu::AdapterInfo) -> String {
         let mut s = format!("{} on {}", api(), info.name);
         let driver = [&info.driver, &info.driver_info]
@@ -1434,6 +1567,28 @@ fn choose(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Only NVIDIA's own driver under XWayland swaps at once (its vsynced swap waits about a
+    /// second for a window the compositor isn't showing); Mesa's drivers keep the refresh's
+    /// pacing, and so does every driver outside XWayland.
+    #[test]
+    fn only_nvidia_under_xwayland_swaps_at_once() {
+        for nvidia in ["NVIDIA Corporation", "NVIDIA 595.99.02", "nvidia"] {
+            assert!(unpaced_swaps(true, nvidia), "{nvidia}");
+            assert!(!unpaced_swaps(false, nvidia), "{nvidia} outside XWayland");
+        }
+        for other in [
+            "Mesa Project and SGI",
+            "Mesa",
+            "Intel",
+            "AMD",
+            "radv Mesa 25.2.8",
+            "Intel open-source Mesa driver Mesa 25.2.8",
+            "",
+        ] {
+            assert!(!unpaced_swaps(true, other), "{other}");
+        }
+    }
 
     #[test]
     fn the_setting_or_an_override_then_the_other_way() {

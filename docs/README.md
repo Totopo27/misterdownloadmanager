@@ -34,7 +34,7 @@ These pages explain each part of the program. The tutorials walk through the thi
 - **[Image galleries](galleries.md)** — download a gallery's pictures (Wikimedia Commons, Flickr, DeviantArt and many more) with gallery-dl.
 - **[Torrents](torrents.md)** — magnet links and .torrent files, choosing files, and sharing.
 - **[Torrents and your security](torrent-security.md)** — what others can see, the network switches, blocklists, proxies.
-- **[Debrid service accounts](debrid.md)** — Real-Debrid, AllDebrid, Premiumize and TorBox: file-host links through your own account.
+- **[Debrid service accounts](debrid.md)** — Real-Debrid, AllDebrid, Premiumize, TorBox and Mega-Debrid: file-host links through your own account.
 
 ## Settings
 

@@ -1,0 +1,25 @@
+[package]
+name = "mdm-cnl"
+description = "Click'n'Load 2: the listener on 127.0.0.1:9666 that takes a link site's packages of links for Link grabber, limited and asked for"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+# AES-128-CBC for Click'n'Load 2 (the same crate zip's AES already brings in).
+aes = "0.9.4"
+axum.workspace = true
+base64.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+url.workspace = true
+
+[dev-dependencies]
+reqwest.workspace = true
+tokio = { workspace = true, features = ["test-util"] }
+
+[lints]
+workspace = true

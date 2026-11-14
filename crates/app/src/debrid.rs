@@ -100,15 +100,17 @@ impl Route {
 /// "premium, 143 days left", "free account": what Options shows for an account.
 pub fn state_text(info: &AccountInfo) -> String {
     match (info.premium, info.premium_left) {
-        (true, Some(left)) => crate::i18n::fmt(
+        (Some(true), Some(left)) => crate::i18n::fmt(
             // i18n: Options → Accounts: a debrid account's state; {days} the days of premium left
             crate::i18n::t("premium, {days} days left"),
             &[("days", &(left.as_secs() / 86400).to_string())],
         ),
         // i18n: Options → Accounts: a debrid account with premium (no end date given)
-        (true, None) => crate::i18n::t("premium").to_owned(),
+        (Some(true), None) => crate::i18n::t("premium").to_owned(),
         // i18n: Options → Accounts: a debrid account without premium (it can't unlock links)
-        (false, _) => crate::i18n::t("free account: links need premium").to_owned(),
+        (Some(false), _) => crate::i18n::t("free account: links need premium").to_owned(),
+        // i18n: Options → Accounts: the service doesn't say whether the account is premium (Mega-Debrid, signed in with an API key); a free account's links are refused when downloading
+        (None, _) => crate::i18n::t("the service doesn't say whether it is premium").to_owned(),
     }
 }
 
@@ -221,6 +223,22 @@ impl SignIn {
                     },
                 ))
             };
+            me.finish(service, run, &ctx);
+        });
+    }
+
+    /// Sign in with the user name and password (Mega-Debrid's other way to its API key).
+    pub fn by_password(
+        &self,
+        service: ServiceKind,
+        user: String,
+        password: String,
+        ctx: &egui::Context,
+    ) {
+        let (me, ctx) = (self.clone(), ctx.clone());
+        me.set(SignInState::Checking, &ctx);
+        std::thread::spawn(move || {
+            let run = async { Ok((http()?, Credential::Login { user, password })) };
             me.finish(service, run, &ctx);
         });
     }

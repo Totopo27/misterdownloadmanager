@@ -513,6 +513,7 @@ mod imp {
                 headers: resp.headers().clone(),
                 url: url.clone(),
                 len: resp.content_length(),
+                from: resp.remote_addr(),
             };
             let body = Body::Browser(Stream {
                 len: head.len,

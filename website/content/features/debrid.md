@@ -1,10 +1,10 @@
 ---
 name: Debrid accounts
-title: Real-Debrid, AllDebrid and Premiumize accounts
+title: Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts
 headline: Your debrid account, with every connection MDM has.
-line: File-host links unlocked through Real-Debrid, AllDebrid or Premiumize, then downloaded with MDM's speed and resume.
+line: File-host links unlocked through Real-Debrid, AllDebrid, Premiumize or Mega-Debrid, then downloaded with MDM's speed and resume.
 lede: A debrid service downloads files from file hosts on its own servers and hands back a plain link, without the host's waits, speed caps and captchas. With your account in MDM, that link is downloaded like any file.
-description: Use your Real-Debrid, AllDebrid or Premiumize account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.
+description: Use your Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.
 group: downloading
 order: 60
 since: 0.5
@@ -27,9 +27,10 @@ Real-Debrid (your account)**. Untick it to download that one link directly. The 
 
 ## Sign in once
 
-**Options → Accounts → Add...** takes **Real-Debrid**, **AllDebrid** and **Premiumize**. Real-Debrid
-and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize
-with its API key. MDM shows the account's name and whether it is premium. With several accounts,
+**Options → Accounts → Add...** takes **Real-Debrid**, **AllDebrid**, **Premiumize** and
+**Mega-Debrid**. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with
+your API token; Premiumize with its API key; Mega-Debrid with your user name and password, or an
+application's API key. MDM shows the account's name and whether it is premium. With several accounts,
 a link goes through the first one whose service supports its host.
 
 ## Torrents without peers

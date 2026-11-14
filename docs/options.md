@@ -122,7 +122,7 @@ The passwords (these, the proxy's and the debrid accounts') are kept in the syst
 ![Options on its Accounts page: debrid service accounts](images/help/options-accounts.webp)
 *Accounts: your debrid accounts.*
 
-Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox; experimental): **Add...** signs in by code in the browser or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See [Debrid service accounts](debrid.md).
+Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; experimental): **Add...** signs in by code in the browser, with your user name and password, or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See [Debrid service accounts](debrid.md).
 
 ## Sounds
 
@@ -154,6 +154,7 @@ Archives (zip, 7z, rar, tar, gz, xz), and [Link grabber](link-grabber.md).
 - Whether **7-Zip** was found: 7z and RAR archives need it.
 - **Look links up when they arrive (name, size, online)** — Link grabber asks each server about its file (on by default).
 - **Hide web pages** — Link grabber's default for the same box (on).
+- **Accept Click'n'Load from web pages (port 9666)** (off by default) — a link site's Click'n'Load button sends its links to MDM's Link grabber. See [Click'n'Load](link-grabber.md#clickn-load).
 
 ## Remote
 

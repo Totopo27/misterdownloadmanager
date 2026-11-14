@@ -3,17 +3,35 @@
 //! a proxy said as such (the address is then the proxy's).
 
 use std::net::{IpAddr, Ipv4Addr};
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 use mdm_engine::download::{State, probe};
-use mdm_engine::{Destination, Download, Options, Proxy, Request};
-use mdm_labserver::{Config, LabServer};
+use mdm_engine::{Destination, Download, Options, Proxy, Request, Server};
+use mdm_labserver::{Config, Faults, LabServer};
 
 fn opts() -> Options {
     Options {
         retry_delay: Duration::from_millis(50),
         max_retries: 1,
         ..Options::default()
+    }
+}
+
+/// The server as `d` tells it, looked at every 5 ms until it ends, as the progress window does
+/// every frame: whole whenever it is told (#933). The last one told.
+async fn told_while_it_runs(d: &Download) -> Option<Server> {
+    let mut told = None;
+    loop {
+        let view = d.snapshot();
+        if let Some(seen) = view.server {
+            assert_eq!(seen.ip, Some(IpAddr::V4(Ipv4Addr::LOCALHOST)), "{seen:?}");
+            assert!(seen.rtt.is_some(), "{seen:?}");
+            told = Some(seen);
+        }
+        if matches!(view.state, State::Done | State::Failed | State::Cancelled) {
+            return told;
+        }
+        tokio::time::sleep(Duration::from_millis(5)).await;
     }
 }
 
@@ -79,22 +97,67 @@ async fn a_server_slow_to_answer_is_told_whole() {
         },
         opts(),
     );
-    // Looked at every 5 ms from the start, as the progress window does every frame.
-    let mut told = None;
-    loop {
-        let view = d.snapshot();
-        if let Some(seen) = view.server {
-            assert_eq!(seen.ip, Some(IpAddr::V4(Ipv4Addr::LOCALHOST)), "{seen:?}");
-            assert!(seen.rtt.is_some(), "{seen:?}");
-            told = Some(seen);
-        }
-        if matches!(view.state, State::Done | State::Failed | State::Cancelled) {
-            break;
-        }
-        tokio::time::sleep(Duration::from_millis(5)).await;
-    }
+    told_while_it_runs(&d)
+        .await
+        .expect("the download saw the server");
     d.wait().await.unwrap();
-    told.expect("the download saw the server");
+}
+
+/// #954: a resumed download asks nothing before its connections, so no first answer told its
+/// server: the list kept the last run's, or none when that run was stopped before its server
+/// answered. Its first connection's answer tells it.
+#[tokio::test]
+async fn a_resumed_download_is_told_its_server() {
+    let lab = LabServer::start(Config {
+        faults: Faults::parse("rate=1M").unwrap(),
+        ..Config::default()
+    })
+    .await
+    .unwrap();
+    // Held back from 4 MiB on, so that it is stopped half done.
+    let faults = lab.faults();
+    lab.set_faults(Faults {
+        stall_at: Some(4 << 20),
+        ..faults.clone()
+    });
+    let dir = tempfile::tempdir().unwrap();
+    let d = Download::start(
+        Request {
+            url: lab.url("/gen/8M/again.bin?seed=954").parse().unwrap(),
+            headers: Default::default(),
+            dest: Destination::Dir(dir.path().to_owned()),
+        },
+        Options {
+            save_interval: Duration::from_millis(100),
+            ..opts()
+        },
+    );
+    let deadline = Instant::now() + Duration::from_secs(20);
+    let file = loop {
+        tokio::time::sleep(Duration::from_millis(50)).await;
+        let snap = d.snapshot();
+        if let Some(f) = snap.file.filter(|_| snap.downloaded >= 1 << 20) {
+            break f;
+        }
+        assert!(Instant::now() < deadline, "the download never started");
+    };
+    d.cancel();
+    assert!(matches!(d.wait().await, Err(mdm_engine::Error::Cancelled)));
+    lab.set_faults(faults);
+    tokio::time::timeout(Duration::from_secs(20), lab.settled())
+        .await
+        .expect("the stopped download's requests end");
+
+    let d = Download::resume(
+        mdm_engine::state::state_path(&file),
+        Default::default(),
+        opts(),
+    )
+    .unwrap();
+    told_while_it_runs(&d)
+        .await
+        .expect("the resumed download saw the server");
+    d.wait().await.unwrap();
 }
 
 #[tokio::test]

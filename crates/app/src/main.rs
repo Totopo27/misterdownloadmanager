@@ -8,6 +8,7 @@ mod chrome;
 mod clipbatch;
 mod clipboard;
 mod clock;
+mod cnl;
 mod countries;
 mod crash;
 mod crashui;

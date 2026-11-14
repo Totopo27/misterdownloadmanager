@@ -2287,7 +2287,7 @@ impl OptionsDialog {
             "opt-rar-tool",
         );
         // i18n: Options → Archives: group box title
-        group(ui, o, 16.0, 300.0, 392.0, 100.0, "Link grabber");
+        group(ui, o, 16.0, 300.0, 392.0, 124.0, "Link grabber");
         winui::checkbox_light(
             ui,
             o + vec2(30.0, 318.0),
@@ -2303,10 +2303,18 @@ impl OptionsDialog {
             "Hide web pages",
             true,
         );
+        winui::checkbox_light(
+            ui,
+            o + vec2(30.0, 366.0),
+            &mut s.cnl_on,
+            // i18n: Options → Archives → Link grabber check box: Click'n'Load, a link site's button that sends its links to a program on this computer (port 9666, as JDownloader)
+            "Accept Click'n'Load from web pages (port 9666)",
+            true,
+        );
         winui::paragraph(
             &p,
             o.x + 30.0,
-            o.y + 380.0,
+            o.y + 404.0,
             crate::i18n::t(
                 "Tasks → Link grabber, or the browser's \"Download all links\": a split\narchive's volumes are one package, the other links of a page another.",
             ),
@@ -3844,10 +3852,13 @@ fn dns_dialog(ui: &mut Ui, o: Pos2, e: &mut DnsEdit) -> Outcome<()> {
     ok_cancel(ui, o, 238.0, 278.0, choice.is_ok())
 }
 
-/// Accounts → Add...: the service, a token typed in, and the sign-in on its thread (#44).
+/// Accounts → Add...: the service, a token (or user name and password) typed in, and the sign-in
+/// on its thread (#44).
 struct AccountEdit {
     service: mdm_debrid::ServiceKind,
     token: String,
+    user: String,
+    password: String,
     signin: crate::debrid::SignIn,
 }
 
@@ -3858,13 +3869,16 @@ impl Default for AccountEdit {
         AccountEdit {
             service: mdm_debrid::ServiceKind::ALL[0],
             token: String::new(),
+            user: String::new(),
+            password: String::new(),
             signin: Default::default(),
         }
     }
 }
 
 /// Accounts → Add...: sign in by code in the browser (Real-Debrid's device flow, AllDebrid's PIN),
-/// or paste the API token (Premiumize: its API key only); the account is checked before it is kept.
+/// with the user name and password (Mega-Debrid), or paste the API token (Premiumize: its API key
+/// only); the account is checked before it is kept.
 fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings::DebridAccount> {
     use crate::debrid::SignInState as S;
     let p = ui.painter().clone();
@@ -3896,6 +3910,8 @@ fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings
         // Another service: what was signed in to (or typed) belongs to the one before.
         e.service = all[i];
         e.token.clear();
+        e.user.clear();
+        e.password.clear();
         *e.signin.state.lock().unwrap() = S::Idle;
     }
     let by_code = e.service.signs_in_by_code();
@@ -3906,8 +3922,11 @@ fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings
             ButtonKind::Disabled
         }
     };
+    if e.service.signs_in_with_password() {
+        password_signin(ui, o, e, busy);
+    }
     // i18n: button: sign in to the debrid service in the browser, by typing a code there
-    if winui::button_light(
+    else if winui::button_light(
         ui,
         r(o, 14.0, 44.0, 220.0, 23.0),
         "Sign in in the browser",
@@ -3995,7 +4014,10 @@ fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings
     } else {
         crate::dialogs::grow_px(&ctx, "opt-account", 0.0);
     }
-    let label = if by_code {
+    let label = if e.service.signs_in_with_password() {
+        // i18n: Options → Add an account: label before the field for an API key the user made at the service (Mega-Debrid: My Account → API Key; the other way to sign in)
+        crate::i18n::t("Or paste an application's API key:")
+    } else if by_code {
         // i18n: Options → Add an account: label before the field for the service's API token (the other way to sign in)
         crate::i18n::t("Or paste your API token:")
     } else {
@@ -4045,6 +4067,15 @@ fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings
     let (line, ok) = match &state {
         // i18n: Options → Add an account: the sign-in is starting or being checked
         S::Starting | S::Checking => (crate::i18n::t("Asking the service...").to_owned(), true),
+        // Signed in by a key that names no account (Mega-Debrid's application keys).
+        S::Done { user, state, .. } if user.is_empty() => (
+            crate::i18n::fmt(
+                // i18n: Options → Add an account: signed in, the service gives no account name; {state} premium or not
+                crate::i18n::t("Signed in ({state})"),
+                &[("state", state)],
+            ),
+            true,
+        ),
         S::Done { user, state, .. } => (
             crate::i18n::fmt(
                 // i18n: Options → Add an account: signed in; {user} the account's name, {state} premium or not
@@ -4093,6 +4124,76 @@ fn account_dialog(ui: &mut Ui, o: Pos2, e: &mut AccountEdit) -> Outcome<settings
         Outcome::Closed => Outcome::Closed,
         Outcome::Open => Outcome::Open,
     }
+}
+
+/// Accounts → Add...: the user name and password a service signs in with (Mega-Debrid), where
+/// the others have "Sign in in the browser". Kept sealed, as the tokens are.
+fn password_signin(ui: &mut Ui, o: Pos2, e: &mut AccountEdit, busy: bool) {
+    let p = ui.painter().clone();
+    // The fields start after the longer label in this language (#192).
+    // i18n: Options → Add an account: label before the field for the user name at the debrid service
+    let user_label = crate::i18n::t("User name:");
+    // i18n: Options → Add an account: label before the field for the password at the debrid service
+    let password_label = crate::i18n::t("Password:");
+    let x =
+        (14.0 + winui::text_width(&p, user_label).max(winui::text_width(&p, password_label)) + 8.0)
+            .min(200.0);
+    text(&p, o.x + 14.0, o.y + 48.0, user_label, LIGHT_TEXT());
+    winui::edit_light(
+        ui,
+        r(o, x, 44.0, 300.0 - x + 14.0, 21.0),
+        &mut e.user,
+        !busy,
+        false,
+    );
+    text(&p, o.x + 14.0, o.y + 76.0, password_label, LIGHT_TEXT());
+    winui::password_light(
+        ui,
+        r(o, x, 72.0, 300.0 - x + 14.0, 21.0),
+        &mut e.password,
+        !busy,
+    );
+    let ready = !busy && !e.user.trim().is_empty() && !e.password.is_empty();
+    // i18n: button: sign in to the debrid service with the user name and password typed in
+    if winui::button_light(
+        ui,
+        r(
+            o,
+            x,
+            100.0,
+            winui::button_fit_width(&p, "Sign in", 90.0, 300.0),
+            21.0,
+        ),
+        "Sign in",
+        if ready {
+            ButtonKind::Normal
+        } else {
+            ButtonKind::Disabled
+        },
+        false,
+    )
+    .clicked()
+    {
+        let ctx = ui.ctx().clone();
+        e.signin.by_password(
+            e.service,
+            e.user.trim().to_owned(),
+            e.password.clone(),
+            &ctx,
+        );
+    }
+    winui::paragraph(
+        &p,
+        o.x + 14.0,
+        o.y + 130.0,
+        // i18n: Options → Add an account: a note under the user name and password fields (Mega-Debrid bans the address for some minutes after a few wrong passwords)
+        crate::i18n::t(
+            "After a few wrong passwords the service blocks this connection for some minutes.",
+        ),
+        LIGHT_TEXT(),
+        o.x + 406.0,
+        14.0,
+    );
 }
 
 /// Open a service's web page in the browser (never in an off-screen test run).

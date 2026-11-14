@@ -78,7 +78,7 @@ async fn a_host_link_downloads_through_the_account() {
     let info = check(&http, ServiceKind::RealDebrid, token("good"))
         .await
         .unwrap();
-    assert_eq!((info.user.as_str(), info.premium), ("labuser", true));
+    assert_eq!((info.user.as_str(), info.premium), ("labuser", Some(true)));
     let d = debrid(&http, token("good")).await;
     let link = "http://hoster.test/file/2M/movie.mkv?chunks=4";
     assert_eq!(
@@ -167,7 +167,7 @@ async fn sign_in_by_code_then_download() {
     let info = check(&http, ServiceKind::RealDebrid, credential.clone())
         .await
         .unwrap();
-    assert!(info.premium);
+    assert_eq!(info.premium, Some(true));
     let d = debrid(&http, credential).await;
     let path = download(&d, "http://hoster.test/file/1M/signed.bin")
         .await

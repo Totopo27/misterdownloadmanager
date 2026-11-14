@@ -6,6 +6,10 @@
 #. never shown for a single file
 #. {n} = a number (keep the braces as they are)
 @plural	Also delete the {n} file from disk|Also delete the {n} files from disk	Also delete the {n} file from disk|Also delete the {n} files from disk
+#. count in cnl.rs
+#. Click'n'Load window: a page whose web site the browser doesn't name, so MDM can't tell which site it is
+#. {n} = a number (keep the braces as they are)
+@plural	An unknown site wants to send {n} link to Link grabber.|An unknown site wants to send {n} links to Link grabber.	An unknown site wants to send {n} link to Link grabber.|An unknown site wants to send {n} links to Link grabber.
 #. count in a dialog box
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
@@ -106,6 +110,10 @@
 #. where a magnet's peers came from: {n} = trackers asked; {peers} = "3 peers"
 #. {n} = a number (keep the braces as they are)
 @plural	{n} tracker: {peers}|{n} trackers: {peers}	{n} tracker: {peers}|{n} trackers: {peers}
+#. count in cnl.rs
+#. Click'n'Load window: {site} is a web site's name such as "example.com"
+#. {site} = a web site's name such as "example.com"; {n} = a number (keep the braces as they are)
+@plural	{site} wants to send {n} link to Link grabber.|{site} wants to send {n} links to Link grabber.	{site} wants to send {n} link to Link grabber.|{site} wants to send {n} links to Link grabber.
 #. count in playlistdlg.rs
 #. in Download video: a playlist title then how many videos it has ({count})
 #. {count} = a number (keep the braces as they are)
@@ -220,6 +228,9 @@
 #. a file size that is only an estimate, as a screen reader says it in the Download video window's list of qualities; {size} is "532 MB"
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
 	about {size}	about {size}
+#. text in the Options window
+#. Options → Archives → Link grabber check box: Click'n'Load, a link site's button that sends its links to a program on this computer (port 9666, as JDownloader)
+	Accept Click'n'Load from web pages (port 9666)	Accept Click'n'Load from web pages (port 9666)
 #. checkbox in the Add torrent window
 #. Torrent settings: other peers may connect to this computer
 	Accept incoming connections	Accept incoming connections
@@ -335,6 +346,9 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Afghanistan	Afghanistan
+#. text in the Options window
+#. Options → Add an account: a note under the user name and password fields (Mega-Debrid bans the address for some minutes after a few wrong passwords)
+	After a few wrong passwords the service blocks this connection for some minutes.	After a few wrong passwords the service blocks this connection for some minutes.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Aland Islands	Aland Islands
@@ -356,10 +370,16 @@
 #. text in the Download video window
 #. in the Subtitles list of Download video: every language the video's uploader gave
 	All the uploader's	All the uploader's
+#. text in cnl.rs
+#. button in the Click'n'Load window: let this site send links (remembered)
+	Allow	Allow
 #. text in the Options window
 #. checkbox under the number of connections per download; {n} is 32
 #. {n} = a number (keep the braces as they are)
 	Allow more than {n} connections	Allow more than {n} connections
+#. text in cnl.rs
+#. Click'n'Load window, under the question: nothing happens to the links before the user adds them in Link grabber
+	Allow only sites you use. Nothing is looked up or downloaded before you add it in Link grabber.	Allow only sites you use. Nothing is looked up or downloaded before you add it in Link grabber.
 #. text in errors.rs
 	already being downloaded: {path}	already being downloaded: {path}
 #. text in the Link grabber window
@@ -525,6 +545,9 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Bhutan	Bhutan
+#. text in cnl.rs
+#. button in the Click'n'Load window: refuse this site's links (remembered)
+	Block	Block
 #. text in the Add torrent window
 #. Torrent settings: the address of an IP blocklist (empty: none)
 	Block the addresses in this list (P2P or eMule format):	Block the addresses in this list (P2P or eMule format):
@@ -725,6 +748,17 @@
 #. button in the download list
 #. verb: clears this filter
 	Clear	Clear
+#. message or event log entry in the main window; window title in cnl.rs
+#. title of the notice when Click'n'Load couldn't start
+#. window title: a web page used Click'n'Load (a link site's button that sends its links to this program)
+	Click'n'Load	Click'n'Load
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {port} is 9666; JDownloader is another download manager that uses the same port
+	Click'n'Load can't start: another program (JDownloader?) is using port {port}. Close it, then turn Click'n'Load off and on again in Options.	Click'n'Load can't start: another program (JDownloader?) is using port {port}. Close it, then turn Click'n'Load off and on again in Options.
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {error} the system's reason
+#. {error} = an error message (keep the braces as they are)
+	Click'n'Load can't start: {error}	Click'n'Load can't start: {error}
 #. text in a download's progress window
 #. column title: the peer's torrent program
 	Client	Client
@@ -2333,7 +2367,11 @@
 #. text in helpers.rs
 #. Video helpers: no copy of this helper yet
 	Not installed yet	Not installed yet
-#. button in helpers.rs
+#. text in the Link grabber window
+#. Link grabber, a link's status: a web page sent it (Click'n'Load), so it isn't looked up (name, size, online) before it is added
+	Not looked up	Not looked up
+#. text in cnl.rs; button in helpers.rs
+#. button in the Click'n'Load window: refuse these links, ask again next time
 	Not now	Not now
 #. text in helpers.rs
 	Not now? Get them later from Tasks → Download video from a page.	Not now? Get them later from Tasks → Download video from a page.
@@ -2479,6 +2517,9 @@
 #. tab title: what happens when the download finishes
 	Options on completion	Options on completion
 #. text in the Options window
+#. Options → Add an account: label before the field for an API key the user made at the service (Mega-Debrid: My Account → API Key; the other way to sign in)
+	Or paste an application's API key:	Or paste an application's API key:
+#. text in the Options window
 #. Options → Add an account: label before the field for the service's API token (the other way to sign in)
 	Or paste your API token:	Or paste your API token:
 #. text in the Link grabber window
@@ -2527,6 +2568,7 @@
 	Password	Password
 #. text in the Link grabber window; text in the Options window
 #. Link grabber: the package's archives' password (a label before its box)
+#. Options → Add an account: label before the field for the password at the debrid service
 	Password:	Password:
 #. text in the Add torrent window
 	Paste a magnet link or choose a .torrent file, then Look up.	Paste a magnet link or choose a .torrent file, then Look up.
@@ -3004,6 +3046,9 @@
 #. a country's name (where a download's server is)
 	Sierra Leone	Sierra Leone
 #. button in the Options window
+#. button: sign in to the debrid service with the user name and password typed in
+	Sign in	Sign in
+#. button in the Options window
 #. button: sign in to the debrid service in the browser, by typing a code there
 	Sign in in the browser	Sign in in the browser
 #. text in the Options window
@@ -3015,6 +3060,9 @@
 #. text in the Options window
 #. Options → Accounts: where the debrid accounts' sign-ins and the other passwords are kept (Windows' own Credential Manager, in Control Panel)
 	Sign-ins and passwords are kept in Windows Credential Manager.	Sign-ins and passwords are kept in Windows Credential Manager.
+#. text in the Options window
+#. Options → Add an account: signed in, the service gives no account name; {state} premium or not
+	Signed in ({state})	Signed in ({state})
 #. text in the Options window
 #. Options → Add an account: signed in; {user} the account's name, {state} premium or not
 	Signed in as {user} ({state})	Signed in as {user} ({state})
@@ -3490,6 +3538,9 @@
 	the server is busy ({status}); try again later	the server is busy ({status}); try again later
 #. text in errors.rs
 	the server sent an unexpected part of the file ({detail})	the server sent an unexpected part of the file ({detail})
+#. text in debrid.rs
+#. Options → Accounts: the service doesn't say whether the account is premium (Mega-Debrid, signed in with an API key); a free account's links are refused when downloading
+	the service doesn't say whether it is premium	the service doesn't say whether it is premium
 #. text in errors.rs
 #. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
 	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM
@@ -3924,6 +3975,9 @@
 #. text in the Options window
 #. column title: the user name
 	User	User
+#. text in the Options window
+#. Options → Add an account: label before the field for the user name at the debrid service
+	User name:	User name:
 #. page title in the Options window
 	User names and passwords for servers/sites	User names and passwords for servers/sites
 #. text in the Options window

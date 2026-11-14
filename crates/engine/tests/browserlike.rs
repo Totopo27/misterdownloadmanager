@@ -4,8 +4,10 @@
 //! `cf-mitigated: challenge`, every request without the headers browsers send (`Sec-Fetch-Mode`).
 #![cfg(feature = "browser-connection")]
 
+use std::net::{IpAddr, Ipv4Addr};
 use std::time::{Duration, Instant};
 
+use mdm_engine::download::State;
 use mdm_engine::{Destination, Download, Options, Request};
 use mdm_labserver::{Config, Faults, LabServer, LogEntry, content};
 use reqwest::header::{COOKIE, HeaderMap, REFERER, USER_AGENT};
@@ -252,6 +254,50 @@ async fn a_look_gets_past_the_bot_check_too() {
     .expect("the look gets through");
     assert_eq!(info.size, Some(2 << 20));
     assert_eq!(info.file_name, "look.apk");
+}
+
+/// #954: a look and a download that got through only on the browser-like connection tell their
+/// server: its address, and the round trip of MDM's own connection, which the bot check refused
+/// at the same server.
+#[tokio::test]
+async fn through_the_browser_like_connection_the_server_is_told() {
+    let s = server("browser_only=1&rate=1M").await;
+    let url: url::Url = s.url("/gen/2M/where.apk?seed=954").parse().unwrap();
+    let localhost = Some(IpAddr::V4(Ipv4Addr::LOCALHOST));
+    let info = mdm_engine::probe(url.clone(), Default::default(), &opts())
+        .await
+        .expect("the look gets through");
+    let server = info.server.expect("the look told the server");
+    assert_eq!(server.ip, localhost, "{server:?}");
+    assert!(server.rtt.is_some(), "{server:?}");
+
+    let dir = tempfile::tempdir().unwrap();
+    let dl = Download::start(
+        Request {
+            url,
+            headers: Default::default(),
+            dest: Destination::Dir(dir.path().to_owned()),
+        },
+        opts(),
+    );
+    // Looked at every 5 ms, as the progress window does every frame.
+    let mut told = None;
+    loop {
+        let view = dl.snapshot();
+        if let Some(seen) = view.server {
+            assert_eq!(seen.ip, localhost, "{seen:?}");
+            assert!(seen.rtt.is_some(), "{seen:?}");
+            told = Some(seen);
+        }
+        if matches!(view.state, State::Done | State::Failed | State::Cancelled) {
+            break;
+        }
+        tokio::time::sleep(Duration::from_millis(5)).await;
+    }
+    dl.wait()
+        .await
+        .expect("the browser-like connection gets through");
+    told.expect("the download told the server");
 }
 
 #[tokio::test]

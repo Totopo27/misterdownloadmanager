@@ -14,6 +14,7 @@
 - **The clipboard.** **Tasks → Add batch download from clipboard** (**Ctrl+B**, also in the tray icon's menu) reads the copied text when you choose it and lists every download link in it: `http`, `https`, `ftp` and magnet links, in a list, a forum post, Markdown or HTML, each once.
 - **Pasting.** Choose **Tasks → Link grabber...** and press **Ctrl+V**: every download link in the copied text is added.
 - **A web page's address.** Paste or copy the address of a page (`https://example.com/downloads`) and MDM reads the page and lists the links on it, as the browser's **Download all links** does, in a package named after the page. The page itself is left unticked. This works for addresses that came on their own (pasted, copied, typed, in a list), not for the links found on a page, so MDM never wanders off through a site. MDM reads only what the page itself holds: links a page's scripts add after it loads come only through the browser.
+- **Click'n'Load** buttons on link sites, once you turn it on. See [Click'n'Load](#clickn-load).
 
 A magnet link shows as **Magnet link** and isn't looked up: once you click **Start** or **Add to queue**, MDM finds the torrent's files and adds it with all of them, in the package's folder (or the **Torrents** folder when the package has none).
 
@@ -26,6 +27,23 @@ Each package is a row you can open and close (click its arrow, double-click it, 
 - **The volumes of one archive** (`movie.part1.rar`, `movie.part2.rar`…, or `backup.7z.001`, `backup.7z.002`…) form one package named after the archive, as long as they come from the same site.
 - **The other links of one page** form a package named after the page.
 - **Everything else** goes into **Various files**.
+- **Links a site packed** (Click'n'Load) keep the site's packages and names, with their archive password when the site gave one.
+
+## Click'n'Load
+
+Many link sites have a **Click'n'Load** button that sends their links straight to a download manager on your computer, as JDownloader's documentation for web sites describes. Turn it on in **Options → Archives and Link grabber → Accept Click'n'Load from web pages** (off by default). MDM then listens on port 9666 of this computer only, and the links a page sends open in Link grabber, with the page's package name and archive password.
+
+Any web page can send links there, not only the link site you are on, so MDM is careful with them:
+
+- **The first time a site sends links, MDM asks**: **Allow** (that site's links go to Link grabber from now on), **Block** (they never do), or **Not now** (these links are dropped, and the site is asked again next time). The site is the one your browser names, never what the page claims. When the browser names none (a page that hides where it is, or one inside a sandboxed frame), the window says **An unknown site**: it is asked about every time, and its answer is never kept. Turning Click'n'Load off forgets the answers.
+- **Links a page sent aren't looked up**: Link grabber shows them as **Not looked up**, and no request leaves for them, with or without your Sites Logins or debrid accounts, until you add them to the queue. Nothing is downloaded before that.
+- **Links to this computer or your network are left out**: a link to `localhost`, to a private or link-local address (`192.168.…`, `10.…`, `172.16.…`, `169.254.…`, their IPv6 kin), or to a name without a dot or under `.local`, `.lan` or `.internal` never reaches Link grabber. A link site's files aren't there, and such an address could be your router or another device. MDM judges the address as written: a public-looking name that points into your network isn't recognized, so look at a package before you add it.
+- **Limits**: at most 10 posts a minute from one site, 500 links and 256 KB a post; more is refused, and one site's posts don't use up another's. At most 20 posts wait for an answer. A site brings MDM's window to the front at most once a minute; its links still arrive in Link grabber in between.
+- The page's own address isn't sent as the links' referrer: a page could name any.
+- **MDM doesn't say it is JDownloader.** Some sites first ask whether JDownloader is running (a script named `jdcheck.js`) and show their button only then. MDM doesn't answer that question, so such a site may say no program was found; a site that simply sends its form works.
+- Only one program can listen on port 9666. If JDownloader is running, MDM says so: close it, then turn the option off and on again.
+- A button that sends a DLC container instead of links isn't taken: reading one needs a key MDM can't use. The site's plain links, or its Click'n'Load button, are the way.
+- Some sites hide the key in a script MDM doesn't run (only the plain form the documentation shows is read): then their button reports a failure, and the site's plain links are the way.
 
 ## Looking links up
 

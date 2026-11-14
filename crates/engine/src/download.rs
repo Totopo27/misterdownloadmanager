@@ -951,10 +951,7 @@ pub async fn probe_kept(
         asked => (client, asked),
     };
     let (head, body, browser, headers, took) = match asked {
-        Ok((resp, headers, took)) => {
-            seen.answered(&resp);
-            (Head::of(&resp), Body::Http(resp), None, headers, took)
-        }
+        Ok((resp, headers, took)) => (Head::of(&resp), Body::Http(resp), None, headers, took),
         // #668: the site refused MDM's connection as a program's (`refused_as_a_program`):
         // looked at once more the way a browser connects, its answer kept for the download
         // (which then asks no more).
@@ -971,6 +968,8 @@ pub async fn probe_kept(
         }
         Err(e) => return Err(e),
     };
+    // Whichever connection it came through, the browser-like one too (#954).
+    seen.answered(&head);
     let final_url = head.url.clone();
     let (size, from_zero) = match head.status {
         StatusCode::PARTIAL_CONTENT => {
@@ -1508,6 +1507,9 @@ pub(crate) struct Head {
     /// Where the answer came from, its redirects followed.
     pub(crate) url: Url,
     pub(crate) len: Option<u64>,
+    /// The address that sent it: the server's, or the proxy's when one carried the request
+    /// (`crate::server`, #954).
+    pub(crate) from: Option<std::net::SocketAddr>,
 }
 
 impl Head {
@@ -1517,6 +1519,7 @@ impl Head {
             headers: resp.headers().clone(),
             url: resp.url().clone(),
             len: resp.content_length(),
+            from: resp.remote_addr(),
         }
     }
 }
@@ -1904,7 +1907,6 @@ async fn run_fresh(
             // headers. Its refusal stays the one told if that fails too.
             match first {
                 Ok(((resp, headers), ttfb)) => {
-                    seen.answered(&resp);
                     let head = Head::of(&resp);
                     (as_get, client0, (head, Body::Http(resp)), headers, ttfb)
                 }
@@ -1922,6 +1924,9 @@ async fn run_fresh(
             }
         }
     };
+    // Whichever connection it came through, the browser-like one too (#954); the look's answer,
+    // kept, was told as it came.
+    shared.seen.get_or_init(Default::default).answered(&head);
     // One connection, as a browser downloads: the site let this one through.
     if browser.is_some() {
         opts.max_connections = 1;
@@ -3725,6 +3730,11 @@ async fn request(ctx: &Ctx, target: &Target, from: u64, to: u64) -> Result<Body,
             (Head::of(&resp), Body::Http(resp))
         }
     };
+    // A resumed download asks nothing before its connections: the first one's answer is the
+    // first it gets (#954).
+    if let Some(seen) = ctx.shared.seen.get() {
+        seen.connection_answered(&head);
+    }
     if head.status.is_success() && !ctx.web_page_ok && is_web_page(&head.headers) {
         return Err(Error::GotWebPage);
     }

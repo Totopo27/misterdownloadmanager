@@ -7,6 +7,11 @@
 #. {n} = a number (keep the braces as they are)
 #, machine
 @plural	Also delete the {n} file from disk|Also delete the {n} files from disk	Auch die {n} Datei von der Festplatte löschen|Auch die {n} Dateien von der Festplatte löschen
+#. count in cnl.rs
+#. Click'n'Load window: a page whose web site the browser doesn't name, so MDM can't tell which site it is
+#. {n} = a number (keep the braces as they are)
+#, machine
+@plural	An unknown site wants to send {n} link to Link grabber.|An unknown site wants to send {n} links to Link grabber.	Eine unbekannte Website möchte {n} Link an den Link-Grabber senden.|Eine unbekannte Website möchte {n} Links an den Link-Grabber senden.
 #. count in a dialog box
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
@@ -133,6 +138,11 @@
 #. {n} = a number (keep the braces as they are)
 #, machine
 @plural	{n} tracker: {peers}|{n} trackers: {peers}	{n} Tracker: {peers}|{n} Tracker: {peers}
+#. count in cnl.rs
+#. Click'n'Load window: {site} is a web site's name such as "example.com"
+#. {site} = a web site's name such as "example.com"; {n} = a number (keep the braces as they are)
+#, machine
+@plural	{site} wants to send {n} link to Link grabber.|{site} wants to send {n} links to Link grabber.	{site} möchte {n} Link an den Link-Grabber senden.|{site} möchte {n} Links an den Link-Grabber senden.
 #. count in playlistdlg.rs
 #. in Download video: a playlist title then how many videos it has ({count})
 #. {count} = a number (keep the braces as they are)
@@ -280,6 +290,10 @@
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
 #, machine
 	about {size}	ca. {size}
+#. text in the Options window
+#. Options → Archives → Link grabber check box: Click'n'Load, a link site's button that sends its links to a program on this computer (port 9666, as JDownloader)
+#, machine
+	Accept Click'n'Load from web pages (port 9666)	Click'n'Load von Webseiten annehmen (Port 9666)
 #. checkbox in the Add torrent window
 #. Torrent settings: other peers may connect to this computer
 #, machine
@@ -435,6 +449,10 @@
 #. a country's name (where a download's server is)
 #, machine
 	Afghanistan	Afghanistan
+#. text in the Options window
+#. Options → Add an account: a note under the user name and password fields (Mega-Debrid bans the address for some minutes after a few wrong passwords)
+#, machine
+	After a few wrong passwords the service blocks this connection for some minutes.	Nach einigen falschen Passwörtern sperrt der Dienst diese Verbindung für einige Minuten.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -464,11 +482,19 @@
 #. in the Subtitles list of Download video: every language the video's uploader gave
 #, machine
 	All the uploader's	Alle vom Uploader
+#. text in cnl.rs
+#. button in the Click'n'Load window: let this site send links (remembered)
+#, machine
+	Allow	Zulassen
 #. text in the Options window
 #. checkbox under the number of connections per download; {n} is 32
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Allow more than {n} connections	Mehr als {n} Verbindungen zulassen
+#. text in cnl.rs
+#. Click'n'Load window, under the question: nothing happens to the links before the user adds them in Link grabber
+#, machine
+	Allow only sites you use. Nothing is looked up or downloaded before you add it in Link grabber.	Lassen Sie nur Seiten zu, die Sie nutzen. Nichts wird nachgeschlagen oder heruntergeladen, bevor Sie es im Link-Grabber hinzufügen.
 #. text in errors.rs
 #, machine
 	already being downloaded: {path}	wird bereits heruntergeladen: {path}
@@ -691,6 +717,10 @@
 #. a country's name (where a download's server is)
 #, machine
 	Bhutan	Bhutan
+#. text in cnl.rs
+#. button in the Click'n'Load window: refuse this site's links (remembered)
+#, machine
+	Block	Blockieren
 #. text in the Add torrent window
 #. Torrent settings: the address of an IP blocklist (empty: none)
 #, machine
@@ -961,6 +991,20 @@
 #. verb: clears this filter
 #, machine
 	Clear	Löschen
+#. message or event log entry in the main window; window title in cnl.rs
+#. title of the notice when Click'n'Load couldn't start
+#. window title: a web page used Click'n'Load (a link site's button that sends its links to this program)
+#, machine
+	Click'n'Load	Click'n'Load
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {port} is 9666; JDownloader is another download manager that uses the same port
+#, machine
+	Click'n'Load can't start: another program (JDownloader?) is using port {port}. Close it, then turn Click'n'Load off and on again in Options.	Click'n'Load kann nicht starten: Ein anderes Programm (JDownloader?) verwendet Port {port}. Schließen Sie es und schalten Sie Click'n'Load in den Optionen aus und wieder ein.
+#. text in cnl.rs
+#. notice: Click'n'Load couldn't start; {error} the system's reason
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	Click'n'Load can't start: {error}	Click'n'Load kann nicht starten: {error}
 #. text in a download's progress window
 #. column title: the peer's torrent program
 #, machine
@@ -3143,6 +3187,10 @@
 #. Video helpers: no copy of this helper yet
 #, machine
 	Not installed yet	Noch nicht installiert
+#. text in the Link grabber window
+#. Link grabber, a link's status: a web page sent it (Click'n'Load), so it isn't looked up (name, size, online) before it is added
+#, machine
+	Not looked up	Nicht nachgeschlagen
 #. button in helpers.rs
 #, machine
 	Not now	Nicht jetzt
@@ -3344,6 +3392,10 @@
 #. tab title: what happens when the download finishes
 #, machine
 	Options on completion	Optionen nach Abschluss
+#. text in the Options window
+#. Options → Add an account: label before the field for an API key the user made at the service (Mega-Debrid: My Account → API Key; the other way to sign in)
+#, machine
+	Or paste an application's API key:	Oder den API-Schlüssel einer Anwendung einfügen:
 #. text in the Options window
 #. Options → Add an account: label before the field for the service's API token (the other way to sign in)
 #, machine
@@ -4053,6 +4105,10 @@
 #, machine
 	Sierra Leone	Sierra Leone
 #. button in the Options window
+#. button: sign in to the debrid service with the user name and password typed in
+#, machine
+	Sign in	Anmelden
+#. button in the Options window
 #. button: sign in to the debrid service in the browser, by typing a code there
 #, machine
 	Sign in in the browser	Im Browser anmelden
@@ -4068,6 +4124,10 @@
 #. Options → Accounts: where the debrid accounts' sign-ins and the other passwords are kept (Windows' own Credential Manager, in Control Panel)
 #, machine
 	Sign-ins and passwords are kept in Windows Credential Manager.	Anmeldeinformationen und Passwörter werden im Windows-Anmeldeinformations-Manager gespeichert.
+#. text in the Options window
+#. Options → Add an account: signed in, the service gives no account name; {state} premium or not
+#, machine
+	Signed in ({state})	Angemeldet ({state})
 #. text in the Options window
 #. Options → Add an account: signed in; {user} the account's name, {state} premium or not
 #, machine
@@ -4715,6 +4775,10 @@
 #. text in errors.rs
 #, machine
 	the server sent an unexpected part of the file ({detail})	Der Server hat einen unerwarteten Teil der Datei gesendet ({detail}).
+#. text in debrid.rs
+#. Options → Accounts: the service doesn't say whether the account is premium (Mega-Debrid, signed in with an API key); a free account's links are refused when downloading
+#, machine
+	the service doesn't say whether it is premium	der Dienst sagt nicht, ob es Premium ist
 #. text in errors.rs
 #. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
 #, machine
@@ -5301,6 +5365,10 @@
 #. column title: the user name
 #, machine
 	User	Benutzer
+#. text in the Options window
+#. Options → Add an account: label before the field for the user name at the debrid service
+#, machine
+	User name:	Benutzername:
 #. page title in the Options window
 #, machine
 	User names and passwords for servers/sites	Benutzernamen und Passwörter für Server/Websites

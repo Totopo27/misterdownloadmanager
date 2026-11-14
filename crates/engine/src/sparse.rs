@@ -3,8 +3,13 @@
 //! Extending a file with `set_len` and then writing far into it makes NTFS zero-fill everything
 //! before the write, synchronously: one 1 MiB write at 2 GiB took 4.3 s on the user's D: drive
 //! (and doubles the bytes written). The planner writes at the middle of the file within the
-//! first second, so every large download paid it. A sparse file has no such fill. Elsewhere
-//! (`ftruncate` already makes sparse files) this is a no-op.
+//! first second, so every large download paid it. A sparse file has no such fill.
+//!
+//! Linux's own NTFS driver (`ntfs3`) fills the same way: a download to an NTFS drive wrote
+//! gigabytes of zeros before its first byte, stood at 0% meanwhile and held up every other
+//! program's disk (14 GB waiting to be written, a third of the time spent waiting on the disk).
+//! It takes the same sparse attribute through its `system.ntfs_attrib` extended attribute.
+//! Elsewhere (`ftruncate` already makes sparse files) this is a no-op.
 //!
 //! The engine's unsafe code: one `DeviceIoControl` call here (and, in its test, one
 //! `GetCompressedFileSizeW`), and the free-space probe's calls in `crate::disk`: two on Windows,
@@ -17,8 +22,9 @@ use std::fs::File;
 pub const MIN_SIZE: u64 = 5 << 20;
 
 /// Mark `file` sparse (before `set_len`) or, once every byte is written, normal again (clearing
-/// allocates any holes still there). False where the file system can't (FAT, exFAT): the
-/// download then works as before.
+/// allocates any holes still there; Linux's ntfs3 can't and leaves it sparse). False where the
+/// file system can't (FAT, exFAT, and every file system but NTFS on Linux): the download then
+/// works as before.
 pub fn set(file: &File, sparse: bool) -> bool {
     imp::set(file, sparse)
 }
@@ -52,7 +58,35 @@ mod imp {
     }
 }
 
-#[cfg(not(windows))]
+#[cfg(target_os = "linux")]
+mod imp {
+    use rustix::fs::{XattrFlags, fgetxattr, fsetxattr};
+
+    /// ntfs3's view of the file's NTFS attributes (a native-endian u32).
+    const NTFS_ATTRIB: &str = "system.ntfs_attrib";
+    const FILE_ATTRIBUTE_SPARSE_FILE: u32 = 0x200;
+
+    /// Other file systems have no such attribute and say so: nothing to do there. ntfs3 can't
+    /// clear it again (EOPNOTSUPP), and needn't: a sparse file whose every byte is written
+    /// reads and behaves as any other.
+    pub fn set(file: &std::fs::File, sparse: bool) -> bool {
+        if !sparse {
+            return false;
+        }
+        let mut buf = [0u8; 4];
+        let Ok(4) = fgetxattr(file, NTFS_ATTRIB, &mut buf) else {
+            return false;
+        };
+        let attrib = u32::from_ne_bytes(buf);
+        if attrib & FILE_ATTRIBUTE_SPARSE_FILE != 0 {
+            return true;
+        }
+        let new = (attrib | FILE_ATTRIBUTE_SPARSE_FILE).to_ne_bytes();
+        fsetxattr(file, NTFS_ATTRIB, &new, XattrFlags::empty()).is_ok()
+    }
+}
+
+#[cfg(not(any(windows, target_os = "linux")))]
 mod imp {
     pub fn set(_: &std::fs::File, _: bool) -> bool {
         false
@@ -120,5 +154,51 @@ mod tests {
         f.set_len(0).unwrap();
         assert!(set(&f, false));
         assert!(!is_sparse(&f));
+    }
+}
+
+#[cfg(all(test, target_os = "linux"))]
+mod linux_tests {
+    use std::os::unix::fs::{FileExt, MetadataExt};
+
+    use super::*;
+
+    fn part_file(dir: &std::path::Path) -> File {
+        File::options()
+            .read(true)
+            .write(true)
+            .create(true)
+            .truncate(true)
+            .open(dir.join("p.bin"))
+            .unwrap()
+    }
+
+    #[test]
+    fn other_file_systems_are_left_as_they_are() {
+        let dir = tempfile::tempdir().unwrap();
+        let f = part_file(dir.path());
+        assert!(!set(&f, true));
+        assert!(!set(&f, false));
+    }
+
+    /// An NTFS folder mounted with ntfs3: `MDM_TEST_NTFS_DIR=/mnt/ntfs cargo test -p mdm-engine
+    /// sparse -- --ignored`.
+    #[test]
+    #[ignore = "needs an NTFS folder (ntfs3) in MDM_TEST_NTFS_DIR"]
+    fn an_ntfs3_part_file_is_written_far_in_without_a_fill() {
+        let root = std::env::var_os("MDM_TEST_NTFS_DIR").expect("MDM_TEST_NTFS_DIR");
+        let dir = tempfile::tempdir_in(root).unwrap();
+        let f = part_file(dir.path());
+        assert!(set(&f, true), "ntfs3 takes the sparse attribute");
+        assert!(set(&f, true), "and says so again");
+        f.set_len(4 << 30).unwrap();
+        f.write_all_at(&[7u8; 1 << 20], 2 << 30).unwrap();
+        f.sync_data().unwrap();
+        // Filled, the file would take its 2 GiB before the write on the drive.
+        let used = f.metadata().unwrap().blocks() * 512;
+        assert!(
+            ((1 << 20)..(64 << 20)).contains(&used),
+            "{used} bytes on the drive"
+        );
     }
 }

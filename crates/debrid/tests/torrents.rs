@@ -83,7 +83,7 @@ async fn held(lab: &LabServer) -> Vec<String> {
 
 #[tokio::test]
 async fn a_magnet_through_each_service_comes_down_as_files() {
-    for service in ServiceKind::ALL {
+    for service in ServiceKind::ALL.into_iter().filter(|s| s.takes_magnets()) {
         let (lab, d) = setup(service).await;
         let dir = tempfile::tempdir().unwrap();
         let (t, s) = run(&d, "1234abcd", dir.path()).await;
@@ -121,7 +121,7 @@ async fn a_magnet_through_each_service_comes_down_as_files() {
 #[tokio::test]
 async fn a_torrent_of_one_file_goes_into_the_folder_itself() {
     // The service keeps it as `Lab Show/video.mkv`: it lands as `video.mkv`, no folder made.
-    for service in ServiceKind::ALL {
+    for service in ServiceKind::ALL.into_iter().filter(|s| s.takes_magnets()) {
         let (_lab, d) = setup(service).await;
         let dir = tempfile::tempdir().unwrap();
         let (_t, s) = run(&d, "one00001", dir.path()).await;
@@ -135,7 +135,7 @@ async fn a_torrent_of_one_file_goes_into_the_folder_itself() {
 
 #[tokio::test]
 async fn a_torrent_the_service_cant_get_fails_with_its_reason() {
-    for service in ServiceKind::ALL {
+    for service in ServiceKind::ALL.into_iter().filter(|s| s.takes_magnets()) {
         let (_lab, d) = setup(service).await;
         let dir = tempfile::tempdir().unwrap();
         let (t, s) = run(&d, "dead0001", dir.path()).await;
