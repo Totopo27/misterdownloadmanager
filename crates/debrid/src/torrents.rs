@@ -202,6 +202,8 @@ pub struct Order {
     pub transfer: Option<String>,
     /// Its folder: the files go under it, in their paths.
     pub folder: PathBuf,
+    /// Custom file or folder name chosen in Add torrent (#517), when renamed from the torrent's own.
+    pub renamed: Option<String>,
     /// The downloads' options (connections, proxy, DNS, adapter, speed limit); the unlocker is
     /// set here.
     pub net: mdm_engine::Options,
@@ -352,9 +354,13 @@ impl RemoteTorrent {
         let folder = if files.len() == 1 {
             order.folder.clone()
         } else {
-            order
-                .folder
-                .join(safe_path(&name).unwrap_or_else(|| PathBuf::from("torrent")))
+            let folder_name = order
+                .renamed
+                .as_deref()
+                .and_then(safe_path)
+                .or_else(|| safe_path(&name))
+                .unwrap_or_else(|| PathBuf::from("torrent"));
+            order.folder.join(folder_name)
         };
         let within = |path: &str| {
             let t = path.trim_start_matches(['/', '\\']);
@@ -384,7 +390,16 @@ impl RemoteTorrent {
                     "the service gave a link MDM can't read".into(),
                 ))
             })?;
-            let dest = match safe_path(&within(&f.path)) {
+            let chosen_rel = if files.len() == 1 {
+                order
+                    .renamed
+                    .as_deref()
+                    .and_then(safe_path)
+                    .or_else(|| safe_path(&within(&f.path)))
+            } else {
+                safe_path(&within(&f.path))
+            };
+            let dest = match chosen_rel {
                 Some(rel) => {
                     let path = folder.join(rel);
                     if let Some(dir) = path.parent() {

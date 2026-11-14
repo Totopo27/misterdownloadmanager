@@ -207,7 +207,7 @@ The button follows the rest of the integration: it doesn't show when **Use advan
 
 ## Keys to force or prevent capture
 
-Hold **Alt** while clicking a link to let the browser download it instead of MDM. In Firefox, Alt+click saves a link only when its `browser.altClickSave` setting is on (in `about:config`); otherwise right-click the link and choose **Save Link As...**, which the browser keeps. **Options → General → Keys...** says so, and holds **Also take files the browser would open**.
+Hold **Alt** (**Option** on a Mac) while clicking a link to let the browser download it instead of MDM. Chromium browsers and Safari download such a link themselves. Firefox does nothing with that click, so the extension follows the link for it, as a plain click would, and the browser keeps what comes of it. When the link redirects, or the page it leads to starts the download by script ("your download starts in 5 seconds"), that download stays with the browser too when it starts within ten seconds. **Options → General → Keys...** says so, and holds **Also take files the browser would open**.
 
 To keep a site's downloads in the browser for good, use the toolbar button's **Never take downloads from**, or add the site to **Don't start downloading automatically from the following sites**. To keep a file type in the browser, take it off the file types list.
 

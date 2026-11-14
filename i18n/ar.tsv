@@ -179,6 +179,10 @@
 #. Options → Archives: {path} is where 7-Zip's program is
 	7z and RAR archives are extracted by 7-Zip ({path}).	يستخرج 7-Zip أرشيفات 7z وRAR ({path}).
 #. text in the Options window
+#. Options → Archives, when Extract in place with HatchZip (a program's name) is on: {path} is where its program is
+#, machine
+	7z and RAR archives are extracted by HatchZip ({path}).	يستخرج HatchZip أرشيفات 7z وRAR ({path}).
+#. text in the Options window
 #. Options → Archives, when 7-Zip isn't installed
 	7z and RAR archives need 7-Zip (7-zip.org), which isn't installed.	تحتاج أرشيفات 7z وRAR إلى 7-Zip (7-zip.org)، وهو غير مثبت.
 #. text in extracting archives (a download's log, the Archive password window)
@@ -1315,6 +1319,14 @@
 #. checkbox in the Options window
 #. Options → Archives check box (a Link grabber package has its own "Extract when done")
 	Extract archives when their download completes	استخراج الأرشيفات عند اكتمال تنزيلها
+#. text in the Options window
+#. Options → Archives check box, greyed: HatchZip (a program's name, hatchzip.dev its site) isn't installed
+#, machine
+	Extract in place with HatchZip (hatchzip.dev, not installed)	الاستخراج في المكان باستخدام HatchZip (hatchzip.dev، غير مثبت)
+#. text in the Options window
+#. Options → Archives check box: HatchZip (a program's name) removes the archive while extracting it, so only the extracted files need disk space
+#, machine
+	Extract in place with HatchZip: only the files need room	الاستخراج في المكان باستخدام HatchZip: تحتاج الملفات وحدها إلى مساحة
 #. text in the Link grabber window
 #. Link grabber check box: extract the package's archives once they are downloaded
 	Extract when done	استخراج عند الانتهاء
@@ -1611,6 +1623,10 @@
 	Haiti	هايتي
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 	Hang up modem when done	قطع اتصال المودم عند الانتهاء
+#. text in extracting archives (a download's log, the Archive password window)
+#. in a download's log: HatchZip (a program's name) extracted the archive in place, removing it as it went
+#, machine
+	HatchZip extracted it in place: the archive was removed as its files came out	استخرجه HatchZip في المكان: أُزيل الأرشيف بينما كانت ملفاته تُستخرج
 #. text in a download's progress window
 #. legend: pieces downloaded
 	Have	المتوفر
@@ -1783,6 +1799,10 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 	it needs a password	يحتاج إلى كلمة مرور
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted in place (after "Couldn't extract {name}: "); {folder} holds the files extracted so far
+#, machine
+	it stopped partway. The files extracted so far are in {folder}, the rest is still in the archive: Extract continues	توقف في منتصف الطريق. الملفات المستخرجة حتى الآن في {folder}، والباقي ما زال في الأرشيف: «استخراج» يُكمل
 #. text in the Add torrent window
 #. Torrent settings, under "Find peers on the local network"
 	It tells the computers on your network which torrents you have.	يخبر أجهزة الكمبيوتر على شبكتك بالتورنتات التي لديك.
@@ -1799,6 +1819,11 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Italy	إيطاليا
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted in place (after "Couldn't extract {name}: "); HatchZip took its files out (the archive is gone), but moving them stopped: {to} holds those moved, {left} the others, {error} the system's reason
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its files came out, but moving them stopped ({error}). Those moved are in {to}, the others still in {left}; nothing was deleted	استخرجت ملفاته، لكن نقلها توقف ({error}). الملفات المنقولة في {to}، والباقية ما زالت في {left}؛ لم يحذف شيء
 #. text in errors.rs
 #. {error} = an error message (keep the braces as they are)
 	its files could not be written: {error}	تعذر كتابة ملفاته: {error}
@@ -3574,6 +3599,10 @@
 	The downloads you add, or drop on this window, show here.	التنزيلات التي تضيفها، أو تفلتها في هذه النافذة، تظهر هنا.
 #. text in errors.rs
 	the drive or network share is no longer available	القرص أو مشاركة الشبكة لم يعد متوفرا
+#. text in extracting archives (a download's log, the Archive password window)
+#. in a download's log, after HatchZip (a program's name) extracted in place: the entries left out (links, unsafe names) were not deleted, they are still in {folder}
+#, machine
+	The entries left out are still in {folder}	العناصر التي تم تخطيها ما زالت في {folder}
 #. text in extension.rs
 #, machine
 	The extension is already in this app. Apple hasn't notarized this build, so Safari needs these steps to allow it.	الملحق موجود بالفعل في هذا التطبيق. لم توثق Apple هذا الإصدار، لذا يحتاج Safari إلى هذه الخطوات للسماح به.
@@ -3747,6 +3776,10 @@
 #. text in the Scheduler window
 #. why OK is greyed when naming a new queue
 	There is already a queue with this name	توجد بالفعل قائمة انتظار بهذا الاسم
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted (after "Couldn't extract {name}: "); HatchZip is a program's name
+#, machine
+	there isn't enough free space for its files, HatchZip says; nothing was changed	لا توجد مساحة حرة كافية لملفاته بحسب HatchZip؛ لم يتغير شيء
 #. text in a download's progress window
 	These settings are unavailable when "Show download complete dialog" is turned on	هذه الإعدادات غير متاحة عند تشغيل "إظهار مربع حوار اكتمال التنزيل"
 #. text in helpers.rs
@@ -5689,3 +5722,7 @@ unit	{n} MB	{n} ميغابايت
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
 unit	{n} MB/sec	{n} ميغابايت/ثانية
+	Shortcut to show or hide window:	اختصار إظهار أو إخفاء النافذة:
+	Press keys...	اضغط المفاتيح...
+	This shortcut is already in use	هذا الاختصار قيد الاستخدام بالفعل
+	Windows and macOS	Windows و macOS

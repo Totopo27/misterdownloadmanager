@@ -66,10 +66,6 @@
    "source": "Portable mode in detail →",
    "text": "便携模式详情 →"
   },
-  "01579d403b821195": {
-   "source": "<x1/> pull requests",
-   "text": "<x1/> 个拉取请求"
-  },
   "015f73be8184c2cb": {
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "可以。MDM 会实时写入下载进度，因此在连接丢失、程序崩溃或重启后，它会从中断的地方继续。恢复下载前，它会检查服务器上的文件是否已更改。当下载地址过期时，您可以使用<g1>刷新下载地址</g1>来提供新的地址并保留已下载的数据。请参阅<g2>恢复中断的下载</g2>。"
@@ -214,10 +210,6 @@
    "source": "<g1>Help → About Mister Download Manager</g1> shows the version you have.",
    "text": "<g1>帮助 → 关于 Mister Download Manager</g1>显示你拥有的版本。"
   },
-  "030e42728ee6a418": {
-   "source": "<g1>Pull requests</g1><g2><x3/> people</g2>",
-   "text": "<g1>拉取请求</g1><g2><x3/> 人</g2>"
-  },
   "031da5c20d1881e4": {
    "source": "Everything the Scheduler can do →",
    "text": "计划程序能做的所有事情 →"
@@ -314,10 +306,6 @@
    "source": "Tick <g1>Wake the computer to run this queue</g1>, under the start time, and a computer that is asleep at the start time is woken for it. It needs <g2>Start download at</g2>.",
    "text": "勾选开始时间下方的<g1>唤醒电脑以运行此队列</g1>，电脑将在开始时间被唤醒。此功能需要<g2>在以下时间开始下载</g2>。"
   },
-  "04ea3f289327532e": {
-   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list:",
-   "text": "在<g2>选项 → 帐户</g2>中勾选<g1>将种子和磁力链接发送到第一个帐户，而不是发送给对等方</g1>。之后，磁力链接（通过添加 URL、浏览器、剪贴板或拖放添加）或<x3/>文件（通过“添加种子”中的<g4>立即下载</g4>或<g5>稍后</g5>操作）都会发送到列表中的第一个帐户："
-  },
   "04fca60787a71402": {
    "source": "Don't make MDM reachable from the internet (a router's port forwarding): the remote control is made for your home network. To reach it while away, use a VPN to your home network instead (WireGuard, Tailscale): with Tailscale, choose its address in <g1>Listen on</g1>.",
    "text": "不要让 MDM 可以从互联网访问（路由器的端口转发）：远程控制是为您的家庭网络设计的。要在外出时访问它，请使用 VPN 连接到您的家庭网络（WireGuard、Tailscale）：使用 Tailscale 时，请在<g1>监听</g1>中选择其地址。"
@@ -393,6 +381,10 @@
   "05bd7f3cbec0de04": {
    "source": "When the browser used no proxy, and <g1>No proxy/socks</g1> is chosen, MDM uses Windows' proxy settings, as browsers do.",
    "text": "如果浏览器未使用代理，且选择了<g1>无代理/SOCKS</g1>，MDM 会像浏览器一样使用 Windows 的代理设置。"
+  },
+  "05d0b33779393664": {
+   "source": "<g1>Links a page sent aren't looked up</g1>: Link grabber shows them as <g2>Not looked up</g2>, and no request leaves for them, with or without your Sites Logins or debrid accounts, until you add them to the queue. Nothing is downloaded before that.",
+   "text": "<g1>网页发送的链接不会被查找</g1>：链接抓取器会将其显示为<g2>未查找</g2>，并且在您将其添加到队列之前，不会发出任何请求，无论是否使用您的站点登录信息或网盘账户。在此之前，不会下载任何内容。"
   },
   "05e4107afbf16316": {
    "source": "Open it with <g1>Scheduler</g1> on the toolbar or <g2>Downloads → Scheduler</g2>. Right-clicking a queue and choosing <g3>Schedule</g3> or <g4>Edit queue</g4> opens it on that queue.",
@@ -489,6 +481,10 @@
   "0717a2923d7e72cc": {
    "source": "<g1>Chrome, Edge, Brave, Opera and Vivaldi</g1>: one click from the Chrome Web Store, and the browser keeps it up to date. Edge first asks to allow extensions from other stores.",
    "text": "<g1>Chrome、Edge、Brave、Opera 和 Vivaldi</g1>：从 Chrome 网上应用店一键安装，浏览器会自动保持更新。Edge 浏览器首次安装时会要求允许来自其他商店的扩展。"
+  },
+  "071f7e9f51504932": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM.",
+   "text": "Windows 会报告两个不同的内存数字。“正在使用的内存”（任务管理器的“内存”列，即私有工作集）是程序当前在 RAM 中占用的内存。“已提交内存”（进程资源管理器的“私有字节”，资源监视器的“提交”）是 Windows 为程序预留的内存；其中大部分可以被分页到磁盘，因此这并不意味着程序正在使用那么多 RAM。"
   },
   "072428c8bd6ba91a": {
    "source": "When the limit is reached, MDM stops downloading. New downloads show <g1>Waiting: the download limit is reached (Scheduler)</g1>. Everything resumes on its own when the period is over. <g2>Show warning before stopping downloads</g2> tells you when this happens and when downloads will go on.",
@@ -777,6 +773,10 @@
   "0b4f1bd33e265aad": {
    "source": "In the browser extension, <g1>Send downloads to → Another Mister Download Manager (a server)</g1> sends the downloads it catches, and <g2>Download with Mister Download Manager</g2> on a link, to the server instead of your computer. The browser's cookies stay behind, so a download that needs you signed in to a site stays with your computer.",
    "text": "在浏览器扩展中，<g1>将下载发送到 → 另一个 Mister Download Manager（服务器）</g1> 会将捕获到的下载以及链接上的<g2>使用 Mister Download Manager 下载</g2>发送到服务器，而不是您的电脑。浏览器的 Cookie 会留在本地，因此需要登录网站才能进行的下载仍会在您的电脑上完成。"
+  },
+  "0b4f6db95315517d": {
+   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour), Mega-Debrid 60 (it allows 50 a second). When a service says it's asked too often, MDM waits.",
+   "text": "MDM 对每个服务的请求频率远低于其限制：Real-Debrid 每分钟最多 120 次（它允许 250 次），AllDebrid 300 次（它允许 600 次），Premiumize 60 次（它未公布限制），TorBox 120 次（它允许每分钟 300 次，每小时 60 次新的网络下载），Mega-Debrid 60 次（它允许每秒 50 次）。当服务提示请求过于频繁时，MDM 会等待。"
   },
   "0b60549b3aaf5aea": {
    "source": "A portable copy. The download list and settings stay in a <x1/> folder next to the program, and nothing is written to the registry. Browser integration needs the installer. See <g2>Portable mode</g2>.",
@@ -1181,6 +1181,10 @@
   "1253f3ce3529a664": {
    "source": "<g1>Firefox</g1> works on every system. If you signed in only moments ago with Firefox open, close it once so it writes the sign-in to its files.",
    "text": "<g1>Firefox</g1>可在所有系统上运行。如果您刚登录 Firefox，请关闭一次浏览器，以便它将登录信息写入文件。"
+  },
+  "1263147c9c6487c5": {
+   "source": "<g1>Link sites, for Click'n'Load.</g1> Off until you turn it on in <g2>Options → Archives and Link grabber</g2>: then MDM listens on port 9666 of this computer only. The first time a site sends links MDM asks whether to allow it; what an allowed site sends opens in Link grabber, where nothing is looked up or downloaded until you add it. Links to this computer or your own network are left out.",
+   "text": "<g1>链接站点，用于 Click'n'Load。</g1> 默认关闭，直到您在<g2>选项 → 压缩包和链接抓取器</g2>中开启：届时 MDM 仅监听本电脑的 9666 端口。首次有站点发送链接时，MDM 会询问是否允许；允许的站点发送的链接会在链接抓取器中打开，在您添加之前，不会进行任何查找或下载。指向本电脑或您自己网络的链接会被忽略。"
   },
   "12696d50b6f54aa3": {
    "source": "The tray icon",
@@ -1658,10 +1662,6 @@
    "source": "To open the page by the server's name (<x1/>), give MDM that name: <x2/> (several: separated by commas). Other names are refused, so that no web page can reach MDM through a name of its own.",
    "text": "要通过服务器名称（<x1/>）打开页面，请为 MDM 提供该名称：<x2/>（多个名称用逗号分隔）。其他名称将被拒绝，这样任何网页都无法通过其自己的名称访问 MDM。"
   },
-  "197cf5eb6cf3a06e": {
-   "source": "Every size (26)",
-   "text": "所有尺寸 (26)"
-  },
   "19810b030c072070": {
    "source": "Path",
    "text": "路径"
@@ -1846,6 +1846,10 @@
    "source": "<g1>Notification area</g1><g2>Starts with the computer in the notification area, and hides progress windows there while they run.</g2>",
    "text": "<g1>通知区域</g1><g2>随电脑启动并在通知区域运行，运行时将进度窗口隐藏在通知区域。</g2>"
   },
+  "1bdd089e60f96be2": {
+   "source": "Click'n'Load",
+   "text": "Click'n'Load"
+  },
   "1be93bd020009908": {
    "source": "<g1>The keyboard focus got lost</g1> when a button greyed itself or Escape closed a drop-down: Tab started over at the top of the window. It now moves on, or comes back, as in Windows.",
    "text": "<g1>键盘焦点会丢失</g1>：按钮变灰或按 Escape 关闭下拉菜单时，按 Tab 会从窗口顶部重新开始。现在，焦点会像在 Windows 中一样继续移动或返回。"
@@ -1901,6 +1905,10 @@
   "1c766405f60723d9": {
    "source": "Crates",
    "text": "Crates"
+  },
+  "1c7c8388e4cf543a": {
+   "source": "Last updated 2026-11-14",
+   "text": "最后更新：2026年11月14日"
   },
   "1c7c99ef90478d88": {
    "source": "Windows 10/11; macOS, Linux to try",
@@ -2210,10 +2218,6 @@
    "source": "On macOS only an administrator can schedule a wake, so the option is greyed. MDM doesn't ask for an administrator's password. An administrator can have the Mac wake every day a minute before the queue starts, for example at 10:59 PM for a queue that starts at 11:00 PM:",
    "text": "在 macOS 上，只有管理员才能安排唤醒，因此该选项是灰色的。MDM 不会要求管理员密码。管理员可以设置 Mac 在队列开始前一分钟每天唤醒，例如，对于晚上 11:00 开始的队列，在晚上 10:59 唤醒："
   },
-  "216eae12c95fa610": {
-   "source": "Everyone who sent a pull request, opened an issue or commented on GitHub since version <x1/>.",
-   "text": "感谢自版本 <x1/> 以来在 GitHub 上提交拉取请求、提出问题或发表评论的所有人。"
-  },
   "2171be975f40efe2": {
    "source": "<g1>Moving from IDM</g1><g2>Your IDM list comes over in one file, each download with its address, referrer and cookies.</g2>",
    "text": "<g1>从 IDM 迁移</g1><g2>您的 IDM 列表可导入为一个文件，每个下载任务都包含其地址、引用页和 Cookie。</g2>"
@@ -2285,10 +2289,6 @@
   "223eac9bc2498002": {
    "source": "<g1>FTP</g1><g2>and FTPS</g2>",
    "text": "<g1>FTP</g1><g2>和 FTPS</g2>"
-  },
-  "225937cd2337f950": {
-   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize and TorBox: file-host links through your own account.",
-   "text": "<g1><g2>网盘服务帐户</g2></g1> — Real-Debrid、AllDebrid、Premiumize 和 TorBox：通过您自己的帐户下载文件托管链接。"
   },
   "228586c26511a211": {
    "source": "Open the add-on's page on addons.mozilla.org, <g1>Mister Download Manager</g1>, and click <g2>Add to Firefox</g2>. Zen and LibreWolf use the same page.",
@@ -2385,6 +2385,10 @@
   "23c9ffb3ae37e1be": {
    "source": "Warning text",
    "text": "警告文本"
+  },
+  "23dbac576172f8c1": {
+   "source": "Some sites hide the key in a script MDM doesn't run (only the plain form the documentation shows is read): then their button reports a failure, and the site's plain links are the way.",
+   "text": "有些网站将密钥隐藏在 MDM 不运行的脚本中（只读取文档中显示的普通表单）：此时，它们的按钮会报告失败，网站的普通链接是正确的方式。"
   },
   "23dc7b2c6f77ebe2": {
    "source": "<g1>Ctrl++</g1> / <g2>Ctrl+−</g2>",
@@ -2697,6 +2701,10 @@
   "2826420ef85a1bcf": {
    "source": "Open <g1>View → Language...</g1>. The same window as on the first start opens: every language by its flag, its own name and its English name. Type in <g2>Search</g2> to narrow the list, then double-click a language or select it and click <g3>OK</g3>. The window switches at once; there is nothing to restart.",
    "text": "打开<g1>视图 → 语言...</g1>。打开的窗口与首次启动时相同，其中每种语言都显示国旗、该语言的名称和英文名称。在<g2>搜索</g2>中输入内容以缩小列表范围，然后双击一种语言，或选择该语言并点击<g3>确定</g3>。界面会立即切换，无需重新启动。"
+  },
+  "282685fe5e7ae3c6": {
+   "source": "<g1>Click'n'Load</g1> buttons on link sites, once you turn it on. See <g2>Click'n'Load</g2>.",
+   "text": "启用后，链接网站上的<g1>Click'n'Load</g1>按钮即可使用。请参阅<g2>Click'n'Load</g2>。"
   },
   "282f9b6ea43027ed": {
    "source": "Saved beside the video, they get its name and the language: <x1/>. Players such as VLC and MPV pick them up on their own. With ffmpeg they're always SRT; without it, the site's own format (often WebVTT, <x2/>).",
@@ -3858,10 +3866,6 @@
    "source": "For video pages, MDM downloads yt-dlp (and ffmpeg if you want merged qualities) on first use.",
    "text": "对于视频页面，MDM 会在首次使用时下载 yt-dlp（如果您需要合并画质，还会下载 ffmpeg）。"
   },
-  "39ba3311a16e6d4d": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts",
-   "text": "Real-Debrid、AllDebrid 和 Premiumize 账户"
-  },
   "39c6e3069cb8cc85": {
    "source": "Click <g1>OK</g1>.",
    "text": "点击<g1>确定</g1>。"
@@ -3869,10 +3873,6 @@
   "39f0061bac128459": {
    "source": "<g1>Options → Archives</g1> says whether 7-Zip was found. Without it, a 7z or RAR archive isn't extracted, and the <g2>7-Zip needed</g2> window says so, with a <g3>Get 7-Zip</g3> button.",
    "text": "<g1>选项 → 存档</g1> 会显示是否找到了 7-Zip。如果没有找到，7z 或 RAR 存档将不会被解压，并且 <g2>需要 7-Zip</g2> 窗口会提示，并带有一个<g3>获取 7-Zip</g3> 按钮。"
-  },
-  "39f69afa6e85f9d1": {
-   "source": "<g1>Issues</g1><g2><x3/> people</g2>",
-   "text": "<g1>问题</g1><g2><x3/> 人</g2>"
   },
   "3a14e0e8b14737d7": {
    "source": "Choose <g1>Downloads → Speed Limiter → Turn on</g1>.",
@@ -4085,10 +4085,6 @@
   "3d4a4f2d1b19754e": {
    "source": "Can I move my downloads over from IDM?",
    "text": "我可以将 IDM 中的下载任务迁移过来吗？"
-  },
-  "3d5479ff36667ffd": {
-   "source": "MDM sends the service only the links you download through it, and your account's token or key. Nothing else.",
-   "text": "MDM 只会将您通过它下载的链接以及您账户的令牌或密钥发送给服务，不会发送其他信息。"
   },
   "3d67b0a7f32fc0e5": {
    "source": "The free, open-source IDM alternative. Every connection at once, crash-safe resume, torrents and video in one list.",
@@ -4521,6 +4517,10 @@
   "438a47f34fb3d4b7": {
    "source": "Browser integration — Mister Download Manager help",
    "text": "浏览器集成 — Mister Download Manager 帮助"
+  },
+  "43ab4c1a614d9ad1": {
+   "source": "<g1>Limits</g1>: at most 10 posts a minute from one site, 500 links and 256 KB a post; more is refused, and one site's posts don't use up another's. At most 20 posts wait for an answer. A site brings MDM's window to the front at most once a minute; its links still arrive in Link grabber in between.",
+   "text": "<g1>限制</g1>：每个网站每分钟最多 10 个帖子，每个帖子最多 500 个链接和 256 KB；超出部分将被拒绝，且一个网站的帖子不会占用另一个网站的配额。最多 20 个帖子等待回复。一个网站最多每分钟将 MDM 窗口置于前台一次；在此期间，其链接仍会到达链接抓取器。"
   },
   "43ad4ee2e95fdb1f": {
    "source": "A page's own short sounds (a click, a voice-search chime) are no longer listed in <g1>Media on this page</g1>.",
@@ -5138,6 +5138,10 @@
    "source": "The formats you meet",
    "text": "支持的格式"
   },
+  "4da9d590ebb4306e": {
+   "source": "A button that sends a DLC container instead of links isn't taken: reading one needs a key MDM can't use. The site's plain links, or its Click'n'Load button, are the way.",
+   "text": "发送 DLC 容器而非链接的按钮不会被接受：读取 DLC 容器需要 MDM 无法使用的密钥。网站的普通链接或其 Click'n'Load 按钮是正确的方式。"
+  },
   "4dad09a9ad62a54a": {
    "source": "Many sites hand out links that only work for a while, or only while you are signed in. Resuming then fails, because the old address no longer answers.",
    "text": "许多网站提供的链接只在一段时间内有效，或者只在您登录时有效。此时恢复会失败，因为旧地址不再响应。"
@@ -5570,6 +5574,10 @@
    "source": "To add a download instead, send <x1/>.",
    "text": "若要添加下载，请发送<x1/>。"
   },
+  "54c262b0fc40fe2e": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts — Mister Download Manager",
+   "text": "Real-Debrid、AllDebrid、Premiumize 和 Mega-Debrid 账户 — Mister Download Manager"
+  },
   "54c47c38624ff486": {
    "source": "<g1>Support MDM</g1>: <g2>Help → Support MDM</g2> and a line in <g3>About</g3> open the creator's <g4>GitHub Sponsors</g4> page in the browser; the website, the README and the browser extension's popup link to it too. Only when asked: MDM stays free, with no reminders, and nothing changes or unlocks.",
    "text": "<g1>支持 MDM</g1>：<g2>帮助 → 支持 MDM</g2> 和<g3>关于</g3>中的一行文字会在浏览器中打开创建者的 <g4>GitHub Sponsors</g4> 页面；网站、README 和浏览器扩展的弹出窗口也链接到该页面。仅在被要求时显示：MDM 保持免费，没有提醒，也没有任何功能改变或解锁。"
@@ -5649,10 +5657,6 @@
   "55a4316a9df511bb": {
    "source": "A small file",
    "text": "小文件"
-  },
-  "55a523d7ca4b905f": {
-   "source": "Thanks to",
-   "text": "鸣谢"
   },
   "55ecea9df3d3ed23": {
    "source": "Paste the address of a playlist (<x1/>) or a channel's videos (<x2/>) and click <g3>Look up</g3>. Instead of one video's qualities, the window lists the list's videos, each with its length.",
@@ -5793,10 +5797,6 @@
   "57d55935c79c75f6": {
    "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
    "text": "安装其中一个，任何一个都可以，然后再次查找视频。MDM 会自行找到 Deno、Node.js（也包括通过 nvm 安装的）和 Bun。如果仍然提示，则新程序的文件夹不在 MDM 启动时使用的 <x1/> 中（Windows 的安装程序会为之后启动的程序添加路径）：退出 MDM（<g2>任务 → 退出</g2>）并重新启动。"
-  },
-  "57df30288a29fe94": {
-   "source": "Made possible by these amazing humans",
-   "text": "由这些杰出人士倾力打造"
   },
   "57e101e4403fd046": {
    "source": "Command",
@@ -5945,6 +5945,10 @@
   "59d5983b5e65fbf4": {
    "source": "reads who opened pull requests and issues, and who commented, from GitHub's public API (the maintainer, Claude and bots left out) for every place that thanks them: the website's home page, <x1/> and each release on the News page (<x2/>, on every build), each release's notes (<x3/>, the people active since the release before) and the README (<x4/> at each release's preparation: its round photos are committed in <x5/>, since GitHub can't round a picture in a README).",
    "text": "从 GitHub 的公共 API 读取谁发起了拉取请求和问题，以及谁发表了评论（维护者、Claude 和机器人除外），用于感谢他们的所有地方：网站主页、<x1/> 和新闻页面上的每个版本（<x2/>，在每个构建中），每个版本的发布说明（<x3/>，自上一个版本以来活跃的人员）以及 README（<x4/> 在每个版本准备时：其圆形照片提交在 <x5/> 中，因为 GitHub 无法在 README 中将图片设为圆形）。"
+  },
+  "59d718d0872bfa97": {
+   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list whose service takes torrents (Mega-Debrid doesn't, yet):",
+   "text": "在<g2>选项 → 账户</g2>中勾选<g1>将种子和磁力链接发送到第一个账户而不是点对点</g1>。然后，磁力链接（添加 URL、浏览器、剪贴板、拖放）或 <x3/> 文件（添加种子中的<g4>立即下载</g4>或<g5>稍后</g5>）将发送到列表中第一个支持种子的账户（Mega-Debrid 尚未支持）："
   },
   "5a277738c32493f8": {
    "source": "Support MDM",
@@ -6177,6 +6181,10 @@
   "5d7b9ab9db6cbd11": {
    "source": "Your first download",
    "text": "您的首次下载"
+  },
+  "5d83c63f00bc131b": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM. On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "Windows 会报告两种不同的内存数据。“正在使用的内存”（任务管理器的“内存”列，即私有工作集）是程序当前在 RAM 中占用的内存。“已提交内存”（Process Explorer 的“私有字节”，资源监视器的“提交”）是 Windows 为程序预留的内存；其中大部分可以被分页到磁盘，因此不代表程序实际使用了那么多 RAM。在一台测试机上（Windows 11，MDM 0.5.2，IDM 6.42，发布版本），MDM 在托盘中运行时，正在使用的内存为 6–9 MB，IDM 约为 6 MB。MDM 窗口打开后，启动时约占用 70 MB，窗口隐藏到托盘后约占用 10 MB，并将内存归还给 Windows。MDM 的已提交内存为 130–160 MB，IDM 约为 10 MB。MDM 在高速下载时，正在使用的内存可能会瞬间上升到几百 MB（它会在磁盘追赶写入速度时将数据保存在内存中）；下载结束后几秒内会回落，在托盘中运行时，剩余内存会在大约十分钟内归还给 Windows。"
   },
   "5d8435f41cea6550": {
    "source": "Protocols",
@@ -6425,10 +6433,6 @@
   "60d28e32899eb074": {
    "source": "<g1>GNU GPL 3.0</g1><g2>free software, for good</g2>",
    "text": "<g1>GNU GPL 3.0</g1><g2>永久免费软件</g2>"
-  },
-  "60db104b0c4ca856": {
-   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour). When a service says it's asked too often, MDM waits.",
-   "text": "MDM 对每个服务的请求次数远低于其限制：Real-Debrid 每分钟最多 120 次 (它允许 250 次)，AllDebrid 300 次 (它允许 600 次)，Premiumize 60 次 (它未公布限制)，TorBox 120 次 (它允许每分钟 300 次，每小时 60 次新网页下载)。当服务提示请求过于频繁时，MDM 会等待。"
   },
   "60e4ea08eb29abeb": {
    "source": "<g1>Stop</g1> on a download in a running queue stays stopped, instead of the queue starting it again a moment later; <g2>Stop All</g2> too (<g3>#341</g3>).",
@@ -6774,6 +6778,10 @@
    "source": "The progress window shows it coming in.",
    "text": "进度窗口显示下载正在进行。"
   },
+  "6687c22337b780e7": {
+   "source": "MDM sends the service only the links you download through it, and your account's token or key (on Mega-Debrid, or its user name and password). Nothing else. Mega-Debrid's documentation puts them in the address; MDM sends them in the request's body instead, where no proxy or server log keeps them.",
+   "text": "MDM 只会将您通过它下载的链接以及您的账户令牌或密钥（在 Mega-Debrid 上，或其用户名和密码）发送给服务。除此之外，别无他物。Mega-Debrid 的文档将它们放在地址中；MDM 则将它们发送到请求正文中，这样任何代理或服务器日志都不会保留它们。"
+  },
   "66987ab567339aa6": {
    "source": "Free IDM alternative",
    "text": "免费的 IDM 替代品"
@@ -6909,6 +6917,10 @@
   "68b88047fcca2939": {
    "source": "Queue downloads for later →",
    "text": "将下载加入队列以便稍后下载 →"
+  },
+  "68ba2e7f312decbd": {
+   "source": "Any web page can send links there, not only the link site you are on, so MDM is careful with them:",
+   "text": "任何网页都可以将链接发送到此处，而不仅仅是您正在访问的链接网站，因此 MDM 会谨慎处理："
   },
   "6934a2b5fa583b1e": {
    "source": "Contributors — Mister Download Manager",
@@ -7081,6 +7093,10 @@
   "6b957cd1180602a0": {
    "source": "How many connections does it use?",
    "text": "它使用多少个连接？"
+  },
+  "6ba170458f12182a": {
+   "source": "Many link sites have a <g1>Click'n'Load</g1> button that sends their links straight to a download manager on your computer, as JDownloader's documentation for web sites describes. Turn it on in <g2>Options → Archives and Link grabber → Accept Click'n'Load from web pages</g2> (off by default). MDM then listens on port 9666 of this computer only, and the links a page sends open in Link grabber, with the page's package name and archive password.",
+   "text": "许多链接网站都有一个<g1>Click'n'Load</g1>按钮，可以直接将链接发送到您电脑上的下载管理器，正如 JDownloader 的网站文档所述。您可以在<g2>选项 → 压缩包和链接抓取器 → 接受网页的 Click'n'Load</g2>中启用此功能（默认关闭）。MDM 随后仅监听本电脑的 9666 端口，网页发送的链接将在链接抓取器中打开，并带有网页的包名称和压缩包密码。"
   },
   "6bb8d2e69de9ec9f": {
    "source": "This website",
@@ -7262,6 +7278,10 @@
    "source": "Every window, rebuilt.",
    "text": "每个窗口，焕然新生。"
   },
+  "6e3b4017fb705290": {
+   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid, Premiumize or Mega-Debrid, then downloaded with MDM's speed and resume.</g2>",
+   "text": "<g1>网盘直链解析</g1><g2>通过 Real-Debrid、AllDebrid、Premiumize 或 Mega-Debrid 解析网盘链接，然后使用 MDM 的高速下载和断点续传功能进行下载。</g2>"
+  },
   "6e409093f697abac": {
    "source": "Batch download numbered files and lists of links — Mister Download Manager",
    "text": "批量下载编号文件和链接列表 — Mister Download Manager"
@@ -7321,10 +7341,6 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "“停止”现在也会停止 yt-dlp，后者以前会在后台继续下载。"
-  },
-  "6f06002d2161cba3": {
-   "source": "Last updated 2026-11-13",
-   "text": "最后更新：2026年11月13日"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7556,7 +7572,7 @@
   },
   "7297ca101de5145e": {
    "source": "The list couldn't be read from GitHub when this page was built. Everyone is on GitHub meanwhile, in the project's <g1>pull requests</g1> and <g2>issues</g2>.",
-   "text": "此页面构建时无法从 GitHub 读取列表。同时，所有贡献者都在 GitHub 项目的<g1>拉取请求</g1>和<g2>问题</g2>中。"
+   "text": "此页面构建时无法从 GitHub 读取列表。同时，所有贡献者都在 GitHub 项目的<g1>拉取请求</g1>和<g2>议题</g2>中。"
   },
   "729a19fc6ce418f9": {
    "source": "Reporting problems",
@@ -7613,10 +7629,6 @@
   "73460447cd841230": {
    "source": "1 GiB over a fast local link",
    "text": "通过快速本地链接下载 1 GiB"
-  },
-  "734a722e25f3a1f1": {
-   "source": "Use your Real-Debrid, AllDebrid or Premiumize account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
-   "text": "在 Mister Download Manager 中使用您的 Real-Debrid、AllDebrid 或 Premiumize 账户：解锁文件主机链接，然后通过所有连接下载。"
   },
   "734da40a1b2e7f72": {
    "source": "Everything MDM doesn't take stays with the browser.",
@@ -7906,6 +7918,10 @@
    "source": "What it costs the computer",
    "text": "电脑资源占用"
   },
+  "77dd412fabcb0ad1": {
+   "source": "Why does MDM show a larger memory figure than IDM?",
+   "text": "为什么 MDM 显示的内存占用比 IDM 大？"
+  },
   "77de723e952c5bde": {
    "source": ", <x1/>, <x2/>, <x3/>, <x4/>,",
    "text": "、<x1/>、<x2/>、<x3/>、<x4/>、"
@@ -7969,10 +7985,6 @@
   "79298af691e8bdd2": {
    "source": "You need your own paid account with one of these services: MDM doesn't sell or include one. Sharing an account or its links breaks the services' terms and can get the account suspended.",
    "text": "您需要拥有这些服务之一的付费账户：MDM 不出售或包含任何账户。共享账户或其链接会违反服务条款，并可能导致账户被暂停。"
-  },
-  "7931468b8d7d517a": {
-   "source": "<x1/> <g2>Everyone who helped</g2>",
-   "text": "<x1/> <g2>所有贡献者</g2>"
   },
   "7957b18548166390": {
    "source": "Questions and answers — Mister Download Manager",
@@ -8986,6 +8998,10 @@
    "source": "Pieces of a stream (its segments) are never listed. A copy-protected stream (DRM: Widevine, PlayReady, FairPlay, as most paid streaming services use) is listed as <g1>Protected</g1>, with no <g2>Download</g2> button: no tool may break that protection, and MDM doesn't try.",
    "text": "流媒体的分块（片段）不会列出。受版权保护的流媒体（DRM：Widevine、PlayReady、FairPlay；大多数付费流媒体服务都使用这些技术）会标记为<g1>受保护</g1>，且不提供<g2>下载</g2>按钮：任何工具都不能绕过这种保护，MDM 也不会尝试。"
   },
+  "87d38b69da245498": {
+   "source": "Why does MDM show a larger memory figure than IDM? — Mister Download Manager",
+   "text": "为什么 MDM 显示的内存占用比 IDM 大？— Mister Download Manager"
+  },
   "87fdb00b527c2d1d": {
    "source": "What is different",
    "text": "不同之处"
@@ -9558,6 +9574,10 @@
    "source": "Transfer",
    "text": "传输"
   },
+  "913e347659323df9": {
+   "source": "Click'n'Load 2 (#37): the listener on 127.0.0.1:9666 that reads a link site's posts into packages for Link grabber, with limits on what it takes",
+   "text": "Click'n'Load 2 (#37)：监听 127.0.0.1:9666 的监听器，将链接网站的帖子读取为“链接抓取器”的包，并限制其接收内容"
+  },
   "91413c8d067f6992": {
    "source": "<g1>All Downloads</g1> — everything, with a node per category below it.",
    "text": "<g1>所有下载</g1> — 显示所有下载，下方按类别列出各个节点。"
@@ -9601,10 +9621,6 @@
   "91f7b61e72ddf0bc": {
    "source": "<g1>Acceleration and resume</g1><g2>A file split over up to 32 connections, re-split until the last byte, and resumed after any crash.</g2>",
    "text": "<g1>加速与续传</g1><g2>文件可拆分为最多 32 个连接，重新拆分直到最后一个字节，并在任何崩溃后恢复下载。</g2>"
-  },
-  "92055d4da1d101c5": {
-   "source": "<x1/> people who sent a pull request, reported a problem or joined a conversation on GitHub. <g2>Meet them all</g2>",
-   "text": "<x1/> 在 GitHub 上提交拉取请求、报告问题或参与讨论的人们。 <g2>认识他们</g2>"
   },
   "92078a4a178bf949": {
    "source": "A title bar MDM draws, while its window isn't the active one (transparent: as when active)",
@@ -9742,10 +9758,6 @@
    "source": "<g1><x2/></g1> — the shape of text boxes, check boxes, buttons, progress bars, scroll bars, the focus mark and the title bar.",
    "text": "<g1><x2/></g1> — 文本框、复选框、按钮、进度条、滚动条、焦点标记和标题栏的形状。"
   },
-  "940dfcf7abcc8702": {
-   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid or Premiumize, then downloaded with MDM's speed and resume.</g2>",
-   "text": "<g1>网盘账户</g1><g2>通过 Real-Debrid、AllDebrid 或 Premiumize 解锁文件托管链接，然后用 MDM 的高速和续传功能下载。</g2>"
-  },
   "94138b99718bf4a0": {
    "source": "Mister Download Manager (\"MDM\", \"the software\") and the website misterdownloadmanager.com (\"the site\") are made by Ahmed Nefzaoui and contributors (\"we\"). By using the software or the site you accept these terms. If you don't, please don't use them.",
    "text": "Mister Download Manager（“MDM”，“本软件”）和网站 misterdownloadmanager.com（“本网站”）由 Ahmed Nefzaoui 和贡献者（“我们”）制作。使用本软件或本网站即表示您接受这些条款。如果您不接受，请不要使用它们。"
@@ -9789,10 +9801,6 @@
   "949e7c1956120262": {
    "source": "Options → Connection: the DNS list at the bottom.",
    "text": "选项 → 连接：底部的 DNS 列表。"
-  },
-  "94a7f71ab168f4df": {
-   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox) turn a file host's link into a direct one the engine downloads",
-   "text": "网盘账户 (#44)：这些服务的官方 API（Real-Debrid、AllDebrid、Premiumize、TorBox）将文件托管链接转换为下载引擎可直接下载的链接。"
   },
   "94d1813016d4945e": {
    "source": "Where there is no tray",
@@ -9881,6 +9889,10 @@
   "95ff4e3f1e52b773": {
    "source": "portable.zip — runs from a folder or USB stick",
    "text": "portable.zip — 可从文件夹或 U 盘运行"
+  },
+  "960ec6fa3baf5716": {
+   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3>, <g4>Premiumize</g4> and <g5>Mega-Debrid</g5>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key; Mega-Debrid with your user name and password, or an application's API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
+   "text": "<g1>选项 → 账户 → 添加…</g1> 支持 <g2>Real-Debrid</g2>、<g3>AllDebrid</g3>、<g4>Premiumize</g4> 和 <g5>Mega-Debrid</g5>。Real-Debrid 和 AllDebrid 可通过在浏览器中确认代码或使用 API 令牌登录；Premiumize 使用其 API 密钥；Mega-Debrid 使用您的用户名和密码，或应用程序的 API 密钥。MDM 会显示账户名称以及是否为高级账户。如果拥有多个账户，链接将通过第一个支持其主机的服务进行下载。"
   },
   "9610ce30533afc6e": {
    "source": "<g1>Your own devices, for the remote control.</g1> Off until you turn it on in <g2>Options → Remote</g2>: then MDM answers, over HTTPS on your local network, only the phones and computers you paired with its code.",
@@ -10170,10 +10182,6 @@
    "source": "<g1><g2>Video downloads</g2></g1> — download a video from its page (YouTube, Vimeo and many more) with yt-dlp.",
    "text": "<g1><g2>视频下载</g2></g1> — 使用 yt-dlp 从视频页面（YouTube、Vimeo 等）下载视频。"
   },
-  "99d899e1714af677": {
-   "source": "MDM supports four services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3> and <g4>TorBox</g4>.",
-   "text": "MDM 支持四种服务：<g1>Real-Debrid</g1>、<g2>AllDebrid</g2>、<g3>Premiumize</g3> 和 <g4>TorBox</g4>。"
-  },
   "99e549b640c7f008": {
    "source": "Light while it waits",
    "text": "等待时轻量运行"
@@ -10318,10 +10326,6 @@
    "source": "Helium",
    "text": "Helium"
   },
-  "9c29a3e8e53ea368": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts — Mister Download Manager",
-   "text": "Real-Debrid、AllDebrid 和 Premiumize 账户 — Mister Download Manager"
-  },
   "9c4861e08c9b1cf2": {
    "source": "Download manager command line and automation API",
    "text": "下载管理器命令行和自动化 API"
@@ -10445,10 +10449,6 @@
   "9e18dba709154be4": {
    "source": "Send downloads from your browser",
    "text": "从浏览器发送下载"
-  },
-  "9e23173a22cf615a": {
-   "source": "<x1/> comment",
-   "text": "<x1/> 条评论"
   },
   "9e2414e7eb93b062": {
    "source": "Windows 7's feel: glossy buttons, a glassy title bar and a glossy green progress bar.",
@@ -10738,10 +10738,6 @@
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "如果窗口在该尺寸下大于屏幕（例如在 1366 × 768 屏幕上，选项窗口设置为 200 %），它会以屏幕允许的最大尺寸打开，其余部分可滚动：使用滚动条、鼠标滚轮，或按<g1>Tab</g1>键切换到下一个控件。"
   },
-  "a24bd8fd730a41d0": {
-   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
-   "text": "在 Windows 上，如果 OpenGL 版本低于 3.0（例如，某些旧显卡驱动，如英特尔第一代核芯显卡，其 OpenGL 版本为 2.1），MDM 将无法正常绘制窗口，显示可能会出现异常。MDM 启动时会检测到此情况，并自动切换到使用微软软件渲染器 (WARP) 的 Direct3D 模式重新启动。此时，<g1>视图 → 绘制方式</g1> 会显示当前模式。选择 <g2>OpenGL</g2> 将再次尝试使用 OpenGL 绘制。"
-  },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
    "text": "为什么 MDM 没有接管我的下载？ — Mister Download Manager"
@@ -10793,6 +10789,10 @@
   "a356f214a2ec96a0": {
    "source": "In Arabic, Hebrew, Persian, Urdu and Uyghur the whole window is mirrored, the way Windows does it for these languages. File names, addresses and folder paths keep their own direction inside translated sentences, so they stay readable. MDM uses the system's own fonts for every script.",
    "text": "在阿拉伯语、希伯来语、波斯语、乌尔都语和维吾尔语中，整个窗口会像 Windows 对这些语言的处理方式一样进行镜像显示。文件名、地址和文件夹路径在翻译后的句子中会保持其自身方向，以确保可读性。MDM 为每种文字都使用系统自带的字体。"
+  },
+  "a3610d8542e56513": {
+   "source": "Last updated 2026-11-14 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "最后更新于 2026-11-14 · 适用于应用程序、浏览器扩展和 misterdownloadmanager.com"
   },
   "a3633bf4f8cf650e": {
    "source": "Remove the selected item of a list (a login, an exception, a queue: asks first)",
@@ -11058,6 +11058,14 @@
    "source": "Internet Download Manager 6.42",
    "text": "Internet Download Manager 6.42"
   },
+  "a6ce32d80128c1ea": {
+   "source": "Every size (27)",
+   "text": "所有尺寸 (27)"
+  },
+  "a73a27470dadf3f9": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
+   "text": "Real-Debrid、AllDebrid、Premiumize、TorBox 或 Mega-Debrid 等网盘加速服务是一种付费账户，它能将文件从文件主机下载到自己的服务器上。它会返回一个纯粹的直链，没有主机等待、速度限制和验证码。在 MDM 中配置您的账户后，您的服务支持的主机链接将通过该服务解锁，然后由 MDM 像任何文件一样下载：包括所有连接、暂停和恢复功能。"
+  },
   "a7431b39fec4f131": {
    "source": "How it holds: Windows binds the adapter's own address. Windows then sends those packets only through that adapter (its strong host model). Linux binds the device itself (Linux 5.7 or newer), and macOS binds the interface. An address of a kind the adapter doesn't have (IPv6 on an IPv4-only VPN) is refused, not sent around it.",
    "text": "它如何保持：Windows 绑定适配器自己的地址。然后 Windows 只通过该适配器发送这些数据包（其强主机模型）。Linux 绑定设备本身（Linux 5.7 或更高版本），macOS 绑定接口。适配器不具备的地址类型（例如仅支持 IPv4 的 VPN 上的 IPv6）将被拒绝，而不会绕过它发送。"
@@ -11178,6 +11186,10 @@
    "source": "Choose <g1>Tasks → Show drop target</g1>. A small box with the MDM icon appears and stays on top of other windows.",
    "text": "选择<g1>任务 → 显示拖放目标</g1>。一个带有 MDM 图标的小方框将出现并停留在其他窗口的顶部。"
   },
+  "a8dd103bdb8c3ce6": {
+   "source": "On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "在一台测试机上（Windows 11，MDM 0.5.2，IDM 6.42，发布版本），托盘中 MDM 的“正在使用的内存”为 6–9 MB，IDM 约为 6 MB。MDM 窗口打开时，启动后立即使用约 70 MB；窗口隐藏到托盘后，会释放内存给 Windows，此时使用约 10 MB。MDM 的“已提交内存”为 130–160 MB，IDM 约为 10 MB。MDM 在高速下载时，“正在使用的内存”可能会瞬间上升到几百 MB（它会在磁盘追赶写入速度时将数据保存在内存中）；下载结束后几秒内会回落，在托盘中，它会在大约十分钟内将剩余内存交还给 Windows。"
+  },
   "a8e296926efbf0e1": {
    "source": "<g1>Main download queue</g1> — where <g2>Download Later</g2>, batch downloads and imported lists go. A download leaves it when it is finished.",
    "text": "<g1>主下载队列</g1> — <g2>稍后下载</g2>、批量下载和导入的列表都会添加到此队列。下载完成后会从队列中移除。"
@@ -11293,6 +11305,10 @@
   "aa33e21a9939345a": {
    "source": "<g1>Linux: Vulkan, and macOS: Metal, in View → Draw with</g1> (<g2>#206</g2>). Linux can draw its windows with Vulkan (on Wayland and X11), and macOS with Metal, the way Windows draws with Direct3D. OpenGL stays the default there until reports from real graphics cards are in: try it and tell us how it went. The same safety net as on Windows: when Vulkan or Metal can't start (no driver for it), its first frame doesn't come within 10 seconds, or a start with it ends before its first frame, MDM draws with OpenGL until it is chosen again, and the menu says why. A graphics card reset while MDM runs starts MDM again.",
    "text": "<g1>Linux：Vulkan，macOS：Metal，在视图 → 绘制方式中</g1>（<g2>#206</g2>）。Linux 可以在 Wayland 和 X11 上使用 Vulkan 绘制窗口，macOS 可以使用 Metal，就像 Windows 使用 Direct3D 绘制一样。OpenGL 仍是默认设置，直到收到真实显卡的报告：请尝试并告诉我们效果如何。与 Windows 相同的安全网：当 Vulkan 或 Metal 无法启动（没有驱动）、其第一帧在 10 秒内未出现，或使用它启动但在第一帧出现前结束时，MDM 会使用 OpenGL 绘制，直到再次选择它，菜单会说明原因。MDM 运行时显卡重置会重新启动 MDM。"
+  },
+  "aa3bccf286cd1a17": {
+   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize, TorBox and Mega-Debrid: file-host links through your own account.",
+   "text": "<g1><g2>网盘服务帐户</g2></g1> — Real-Debrid、AllDebrid、Premiumize、TorBox 和 Mega-Debrid：通过您自己的帐户解析文件托管链接。"
   },
   "aa4c0c6b476d4f22": {
    "source": "Browser integration is set up by MDM itself at each start (the browsers installed then are found); add the extension as in <g1>Browser integration</g1>. Firefox installed as a Snap (Ubuntu's) reaches MDM once you allow it; other Snap and Flatpak browsers can't (see <g2>Flatpak and Snap browsers</g2>). The tray icon, Dark Mode support and Launch on startup work on GNOME (Ubuntu's), KDE Plasma, Xfce and Cinnamon.",
@@ -11470,6 +11486,10 @@
    "source": "Firefox asks to confirm: click <g1>Add</g1>. Firefox keeps the add-on up to date.",
    "text": "Firefox 会要求确认：点击<g1>添加</g1>。Firefox 会自动更新此附加组件。"
   },
+  "ad104637d2763ef5": {
+   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - <g3>User name</g3> and <g4>Password</g4>, then <g5>Sign in</g5> (Mega-Debrid). Mega-Debrid blocks your connection for some minutes after a few wrong passwords. Each sign-in replaces the account's last one at Mega-Debrid, so another program signed in to the same account makes MDM sign in again on its next link, on its own. MDM itself signs in only when its token is refused, so its checks and its downloads at once don't end each other's. MDM keeps your password (in the keychain, see below) to sign in again. - or paste your <g6>API token</g6> (<g7>Find my token</g7> opens the service's page that shows it), then <g8>Use the token</g8>. Premiumize signs in this way only: paste the API key from its Account page. On Mega-Debrid, make an application under <g9>My Account → API Key</g9> and paste its key; MDM then never needs your password, and doesn't keep it: the key is all it stores, and you can delete the key on that page at any time. Mega-Debrid doesn't say whether a key's account is premium, so the Accounts list says <g10>the service doesn't say whether it is premium</g10> for it; a free account's links are refused when you download them.",
+   "text": "选择服务，然后： - <g1>在浏览器中登录</g1>（Real-Debrid、AllDebrid 和 TorBox）：MDM 会显示一个代码并打开服务页面（TorBox 的页面也在 <x2/>）。在那里输入代码（AllDebrid 的页面已包含该代码）并允许 MDM。对话框会自动识别。 - <g3>用户名</g3> 和 <g4>密码</g4>，然后 <g5>登录</g5>（Mega-Debrid）。Mega-Debrid 在几次密码错误后会阻止您的连接几分钟。每次登录都会替换 Mega-Debrid 上该账户的上次登录，因此另一个程序登录到同一账户会导致 MDM 在下次链接时自动重新登录。MDM 仅在令牌被拒绝时才重新登录，因此其检查和下载不会相互中断。MDM 会保存您的密码（在钥匙串中，见下文）以便重新登录。 - 或者粘贴您的 <g6>API 令牌</g6>（<g7>查找我的令牌</g7> 会打开显示该令牌的服务页面），然后 <g8>使用令牌</g8>。Premiumize 仅通过此方式登录：从其账户页面粘贴 API 密钥。在 Mega-Debrid 上，在 <g9>我的账户 → API 密钥</g9> 下创建一个应用程序并粘贴其密钥；MDM 之后将永远不需要您的密码，也不会保存它：它只存储密钥，您可以随时在该页面删除密钥。Mega-Debrid 不会说明密钥的账户是否为高级账户，因此“账户”列表会显示 <g10>服务未说明是否为高级账户</g10>；免费账户的链接在下载时会被拒绝。"
+  },
   "ad20819c93bdea53": {
    "source": "Windows may give the stick another drive letter, such as <x1/> instead of <x2/>. The folders you set, and the downloads already in the list, still point at the old letter. Check <g3>Options → Save to</g3> and change the folders if needed. When MDM is about to save into a folder that doesn't exist, it asks whether to create it.",
    "text": "Windows 可能会为 U 盘分配另一个驱动器号，例如<x1/>而不是<x2/>。您设置的文件夹以及列表中已有的下载仍然指向旧的驱动器号。检查<g3>选项 → 保存到</g3>，如果需要，请更改文件夹。当 MDM 即将保存到不存在的文件夹时，它会询问是否创建该文件夹。"
@@ -11509,10 +11529,6 @@
   "adbf2cdd5f87d0b6": {
    "source": "Transfer: first request to last byte",
    "text": "传输：从首次请求到最后一个字节"
-  },
-  "adc99f39f820cbb6": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
-   "text": "Real-Debrid、AllDebrid、Premiumize 或 TorBox 等网盘离线下载服务是一种付费账户，它将文件从文件托管服务下载到自己的服务器上。它会返回一个直接链接，没有文件托管服务的等待、速度限制和验证码。在 MDM 中设置您的账户后，您的服务支持的文件托管服务链接将通过该服务解锁，然后由 MDM 像下载任何文件一样下载：包括所有连接、暂停和恢复功能。"
   },
   "ade160a1aa789777": {
    "source": "MDM downloads what you point it at, the way a web browser does, only faster and with more control. It's made for everyday downloads: software and updates, documents, your own files from cloud storage, videos and music you're allowed to save, Linux images and other torrents shared by their makers, and anything else you have the right to download.",
@@ -11669,6 +11685,10 @@
   "b05f1388075b4b26": {
    "source": "The Scheduler's choices for when the queue is done, Turn off computer when done among them",
    "text": "“计划程序”中队列完成后的选项，其中包括“完成后关闭计算机”"
+  },
+  "b064cf9d46e0dfec": {
+   "source": "<g1>Links a site packed</g1> (Click'n'Load) keep the site's packages and names, with their archive password when the site gave one.",
+   "text": "<g1>网站打包的链接</g1>（Click'n'Load）会保留网站的包和名称，以及网站提供的压缩包密码。"
   },
   "b08e516b19471d83": {
    "source": "<g1>All files and checksums</g1><g2>Version 0.5.2 on GitHub Releases, with SHA256SUMS.txt</g2>",
@@ -12342,10 +12362,6 @@
    "source": "Options: Remote",
    "text": "选项：远程"
   },
-  "b9a51e6448b28bb1": {
-   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - or paste your <g3>API token</g3> (<g4>Find my token</g4> opens the service's page that shows it), then <g5>Use the token</g5>. Premiumize signs in this way only: paste the API key from its Account page.",
-   "text": "选择服务，然后： - <g1>在浏览器中登录</g1> (Real-Debrid、AllDebrid 和 TorBox)：MDM 会显示一个代码并打开服务页面 (TorBox 的页面也在 <x2/>)。在那里输入代码 (AllDebrid 的页面已包含该代码) 并授权 MDM。对话框会自动检测到。 - 或粘贴您的 <g3>API 令牌</g3> (<g4>查找我的令牌</g4> 会打开显示该令牌的服务页面)，然后<g5>使用令牌</g5>。Premiumize 仅通过此方式登录：从其“账户”页面粘贴 API 密钥。"
-  },
   "b9bee71f3466bfea": {
    "source": "Change it at any time, no restart",
    "text": "随时更改，无需重启"
@@ -12422,10 +12438,6 @@
    "source": "<g1>The time</g1> is measured from the download's own connections, as each one opens: MDM sends nothing extra to the server. It is an estimate (the time to open a connection, divided by its round trips: one for http, two for https), so it says <g2>about</g2>. The quickest connection counts.",
    "text": "<g1>时间</g1>是从下载自身的连接中测量的，每个连接打开时都会测量：MDM 不会向服务器发送任何额外数据。这是一个估算值（打开连接所需的时间，除以其往返次数：HTTP 为一次，HTTPS 为两次），因此显示<g2>约</g2>。最快的连接会被计算在内。"
   },
-  "bb7529bf5491688a": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands…",
-   "text": "Real-Debrid、AllDebrid、Premiumize 或 TorBox 等网盘离线下载服务是一种付费账户，它将文件从文件托管服务下载到自己的服务器上。它会返回一个直接链接，没有文件托管服务的等待、速度限制和验证码。在 MDM 中设置您的账户后，您的服务支持的文件托管服务链接将通过该服务解锁，然后由 MDM 像下载任何文件一样下载：包括所有连接、暂停和恢复功能。"
-  },
   "bb7ddff510dd3161": {
    "source": "If your network gives a proxy auto-config (PAC) script, type its address, or pick the file, under <g1>Use automatic configuration script</g1>. MDM fetches it and asks it which way each download goes (<x2/>, <x3/> or <x4/>), as browsers do. Until it has been fetched, or if it can't be, MDM uses the system's settings.",
    "text": "如果您的网络提供代理自动配置 (PAC) 脚本，请在<g1>使用自动配置脚本</g1>下输入其地址或选择文件。MDM 会像浏览器一样获取该脚本，并询问每个下载应通过哪种方式进行（<x2/>、<x3/> 或 <x4/>）。在脚本被获取之前，或者如果无法获取，MDM 将使用系统设置。"
@@ -12441,6 +12453,10 @@
   "bbdebbdee79af831": {
    "source": "MDM finds the browsers installed and offers each one its extension.",
    "text": "MDM 会找到已安装的浏览器，并为每个浏览器提供其扩展。"
+  },
+  "bbe26dcd777f25da": {
+   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
+   "text": "<g1>您的网盘账户。</g1> 您通过“<g2>选项 → 账户</g2>”中的 Real-Debrid、AllDebrid、Premiumize 或 Mega-Debrid 账户发送的链接或种子会发送到该服务，然后由该服务提供文件。您的登录信息（包括上述密码）将保留在您的计算机上。"
   },
   "bbeb2269d1830f72": {
    "source": "<g1>A menu shut with Escape opens again at the first click on its title</g1>: a menu opened from the menu bar and shut with Escape, the pointer still on its title, was left marked open. On Linux the next click on that title only \"shut\" it, and a second click was needed; on Windows Escape seemed to do nothing (the menu came back at once). Escape, or MDM losing the focus, now shuts the menu whatever the pointer rests on; a press on a title still shuts its own menu or opens another.",
@@ -12702,10 +12718,6 @@
    "source": "Your browsers hand it their downloads, and proven open-source tools do the specialist work. <g1>Set up the extension</g1>.",
    "text": "浏览器会将下载任务交给 MDM，专业工作则由成熟的开源工具完成。<g1>设置扩展</g1>。"
   },
-  "bfccf2cc495dc164": {
-   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek and Cyrillic text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. Other scripts are shaped and drawn by egui.",
-   "text": "一个 egui 窗口绘制到固定的像素坐标，每个对话框一个即时视口。<x1/> 负责维护状态（下载、队列、设置、列表选择），并将菜单、工具栏、按键和 IPC 命令转换为操作。每个对话框都是独立的模块，并返回一个 <x2/>（打开、关闭、完成并带有一个值）。仅限 Windows 的调用被限制在 <x3/> 中，而其 Linux 和 macOS 对应部分则在 <x4/> 中（从会话开始、浏览器主机、声音、在文件夹中显示、崩溃处理程序）；其他所有文件都是安全、可移植的 Rust 代码。字体来自系统：Windows 的 Fonts 文件夹、macOS 的系统字体、Linux 上的 fontconfig (<x5/>)。在 Windows 上，拉丁语、希腊语和西里尔语文本由 DirectWrite 绘制 (<x6/>，通过 egui 的字形光栅化器钩子)：在自然模式下，视图 → 文本 → 平滑，按请求的大小进行抗锯齿处理，并以四分之一像素放置，使用字体自身的字距；经典（默认）模式下，使用 GDI 经典模式，因此每个字母的提示形状和整像素宽度结合在一起。其他脚本由 egui 进行塑形和绘制。"
-  },
   "bfcf797517e5c279": {
    "source": "MDM remembers the columns, their widths and the sort order.",
    "text": "MDM 会记住列、列宽和排序顺序。"
@@ -12801,6 +12813,10 @@
   "c16bf35f546c4e5c": {
    "source": "<g1>Update now</g1> in Help → Check for updates: MDM downloads the new version, checks it, puts it in place and restarts, on Windows (setup, portable and plain zip), Mac and Linux (AppImage, .tar.gz; a .deb or .rpm opens in the system's installer). It installs only files listed in a checksum list signed by MDM's release key, which every release now carries (<x2/>). The first update this way will be from 0.2.1 to the next version.",
    "text": "在“帮助”→“检查更新”中选择<g1>立即更新</g1>：MDM 会在 Windows（安装版、便携版和普通 zip）、macOS 和 Linux（AppImage、.tar.gz；.deb 或 .rpm 会在系统安装程序中打开）上下载新版本、验证并安装，然后重新启动。它只会安装 MDM 发布密钥签名的校验和列表中列出的文件；现在每个版本都附带该列表（<x2/>）。首次使用此方式更新时，会从 0.2.1 更新到下一个版本。"
+  },
+  "c17a4b4d31ab68a9": {
+   "source": "The smallest text in a Chinese, Japanese or Korean interface (their glyphs are denser than Latin's)",
+   "text": "中文、日文或韩文界面中的最小文本（这些语言的字形比拉丁语更密集）"
   },
   "c1899b1d4f5b3ff2": {
    "source": "The download button over videos",
@@ -12929,6 +12945,10 @@
   "c3b2f678a0ea5986": {
    "source": "A connection that is far slower than the others is dropped and opened again.",
    "text": "比其他连接慢得多的连接会被断开并重新打开。"
+  },
+  "c3b6062dd1dccf3a": {
+   "source": "<g1>MDM doesn't say it is JDownloader.</g1> Some sites first ask whether JDownloader is running (a script named <x2/>) and show their button only then. MDM doesn't answer that question, so such a site may say no program was found; a site that simply sends its form works.",
+   "text": "<g1>MDM 不会声称自己是 JDownloader。</g1>有些网站会先询问 JDownloader 是否正在运行（一个名为<x2/>的脚本），然后才显示其按钮。MDM 不会回答这个问题，因此此类网站可能会显示未找到程序；而简单发送其表单的网站则可以正常工作。"
   },
   "c3bbc73f092cecb9": {
    "source": "Options on its Sounds page: a sound for each event",
@@ -13166,6 +13186,10 @@
    "source": "Every version is on the <g1>Releases</g1> page. For Windows there are three files:",
    "text": "所有版本都在<g1>发布</g1>页面上。Windows 有三个文件："
   },
+  "c740de7dd5da36cb": {
+   "source": "MDM supports five services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3>, <g4>TorBox</g4> and <g5>Mega-Debrid</g5>.",
+   "text": "MDM 支持五种服务：<g1>Real-Debrid</g1>、<g2>AllDebrid</g2>、<g3>Premiumize</g3>、<g4>TorBox</g4> 和 <g5>Mega-Debrid</g5>。"
+  },
   "c746660e91994045": {
    "source": "<g1>If it can't be reached, use the system's DNS</g1>: off by default, so a DNS that doesn't answer stops the download with a message naming it rather than quietly showing your lookups to the system's DNS. A name the DNS says doesn't exist never falls back (that would undo a filtering DNS).",
    "text": "<g1>如果无法访问，请使用系统的 DNS</g1>：此选项默认关闭，因此 DNS 无响应时会停止下载，并显示 DNS 名称，而不会悄悄将您的查询交给系统的 DNS。如果 DNS 指定某个名称不存在，则不会回退到系统的 DNS（否则会绕过 DNS 过滤）。"
@@ -13330,6 +13354,10 @@
    "source": "<g1>A long file name ran out of the progress window</g1> (<g2>#62</g2>): on the <g3>Options on completion</g3> tab, a longer translation of \"Save To:\" (Turkish, German…) ran into the path, and the path ran past the window's edge. The label now takes the room its language needs, and the path is shortened in the middle, keeping the file's name in sight, and shown whole on hover; right-to-left languages included.",
    "text": "<g1>过长的文件名会超出进度窗口</g1> (<g2>#62</g2>)：在<g3>完成后选项</g3>选项卡上，“保存到:”的较长翻译（土耳其语、德语等）会与路径重叠，并且路径会超出窗口边缘。现在标签会根据其语言所需的空间进行调整，路径会在中间缩短，以保持文件名可见，并在鼠标悬停时显示完整路径；包括从右到左的语言。"
   },
+  "c999b61151dbe721": {
+   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid) turn a file host's link into a direct one the engine downloads",
+   "text": "网盘账户 (#44)：这些服务的官方 API（Real-Debrid、AllDebrid、Premiumize、TorBox、Mega-Debrid）将文件托管链接转换为引擎可直接下载的链接"
+  },
   "c9a8324f618160c6": {
    "source": "<g1>The plain zip</g1> (<x2/>), the same programs without an installer.",
    "text": "<g1>普通 zip 包</g1> (<x2/>)，不带安装程序的相同程序。"
@@ -13430,17 +13458,9 @@
    "source": "Can I download without the browser extension?",
    "text": "不安装浏览器扩展程序也能下载吗？"
   },
-  "cb3fee6871e1183d": {
-   "source": "<g1>0.5.2</g1> <g2>17.1 MB</g2>",
-   "text": "<g1>0.5.2</g1> <g2>17.1 MB</g2>"
-  },
   "cb565e5b28b1036b": {
    "source": "<g1><x2/> Add to Firefox</g1><g3><x4/> Add to Chrome</g3>",
    "text": "<g1><x2/> 添加到 Firefox</g1><g3><x4/> 添加到 Chrome</g3>"
-  },
-  "cb661d84888ecca4": {
-   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3> and <g4>Premiumize</g4>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
-   "text": "<g1>选项 → 账户 → 添加...</g1>支持<g2>Real-Debrid</g2>、<g3>AllDebrid</g3>和<g4>Premiumize</g4>。Real-Debrid 和 AllDebrid 通过您在浏览器中确认的代码或您的 API 令牌登录；Premiumize 通过其 API 密钥登录。MDM 会显示账户名称以及是否为高级账户。如果有多个账户，链接会通过第一个支持其主机服务的账户下载。"
   },
   "cb75f147f406ef80": {
    "source": "Check the download's own <g1>Speed Limiter</g1> tab in its progress window.",
@@ -13485,6 +13505,10 @@
   "cbed9e6bff5df9ed": {
    "source": "Sorted into packages",
    "text": "分类打包"
+  },
+  "cbfd25f29119468a": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own…",
+   "text": "Real-Debrid、AllDebrid、Premiumize、TorBox 或 Mega-Debrid 等网盘加速服务是一种付费账户，它能将文件从文件主机下载到自己的服务器上……"
   },
   "cbfdf9d84e3b1fa2": {
    "source": "A tooltip's left and right padding",
@@ -13658,10 +13682,6 @@
    "source": "Link grabber and archives — Mister Download Manager help",
    "text": "链接抓取器和存档 — Mister Download Manager 帮助"
   },
-  "ce5bf471e6fccfb8": {
-   "source": "<g1>Comments</g1><g2><x3/> people</g2>",
-   "text": "<g1>评论</g1><g2><x3/> 人</g2>"
-  },
   "ce6f1a716e6dad6d": {
    "source": "Or",
    "text": "或者"
@@ -13745,6 +13765,10 @@
   "cfadb8fa8b105d9f": {
    "source": "A greyed toolbar label",
    "text": "置灰的工具栏标签"
+  },
+  "cfddefff24fc39b6": {
+   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; experimental): <g1>Add...</g1> signs in by code in the browser, with your user name and password, or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
+   "text": "您的网盘服务帐户（Real-Debrid、AllDebrid、Premiumize、TorBox、Mega-Debrid；实验性功能）：<g1>添加…</g1> 通过浏览器中的代码、您的用户名和密码，或您的 API 令牌或密钥登录；然后，服务支持的主机链接将通过它下载。列表的顺序是帐户被请求的顺序。请参阅<g2>网盘服务帐户</g2>。"
   },
   "cfe97b6cc1200669": {
    "source": "Yes: HTTP and SOCKS proxies, and proxy auto-config (PAC) scripts, in <g1>Options → Proxy / Socks</g1>. See <g2>Options</g2>. To keep every download on a VPN, see <g3>Network adapter</g3>.",
@@ -14190,10 +14214,6 @@
    "source": "Mister Download Manager and IDM, side by side.",
    "text": "Mister Download Manager 与 IDM 并排比较。"
   },
-  "d65efc937a364b03": {
-   "source": "<x1/> issue",
-   "text": "<x1/> 个问题"
-  },
   "d663f408764b1150": {
    "source": "Replay",
    "text": "重播"
@@ -14310,10 +14330,6 @@
    "source": "Set it up",
    "text": "设置"
   },
-  "d7dccabcd92050ba": {
-   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid or Premiumize account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
-   "text": "<g1>您的网盘账户。</g1>您通过<g2>选项 → 账户</g2>中的Real-Debrid、AllDebrid或Premiumize账户发送的链接或种子会发送到该服务，然后由该服务提供文件。您的登录信息会与上述密码一起保存在您的计算机上。"
-  },
   "d7e47d8cb056d141": {
    "source": "<g1>Download in order</g1>, to watch a video while it downloads, with each file's first and last pieces early. Other torrents fetch the rarest pieces first.",
    "text": "<g1>按顺序下载</g1>，以便在视频下载时观看，每个文件的开头和结尾分块会优先下载。其他种子则优先获取最稀有的分块。"
@@ -14357,6 +14373,10 @@
   "d89e02f60b2ac3f2": {
    "source": "Speed Limiter",
    "text": "速度限制器"
+  },
+  "d8ab0b376c3097e9": {
+   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek, Cyrillic and single-codepoint CJK text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. CJK uses the interface language's system face; combining marks, multi-codepoint clusters and missing glyphs stay with egui, as do other scripts.",
+   "text": "一个 egui 窗口绘制到固定的像素坐标，每个对话框一个即时视口。<x1/> 保存状态（下载、队列、设置、列表选择），并将菜单、工具栏、按键和 IPC 命令转换为操作。每个对话框都是自己的模块，并返回一个 <x2/>（打开、关闭、完成并带有一个值）。仅限 Windows 的调用限制在 <x3/> 中，其 Linux 和 macOS 对应项限制在 <x4/> 中（从会话开始、浏览器的主机、声音、在文件夹中显示、崩溃处理程序）；所有其他文件都是安全的、可移植的 Rust。字体来自系统：Windows 的 Fonts 文件夹、macOS 的系统字体、Linux 上的 fontconfig (<x5/>)。在 Windows 上，拉丁文、希腊文、西里尔文和单码点 CJK 文本由 DirectWrite 绘制 (<x6/>，通过 egui 的字形栅格化钩子)：在自然模式下，“视图”→“文本”→“平滑”模式，按请求大小进行抗锯齿处理，并以字体自身的字距放置在四分之一像素处；“经典”（默认）模式下，采用 GDI 经典模式，因此每个字母的提示形状和整像素宽度结合在一起。CJK 使用界面语言的系统字体；组合标记、多码点簇和缺失字形以及其他脚本仍由 egui 处理。"
   },
   "d8c59eee97dfb40d": {
    "source": "<g1>Port</g1> — 8463 by default.",
@@ -14745,6 +14765,10 @@
   "e069363b1b77d1db": {
    "source": "Chrome, Firefox, Edge and more",
    "text": "Chrome、Firefox、Edge 等"
+  },
+  "e0c2425f7ce3b025": {
+   "source": "The page's own address isn't sent as the links' referrer: a page could name any.",
+   "text": "网页本身的地址不会作为链接的引用者发送：网页可以指定任何引用者。"
   },
   "e0f4ab5df9c8188d": {
    "source": "A running queue starts its downloads in list order, a few at a time (four by default). When one fails, it moves to the end of the queue and is tried again 30 seconds later. The queue stops when nothing is left to download.",
@@ -15146,10 +15170,6 @@
    "source": "A second copy of MDM watches the first. When MDM crashes, the report window says <g1>Mister Download Manager closed unexpectedly</g1>. When its window hasn't answered for 8 seconds, it says <g2>Mister Download Manager stopped responding</g2>, and <g3>End and restart MDM</g3> closes the frozen copy and starts a fresh one. If MDM comes back by itself, the window says so.",
    "text": "MDM 的第二个副本会监视第一个副本。当 MDM 崩溃时，报告窗口会显示<g1>Mister Download Manager 意外关闭</g1>。当其窗口在 8 秒内没有响应时，它会显示<g2>Mister Download Manager 已停止响应</g2>，并且<g3>结束并重启 MDM</g3>会关闭冻结的副本并启动一个新的。如果 MDM 自行恢复，窗口会显示此信息。"
   },
-  "e6e4ffbd1a17c7e8": {
-   "source": "<x1/> pull request",
-   "text": "<x1/> 个拉取请求"
-  },
   "e6e9f590b183bea4": {
    "source": "Link grabber: paste many links, MDM groups them, checks which are online, and extracts archives when they arrive.",
    "text": "链接抓取器：粘贴多个链接，MDM 会将它们分组，检查哪些在线，并在文件到达时解压归档。"
@@ -15374,6 +15394,10 @@
    "source": "Make one",
    "text": "制作主题"
   },
+  "e9ee6b93a480a828": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM…",
+   "text": "Windows 会报告两种不同的内存数据。“正在使用的内存”（任务管理器的“内存”列，即私有工作集）是程序当前在 RAM 中占用的内存…"
+  },
   "ea0b11f82fe35728": {
    "source": "Tasks → Add magnet link..., or the toolbar's Add Torrent",
    "text": "任务 → 添加磁力链接…，或工具栏上的“添加 Torrent”"
@@ -15493,10 +15517,6 @@
   "eb908c0a11a04d0d": {
    "source": "Note",
    "text": "注意"
-  },
-  "eb9f527d55414228": {
-   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "最后更新日期：2026年11月13日 · 适用于应用程序、浏览器扩展和 misterdownloadmanager.com"
   },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
@@ -15681,6 +15701,14 @@
   "ee4329d38e737b6a": {
    "source": "Pick a quality.",
    "text": "选择一个画质。"
+  },
+  "ee48f7cb0fdcc5f1": {
+   "source": "Use your Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
+   "text": "在 Mister Download Manager 中使用您的 Real-Debrid、AllDebrid、Premiumize 或 Mega-Debrid 账户：解锁文件托管链接，然后通过所有连接进行下载。"
+  },
+  "ee5325073a33b985": {
+   "source": "<g1>Links to this computer or your network are left out</g1>: a link to <x2/>, to a private or link-local address (<x3/>, <x4/>, <x5/>, <x6/>, their IPv6 kin), or to a name without a dot or under <x7/>, <x8/> or <x9/> never reaches Link grabber. A link site's files aren't there, and such an address could be your router or another device. MDM judges the address as written: a public-looking name that points into your network isn't recognized, so look at a package before you add it.",
+   "text": "<g1>指向本电脑或您网络的链接将被忽略</g1>：指向<x2/>、私有或本地链接地址（<x3/>、<x4/>、<x5/>、<x6/>、其 IPv6 对应项），或没有点号或在<x7/>、<x8/>或<x9/>下的名称的链接永远不会到达链接抓取器。链接网站的文件不在那里，而且此类地址可能是您的路由器或其他设备。MDM 会根据所写的地址进行判断：指向您网络的公共名称不会被识别，因此在添加包之前请仔细查看。"
   },
   "ee657a313da06c4d": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: free and open source, laid out like IDM, and it imports your IDM list. If you need something else first, such as an Android app or a particular feature, the comparison above shows what each of the others is good at.",
@@ -16090,6 +16118,10 @@
    "source": "The list shows the order they will run in. Use the arrow buttons under it to move a download up or down.",
    "text": "列表显示了它们将运行的顺序。使用下面的箭头按钮可以向上或向下移动下载。"
   },
+  "f3a43b64feb190bf": {
+   "source": "Only one program can listen on port 9666. If JDownloader is running, MDM says so: close it, then turn the option off and on again.",
+   "text": "只有一个程序可以监听 9666 端口。如果 JDownloader 正在运行，MDM 会提示：请关闭它，然后再次关闭并打开该选项。"
+  },
   "f3d19efbbf46e57b": {
    "source": "Archives extracted",
    "text": "已提取的压缩包"
@@ -16270,10 +16302,6 @@
    "source": "Not offered on its website<g1><g2>3</g2></g1>",
    "text": "其网站未提供<g1><g2>3</g2></g1>"
   },
-  "f79d1bba86369d73": {
-   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox; experimental): <g1>Add...</g1> signs in by code in the browser or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
-   "text": "您的网盘服务帐户（Real-Debrid、AllDebrid、Premiumize、TorBox；实验性功能）：点击“<g1>添加...</g1>”可通过浏览器中的代码或您的 API 令牌或密钥登录；然后，该服务支持的主机链接将通过它下载。列表中的顺序是帐户被请求的顺序。请参阅“<g2>网盘服务帐户</g2>”。"
-  },
   "f7a4f8dcbb4812c2": {
    "source": "In Chrome, Edge and Brave you can limit an extension to some sites (right-click its toolbar button → <g1>This can read and change site data</g1>). On a site it may not read, the extension can't pass your sign-in on, so it leaves the download to the browser. Choose <g2>On all sites</g2> to let MDM take downloads everywhere.",
    "text": "在 Chrome、Edge 和 Brave 中，您可以限制扩展程序只能访问部分网站（右键点击工具栏上的扩展程序按钮 → <g1>此扩展程序可以读取和更改网站数据</g1>）。在扩展程序无法读取的网站上，它无法传递您的登录信息，因此会让浏览器处理下载。选择<g2>在所有网站上</g2>，即可让 MDM 接管所有网站的下载。"
@@ -16317,10 +16345,6 @@
   "f8092cd791a22a18": {
    "source": "<g1>Stop sharing after sharing for … minutes</g1> — or once it has been shared that long, over all its runs. Off by default.",
    "text": "<g1>共享时间达到以下时长后停止共享</g1> — 或者累计共享达到指定时长后停止。默认关闭。"
-  },
-  "f821c9c149c3e050": {
-   "source": "<x1/> comments",
-   "text": "<x1/> 条评论"
   },
   "f82dc8051d1faab0": {
    "source": "names besides its addresses the page may be opened by",
@@ -16409,10 +16433,6 @@
   "f99db8564b0343d7": {
    "source": "What's new in version 0.5.0 <g1>2026-11-08</g1>",
    "text": "0.5.0 版本更新内容 <g1>2026-11-08</g1>"
-  },
-  "f9a8db1326e07676": {
-   "source": "<x1/> issues",
-   "text": "<x1/> 个问题"
   },
   "f9ad81eb1765abbd": {
    "source": "In the browser extension's menu, <g1>Send downloads to → Another Mister Download Manager (a server)</g1>: type the server's address, open it once in that browser to accept its certificate, then enter a pairing code (<x2/> above). Downloads the extension catches, and <g3>Download with Mister Download Manager</g3> on a link, then go to the server instead of this computer. The browser's cookies are not sent to the server: a download that needs you to be signed in to a site stays with this computer.",
@@ -16822,6 +16842,10 @@
    "source": "Privacy policy — Mister Download Manager",
    "text": "隐私政策 — Mister Download Manager"
   },
+  "fea1b4253c14428a": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts",
+   "text": "Real-Debrid、AllDebrid、Premiumize 和 Mega-Debrid 账户"
+  },
   "fea945c5c18cacc1": {
    "source": "Why is MDM faster than a browser?",
    "text": "为什么MDM比浏览器更快？"
@@ -16913,6 +16937,10 @@
   "ffe6d971c9f20725": {
    "source": "Step by step in the help",
    "text": "帮助中的分步说明"
+  },
+  "ffed56884994ca66": {
+   "source": "<g1>The first time a site sends links, MDM asks</g1>: <g2>Allow</g2> (that site's links go to Link grabber from now on), <g3>Block</g3> (they never do), or <g4>Not now</g4> (these links are dropped, and the site is asked again next time). The site is the one your browser names, never what the page claims. When the browser names none (a page that hides where it is, or one inside a sandboxed frame), the window says <g5>An unknown site</g5>: it is asked about every time, and its answer is never kept. Turning Click'n'Load off forgets the answers.",
+   "text": "<g1>网站首次发送链接时，MDM 会询问</g1>：<g2>允许</g2>（该网站的链接此后将进入链接抓取器）、<g3>阻止</g3>（永不进入），或<g4>暂不</g4>（这些链接将被丢弃，下次会再次询问该网站）。网站名称是您的浏览器所显示的，而非网页声称的。当浏览器未显示名称时（隐藏其来源的网页，或沙盒框架内的网页），窗口会显示<g5>未知网站</g5>：每次都会询问，且其答案永不保存。关闭 Click'n'Load 会忘记这些答案。"
   },
   "ffeedec50b9a371f": {
    "source": "For a download already in the list, <g1>File Properties</g1> has the same choice beside the login: <g2>Through Real-Debrid</g2>. It can be changed while the download isn't running. The next start goes the new way, and continues from what is already downloaded when the file is the same.",

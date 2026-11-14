@@ -29,7 +29,17 @@ archives, and single GZ and XZ files.
 7z and RAR archives need 7-Zip, a free program. MDM uses it when it is installed, for split and
 encrypted archives too. **Options → Archives** says whether it was found; when it wasn't, the
 **7-Zip needed** window says so, with a **Get 7-Zip** button. RAR's own extraction code can't be
-part of a free program like MDM, which is why it asks 7-Zip.
+part of a free program like MDM, which is why it asks 7-Zip. With **Extract in place with
+HatchZip** on (below), HatchZip extracts them instead.
+
+## In place, for a nearly full disk
+
+A 180 GB download that unpacks to 200 GB normally needs 380 GB: the archive and its files at
+once. With [HatchZip](https://hatchzip.dev), a free extractor, installed, tick **Extract in place
+with HatchZip** in **Options → Archives**: the archive shrinks as its files come out, so a little
+over 200 GB is enough. HatchZip checks that everything fits and that the password is right before
+it changes anything. If it stops partway, the files so far stay beside the archive and **Extract**
+continues.
 
 ## Careful with your disk
 

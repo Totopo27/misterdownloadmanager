@@ -401,6 +401,22 @@ fn mark_all(dir: &Path, on_file: &mut dyn FnMut(&Path)) -> io::Result<u64> {
 /// that is a link, or not a plain file or folder, is removed before anything is moved into
 /// place, and so is a name that isn't safe. Returns what was left out.
 pub fn check_tree(root: &Path, depth: usize) -> io::Result<Vec<(String, &'static str)>> {
+    let bad = scan(root, depth)?;
+    for (path, _, _) in &bad {
+        let t = fs::symlink_metadata(path)?.file_type();
+        if t.is_dir() {
+            let _ = fs::remove_dir_all(path);
+        } else {
+            let _ = fs::remove_file(path).or_else(|_| fs::remove_dir(path));
+        }
+    }
+    Ok(bad.into_iter().map(|(_, rel, why)| (rel, why)).collect())
+}
+
+/// What under `root` breaks the rules (a link, not a plain file or folder, a name that isn't
+/// safe), with its path, its name under `root` and why; nothing is changed. A folder that breaks
+/// them isn't looked into.
+fn scan(root: &Path, depth: usize) -> io::Result<Vec<(PathBuf, String, &'static str)>> {
     let mut out = Vec::new();
     let mut todo = vec![root.to_path_buf()];
     while let Some(d) = todo.pop() {
@@ -429,18 +445,182 @@ pub fn check_tree(root: &Path, depth: usize) -> io::Result<Vec<(String, &'static
                 }
             };
             match bad {
-                Some(why) => {
-                    out.push((rel, why));
-                    if t.is_dir() && !t.is_symlink() {
-                        let _ = fs::remove_dir_all(&path);
-                    } else {
-                        let _ = fs::remove_file(&path).or_else(|_| fs::remove_dir(&path));
-                    }
-                }
+                Some(why) => out.push((path, rel, why)),
                 None if t.is_dir() => todo.push(path),
                 None => {}
             }
         }
     }
     Ok(out)
+}
+
+/// What [`move_out`] did.
+pub struct Moved {
+    /// Where the files went, the number of them, and those numbered.
+    pub report: Report,
+    /// Entries that break the rules: never moved, never deleted (they stay in the folder).
+    pub skipped: Vec<(String, &'static str)>,
+    /// The folder, when something is still in it (the entries left out).
+    pub left: Option<PathBuf>,
+}
+
+/// Put what another program extracted into `from` (HatchZip in place, a folder of its own) where
+/// `subfolder` says, as our own extractions are, one entry at a time. Nothing in it is ever
+/// deleted: those files are no longer in the archive. Entries that break the rules stay where
+/// they are; when a move fails, what was moved stays where it went, the rest in `from`. Empty
+/// folders are removed from `from` at the end, and `from` itself when nothing is left in it.
+/// When `from` can't even be read, nothing was moved and everything is still in it: that is
+/// said the same way ([`Error::Unplaced`]), so the user is told where the files are.
+pub fn move_out(
+    from: &Path,
+    dest: &Path,
+    base: &str,
+    subfolder: Subfolder,
+    depth: usize,
+    on_file: &mut dyn FnMut(&Path),
+) -> Result<Moved, Error> {
+    let unread = |e: io::Error| {
+        tracing::warn!(
+            "extract: {} can't be read: {e}; nothing was moved out of it",
+            from.display()
+        );
+        Error::Unplaced {
+            to: dest.to_path_buf(),
+            left: from.to_path_buf(),
+            why: e.to_string(),
+        }
+    };
+    let bad = scan(from, depth).map_err(unread)?;
+    let bad_paths: Vec<PathBuf> = bad.iter().map(|(p, _, _)| p.clone()).collect();
+    // By name: the same order every time.
+    let mut tops: Vec<PathBuf> = fs::read_dir(from)
+        .map_err(unread)?
+        .filter_map(|e| e.ok().map(|e| e.path()))
+        .filter(|p| !bad_paths.contains(p))
+        .collect();
+    tops.sort();
+    let together = match subfolder {
+        Subfolder::Always => true,
+        Subfolder::Never => false,
+        Subfolder::Smart => tops.len() > 1,
+    };
+    let mut m = Mover {
+        bad: &bad_paths,
+        report: Report::default(),
+        on_file,
+    };
+    m.report.folder = dest.to_path_buf();
+    let moved = (|| {
+        let root = if together {
+            let name = mdm_engine::naming::sanitize(base);
+            let name = if name.is_empty() {
+                "extracted".to_owned()
+            } else {
+                name
+            };
+            let folder = m.free(dest.join(&name));
+            fs::create_dir(&folder)?;
+            m.report.folder = folder.clone();
+            folder
+        } else {
+            dest.to_path_buf()
+        };
+        for top in &tops {
+            if let Some(name) = top.file_name() {
+                m.entry(top, root.join(name))?;
+            }
+        }
+        io::Result::Ok(())
+    })();
+    if let Err(e) = moved {
+        tracing::warn!(
+            "extract: moving out of {} stopped: {e}; moved so far: {}",
+            from.display(),
+            m.report.folder.display()
+        );
+        return Err(Error::Unplaced {
+            to: m.report.folder,
+            left: from.to_path_buf(),
+            why: e.to_string(),
+        });
+    }
+    prune(from);
+    let left = fs::symlink_metadata(from)
+        .is_ok()
+        .then(|| from.to_path_buf());
+    Ok(Moved {
+        report: m.report,
+        skipped: bad.into_iter().map(|(_, rel, why)| (rel, why)).collect(),
+        left,
+    })
+}
+
+/// [`move_out`]'s state while it moves.
+struct Mover<'a> {
+    bad: &'a [PathBuf],
+    report: Report,
+    on_file: &'a mut dyn FnMut(&Path),
+}
+
+impl Mover<'_> {
+    /// `to`, or the first numbered name beside it when it is taken.
+    fn free(&mut self, to: PathBuf) -> PathBuf {
+        if fs::symlink_metadata(&to).is_ok() {
+            self.report.renamed += 1;
+            numbered(&to)
+        } else {
+            to
+        }
+    }
+
+    /// Move `from` to `to` (numbered when taken): whole, unless it is a folder holding an entry
+    /// that breaks the rules; then its folder is made and what is safe in it moved, one by one.
+    fn entry(&mut self, from: &Path, to: PathBuf) -> io::Result<()> {
+        let to = self.free(to);
+        let holds_bad = self.bad.iter().any(|b| b.starts_with(from));
+        if holds_bad {
+            fs::create_dir(&to)?;
+            let mut inside = fs::read_dir(from)?
+                .map(|e| e.map(|e| e.path()))
+                .collect::<io::Result<Vec<_>>>()?;
+            inside.sort();
+            for path in inside {
+                if self.bad.contains(&path) {
+                    continue;
+                }
+                if let Some(name) = path.file_name() {
+                    self.entry(&path, to.join(name))?;
+                }
+            }
+            return Ok(());
+        }
+        fs::rename(from, &to)?;
+        self.report.files += if fs::symlink_metadata(&to)?.is_dir() {
+            mark_all(&to, self.on_file)?
+        } else {
+            (self.on_file)(&to);
+            1
+        };
+        Ok(())
+    }
+}
+
+/// Remove the empty folders under `root`, deepest first, then `root` if it is empty: never a
+/// file, never a link.
+fn prune(root: &Path) {
+    let mut dirs = vec![root.to_path_buf()];
+    let mut i = 0;
+    while i < dirs.len() {
+        if let Ok(rd) = fs::read_dir(&dirs[i]) {
+            for e in rd.flatten() {
+                if e.file_type().is_ok_and(|t| t.is_dir()) {
+                    dirs.push(e.path());
+                }
+            }
+        }
+        i += 1;
+    }
+    for d in dirs.iter().rev() {
+        let _ = fs::remove_dir(d);
+    }
 }

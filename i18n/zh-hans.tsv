@@ -2068,7 +2068,7 @@
 #. message or event log entry in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-	Hide &categories	隐藏&类别
+	Hide &categories	隐藏类别(&C)
 #. button in a download's progress window
 #, machine
 	Hide tab	隐藏选项卡
@@ -3751,7 +3751,7 @@
 #. verb: stop the queue
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-	S&top	停&止
+	S&top	停止(&T)
 #. text in the Scheduler window
 #. Saturday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -4001,7 +4001,7 @@
 #. message or event log entry in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-	Show &categories	显示&类别
+	Show &categories	显示类别(&C)
 #. text in the Options window
 #, machine
 	Show a dialog and ask what to do.	显示对话框并询问如何操作。
@@ -6512,12 +6512,12 @@ menu	&Add new download	添加新下载(&D)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	Add &new download...	添&加新下载...
+menu	Add &new download...	添加新下载(&N)...
 #. menu command in the main window
 #. View → Text: letters drawn the classic way, hinted to whole pixels (crisp, coarse on a dense screen)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Classic	经&典
+menu	&Classic	经典(&C)
 #. menu command in standard windows
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6547,7 +6547,7 @@ menu	&Import	导入(&I)
 #. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Interface size	界面&大小
+menu	&Interface size	界面大小(&I)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6588,13 +6588,13 @@ menu	&Report a problem	报告问题(&R)
 #. header menu: put the columns back as they first were (order, widths, all shown)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Reset columns	&重置列
+menu	&Reset columns	重置列(&R)
 #. menu command in the main window
 #. Tasks menu: the RSS feeds window (feeds of torrents, and rules that add them)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	&RSS feeds...	R&SS 源...
+menu	&RSS feeds...	RSS 源(&S)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6608,7 +6608,7 @@ menu	&Show hidden tabs	显示隐藏的选项卡(&S)
 #. View → Text: letters drawn smooth, as Windows' modern apps draw them, anti-aliased at any size
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&Smooth	&平滑
+menu	&Smooth	平滑(&S)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6621,7 +6621,7 @@ menu	&Stop Download	停止下载(&S)
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Te&xt	&文本
+menu	Te&xt	文本(&X)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -6920,7 +6920,7 @@ menu	Open	打开
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	Open &torrent file...	打开&torrent 文件...
+menu	Open &torrent file...	打开 torrent 文件(&T)...
 #. menu command in the main window
 #, machine
 menu	Open folder	打开文件夹
@@ -6970,7 +6970,7 @@ menu	pywal	pywal 配色
 #. verb: download the file again from the start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	R&edownload	重新&下载
+menu	R&edownload	重新下载(&E)
 #. menu command in the main window
 #. right-click → Torrent: ask the torrent's trackers for peers again now
 #, machine
@@ -6994,7 +6994,7 @@ menu	Remove	删除
 #. verb: removes the selected download from the list and its file from the disk
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Remove with &files	删除&文件
+menu	Remove with &files	删除文件(&F)
 #. menu command in the main window
 #. verb: removes the download from the list and its file from the disk
 #, machine
@@ -7005,16 +7005,16 @@ menu	Resume Download	恢复下载
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	S&cheduler	计划&任务
+menu	S&cheduler	计划任务(&C)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	S&ettings...	&设置...
+menu	S&ettings...	设置(&E)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	S&top queue	停止&队列
+menu	S&top queue	停止队列(&T)
 #. menu command in the main window
 #. command: opens this queue's schedule (when it starts and stops)
 #, machine
@@ -7026,18 +7026,18 @@ menu	Select &all	全选(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Show &drop target	显示&拖放目标
+menu	Show &drop target	显示拖放目标(&D)
 #. menu command in the main window
 #, machine
 menu	Show Mister Download Manager	显示 Mister Download Manager
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Speed &Limiter	速度&限制器
+menu	Speed &Limiter	速度限制器(&L)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Start &queue	启动&队列
+menu	Start &queue	启动队列(&Q)
 #. menu command in the main window
 #, machine
 menu	Start now	立即开始
@@ -7051,11 +7051,11 @@ menu	Stop Download	停止下载
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	支持 &MDM
+menu	Support &MDM	支持 MDM(&M)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Tell a &friend	推荐给&朋友
+menu	Tell a &friend	推荐给朋友(&F)
 #. menu command in the main window
 #. View → Draw with: a greyed note under "… didn't start here"; why: the graphics card stopped working twice (a driver update or reset)
 #, machine
@@ -7068,12 +7068,12 @@ menu	Theme	主题
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	To &IDM export file...	导出到 &IDM 文件...
+menu	To &IDM export file...	导出到 IDM 文件(&I)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	To &text file...	导出到&文本文件...
+menu	To &text file...	导出到文本文件(&T)...
 #. menu command in the main window
 #. noun: the toolbar (submenu of View with its settings)
 #, machine
@@ -7086,15 +7086,15 @@ menu	Torrent	种子
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 #, machine
-menu	Torrent setti&ngs...	Torrent 设&置...
+menu	Torrent setti&ngs...	Torrent 设置(&N)...
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Turn o&n	打&开
+menu	Turn o&n	打开(&N)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Turn of&f	关&闭
+menu	Turn of&f	关闭(&F)
 #. menu command in the main window
 #. the trailing ... means it opens a window: keep it
 #, machine
@@ -7114,23 +7114,23 @@ menu	Vulkan draws with a software renderer	Vulkan 使用软件渲染器绘制
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menubar	&Downloads	&下载
+menubar	&Downloads	下载(&D)
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menubar	&File	&文件
+menubar	&File	文件(&F)
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menubar	&Help	&帮助
+menubar	&Help	帮助(&H)
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menubar	&Tasks	&任务
+menubar	&Tasks	任务(&T)
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menubar	&View	&视图
+menubar	&View	视图(&V)
 #. toolbar button in the main window
 #, machine
 toolbar	Add Torrent	添加 Torrent
@@ -7189,3 +7189,7 @@ unit	{n} MB	{n} MB
 #. {n} = a number (keep the braces as they are)
 #, machine
 unit	{n} MB/sec	{n} MB/秒
+	Shortcut to show or hide window:	显示或隐藏窗口的快捷键：
+	Press keys...	请按下组合键...
+	This shortcut is already in use	此快捷键已被占用
+	Windows and macOS	Windows 和 macOS

@@ -209,6 +209,8 @@ pub struct OptionsDialog {
     learned: Vec<(String, u32)>,
     /// 7-Zip's program (Archives: RAR goes through it), looked for when the window opens.
     seven_zip: Option<std::path::PathBuf>,
+    /// HatchZip's command line program (Archives: extract in place), looked for with 7-Zip.
+    hatch_zip: Option<std::path::PathBuf>,
     /// Proxy / Socks → Network adapter (#35): the computer's adapters, read again every 2 s.
     adapters: Option<(std::time::Instant, Vec<mdm_engine::net::Adapter>)>,
     /// Remote (#141): the running remote control (its state, paired devices, pairing), the
@@ -221,6 +223,11 @@ pub struct OptionsDialog {
     /// Sites Logins → Cookies for video sites (#229): the browser in the list (an index into
     /// `mdm_tools::proc::cookie_browsers`), kept while Off is chosen.
     cookie_browser: usize,
+    /// General → Shortcut to show or hide window (#558): waiting for a key combination.
+    recording_hotkey: bool,
+    /// General → Shortcut to show or hide window (#558): true when the chosen shortcut could not
+    /// be registered because another program holds it.
+    hotkey_taken: bool,
     /// Downloads → User-Agent → Automatic (#668): the default browser's, the box then shows it;
     /// unticked, the box's own text (empty is automatic again when the window opens next).
     ua_auto: bool,
@@ -232,6 +239,20 @@ pub struct OptionsDialog {
 }
 
 impl OptionsDialog {
+    /// True while the user is recording a new global shortcut in General (#558).
+    pub fn is_recording_hotkey(&self) -> bool {
+        self.recording_hotkey
+    }
+
+    /// The shortcut currently shown in General (#558), for live registration while Options is open.
+    pub fn draft_hotkey(&self) -> &str {
+        &self.s.show_hide_hotkey
+    }
+
+    /// Updates whether the current shortcut failed to register because another program holds it.
+    pub fn set_hotkey_taken(&mut self, taken: bool) {
+        self.hotkey_taken = taken;
+    }
     /// Open on tab `page` (the numbers in `tabs`: 0 General … 4 Connection, 5 Proxy / Socks,
     /// 6 Sites Logins, 7 Accounts, 8 Sounds, 9 Regional, 10 Archives); for `/show options:<tab>`.
     pub fn on_page(mut self, page: usize) -> Self {
@@ -300,11 +321,14 @@ impl OptionsDialog {
             restore_ask: None,
             learned,
             seven_zip: crate::extractq::seven_zip(),
+            hatch_zip: crate::extractq::hatch_zip(),
             adapters: None,
             remote: None,
             port: settings.remote_port.to_string(),
             device_rows: Default::default(),
             cookie_browser: cookie_browser_at(settings),
+            recording_hotkey: false,
+            hotkey_taken: false,
             ua_auto: settings.own_user_agent().is_none(),
             snoozed_until: None,
             resume_snooze: false,
@@ -314,6 +338,9 @@ impl OptionsDialog {
     /// `Done(settings)` on OK.
     pub fn show(&mut self, ctx: &egui::Context, downloads: &std::path::Path) -> Outcome<Settings> {
         let modal = self.sub.is_some() || self.cat_edit.is_some() || self.restore_ask.is_some();
+        if modal || self.page != 0 {
+            self.recording_hotkey = false;
+        }
         let outcome = window(
             ctx,
             "options",
@@ -517,13 +544,171 @@ impl OptionsDialog {
                 ));
             }
         }
+        // MDM's (#558): global keyboard shortcut (2-key or 3-key combination) to show or hide
+        // the main window (Windows and macOS).
+        let hk_supported = cfg!(any(windows, target_os = "macos"));
+        let hk_taken = hk_supported
+            && self.hotkey_taken
+            && !self.recording_hotkey
+            && !s.show_hide_hotkey.is_empty();
+        let (clear_x, clear_w) =
+            winui::buttons_to_right(&p, 392.0, 0.0, &[("Clear", 56.0)], 110.0)[0];
+        let box_w = 126.0;
+        let box_x = clear_x - 6.0 - box_w;
+        // i18n: Options → General: label for the global keyboard shortcut that shows or hides MDM's main window (#558)
+        let base_hk_label = crate::i18n::t("Shortcut to show or hide window:");
+        // i18n: Options → General: shown when the chosen global shortcut is already registered by another program (#558)
+        let taken_msg = crate::i18n::t("This shortcut is already in use");
+        let (hk_label, lbl_ink) = if hk_taken {
+            (taken_msg, winui::ERROR())
+        } else if hk_supported {
+            (base_hk_label, LIGHT_TEXT())
+        } else {
+            (base_hk_label, LIGHT_DISABLED())
+        };
+        let (lbl_rc, lbl_cut) = winui::text_fit(
+            &p,
+            o.x + 30.0,
+            o.y + 243.0,
+            hk_label,
+            lbl_ink,
+            o.x + box_x - 6.0,
+        );
+        if lbl_cut {
+            winui::full_on_hover(ui, lbl_rc, ("general-hotkey", 243), hk_label);
+        }
+        let box_rc = r(o, box_x, 229.0, box_w, 21.0);
+        let box_resp = ui.interact(
+            box_rc,
+            egui::Id::unique("hotkey-recorder"),
+            if hk_supported {
+                Sense::click()
+            } else {
+                Sense::hover()
+            },
+        );
+        box_resp.ctx.accesskit_node_builder(box_resp.id, |node| {
+            node.set_role(egui::accesskit::Role::Button);
+            node.set_label(base_hk_label.trim_end_matches(':').trim().to_owned());
+            if !hk_supported {
+                node.set_disabled();
+            }
+        });
+        let box_resp = if hk_taken && box_resp.hovered() {
+            box_resp.on_hover_text(taken_msg)
+        } else {
+            box_resp
+        };
+        if hk_supported && box_resp.clicked() {
+            self.recording_hotkey = !self.recording_hotkey;
+        }
+        if hk_supported && self.recording_hotkey {
+            match ui.input(crate::hotkey::capture_from_egui) {
+                crate::hotkey::CaptureEvent::Recorded(sc) => {
+                    s.show_hide_hotkey = sc.canonical();
+                    self.recording_hotkey = false;
+                    winui::take_key(ui, egui::Key::Escape);
+                    winui::take_key(ui, egui::Key::Enter);
+                }
+                crate::hotkey::CaptureEvent::Clear => {
+                    s.show_hide_hotkey.clear();
+                    self.recording_hotkey = false;
+                    winui::take_key(ui, egui::Key::Escape);
+                }
+                crate::hotkey::CaptureEvent::Cancel => {
+                    self.recording_hotkey = false;
+                    winui::take_key(ui, egui::Key::Escape);
+                }
+                crate::hotkey::CaptureEvent::None => {
+                    if ui.input(|i| i.pointer.any_pressed()) && !box_resp.hovered() {
+                        self.recording_hotkey = false;
+                    }
+                }
+            }
+        }
+        p.rect_filled(
+            box_rc,
+            0.0,
+            if hk_supported {
+                winui::FIELD()
+            } else {
+                LIGHT_BG()
+            },
+        );
+        let border = if self.recording_hotkey {
+            winui::SELECTION()
+        } else if hk_taken {
+            winui::ERROR()
+        } else {
+            winui::FIELD_EDGE()
+        };
+        p.rect_stroke(
+            box_rc,
+            0.0,
+            egui::Stroke::new(1.0, border),
+            egui::StrokeKind::Inside,
+        );
+        let (hk_text, hk_ink) = if !hk_supported {
+            (
+                // i18n: Options → General → Shortcut to show or hide window: shown in the disabled shortcut box on Linux (#558)
+                crate::i18n::t("Windows and macOS").to_owned(),
+                LIGHT_DISABLED(),
+            )
+        } else if self.recording_hotkey {
+            match ui.input(|i| crate::hotkey::pending_modifiers_preview(i.modifiers)) {
+                Some(mods) => (crate::i18n::ltr(&mods), LIGHT_TEXT()),
+                // i18n: Options → General: shown inside the shortcut recorder box while waiting for the user to press a 2-key or 3-key shortcut (#558)
+                None => (crate::i18n::t("Press keys...").to_owned(), winui::MUTED()),
+            }
+        } else if s.show_hide_hotkey.is_empty() {
+            (crate::i18n::t("None").to_owned(), winui::MUTED())
+        } else {
+            let shown = crate::hotkey::Shortcut::parse(&s.show_hide_hotkey).map_or_else(
+                || s.show_hide_hotkey.clone(),
+                crate::hotkey::Shortcut::display,
+            );
+            let ink = if hk_taken {
+                winui::ERROR()
+            } else {
+                LIGHT_TEXT()
+            };
+            (crate::i18n::ltr(&shown), ink)
+        };
+        winui::fit(
+            ui,
+            &p,
+            o.x + box_x + 6.0,
+            o.y + 243.0,
+            &hk_text,
+            hk_ink,
+            o.x + box_x + box_w - 6.0,
+            "hotkey-value",
+        );
+        let clear_kind =
+            if hk_supported && (!s.show_hide_hotkey.is_empty() || self.recording_hotkey) {
+                ButtonKind::Normal
+            } else {
+                ButtonKind::Disabled
+            };
+        if winui::button_light(
+            ui,
+            r(o, clear_x, 229.0, clear_w, 21.0),
+            "Clear",
+            clear_kind,
+            false,
+        )
+        .clicked()
+        {
+            s.show_hide_hotkey.clear();
+            self.recording_hotkey = false;
+        }
         group(
             ui,
             o,
             16.0,
-            234.0,
+            256.0,
             392.0,
-            160.0,
+            138.0,
             "Capture downloads from the following browsers:",
         );
         // Check list: one row per browser in the shared row list (Space ticks the selected
@@ -534,7 +719,7 @@ impl OptionsDialog {
         let ev = winui::row_list(
             ui,
             "browsers",
-            r(o, 30.0, 244.0, 362.0, 78.0),
+            r(o, 30.0, 266.0, 362.0, 56.0),
             browsers.len(),
             17.0,
             &mut self.browser_rows,
@@ -2199,7 +2384,7 @@ impl OptionsDialog {
         );
         let s = &mut self.s;
         // i18n: Options → Archives: group box title
-        group(ui, o, 16.0, 92.0, 392.0, 196.0, "Archives");
+        group(ui, o, 16.0, 92.0, 392.0, 228.0, "Archives");
         winui::checkbox_light(
             ui,
             o + vec2(30.0, 110.0),
@@ -2258,8 +2443,18 @@ impl OptionsDialog {
             o.x + 400.0,
             13.0,
         );
-        let (rar, ink) = match &self.seven_zip {
-            Some(path) => (
+        // HatchZip only when asked for (in place); without it, 7z and RAR need 7-Zip.
+        let hatch = self.hatch_zip.as_ref().filter(|_| s.extract_in_place);
+        let (rar, ink) = match (hatch, &self.seven_zip) {
+            (Some(path), _) => (
+                crate::i18n::fmt(
+                    // i18n: Options → Archives, when Extract in place with HatchZip (a program's name) is on: {path} is where its program is
+                    crate::i18n::t("7z and RAR archives are extracted by HatchZip ({path})."),
+                    &[("path", &crate::i18n::ltr(&path.display().to_string()))],
+                ),
+                LIGHT_TEXT(),
+            ),
+            (None, Some(path)) => (
                 crate::i18n::fmt(
                     // i18n: Options → Archives: {path} is where 7-Zip's program is
                     crate::i18n::t("7z and RAR archives are extracted by 7-Zip ({path})."),
@@ -2267,7 +2462,7 @@ impl OptionsDialog {
                 ),
                 LIGHT_TEXT(),
             ),
-            None => (
+            (None, None) => (
                 // i18n: Options → Archives, when 7-Zip isn't installed
                 crate::i18n::t(
                     "7z and RAR archives need 7-Zip (7-zip.org), which isn't installed.",
@@ -2286,11 +2481,25 @@ impl OptionsDialog {
             o.x + 400.0,
             "opt-rar-tool",
         );
-        // i18n: Options → Archives: group box title
-        group(ui, o, 16.0, 300.0, 392.0, 124.0, "Link grabber");
+        let has_hatchzip = self.hatch_zip.is_some();
         winui::checkbox_light(
             ui,
-            o + vec2(30.0, 318.0),
+            o + vec2(30.0, 294.0),
+            &mut s.extract_in_place,
+            if has_hatchzip {
+                // i18n: Options → Archives check box: HatchZip (a program's name) removes the archive while extracting it, so only the extracted files need disk space
+                "Extract in place with HatchZip: only the files need room"
+            } else {
+                // i18n: Options → Archives check box, greyed: HatchZip (a program's name, hatchzip.dev its site) isn't installed
+                "Extract in place with HatchZip (hatchzip.dev, not installed)"
+            },
+            has_hatchzip,
+        );
+        // i18n: Options → Archives: group box title
+        group(ui, o, 16.0, 320.0, 392.0, 132.0, "Link grabber");
+        winui::checkbox_light(
+            ui,
+            o + vec2(30.0, 338.0),
             &mut s.grabber_check,
             // i18n: Options → Archives → Link grabber check box (IDM's Download all links looks every link up)
             "Look links up when they arrive (name, size, online)",
@@ -2298,14 +2507,14 @@ impl OptionsDialog {
         );
         winui::checkbox_light(
             ui,
-            o + vec2(30.0, 342.0),
+            o + vec2(30.0, 362.0),
             &mut s.grabber_hide_pages,
             "Hide web pages",
             true,
         );
         winui::checkbox_light(
             ui,
-            o + vec2(30.0, 366.0),
+            o + vec2(30.0, 386.0),
             &mut s.cnl_on,
             // i18n: Options → Archives → Link grabber check box: Click'n'Load, a link site's button that sends its links to a program on this computer (port 9666, as JDownloader)
             "Accept Click'n'Load from web pages (port 9666)",
@@ -2314,7 +2523,7 @@ impl OptionsDialog {
         winui::paragraph(
             &p,
             o.x + 30.0,
-            o.y + 404.0,
+            o.y + 418.0,
             crate::i18n::t(
                 "Tasks → Link grabber, or the browser's \"Download all links\": a split\narchive's volumes are one package, the other links of a page another.",
             ),

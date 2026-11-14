@@ -406,7 +406,7 @@ pieces fit.
 | [`mdm-remote`](crates/remote) | The remote control: the HTTPS server and page a paired phone uses |
 | [`mdm-crash`](crates/crash) | Crash and freeze reports: the monitor, minidumps, stacks |
 | [`mdm-debrid`](crates/debrid) | Debrid accounts through the services' official APIs |
-| [`mdm-extract`](crates/extract) | Archive extraction (zip, tar, gz, xz; 7z and RAR through 7-Zip) |
+| [`mdm-extract`](crates/extract) | Archive extraction (zip, tar, gz, xz; 7z and RAR through 7-Zip; in place through HatchZip) |
 | [`mdm-geo`](crates/geo) | A server's country, from an IP table on this computer |
 | [`mdm-tools`](crates/tools) | yt-dlp and ffmpeg for video pages, gallery-dl for galleries |
 | [`mdm-torrent`](crates/torrent) | BitTorrent through librqbit |
@@ -430,6 +430,7 @@ pieces fit.
 | `MDM_OFFSCREEN=1` | Opens every window off the screen, without focus, tray icon or sound (screenshots and checks) |
 | `MDM_TEST_TRASH_DIR=<folder>` | Tests only: archives deleted after extracting go into this folder, never into the real Recycle Bin or Trash |
 | `MDM_TEST_7ZIP=<program>\|none` | Tests only: the 7-Zip program to use for 7z and RAR archives, or `none` to act as if 7-Zip weren't installed |
+| `MDM_TEST_HATCHZIP=<program>\|none` | Tests only: the HatchZip program to use (extraction in place), or `none` to act as if HatchZip weren't installed |
 
 </details>
 
@@ -516,7 +517,8 @@ Built on [egui](https://github.com/emilk/egui) through
 [storytold/craft-libs](https://github.com/storytold/craft-libs) (MIT OR Apache-2.0),
 [librqbit](https://github.com/ikatson/rqbit) (Apache-2.0),
 [zip](https://github.com/zip-rs/zip2) (MIT), and [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-(Unlicense, run as a separate program; as are 7-Zip for 7z and RAR archives). Flags from
+(Unlicense, run as a separate program; as are 7-Zip for 7z and RAR archives, and
+[HatchZip](https://github.com/xevrion/hatchzip) (MIT OR Apache-2.0) when installed). Flags from
 [flag-icons](https://github.com/lipis/flag-icons) (MIT); pictures drawn with
 [rough.js](https://roughjs.com/) (MIT) in [Patrick Hand](https://fonts.google.com/specimen/Patrick+Hand)
 (SIL OFL) and [Vega-Lite](https://vega.github.io/vega-lite/) (BSD-3). Bundled icons and artwork

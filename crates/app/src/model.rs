@@ -543,6 +543,9 @@ pub struct RemoteSpec {
     pub transfer: Option<String>,
     /// The folder its files go into (a torrent of several files gets its own folder there).
     pub folder: PathBuf,
+    /// Custom file or folder name chosen in Add torrent (#517), when renamed from the torrent's own.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub renamed: Option<String>,
 }
 
 /// A gallery download's choice (#58).

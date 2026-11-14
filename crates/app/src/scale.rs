@@ -254,7 +254,7 @@ pub fn pane<R>(
 ) -> R {
     use crate::scrollbar::THICK;
     let view = ui.max_rect();
-    let (need_v, need_h) = bars(content, view.size());
+    let (need_v, need_h) = bars(content, view.size(), ui.ctx().pixels_per_point());
     if !need_v && !need_h {
         return body(ui, view.min);
     }
@@ -360,13 +360,19 @@ pub fn pane<R>(
     out
 }
 
-/// Which scroll bars a `content` needs in `view`: (vertical, horizontal). A bar takes room
-/// from the other direction, which can make that one needed too.
-fn bars(content: Vec2, view: Vec2) -> (bool, bool) {
+/// Which scroll bars a `content` needs in `view`: (vertical, horizontal), both in points, with
+/// `ppp` device pixels to a point. A bar takes room from the other direction, which can make
+/// that one needed too.
+fn bars(content: Vec2, view: Vec2, ppp: f32) -> (bool, bool) {
     use crate::scrollbar::THICK;
-    let mut v = content.y > view.y + 0.5;
-    let h = content.x > view.x - if v { THICK } else { 0.0 } + 0.5;
-    v = v || (h && content.y > view.y - THICK + 0.5);
+    // One device pixel over is the window's client rounded down at the interface size (520
+    // points at 125 % is 650 px, and the client came back 649), not content left out: both bars
+    // showed over a window whose content was wholly visible (#672). Counted in whole device
+    // pixels, so the conversion's float noise can't tip it either way.
+    let over = |content: f32, view: f32| ((content - view) * ppp).round() > 1.0;
+    let mut v = over(content.y, view.y);
+    let h = over(content.x, view.x - if v { THICK } else { 0.0 });
+    v = v || (h && over(content.y, view.y - THICK));
     (v, h)
 }
 
@@ -500,11 +506,23 @@ mod tests {
     /// A bar only where the content is larger; one bar's room can make the other needed.
     #[test]
     fn scroll_bars_only_where_needed() {
-        assert_eq!(bars(vec2(430.0, 506.0), vec2(430.0, 506.0)), (false, false));
-        assert_eq!(bars(vec2(430.0, 506.0), vec2(600.0, 400.0)), (true, false));
-        assert_eq!(bars(vec2(760.0, 300.0), vec2(700.0, 400.0)), (false, true));
+        assert_eq!(
+            bars(vec2(430.0, 506.0), vec2(430.0, 506.0), 1.0),
+            (false, false)
+        );
+        assert_eq!(
+            bars(vec2(430.0, 506.0), vec2(600.0, 400.0), 1.0),
+            (true, false)
+        );
+        assert_eq!(
+            bars(vec2(760.0, 300.0), vec2(700.0, 400.0), 1.0),
+            (false, true)
+        );
         // Only taller, but the vertical bar leaves too little width.
-        assert_eq!(bars(vec2(440.0, 506.0), vec2(450.0, 400.0)), (true, true));
+        assert_eq!(
+            bars(vec2(440.0, 506.0), vec2(450.0, 400.0), 1.0),
+            (true, true)
+        );
     }
 
     /// The focused control brought into view: below the port scrolls down, above scrolls up,
@@ -521,5 +539,56 @@ mod tests {
         let right = Rect::from_min_max(pos2(420.0, 10.0), pos2(480.0, 31.0));
         assert_eq!(into_view(right, port, false), vec2(84.0, 0.0));
         assert_eq!(into_view(right, port, true), vec2(-84.0, 0.0));
+    }
+
+    /// #672: a client one device pixel short of the content is the window's size rounded down
+    /// at the interface size, not a line of the content left out; the old half-point allowance
+    /// put both bars up here.
+    #[test]
+    fn a_pixel_rounded_off_needs_no_bar() {
+        assert_eq!(
+            bars(vec2(650.0, 500.0), vec2(649.0, 500.0), 1.0),
+            (false, false)
+        );
+        assert_eq!(
+            bars(vec2(650.0, 500.0), vec2(650.0, 499.0), 1.0),
+            (false, false)
+        );
+    }
+
+    /// #672 at 125 %, where a device pixel is 0.8 points: the 649 px client of a 650 px
+    /// (520-point) window needs no bar, one two pixels short does.
+    #[test]
+    fn a_device_pixel_at_125_percent() {
+        let view = |px: f32| vec2(px / 1.25, 400.0);
+        assert_eq!(bars(vec2(520.0, 300.0), view(649.0), 1.25), (false, false));
+        assert_eq!(bars(vec2(520.0, 300.0), view(648.0), 1.25), (false, true));
+        // At 200 % a point is two pixels: a point short is content left out.
+        assert_eq!(
+            bars(vec2(520.0, 300.0), vec2(519.0, 400.0), 2.0),
+            (false, true)
+        );
+    }
+
+    /// Content two pixels over is content to scroll to, and the bar it puts up takes room from the
+    /// other direction, as Win32's do.
+    #[test]
+    fn content_left_out_needs_its_bar() {
+        // Two pixels wider, well short of the height: the horizontal bar only.
+        assert_eq!(
+            bars(vec2(651.0, 480.0), vec2(649.0, 500.0), 1.0),
+            (false, true)
+        );
+        // Two pixels taller, 20 narrower than the view: the vertical bar only.
+        assert_eq!(
+            bars(vec2(630.0, 502.0), vec2(650.0, 500.0), 1.0),
+            (true, false)
+        );
+        // Filling the width and two pixels wider: the horizontal bar's 17 px also leave it too
+        // tall, so both, as Win32 decides them.
+        assert_eq!(
+            bars(vec2(651.0, 500.0), vec2(649.0, 500.0), 1.0),
+            (true, true)
+        );
     }
 }

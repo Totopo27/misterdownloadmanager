@@ -215,6 +215,10 @@
 #, machine
 	7z and RAR archives are extracted by 7-Zip ({path}).	7z- und RAR-Archive werden mit 7-Zip ({path}) entpackt.
 #. text in the Options window
+#. Options → Archives, when Extract in place with HatchZip (a program's name) is on: {path} is where its program is
+#, machine
+	7z and RAR archives are extracted by HatchZip ({path}).	7z- und RAR-Archive werden mit HatchZip ({path}) entpackt.
+#. text in the Options window
 #. Options → Archives, when 7-Zip isn't installed
 #, machine
 	7z and RAR archives need 7-Zip (7-zip.org), which isn't installed.	Zum Entpacken von 7z- und RAR-Archiven wird 7-Zip (7-zip.org) benötigt, das nicht installiert ist.
@@ -1695,6 +1699,14 @@
 #. Options → Archives check box (a Link grabber package has its own "Extract when done")
 #, machine
 	Extract archives when their download completes	Archive nach Abschluss des Downloads extrahieren
+#. text in the Options window
+#. Options → Archives check box, greyed: HatchZip (a program's name, hatchzip.dev its site) isn't installed
+#, machine
+	Extract in place with HatchZip (hatchzip.dev, not installed)	Mit HatchZip vor Ort entpacken (hatchzip.dev, nicht installiert)
+#. text in the Options window
+#. Options → Archives check box: HatchZip (a program's name) removes the archive while extracting it, so only the extracted files need disk space
+#, machine
+	Extract in place with HatchZip: only the files need room	Mit HatchZip vor Ort entpacken: nur die Dateien brauchen Platz
 #. text in the Link grabber window
 #. Link grabber check box: extract the package's archives once they are downloaded
 #, machine
@@ -2084,6 +2096,10 @@
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
 	Hang up modem when done	Modem nach Abschluss auflegen
+#. text in extracting archives (a download's log, the Archive password window)
+#. in a download's log: HatchZip (a program's name) extracted the archive in place, removing it as it went
+#, machine
+	HatchZip extracted it in place: the archive was removed as its files came out	HatchZip hat es vor Ort entpackt: Das Archiv wurde entfernt, während seine Dateien herauskamen
 #. text in a download's progress window
 #. legend: pieces downloaded
 #, machine
@@ -2308,6 +2324,10 @@
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
 	it needs a password	sie benötigt ein Kennwort
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted in place (after "Couldn't extract {name}: "); {folder} holds the files extracted so far
+#, machine
+	it stopped partway. The files extracted so far are in {folder}, the rest is still in the archive: Extract continues	Es wurde mittendrin angehalten. Die bisher entpackten Dateien liegen in {folder}, der Rest ist noch im Archiv: „Extrahieren“ setzt fort
 #. text in the Add torrent window
 #. Torrent settings, under "Find peers on the local network"
 #, machine
@@ -2329,6 +2349,11 @@
 #. a country's name (where a download's server is)
 #, machine
 	Italy	Italien
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted in place (after "Couldn't extract {name}: "); HatchZip took its files out (the archive is gone), but moving them stopped: {to} holds those moved, {left} the others, {error} the system's reason
+#. {error} = an error message (keep the braces as they are)
+#, machine
+	its files came out, but moving them stopped ({error}). Those moved are in {to}, the others still in {left}; nothing was deleted	die Dateien wurden entpackt, aber das Verschieben brach ab ({error}). Die verschobenen liegen in {to}, die übrigen noch in {left}; nichts wurde gelöscht
 #. text in errors.rs
 #. {error} = an error message (keep the braces as they are)
 #, machine
@@ -4638,6 +4663,10 @@
 #. text in errors.rs
 #, machine
 	the drive or network share is no longer available	Das Laufwerk oder die Netzwerkfreigabe ist nicht mehr verfügbar.
+#. text in extracting archives (a download's log, the Archive password window)
+#. in a download's log, after HatchZip (a program's name) extracted in place: the entries left out (links, unsafe names) were not deleted, they are still in {folder}
+#, machine
+	The entries left out are still in {folder}	Die ausgelassenen Einträge liegen noch in {folder}
 #. text in extension.rs
 #, machine
 	The extension is already in this app. Apple hasn't notarized this build, so Safari needs these steps to allow it.	Die Erweiterung ist bereits in dieser App enthalten. Apple hat dieses Build nicht notariell beglaubigt, daher sind diese Schritte nötig, damit Safari sie zulässt.
@@ -4860,6 +4889,10 @@
 #. why OK is greyed when naming a new queue
 #, machine
 	There is already a queue with this name	Es gibt bereits eine Warteschlange mit diesem Namen
+#. text in extracting archives (a download's log, the Archive password window)
+#. why an archive wasn't extracted (after "Couldn't extract {name}: "); HatchZip is a program's name
+#, machine
+	there isn't enough free space for its files, HatchZip says; nothing was changed	laut HatchZip ist nicht genug freier Platz für seine Dateien; nichts wurde verändert
 #. text in a download's progress window
 #, machine
 	These settings are unavailable when "Show download complete dialog" is turned on	Diese Einstellungen sind nicht verfügbar, wenn „Dialog „Download abgeschlossen“ anzeigen“ aktiviert ist
@@ -7257,3 +7290,7 @@ unit	{n} MB	{n} MB
 #. {n} = a number (keep the braces as they are)
 #, machine
 unit	{n} MB/sec	{n} MB/s
+	Shortcut to show or hide window:	Tastenkürzel zum Ein-/Ausblenden:
+	Press keys...	Tasten drücken...
+	This shortcut is already in use	Dieses Tastenkürzel wird bereits verwendet
+	Windows and macOS	Windows und macOS

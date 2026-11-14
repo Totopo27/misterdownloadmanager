@@ -785,6 +785,7 @@ impl Host {
     /// Forget a torrent the list no longer has; its files stay unless `files` (and the session
     /// runs: it knows which files are the torrent's).
     pub fn forget(&self, rt: &tokio::runtime::Handle, hash: &str, files: bool) {
+        crate::torrent_rename::on_forget_torrent(hash);
         if let Some(t) = self.get() {
             let hash = hash.to_owned();
             rt.spawn(async move {

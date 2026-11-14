@@ -174,7 +174,7 @@
     "message": "زنده"
   },
   "video_off": {
-    "message": "در این سایت خاموش است"
+    "message": "در این سایت غیرفعال است"
   },
   "video_drm": {
     "message": "ویدیوی محافظت‌شده"
@@ -270,7 +270,7 @@
     "message": "افزودن عنوان صفحه پیش از نام فایل رسانه"
   },
   "video_cant_save": {
-    "message": "قابل ذخیره نیست"
+    "message": "امکان ذخیره‌سازی ندارد"
   },
   "video_open_post_button": {
     "message": "باز کردن پست"
@@ -288,7 +288,7 @@
     }
   },
   "video_tip_best": {
-    "message": "بهترین کیفیت را بارگیری کنید"
+    "message": "بارگیری بهترین کیفیت"
   },
   "video_sending": {
     "message": "در حال ارسال به MDM..."
@@ -309,7 +309,7 @@
     "message": "تلاش مجدد"
   },
   "video_turn_on": {
-    "message": "روشن کردن"
+    "message": "فعال کردن"
   },
   "video_best": {
     "message": "بهترین"

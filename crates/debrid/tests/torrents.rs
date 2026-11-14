@@ -42,6 +42,7 @@ async fn run(d: &Debrid, hash: &str, folder: &Path) -> (RemoteTorrent, mdm_engin
             .unwrap(),
         transfer: None,
         folder: folder.to_owned(),
+        renamed: None,
         net: Options {
             max_retries: 1,
             retry_delay: Duration::from_millis(50),
@@ -179,6 +180,7 @@ async fn a_stopped_torrent_continues_from_its_transfer() {
         magnet: "magnet:?xt=urn:btih:5678&dn=Again".parse().unwrap(),
         transfer: None,
         folder: dir.path().to_owned(),
+        renamed: None,
         net: Options::default(),
         poll: Duration::from_millis(300),
     };

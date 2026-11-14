@@ -66,10 +66,6 @@
    "source": "Portable mode in detail →",
    "text": "تفاصيل الوضع المحمول →"
   },
-  "01579d403b821195": {
-   "source": "<x1/> pull requests",
-   "text": "<x1/> طلبات سحب"
-  },
   "015f73be8184c2cb": {
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "نعم. يكتب MDM بيانات التقدم أثناء التنزيل، لذا يواصل التنزيل من حيث توقف بعد انقطاع الاتصال أو تعطل البرنامج أو إعادة تشغيله. قبل المتابعة، يتحقق من أن الملف على الخادم لم يتغير. إذا انتهت صلاحية عنوان التنزيل، يتيح لك <g1>تحديث عنوان التنزيل</g1> إدخال عنوان جديد ومتابعة التنزيل مع الاحتفاظ بالبيانات. انظر <g2>متابعة تنزيل متوقف</g2>."
@@ -214,10 +210,6 @@
    "source": "<g1>Help → About Mister Download Manager</g1> shows the version you have.",
    "text": "تعرض <g1>تعليمات → حول Mister Download Manager</g1> الإصدار المثبت لديك."
   },
-  "030e42728ee6a418": {
-   "source": "<g1>Pull requests</g1><g2><x3/> people</g2>",
-   "text": "<g1>طلبات السحب</g1><g2><x3/> أشخاص</g2>"
-  },
   "031da5c20d1881e4": {
    "source": "Everything the Scheduler can do →",
    "text": "كل ما يمكن أن تفعله الجدولة →"
@@ -314,10 +306,6 @@
    "source": "Tick <g1>Wake the computer to run this queue</g1>, under the start time, and a computer that is asleep at the start time is woken for it. It needs <g2>Start download at</g2>.",
    "text": "حدد <g1>إيقاظ الكمبيوتر لتشغيل قائمة الانتظار هذه</g1> أسفل وقت البدء، وسيوقظ هذا الخيار الكمبيوتر إذا كان في وضع الإسبات عند وقت البدء. يتطلب هذا الخيار <g2>بدء التنزيل في</g2>."
   },
-  "04ea3f289327532e": {
-   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list:",
-   "text": "حدد <g1>إرسال التورنت وروابط المغناطيس إلى الحساب الأول بدلا من القرناء</g1> ضمن <g2>الخيارات → الحسابات</g2>. بعد ذلك، يرسل رابط مغناطيسي (من «إضافة URL» أو المستعرض أو الحافظة أو عبر الإفلات) أو ملف <x3/> (باختيار <g4>تنزيل الآن</g4> أو <g5>لاحقا</g5> ضمن «إضافة تورنت») إلى أول حساب في القائمة:"
-  },
   "04fca60787a71402": {
    "source": "Don't make MDM reachable from the internet (a router's port forwarding): the remote control is made for your home network. To reach it while away, use a VPN to your home network instead (WireGuard, Tailscale): with Tailscale, choose its address in <g1>Listen on</g1>.",
    "text": "لا تجعل MDM قابلا للوصول من الإنترنت (إعادة توجيه منفذ جهاز التوجيه): التحكم عن بعد مصمم لشبكتك المنزلية. للوصول إليه أثناء غيابك، استخدم VPN لشبكتك المنزلية بدلا من ذلك (WireGuard، Tailscale): مع Tailscale، اختر عنوانه في <g1>الاستماع على</g1>."
@@ -393,6 +381,10 @@
   "05bd7f3cbec0de04": {
    "source": "When the browser used no proxy, and <g1>No proxy/socks</g1> is chosen, MDM uses Windows' proxy settings, as browsers do.",
    "text": "إذا لم يستخدم المستعرض وكيلا واخترت <g1>لا يوجد وكيل/SOCKS</g1>، يستخدم MDM إعدادات وكيل Windows، كما تفعل المستعرضات."
+  },
+  "05d0b33779393664": {
+   "source": "<g1>Links a page sent aren't looked up</g1>: Link grabber shows them as <g2>Not looked up</g2>, and no request leaves for them, with or without your Sites Logins or debrid accounts, until you add them to the queue. Nothing is downloaded before that.",
+   "text": "<g1>لا يتم البحث عن الروابط التي أرسلتها صفحة</g1>: يعرضها ملتقط الروابط على أنها <g2>لم يبحث عنه</g2>، ولا يغادر أي طلب لها، سواء بحسابات تسجيلات دخول المواقع الخاصة بك أو بدونها، حتى تضيفها إلى قائمة الانتظار. لا يتم تنزيل أي شيء قبل ذلك."
   },
   "05e4107afbf16316": {
    "source": "Open it with <g1>Scheduler</g1> on the toolbar or <g2>Downloads → Scheduler</g2>. Right-clicking a queue and choosing <g3>Schedule</g3> or <g4>Edit queue</g4> opens it on that queue.",
@@ -489,6 +481,10 @@
   "0717a2923d7e72cc": {
    "source": "<g1>Chrome, Edge, Brave, Opera and Vivaldi</g1>: one click from the Chrome Web Store, and the browser keeps it up to date. Edge first asks to allow extensions from other stores.",
    "text": "<g1>Chrome وEdge وBrave وOpera وVivaldi</g1>: بنقرة واحدة من سوق Chrome الإلكتروني، ويقوم المتصفح بتحديثه تلقائيا. يطلب Edge أولا السماح بالإضافات من المتاجر الأخرى."
+  },
+  "071f7e9f51504932": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM.",
+   "text": "يبلغ Windows عن رقمين مختلفين للذاكرة. الذاكرة قيد الاستخدام (عمود «الذاكرة» في مدير المهام، مجموعة العمل الخاصة) هي ما يحتفظ به البرنامج في ذاكرة الوصول العشوائي (RAM) الآن. الذاكرة الملتزم بها (الـ «بايتات الخاصة» في مستكشف العمليات، «الالتزام» في مراقب الموارد) هي الذاكرة التي خصصها Windows للبرنامج؛ يمكن ترحيل معظمها، لذا لا يعني ذلك أن البرنامج يستخدم كل هذه الذاكرة."
   },
   "072428c8bd6ba91a": {
    "source": "When the limit is reached, MDM stops downloading. New downloads show <g1>Waiting: the download limit is reached (Scheduler)</g1>. Everything resumes on its own when the period is over. <g2>Show warning before stopping downloads</g2> tells you when this happens and when downloads will go on.",
@@ -777,6 +773,10 @@
   "0b4f1bd33e265aad": {
    "source": "In the browser extension, <g1>Send downloads to → Another Mister Download Manager (a server)</g1> sends the downloads it catches, and <g2>Download with Mister Download Manager</g2> on a link, to the server instead of your computer. The browser's cookies stay behind, so a download that needs you signed in to a site stays with your computer.",
    "text": "في إضافة المستعرض، يرسل <g1>إرسال التنزيلات إلى → Mister Download Manager آخر (خادم)</g1> التنزيلات التي يلتقطها، و<g2>تنزيل باستخدام Mister Download Manager</g2> على رابط، إلى الخادم بدلا من جهاز الكمبيوتر الخاص بك. تبقى ملفات تعريف الارتباط للمستعرض، لذا فإن التنزيل الذي يتطلب تسجيل دخولك إلى موقع يبقى على جهاز الكمبيوتر الخاص بك."
+  },
+  "0b4f6db95315517d": {
+   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour), Mega-Debrid 60 (it allows 50 a second). When a service says it's asked too often, MDM waits.",
+   "text": "يسأل MDM كل خدمة بأقل من حد طلباتها بكثير: Real-Debrid بحد أقصى 120 مرة في الدقيقة (تسمح بـ 250)، AllDebrid 300 (تسمح بـ 600)، Premiumize 60 (لا تنشر أي حد)، TorBox 120 (تسمح بـ 300 في الدقيقة، و 60 تنزيلا جديدا من الويب في الساعة)، Mega-Debrid 60 (تسمح بـ 50 في الثانية). عندما تقول خدمة إنها سئلت كثيرا، ينتظر MDM."
   },
   "0b60549b3aaf5aea": {
    "source": "A portable copy. The download list and settings stay in a <x1/> folder next to the program, and nothing is written to the registry. Browser integration needs the installer. See <g2>Portable mode</g2>.",
@@ -1182,6 +1182,10 @@
    "source": "<g1>Firefox</g1> works on every system. If you signed in only moments ago with Firefox open, close it once so it writes the sign-in to its files.",
    "text": "<g1>Firefox</g1> يعمل على كل الأنظمة. إذا سجلت الدخول قبل لحظات فقط وكان Firefox مفتوحا، أغلقه مرة واحدة ليكتب معلومات تسجيل الدخول إلى ملفاته."
   },
+  "1263147c9c6487c5": {
+   "source": "<g1>Link sites, for Click'n'Load.</g1> Off until you turn it on in <g2>Options → Archives and Link grabber</g2>: then MDM listens on port 9666 of this computer only. The first time a site sends links MDM asks whether to allow it; what an allowed site sends opens in Link grabber, where nothing is looked up or downloaded until you add it. Links to this computer or your own network are left out.",
+   "text": "<g1>مواقع الروابط، لـ Click'n'Load.</g1> تكون متوقفة حتى تقوم بتشغيلها في <g2>الخيارات ← الأرشيفات وملتقط الروابط</g2>: عندئذ يستمع MDM على المنفذ 9666 لهذا الكمبيوتر فقط. في المرة الأولى التي يرسل فيها موقع روابط، يسأل MDM عما إذا كنت تريد السماح بذلك؛ ما يرسله الموقع المسموح به يفتح في ملتقط الروابط، حيث لا يتم البحث عن أي شيء أو تنزيله حتى تقوم بإضافته. يتم استبعاد الروابط إلى هذا الكمبيوتر أو شبكتك الخاصة."
+  },
   "12696d50b6f54aa3": {
    "source": "The tray icon",
    "text": "أيقونة منطقة الإشعارات"
@@ -1321,6 +1325,10 @@
   "143e794d57701123": {
    "source": "The download list's Web chip",
    "text": "شريحة «الويب» في قائمة التنزيلات"
+  },
+  "14449a0155412e85": {
+   "source": "<g1>Accept Click'n'Load from web pages (port 9666)</g1> (off by default) — a link site's Click'n'Load button sends its links to MDM's Link grabber. See <g2>Click'n'Load</g2>.",
+   "text": "<g1>قبول Click'n'Load من صفحات الويب (المنفذ 9666)</g1> (متوقف افتراضيا) — يرسل زر Click'n'Load الخاص بموقع الروابط روابطه إلى ملتقط الروابط في MDM. انظر <g2>Click'n'Load</g2>."
   },
   "14462b3e558d6a58": {
    "source": "The download list's grid lines",
@@ -1658,10 +1666,6 @@
    "source": "To open the page by the server's name (<x1/>), give MDM that name: <x2/> (several: separated by commas). Other names are refused, so that no web page can reach MDM through a name of its own.",
    "text": "لفتح الصفحة باسم الخادم (<x1/>)، أعط MDM هذا الاسم: <x2/> (عدة أسماء: مفصولة بفواصل). يتم رفض الأسماء الأخرى، بحيث لا تتمكن أي صفحة ويب من الوصول إلى MDM من خلال اسم خاص بها."
   },
-  "197cf5eb6cf3a06e": {
-   "source": "Every size (26)",
-   "text": "كل الأحجام (26)"
-  },
   "19810b030c072070": {
    "source": "Path",
    "text": "المسار"
@@ -1846,6 +1850,10 @@
    "source": "<g1>Notification area</g1><g2>Starts with the computer in the notification area, and hides progress windows there while they run.</g2>",
    "text": "<g1>منطقة الإشعارات</g1><g2>يبدأ مع الكمبيوتر في منطقة الإشعارات، ويخفي نوافذ التقدم هناك أثناء تشغيلها.</g2>"
   },
+  "1bdd089e60f96be2": {
+   "source": "Click'n'Load",
+   "text": "Click'n'Load"
+  },
   "1be93bd020009908": {
    "source": "<g1>The keyboard focus got lost</g1> when a button greyed itself or Escape closed a drop-down: Tab started over at the top of the window. It now moves on, or comes back, as in Windows.",
    "text": "<g1>كان التركيز ينتقل من لوحة المفاتيح</g1> عند تعطيل زر أو عند إغلاق قائمة منسدلة باستخدام Escape: فكان Tab يعود إلى أعلى النافذة. أصبح Tab الآن ينتقل إلى العنصر التالي أو يعود إلى العنصر السابق، كما في Windows."
@@ -1901,6 +1909,10 @@
   "1c766405f60723d9": {
    "source": "Crates",
    "text": "الصناديق (Crates)"
+  },
+  "1c7c8388e4cf543a": {
+   "source": "Last updated 2026-11-14",
+   "text": "آخر تحديث 14-11-2026"
   },
   "1c7c99ef90478d88": {
    "source": "Windows 10/11; macOS, Linux to try",
@@ -2210,10 +2222,6 @@
    "source": "On macOS only an administrator can schedule a wake, so the option is greyed. MDM doesn't ask for an administrator's password. An administrator can have the Mac wake every day a minute before the queue starts, for example at 10:59 PM for a queue that starts at 11:00 PM:",
    "text": "على macOS، لا يستطيع جدولة الإيقاظ إلا مسؤول، لذا يكون الخيار معطلا. لا يطلب MDM كلمة مرور المسؤول. يمكن للمسؤول ضبط جهاز Mac ليستيقظ كل يوم قبل دقيقة من بدء قائمة الانتظار، مثلا عند 10:59 مساء لقائمة انتظار تبدأ عند 11:00 مساء:"
   },
-  "216eae12c95fa610": {
-   "source": "Everyone who sent a pull request, opened an issue or commented on GitHub since version <x1/>.",
-   "text": "كل من أرسل طلب سحب، أو فتح مشكلة، أو علق على GitHub منذ الإصدار <x1/>."
-  },
   "2171be975f40efe2": {
    "source": "<g1>Moving from IDM</g1><g2>Your IDM list comes over in one file, each download with its address, referrer and cookies.</g2>",
    "text": "<g1>الانتقال من IDM</g1><g2>تنتقل قائمة IDM الخاصة بك في ملف واحد، كل تنزيل مع عنوانه، والمرجع، وملفات تعريف الارتباط.</g2>"
@@ -2285,10 +2293,6 @@
   "223eac9bc2498002": {
    "source": "<g1>FTP</g1><g2>and FTPS</g2>",
    "text": "<g1>FTP</g1><g2>و FTPS</g2>"
-  },
-  "225937cd2337f950": {
-   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize and TorBox: file-host links through your own account.",
-   "text": "<g1><g2>حسابات خدمة Debrid</g2></g1> — Real-Debrid وAllDebrid وPremiumize وTorBox: روابط استضافة الملفات عبر حسابك الخاص."
   },
   "228586c26511a211": {
    "source": "Open the add-on's page on addons.mozilla.org, <g1>Mister Download Manager</g1>, and click <g2>Add to Firefox</g2>. Zen and LibreWolf use the same page.",
@@ -2385,6 +2389,10 @@
   "23c9ffb3ae37e1be": {
    "source": "Warning text",
    "text": "نص التحذير"
+  },
+  "23dbac576172f8c1": {
+   "source": "Some sites hide the key in a script MDM doesn't run (only the plain form the documentation shows is read): then their button reports a failure, and the site's plain links are the way.",
+   "text": "تخفي بعض المواقع المفتاح في برنامج نصي لا يقوم MDM بتشغيله (يتم قراءة النموذج العادي الذي يظهره التوثيق فقط): ثم يبلغ زرها عن فشل، والروابط العادية للموقع هي الطريقة."
   },
   "23dc7b2c6f77ebe2": {
    "source": "<g1>Ctrl++</g1> / <g2>Ctrl+−</g2>",
@@ -2697,6 +2705,10 @@
   "2826420ef85a1bcf": {
    "source": "Open <g1>View → Language...</g1>. The same window as on the first start opens: every language by its flag, its own name and its English name. Type in <g2>Search</g2> to narrow the list, then double-click a language or select it and click <g3>OK</g3>. The window switches at once; there is nothing to restart.",
    "text": "افتح <g1>عرض → اللغة...</g1>. ستفتح النافذة نفسها التي تظهر عند التشغيل لأول مرة: تعرض كل لغة مع علمها واسمها بلغتها واسمها بالإنجليزية. اكتب في <g2>بحث</g2> لتصفية القائمة، ثم انقر نقرا مزدوجا على لغة أو حددها وانقر <g3>موافق</g3>. تتغير لغة النافذة فورا؛ ولا حاجة إلى إعادة تشغيل البرنامج."
+  },
+  "282685fe5e7ae3c6": {
+   "source": "<g1>Click'n'Load</g1> buttons on link sites, once you turn it on. See <g2>Click'n'Load</g2>.",
+   "text": "أزرار <g1>Click'n'Load</g1> في مواقع الروابط، بمجرد تشغيلها. انظر <g2>Click'n'Load</g2>."
   },
   "282f9b6ea43027ed": {
    "source": "Saved beside the video, they get its name and the language: <x1/>. Players such as VLC and MPV pick them up on their own. With ffmpeg they're always SRT; without it, the site's own format (often WebVTT, <x2/>).",
@@ -3858,10 +3870,6 @@
    "source": "For video pages, MDM downloads yt-dlp (and ffmpeg if you want merged qualities) on first use.",
    "text": "بالنسبة لصفحات الفيديو، يقوم MDM بتنزيل yt-dlp (و ffmpeg إذا كنت تريد جودات مدمجة) عند الاستخدام الأول."
   },
-  "39ba3311a16e6d4d": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts",
-   "text": "حسابات Real-Debrid وAllDebrid وPremiumize"
-  },
   "39c6e3069cb8cc85": {
    "source": "Click <g1>OK</g1>.",
    "text": "انقر على <g1>موافق</g1>."
@@ -3869,10 +3877,6 @@
   "39f0061bac128459": {
    "source": "<g1>Options → Archives</g1> says whether 7-Zip was found. Without it, a 7z or RAR archive isn't extracted, and the <g2>7-Zip needed</g2> window says so, with a <g3>Get 7-Zip</g3> button.",
    "text": "توضح <g1>الخيارات → الأرشيفات</g1> ما إذا تم العثور على 7-Zip. بدونه، لا يتم استخراج أرشيف 7z أو RAR، وتوضح نافذة <g2>يلزم 7-Zip</g2> ذلك، مع زر <g3>الحصول على 7-Zip</g3>."
-  },
-  "39f69afa6e85f9d1": {
-   "source": "<g1>Issues</g1><g2><x3/> people</g2>",
-   "text": "<g1>المشكلات</g1><g2><x3/> أشخاص</g2>"
   },
   "3a14e0e8b14737d7": {
    "source": "Choose <g1>Downloads → Speed Limiter → Turn on</g1>.",
@@ -4085,10 +4089,6 @@
   "3d4a4f2d1b19754e": {
    "source": "Can I move my downloads over from IDM?",
    "text": "هل يمكنني نقل تنزيلاتي من IDM؟"
-  },
-  "3d5479ff36667ffd": {
-   "source": "MDM sends the service only the links you download through it, and your account's token or key. Nothing else.",
-   "text": "يرسل MDM إلى الخدمة فقط الروابط التي تقوم بتنزيلها من خلالها، ورمز حسابك المميز أو مفتاحه. لا شيء آخر."
   },
   "3d67b0a7f32fc0e5": {
    "source": "The free, open-source IDM alternative. Every connection at once, crash-safe resume, torrents and video in one list.",
@@ -4525,6 +4525,10 @@
   "438a47f34fb3d4b7": {
    "source": "Browser integration — Mister Download Manager help",
    "text": "تكامل المتصفح — مساعدة Mister Download Manager"
+  },
+  "43ab4c1a614d9ad1": {
+   "source": "<g1>Limits</g1>: at most 10 posts a minute from one site, 500 links and 256 KB a post; more is refused, and one site's posts don't use up another's. At most 20 posts wait for an answer. A site brings MDM's window to the front at most once a minute; its links still arrive in Link grabber in between.",
+   "text": "<g1>الحدود</g1>: بحد أقصى 10 منشورات في الدقيقة من موقع واحد، 500 رابط و 256 كيلوبايت لكل منشور؛ يتم رفض المزيد، ولا تستخدم منشورات موقع واحد منشورات موقع آخر. بحد أقصى 20 منشورا تنتظر إجابة. يجلب موقع نافذة MDM إلى المقدمة مرة واحدة في الدقيقة على الأكثر؛ لا تزال روابطه تصل إلى ملتقط الروابط في هذه الأثناء."
   },
   "43ad4ee2e95fdb1f": {
    "source": "A page's own short sounds (a click, a voice-search chime) are no longer listed in <g1>Media on this page</g1>.",
@@ -5142,6 +5146,10 @@
    "source": "The formats you meet",
    "text": "الصيغ التي تقابلها"
   },
+  "4da9d590ebb4306e": {
+   "source": "A button that sends a DLC container instead of links isn't taken: reading one needs a key MDM can't use. The site's plain links, or its Click'n'Load button, are the way.",
+   "text": "لا يتم أخذ زر يرسل حاوية DLC بدلا من الروابط: تتطلب قراءة واحدة مفتاحا لا يمكن لـ MDM استخدامه. الروابط العادية للموقع، أو زر Click'n'Load الخاص به، هي الطريقة."
+  },
   "4dad09a9ad62a54a": {
    "source": "Many sites hand out links that only work for a while, or only while you are signed in. Resuming then fails, because the old address no longer answers.",
    "text": "توزع العديد من المواقع روابط تعمل لفترة قصيرة فقط، أو فقط أثناء تسجيل دخولك. يفشل الاستئناف حينها، لأن العنوان القديم لم يعد يستجيب."
@@ -5574,6 +5582,10 @@
    "source": "To add a download instead, send <x1/>.",
    "text": "لإضافة تنزيل بدلا من ذلك، أرسل <x1/>."
   },
+  "54c262b0fc40fe2e": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts — Mister Download Manager",
+   "text": "حسابات Real-Debrid وAllDebrid وPremiumize وMega-Debrid — Mister Download Manager"
+  },
   "54c47c38624ff486": {
    "source": "<g1>Support MDM</g1>: <g2>Help → Support MDM</g2> and a line in <g3>About</g3> open the creator's <g4>GitHub Sponsors</g4> page in the browser; the website, the README and the browser extension's popup link to it too. Only when asked: MDM stays free, with no reminders, and nothing changes or unlocks.",
    "text": "<g1>ادعم MDM</g1>: <g2>تعليمات ← ادعم MDM</g2> وسطر في <g3>حول</g3> يفتح صفحة <g4>GitHub Sponsors</g4> الخاصة بالمطور في المستعرض؛ يربط الموقع الإلكتروني وملف README والنافذة المنبثقة لملحق المستعرض بها أيضا. فقط عند الطلب: يبقى MDM مجانيا، بدون تذكيرات، ولا يتغير أو يفتح شيء."
@@ -5653,10 +5665,6 @@
   "55a4316a9df511bb": {
    "source": "A small file",
    "text": "ملف صغير"
-  },
-  "55a523d7ca4b905f": {
-   "source": "Thanks to",
-   "text": "شكر خاص لـ"
   },
   "55ecea9df3d3ed23": {
    "source": "Paste the address of a playlist (<x1/>) or a channel's videos (<x2/>) and click <g3>Look up</g3>. Instead of one video's qualities, the window lists the list's videos, each with its length.",
@@ -5797,10 +5805,6 @@
   "57d55935c79c75f6": {
    "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
    "text": "ثبت إحداها، فكلاهما يعمل، ثم ابحث عن الفيديو مرة أخرى. يجد MDM برامج Deno وNode.js (أيضا المثبتة باستخدام nvm) وBun بنفسه. إذا استمرت الرسالة، فإن مجلد البرنامج الجديد ليس على <x1/> الذي بدأ به MDM (تضيفه مثبتات Windows للبرامج التي تبدأ بعدها): أغلق MDM (<g2>المهام → إنهاء</g2>) وأعد تشغيله."
-  },
-  "57df30288a29fe94": {
-   "source": "Made possible by these amazing humans",
-   "text": "أصبح ممكنا بفضل هؤلاء الأشخاص الرائعين"
   },
   "57e101e4403fd046": {
    "source": "Command",
@@ -5949,6 +5953,10 @@
   "59d5983b5e65fbf4": {
    "source": "reads who opened pull requests and issues, and who commented, from GitHub's public API (the maintainer, Claude and bots left out) for every place that thanks them: the website's home page, <x1/> and each release on the News page (<x2/>, on every build), each release's notes (<x3/>, the people active since the release before) and the README (<x4/> at each release's preparation: its round photos are committed in <x5/>, since GitHub can't round a picture in a README).",
    "text": "يقرأ من فتح طلبات السحب والمشكلات، ومن علق، من واجهة برمجة تطبيقات GitHub العامة (مع استبعاد المشرف وكلود والروبوتات) لكل مكان يشكرهم: الصفحة الرئيسية للموقع، <x1/> وكل إصدار في صفحة الأخبار (<x2/>، في كل بنية)، وملاحظات كل إصدار (<x3/>، الأشخاص النشطون منذ الإصدار السابق) وملف README (<x4/> عند إعداد كل إصدار: يتم تضمين صوره الدائرية في <x5/>، نظرا لأن GitHub لا يمكنه تقريب صورة في ملف README)."
+  },
+  "59d718d0872bfa97": {
+   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list whose service takes torrents (Mega-Debrid doesn't, yet):",
+   "text": "ضع علامة على <g1>إرسال التورنت وروابط المغناطيس إلى الحساب الأول بدلا من الأقران</g1> في <g2>الخيارات ← الحسابات</g2>. عندها يذهب الرابط المغناطيسي (إضافة URL، المستعرض، الحافظة، الإفلات) أو ملف <x3/> (زر <g4>تنزيل الآن</g4> أو <g5>لاحقا</g5> في إضافة تورنت) إلى الحساب الأول في القائمة الذي تقبل خدمته التورنت (Mega-Debrid لا تقبلها بعد):"
   },
   "5a277738c32493f8": {
    "source": "Support MDM",
@@ -6181,6 +6189,10 @@
   "5d7b9ab9db6cbd11": {
    "source": "Your first download",
    "text": "أول تنزيل لك"
+  },
+  "5d83c63f00bc131b": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM. On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "يبلغ Windows عن رقمين مختلفين للذاكرة. الذاكرة قيد الاستخدام (عمود «الذاكرة» في مدير المهام، مجموعة العمل الخاصة) هي ما يحتفظ به البرنامج في ذاكرة الوصول العشوائي (RAM) حاليا. الذاكرة الملتزم بها («البايتات الخاصة» في مستكشف العمليات، «الالتزام» في مراقب الموارد) هي الذاكرة التي خصصها Windows للبرنامج؛ يمكن ترحيل معظمها، لذا لا يعني ذلك أن البرنامج يستخدم كل هذه الذاكرة. على جهاز اختبار واحد (Windows 11، MDM 0.5.2، IDM 6.42، إصدارات نهائية)، كانت الذاكرة قيد الاستخدام في علبة النظام 6-9 ميغابايت لـ MDM وحوالي 6 ميغابايت لـ IDM. مع فتح نافذته، يستخدم MDM حوالي 70 ميغابايت فور بدء تشغيله، وحوالي 10 ميغابايت بمجرد إخفاء النافذة في علبة النظام، مما يعيد الذاكرة إلى Windows. كانت الذاكرة الملتزم بها 130-160 ميغابايت لـ MDM وحوالي 10 ميغابايت لـ IDM. بينما يقوم MDM بالتنزيل بسرعة، يمكن أن ترتفع ذاكرته قيد الاستخدام إلى بضع مئات من الميغابايت للحظة (يحتفظ بالبيانات في الذاكرة بينما يلحق القرص الصلب بالعمل)؛ تنخفض مرة أخرى في غضون ثوان من انتهاء التنزيل، وفي علبة النظام يعيد الباقي إلى Windows في غضون عشر دقائق تقريبا."
   },
   "5d8435f41cea6550": {
    "source": "Protocols",
@@ -6429,10 +6441,6 @@
   "60d28e32899eb074": {
    "source": "<g1>GNU GPL 3.0</g1><g2>free software, for good</g2>",
    "text": "<g1>GNU GPL 3.0</g1><g2>برنامج مجاني، للأبد</g2>"
-  },
-  "60db104b0c4ca856": {
-   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour). When a service says it's asked too often, MDM waits.",
-   "text": "يطلب MDM من كل خدمة أقل بكثير من حد طلباتها: Real-Debrid بحد أقصى 120 مرة في الدقيقة (يسمح بـ 250)، AllDebrid 300 (يسمح بـ 600)، Premiumize 60 (لا ينشر حدا)، TorBox 120 (يسمح بـ 300 في الدقيقة، و 60 تنزيلا جديدا عبر الويب في الساعة). عندما تقول الخدمة إنها سئلت كثيرا، ينتظر MDM."
   },
   "60e4ea08eb29abeb": {
    "source": "<g1>Stop</g1> on a download in a running queue stays stopped, instead of the queue starting it again a moment later; <g2>Stop All</g2> too (<g3>#341</g3>).",
@@ -6778,6 +6786,10 @@
    "source": "The progress window shows it coming in.",
    "text": "نافذة التقدم تظهر الملف وهو ينزل."
   },
+  "6687c22337b780e7": {
+   "source": "MDM sends the service only the links you download through it, and your account's token or key (on Mega-Debrid, or its user name and password). Nothing else. Mega-Debrid's documentation puts them in the address; MDM sends them in the request's body instead, where no proxy or server log keeps them.",
+   "text": "يرسل MDM إلى الخدمة فقط الروابط التي تنزلها عبرها، ورمز حسابك أو مفتاحه (في Mega-Debrid، أو اسم المستخدم وكلمة المرور). لا شيء آخر. تضع وثائق Mega-Debrid هذه المعلومات في العنوان؛ يرسلها MDM في نص الطلب بدلا من ذلك، حيث لا يحتفظ بها أي وكيل أو سجل خادم."
+  },
   "66987ab567339aa6": {
    "source": "Free IDM alternative",
    "text": "بديل مجاني لـ IDM"
@@ -6913,6 +6925,10 @@
   "68b88047fcca2939": {
    "source": "Queue downloads for later →",
    "text": "إضافة التنزيلات إلى قائمة الانتظار لوقت لاحق ←"
+  },
+  "68ba2e7f312decbd": {
+   "source": "Any web page can send links there, not only the link site you are on, so MDM is careful with them:",
+   "text": "يمكن لأي صفحة ويب إرسال روابط هناك، وليس فقط موقع الروابط الذي تتواجد فيه، لذا يتعامل MDM معها بحذر:"
   },
   "6934a2b5fa583b1e": {
    "source": "Contributors — Mister Download Manager",
@@ -7085,6 +7101,10 @@
   "6b957cd1180602a0": {
    "source": "How many connections does it use?",
    "text": "كم عدد الاتصالات التي يستخدمها؟"
+  },
+  "6ba170458f12182a": {
+   "source": "Many link sites have a <g1>Click'n'Load</g1> button that sends their links straight to a download manager on your computer, as JDownloader's documentation for web sites describes. Turn it on in <g2>Options → Archives and Link grabber → Accept Click'n'Load from web pages</g2> (off by default). MDM then listens on port 9666 of this computer only, and the links a page sends open in Link grabber, with the page's package name and archive password.",
+   "text": "تحتوي العديد من مواقع الروابط على زر <g1>Click'n'Load</g1> يرسل روابطها مباشرة إلى مدير التنزيل على جهاز الكمبيوتر الخاص بك، كما يصف توثيق JDownloader لمواقع الويب. قم بتشغيله في <g2>الخيارات ← الأرشيفات وملتقط الروابط ← قبول Click'n'Load من صفحات الويب</g2> (إيقاف تشغيله افتراضيا). يستمع MDM بعد ذلك على المنفذ 9666 لهذا الكمبيوتر فقط، وتفتح الروابط التي ترسلها الصفحة في ملتقط الروابط، مع اسم حزمة الصفحة وكلمة مرور الأرشيف."
   },
   "6bb8d2e69de9ec9f": {
    "source": "This website",
@@ -7266,6 +7286,10 @@
    "source": "Every window, rebuilt.",
    "text": "كل نافذة، أعيد بناؤها."
   },
+  "6e3b4017fb705290": {
+   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid, Premiumize or Mega-Debrid, then downloaded with MDM's speed and resume.</g2>",
+   "text": "<g1>حسابات Debrid</g1><g2>روابط استضافة الملفات التي تم فك قفلها عبر Real-Debrid أو AllDebrid أو Premiumize أو Mega-Debrid، ثم تنزيلها بسرعة MDM وإمكانية المتابعة.</g2>"
+  },
   "6e409093f697abac": {
    "source": "Batch download numbered files and lists of links — Mister Download Manager",
    "text": "تنزيل جماعي للملفات المرقمة وقوائم الروابط — Mister Download Manager"
@@ -7325,10 +7349,6 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "يوقف «إيقاف» الآن أيضا yt-dlp، الذي كان يستمر في التنزيل في الخلفية."
-  },
-  "6f06002d2161cba3": {
-   "source": "Last updated 2026-11-13",
-   "text": "آخر تحديث 2026-11-13"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7560,7 +7580,7 @@
   },
   "7297ca101de5145e": {
    "source": "The list couldn't be read from GitHub when this page was built. Everyone is on GitHub meanwhile, in the project's <g1>pull requests</g1> and <g2>issues</g2>.",
-   "text": "تعذر قراءة القائمة من GitHub عند إنشاء هذه الصفحة. الجميع موجودون على GitHub في هذه الأثناء، في <g1>طلبات السحب</g1> و<g2>المشكلات</g2> بالمشروع."
+   "text": "تعذر قراءة القائمة من GitHub عند إنشاء هذه الصفحة. في هذه الأثناء، الجميع موجودون على GitHub، في <g1>طلبات السحب</g1> و<g2>المشكلات</g2> الخاصة بالمشروع."
   },
   "729a19fc6ce418f9": {
    "source": "Reporting problems",
@@ -7617,10 +7637,6 @@
   "73460447cd841230": {
    "source": "1 GiB over a fast local link",
    "text": "1 جيبيبايت عبر رابط محلي سريع"
-  },
-  "734a722e25f3a1f1": {
-   "source": "Use your Real-Debrid, AllDebrid or Premiumize account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
-   "text": "استخدم حسابك في Real-Debrid أو AllDebrid أو Premiumize في Mister Download Manager: روابط مواقع الاستضافة مفتوحة، ثم يتم تنزيلها بكل اتصال."
   },
   "734da40a1b2e7f72": {
    "source": "Everything MDM doesn't take stays with the browser.",
@@ -7910,6 +7926,10 @@
    "source": "What it costs the computer",
    "text": "ما يستهلكه من موارد الكمبيوتر"
   },
+  "77dd412fabcb0ad1": {
+   "source": "Why does MDM show a larger memory figure than IDM?",
+   "text": "لماذا يعرض MDM رقما أكبر للذاكرة مقارنة بـ IDM؟"
+  },
   "77de723e952c5bde": {
    "source": ", <x1/>, <x2/>, <x3/>, <x4/>,",
    "text": "، <x1/>، <x2/>، <x3/>، <x4/>،"
@@ -7973,10 +7993,6 @@
   "79298af691e8bdd2": {
    "source": "You need your own paid account with one of these services: MDM doesn't sell or include one. Sharing an account or its links breaks the services' terms and can get the account suspended.",
    "text": "تحتاج إلى حسابك المدفوع الخاص بك مع إحدى هذه الخدمات: لا يبيع MDM أو يتضمن حسابا. يؤدي مشاركة حساب أو روابطه إلى انتهاك شروط الخدمات وقد يؤدي إلى تعليق الحساب."
-  },
-  "7931468b8d7d517a": {
-   "source": "<x1/> <g2>Everyone who helped</g2>",
-   "text": "<x1/> <g2>كل من ساعد</g2>"
   },
   "7957b18548166390": {
    "source": "Questions and answers — Mister Download Manager",
@@ -8990,6 +9006,10 @@
    "source": "Pieces of a stream (its segments) are never listed. A copy-protected stream (DRM: Widevine, PlayReady, FairPlay, as most paid streaming services use) is listed as <g1>Protected</g1>, with no <g2>Download</g2> button: no tool may break that protection, and MDM doesn't try.",
    "text": "لا تظهر قطع البث (مقاطع البث) في القائمة أبدا. ويظهر البث المحمي من النسخ (DRM: Widevine وPlayReady وFairPlay، كما في معظم خدمات البث المدفوعة) على أنه <g1>محمي</g1>، من دون زر <g2>تنزيل</g2>: لا يجوز لأي أداة تجاوز هذه الحماية، ولا يحاول MDM ذلك."
   },
+  "87d38b69da245498": {
+   "source": "Why does MDM show a larger memory figure than IDM? — Mister Download Manager",
+   "text": "لماذا يعرض MDM استهلاك ذاكرة أكبر من IDM؟ — Mister Download Manager"
+  },
   "87fdb00b527c2d1d": {
    "source": "What is different",
    "text": "ما هو المختلف"
@@ -9562,6 +9582,10 @@
    "source": "Transfer",
    "text": "النقل"
   },
+  "913e347659323df9": {
+   "source": "Click'n'Load 2 (#37): the listener on 127.0.0.1:9666 that reads a link site's posts into packages for Link grabber, with limits on what it takes",
+   "text": "Click'n'Load 2 (العدد 37): المستمع على 127.0.0.1:9666 الذي يقرأ منشورات موقع الروابط ويحولها إلى حزم لـ«ملتقط الروابط»، مع قيود على ما يأخذه."
+  },
   "91413c8d067f6992": {
    "source": "<g1>All Downloads</g1> — everything, with a node per category below it.",
    "text": "<g1>جميع التنزيلات</g1> — كل شيء، مع عقدة لكل فئة أسفلها."
@@ -9605,10 +9629,6 @@
   "91f7b61e72ddf0bc": {
    "source": "<g1>Acceleration and resume</g1><g2>A file split over up to 32 connections, re-split until the last byte, and resumed after any crash.</g2>",
    "text": "<g1>التسريع والمتابعة</g1><g2>ينقسم الملف إلى 32 اتصالا كحد أقصى، ويعاد تقسيمه حتى آخر بايت، ويستأنف بعد أي عطل.</g2>"
-  },
-  "92055d4da1d101c5": {
-   "source": "<x1/> people who sent a pull request, reported a problem or joined a conversation on GitHub. <g2>Meet them all</g2>",
-   "text": "<x1/> الأشخاص الذين أرسلوا طلب سحب، أو أبلغوا عن مشكلة، أو انضموا إلى محادثة على GitHub. <g2>تعرف عليهم جميعا</g2>"
   },
   "92078a4a178bf949": {
    "source": "A title bar MDM draws, while its window isn't the active one (transparent: as when active)",
@@ -9746,10 +9766,6 @@
    "source": "<g1><x2/></g1> — the shape of text boxes, check boxes, buttons, progress bars, scroll bars, the focus mark and the title bar.",
    "text": "<g1><x2/></g1> — شكل مربعات النص، ومربعات الاختيار، والأزرار، وأشرطة التقدم، وأشرطة التمرير، وعلامة التركيز، وشريط العنوان."
   },
-  "940dfcf7abcc8702": {
-   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid or Premiumize, then downloaded with MDM's speed and resume.</g2>",
-   "text": "<g1>حسابات Debrid</g1><g2>روابط استضافة الملفات مفتوحة عبر Real-Debrid أو AllDebrid أو Premiumize، ثم يتم تنزيلها بسرعة MDM ومتابعتها.</g2>"
-  },
   "94138b99718bf4a0": {
    "source": "Mister Download Manager (\"MDM\", \"the software\") and the website misterdownloadmanager.com (\"the site\") are made by Ahmed Nefzaoui and contributors (\"we\"). By using the software or the site you accept these terms. If you don't, please don't use them.",
    "text": "برنامج Mister Download Manager (\"MDM\"، \"البرنامج\") وموقع misterdownloadmanager.com (\"الموقع\") من إنشاء أحمد نفزاوي والمساهمين (\"نحن\"). بستخدام البرنامج أو الموقع، فإنك توافق على هذه الشروط. إذا لم توافق عليها، يرجى عدم استخدام البرنامج أو الموقع."
@@ -9793,10 +9809,6 @@
   "949e7c1956120262": {
    "source": "Options → Connection: the DNS list at the bottom.",
    "text": "الخيارات ← الاتصال: قائمة DNS في الأسفل."
-  },
-  "94a7f71ab168f4df": {
-   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox) turn a file host's link into a direct one the engine downloads",
-   "text": "حسابات Debrid (#44): تحول واجهات برمجة التطبيقات الرسمية للخدمات (Real-Debrid، AllDebrid، Premiumize، TorBox) رابط موقع الاستضافة إلى رابط مباشر يحمله المحرك"
   },
   "94d1813016d4945e": {
    "source": "Where there is no tray",
@@ -9885,6 +9897,10 @@
   "95ff4e3f1e52b773": {
    "source": "portable.zip — runs from a folder or USB stick",
    "text": "portable.zip — يعمل من مجلد أو ذاكرة USB"
+  },
+  "960ec6fa3baf5716": {
+   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3>, <g4>Premiumize</g4> and <g5>Mega-Debrid</g5>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key; Mega-Debrid with your user name and password, or an application's API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
+   "text": "<g1>الخيارات ← الحسابات ← إضافة...</g1> تقبل <g2>Real-Debrid</g2> و<g3>AllDebrid</g3> و<g4>Premiumize</g4> و<g5>Mega-Debrid</g5>. يسجل Real-Debrid وAllDebrid الدخول برمز تؤكده في المستعرض، أو برمز API الخاص بك؛ وPremiumize بمفتاح API الخاص به؛ وMega-Debrid باسم المستخدم وكلمة المرور، أو بمفتاح API لتطبيق. يعرض MDM اسم الحساب وما إذا كان مدفوعا. مع عدة حسابات، يمر الرابط عبر أول حساب تدعم خدمته المضيف."
   },
   "9610ce30533afc6e": {
    "source": "<g1>Your own devices, for the remote control.</g1> Off until you turn it on in <g2>Options → Remote</g2>: then MDM answers, over HTTPS on your local network, only the phones and computers you paired with its code.",
@@ -10174,10 +10190,6 @@
    "source": "<g1><g2>Video downloads</g2></g1> — download a video from its page (YouTube, Vimeo and many more) with yt-dlp.",
    "text": "<g1><g2>تنزيلات الفيديو</g2></g1> — تنزيل فيديو من صفحته (YouTube وVimeo والعديد غيرها) باستخدام yt-dlp."
   },
-  "99d899e1714af677": {
-   "source": "MDM supports four services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3> and <g4>TorBox</g4>.",
-   "text": "يدعم MDM أربع خدمات: <g1>Real-Debrid</g1> و<g2>AllDebrid</g2> و<g3>Premiumize</g3> و<g4>TorBox</g4>."
-  },
   "99e549b640c7f008": {
    "source": "Light while it waits",
    "text": "خفيف أثناء الانتظار"
@@ -10322,10 +10334,6 @@
    "source": "Helium",
    "text": "هيليوم"
   },
-  "9c29a3e8e53ea368": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts — Mister Download Manager",
-   "text": "حسابات Real-Debrid وAllDebrid وPremiumize — Mister Download Manager"
-  },
   "9c4861e08c9b1cf2": {
    "source": "Download manager command line and automation API",
    "text": "سطر أوامر مدير التنزيل وواجهة برمجة التطبيقات للأتمتة"
@@ -10449,10 +10457,6 @@
   "9e18dba709154be4": {
    "source": "Send downloads from your browser",
    "text": "إرسال التنزيلات من متصفحك"
-  },
-  "9e23173a22cf615a": {
-   "source": "<x1/> comment",
-   "text": "<x1/> تعليق"
   },
   "9e2414e7eb93b062": {
    "source": "Windows 7's feel: glossy buttons, a glassy title bar and a glossy green progress bar.",
@@ -10742,10 +10746,6 @@
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "تفتح نافذة أكبر من الشاشة بهذا الحجم (الخيارات بنسبة 200% على شاشة 1366 × 768) بالحجم الذي تسمح به الشاشة، ويتم تمرير الباقي: باستخدام أشرطة التمرير، أو عجلة الماوس، أو <g1>Tab</g1> إلى عنصر التحكم التالي."
   },
-  "a24bd8fd730a41d0": {
-   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
-   "text": "على Windows، لا يمكن لـ OpenGL الأقدم من 3.0 (مثل برنامج تشغيل بطاقة رسومات قديمة، كبطاقة Intel HD Graphics الأولى التي تدعم OpenGL 2.1) رسم MDM: تظهر نوافذه مشوهة. يلاحظ MDM ذلك عند بدء التشغيل ويعيد التشغيل باستخدام Direct3D على برنامج العرض البرمجي من Microsoft (WARP)، ومنذ ذلك الحين، يظهر ذلك في <g1>عرض → الرسم باستخدام</g1>. اختيار <g2>OpenGL</g2> هناك يحاول ذلك مرة أخرى."
-  },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
    "text": "لماذا لا يتولى MDM تنزيلاتي؟ — Mister Download Manager"
@@ -10797,6 +10797,10 @@
   "a356f214a2ec96a0": {
    "source": "In Arabic, Hebrew, Persian, Urdu and Uyghur the whole window is mirrored, the way Windows does it for these languages. File names, addresses and folder paths keep their own direction inside translated sentences, so they stay readable. MDM uses the system's own fonts for every script.",
    "text": "في العربية والعبرية والفارسية والأردية والأويغورية، تنعكس النافذة بأكملها، بالطريقة التي يفعلها Windows لهذه اللغات. تحتفظ أسماء الملفات والعناوين ومسارات المجلدات باتجاهها الخاص داخل الجمل المترجمة، بحيث تظل قابلة للقراءة. يستخدم MDM خطوط النظام الخاصة به لكل خط."
+  },
+  "a3610d8542e56513": {
+   "source": "Last updated 2026-11-14 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "آخر تحديث 2026-11-14 · ينطبق على التطبيق وإضافة المستعرض وموقع misterdownloadmanager.com"
   },
   "a3633bf4f8cf650e": {
    "source": "Remove the selected item of a list (a login, an exception, a queue: asks first)",
@@ -11062,6 +11066,14 @@
    "source": "Internet Download Manager 6.42",
    "text": "Internet Download Manager 6.42"
   },
+  "a6ce32d80128c1ea": {
+   "source": "Every size (27)",
+   "text": "جميع الأحجام (27)"
+  },
+  "a73a27470dadf3f9": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
+   "text": "خدمة الديبريد، مثل Real-Debrid أو AllDebrid أو Premiumize أو TorBox أو Mega-Debrid، هي حساب مدفوع يجلب الملفات من مواقع الاستضافة إلى خوادمه الخاصة. ثم يعيد رابطا مباشرا عاديا، دون انتظار مواقع الاستضافة أو تحديد السرعة أو الكابتشا. باستخدام حسابك في MDM، يتم فتح رابط من موقع استضافة تدعمه خدمتك عبر الخدمة، ثم ينزله MDM كأي ملف: بجميع اتصالاته، وإيقافه، ومتابعته."
+  },
   "a7431b39fec4f131": {
    "source": "How it holds: Windows binds the adapter's own address. Windows then sends those packets only through that adapter (its strong host model). Linux binds the device itself (Linux 5.7 or newer), and macOS binds the interface. An address of a kind the adapter doesn't have (IPv6 on an IPv4-only VPN) is refused, not sent around it.",
    "text": "كيف يعمل: يربط Windows عنوان المحول الخاص به. ثم يرسل Windows هذه الحزم فقط من خلال هذا المحول (نموذج المضيف القوي الخاص به). يربط Linux الجهاز نفسه (Linux 5.7 أو أحدث)، ويربط macOS الواجهة. يتم رفض عنوان من نوع لا يملكه المحول (IPv6 على VPN يدعم IPv4 فقط)، ولا يتم إرساله حوله."
@@ -11182,6 +11194,10 @@
    "source": "Choose <g1>Tasks → Show drop target</g1>. A small box with the MDM icon appears and stays on top of other windows.",
    "text": "اختر <g1>المهام → إظهار هدف الإفلات</g1>. سيظهر مربع صغير يحمل أيقونة MDM ويبقى فوق النوافذ الأخرى."
   },
+  "a8dd103bdb8c3ce6": {
+   "source": "On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "على جهاز اختبار واحد (Windows 11، MDM 0.5.2، IDM 6.42، إصدارات نهائية)، كانت الذاكرة قيد الاستخدام في علبة النظام تتراوح بين 6 و9 ميغابايت لـ MDM وحوالي 6 ميغابايت لـ IDM. مع فتح نافذته، يستخدم MDM حوالي 70 ميغابايت فور بدء تشغيله، وحوالي 10 ميغابايت بمجرد إخفاء النافذة في علبة النظام، مما يعيد الذاكرة إلى Windows. كانت الذاكرة الملتزم بها تتراوح بين 130 و160 ميغابايت لـ MDM وحوالي 10 ميغابايت لـ IDM. بينما يقوم MDM بالتنزيل بسرعة، يمكن أن ترتفع ذاكرته قيد الاستخدام إلى بضع مئات من الميغابايت للحظة (يحتفظ بالبيانات في الذاكرة بينما يلحق القرص الصلب بالركب)؛ ثم تنخفض مرة أخرى في غضون ثوان من انتهاء التنزيل، وفي علبة النظام يعيد الباقي إلى Windows في غضون عشر دقائق تقريبا."
+  },
   "a8e296926efbf0e1": {
    "source": "<g1>Main download queue</g1> — where <g2>Download Later</g2>, batch downloads and imported lists go. A download leaves it when it is finished.",
    "text": "<g1>قائمة انتظار التنزيل الرئيسية</g1> — حيث تذهب تنزيلات <g2>تنزيل لاحقا</g2>، والتنزيلات المجمعة، والقوائم المستوردة. يغادر التنزيل هذه القائمة عند انتهائه."
@@ -11297,6 +11313,10 @@
   "aa33e21a9939345a": {
    "source": "<g1>Linux: Vulkan, and macOS: Metal, in View → Draw with</g1> (<g2>#206</g2>). Linux can draw its windows with Vulkan (on Wayland and X11), and macOS with Metal, the way Windows draws with Direct3D. OpenGL stays the default there until reports from real graphics cards are in: try it and tell us how it went. The same safety net as on Windows: when Vulkan or Metal can't start (no driver for it), its first frame doesn't come within 10 seconds, or a start with it ends before its first frame, MDM draws with OpenGL until it is chosen again, and the menu says why. A graphics card reset while MDM runs starts MDM again.",
    "text": "<g1>Linux: Vulkan، و macOS: Metal، في عرض ← الرسم باستخدام</g1> (<g2>#206</g2>). يمكن لـ Linux رسم نوافذه باستخدام Vulkan (على Wayland و X11)، و macOS باستخدام Metal، بالطريقة التي يرسم بها Windows باستخدام Direct3D. يبقى OpenGL هو الافتراضي هناك حتى ورود تقارير من بطاقات الرسوميات الحقيقية: جربها وأخبرنا كيف سارت الأمور. نفس شبكة الأمان كما في Windows: عندما لا يتمكن Vulkan أو Metal من البدء (لا يوجد برنامج تشغيل له)، أو لا يأتي إطاره الأول في غضون 10 ثوان، أو ينتهي البدء به قبل إطاره الأول، يرسم MDM باستخدام OpenGL حتى يتم اختياره مرة أخرى، وتشير القائمة إلى السبب. إعادة تعيين بطاقة الرسوميات أثناء تشغيل MDM تبدأ MDM مرة أخرى."
+  },
+  "aa3bccf286cd1a17": {
+   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize, TorBox and Mega-Debrid: file-host links through your own account.",
+   "text": "<g1><g2>حسابات خدمة Debrid</g2></g1> — Real-Debrid وAllDebrid وPremiumize وTorBox وMega-Debrid: روابط استضافة الملفات عبر حسابك الخاص."
   },
   "aa4c0c6b476d4f22": {
    "source": "Browser integration is set up by MDM itself at each start (the browsers installed then are found); add the extension as in <g1>Browser integration</g1>. Firefox installed as a Snap (Ubuntu's) reaches MDM once you allow it; other Snap and Flatpak browsers can't (see <g2>Flatpak and Snap browsers</g2>). The tray icon, Dark Mode support and Launch on startup work on GNOME (Ubuntu's), KDE Plasma, Xfce and Cinnamon.",
@@ -11474,6 +11494,10 @@
    "source": "Firefox asks to confirm: click <g1>Add</g1>. Firefox keeps the add-on up to date.",
    "text": "يطلب Firefox التأكيد: انقر على <g1>إضافة</g1>. يحدث Firefox الإضافة تلقائيا."
   },
+  "ad104637d2763ef5": {
+   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - <g3>User name</g3> and <g4>Password</g4>, then <g5>Sign in</g5> (Mega-Debrid). Mega-Debrid blocks your connection for some minutes after a few wrong passwords. Each sign-in replaces the account's last one at Mega-Debrid, so another program signed in to the same account makes MDM sign in again on its next link, on its own. MDM itself signs in only when its token is refused, so its checks and its downloads at once don't end each other's. MDM keeps your password (in the keychain, see below) to sign in again. - or paste your <g6>API token</g6> (<g7>Find my token</g7> opens the service's page that shows it), then <g8>Use the token</g8>. Premiumize signs in this way only: paste the API key from its Account page. On Mega-Debrid, make an application under <g9>My Account → API Key</g9> and paste its key; MDM then never needs your password, and doesn't keep it: the key is all it stores, and you can delete the key on that page at any time. Mega-Debrid doesn't say whether a key's account is premium, so the Accounts list says <g10>the service doesn't say whether it is premium</g10> for it; a free account's links are refused when you download them.",
+   "text": "اختر الخدمة، ثم إما: - <g1>تسجيل الدخول في المستعرض</g1> (Real-Debrid وAllDebrid وTorBox): يعرض MDM رمزا ويفتح صفحة الخدمة (صفحة TorBox موجودة أيضا على <x2/>). اكتب الرمز هناك (صفحة AllDebrid تحتوي عليه بالفعل) واسمح لـ MDM. يلاحظ مربع الحوار ذلك تلقائيا. - <g3>اسم المستخدم</g3> و<g4>كلمة المرور</g4>، ثم <g5>تسجيل الدخول</g5> (Mega-Debrid). يحظر Mega-Debrid اتصالك لعدة دقائق بعد بضع كلمات مرور خاطئة. يحل كل تسجيل دخول محل آخر حساب للخدمة في Mega-Debrid، لذا فإن برنامجا آخر مسجلا في نفس الحساب يجعل MDM يسجل الدخول مرة أخرى عند رابطه التالي، تلقائيا. يسجل MDM نفسه الدخول فقط عندما يرفض رمزه، لذا فإن فحوصاته وتنزيلاته في آن واحد لا تنهي بعضها البعض. يحتفظ MDM بكلمة مرورك (في سلسلة المفاتيح، انظر أدناه) لتسجيل الدخول مرة أخرى. - أو الصق <g6>رمز API</g6> الخاص بك (<g7>البحث عن رمزي</g7> يفتح صفحة الخدمة التي تعرضه)، ثم <g8>استخدام الرمز</g8>. تسجل Premiumize الدخول بهذه الطريقة فقط: الصق مفتاح API من صفحة حسابها. في Mega-Debrid، أنشئ تطبيقا ضمن <g9>حسابي ← مفتاح API</g9> والصق مفتاحه؛ لا يحتاج MDM بعد ذلك إلى كلمة مرورك أبدا، ولا يحتفظ بها: المفتاح هو كل ما يخزنه، ويمكنك حذف المفتاح من تلك الصفحة في أي وقت. لا يذكر Mega-Debrid ما إذا كان حساب المفتاح مدفوعا، لذا تعرض قائمة الحسابات <g10>الخدمة لا تذكر ما إذا كان مدفوعا</g10> له؛ ترفض روابط الحساب المجاني عند تنزيلها."
+  },
   "ad20819c93bdea53": {
    "source": "Windows may give the stick another drive letter, such as <x1/> instead of <x2/>. The folders you set, and the downloads already in the list, still point at the old letter. Check <g3>Options → Save to</g3> and change the folders if needed. When MDM is about to save into a folder that doesn't exist, it asks whether to create it.",
    "text": "قد تعطي Windows محرك أقراص USB حرفا آخر، مثل <x1/> بدلا من <x2/>. لا تزال المجلدات التي قمت بتعيينها، والتنزيلات الموجودة بالفعل في القائمة، تشير إلى الحرف القديم. تحقق من <g3>الخيارات → حفظ في</g3> وقم بتغيير المجلدات إذا لزم الأمر. عندما يكون MDM على وشك الحفظ في مجلد غير موجود، فإنه يسأل عما إذا كان سيتم إنشاؤه."
@@ -11513,10 +11537,6 @@
   "adbf2cdd5f87d0b6": {
    "source": "Transfer: first request to last byte",
    "text": "النقل: من أول طلب إلى آخر بايت"
-  },
-  "adc99f39f820cbb6": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
-   "text": "خدمة الديبريد، مثل Real-Debrid أو AllDebrid أو Premiumize أو TorBox، هي حساب مدفوع يقوم بتنزيل الملفات من مواقع الاستضافة إلى خوادمه الخاصة. توفر الخدمة رابطا مباشرا عاديا، دون انتظار مواقع الاستضافة أو قيود السرعة أو الكابتشا. باستخدام حسابك في MDM، يتم فتح الرابط من موقع استضافة تدعمه خدمتك عبر الخدمة، ثم يقوم MDM بتنزيله كأي ملف آخر: بجميع اتصالاته، وإيقافه، ومتابعته."
   },
   "ade160a1aa789777": {
    "source": "MDM downloads what you point it at, the way a web browser does, only faster and with more control. It's made for everyday downloads: software and updates, documents, your own files from cloud storage, videos and music you're allowed to save, Linux images and other torrents shared by their makers, and anything else you have the right to download.",
@@ -11673,6 +11693,10 @@
   "b05f1388075b4b26": {
    "source": "The Scheduler's choices for when the queue is done, Turn off computer when done among them",
    "text": "خيارات «المجدول» لما يحدث عند انتهاء قائمة الانتظار، ومنها «إيقاف تشغيل الكمبيوتر عند الانتهاء»"
+  },
+  "b064cf9d46e0dfec": {
+   "source": "<g1>Links a site packed</g1> (Click'n'Load) keep the site's packages and names, with their archive password when the site gave one.",
+   "text": "تحافظ <g1>الروابط التي حزمها موقع</g1> (Click'n'Load) على حزم الموقع وأسمائه، مع كلمة مرور الأرشيف الخاصة بها إذا قدمها الموقع."
   },
   "b08e516b19471d83": {
    "source": "<g1>All files and checksums</g1><g2>Version 0.5.2 on GitHub Releases, with SHA256SUMS.txt</g2>",
@@ -12346,10 +12370,6 @@
    "source": "Options: Remote",
    "text": "الخيارات: التحكم عن بعد"
   },
-  "b9a51e6448b28bb1": {
-   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - or paste your <g3>API token</g3> (<g4>Find my token</g4> opens the service's page that shows it), then <g5>Use the token</g5>. Premiumize signs in this way only: paste the API key from its Account page.",
-   "text": "اختر الخدمة، ثم إما: - <g1>تسجيل الدخول في المستعرض</g1> (Real-Debrid وAllDebrid وTorBox): يعرض MDM رمزا ويفتح صفحة الخدمة (صفحة TorBox موجودة أيضا على <x2/>). اكتب الرمز هناك (صفحة AllDebrid تحتوي عليه بالفعل) واسمح لـ MDM. يلاحظ مربع الحوار ذلك تلقائيا. - أو الصق <g3>رمز API</g3> الخاص بك (<g4>البحث عن رمزي</g4> يفتح صفحة الخدمة التي تعرضه)، ثم <g5>استخدام الرمز</g5>. Premiumize يسجل الدخول بهذه الطريقة فقط: الصق مفتاح API من صفحة الحساب الخاصة به."
-  },
   "b9bee71f3466bfea": {
    "source": "Change it at any time, no restart",
    "text": "غيرها في أي وقت، دون إعادة تشغيل"
@@ -12426,10 +12446,6 @@
    "source": "<g1>The time</g1> is measured from the download's own connections, as each one opens: MDM sends nothing extra to the server. It is an estimate (the time to open a connection, divided by its round trips: one for http, two for https), so it says <g2>about</g2>. The quickest connection counts.",
    "text": "يتم قياس <g1>الوقت</g1> من اتصالات التنزيل نفسها، مع فتح كل اتصال: لا يرسل MDM أي شيء إضافي إلى الخادم. إنه تقدير (الوقت اللازم لفتح اتصال، مقسوما على رحلات الذهاب والإياب: واحدة لـ HTTP، واثنتان لـ HTTPS)، لذلك يقول <g2>حوالي</g2>. الاتصال الأسرع هو الذي يحتسب."
   },
-  "bb7529bf5491688a": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands…",
-   "text": "خدمة الديبريد، مثل Real-Debrid أو AllDebrid أو Premiumize أو TorBox، هي حساب مدفوع يقوم بتنزيل الملفات من مواقع الاستضافة إلى خوادمه الخاصة. توفر..."
-  },
   "bb7ddff510dd3161": {
    "source": "If your network gives a proxy auto-config (PAC) script, type its address, or pick the file, under <g1>Use automatic configuration script</g1>. MDM fetches it and asks it which way each download goes (<x2/>, <x3/> or <x4/>), as browsers do. Until it has been fetched, or if it can't be, MDM uses the system's settings.",
    "text": "إذا كانت شبكتك توفر برنامجا نصيا للضبط التلقائي للوكيل (PAC)، فاكتب عنوانه، أو اختر الملف، ضمن <g1>استخدام برنامج نصي للضبط التلقائي</g1>. يجلب MDM هذا البرنامج ويسأله عن مسار كل تنزيل (<x2/>، <x3/> أو <x4/>)، كما تفعل المستعرضات. حتى يتم جلبه، أو إذا تعذر ذلك، يستخدم MDM إعدادات النظام."
@@ -12445,6 +12461,10 @@
   "bbdebbdee79af831": {
    "source": "MDM finds the browsers installed and offers each one its extension.",
    "text": "يعثر MDM على المستعرضات المثبتة ويقدم لكل منها إضافته."
+  },
+  "bbe26dcd777f25da": {
+   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
+   "text": "<g1>حساباتك في خدمات التنزيل المباشر (Debrid).</g1> أي رابط أو تورنت ترسله عبر حساب Real-Debrid أو AllDebrid أو Premiumize أو Mega-Debrid في <g2>الخيارات → الحسابات</g2> يذهب إلى تلك الخدمة، والتي تقوم بعد ذلك بتوفير الملف. يبقى تسجيل الدخول الخاص بها على جهاز الكمبيوتر الخاص بك، مع كلمات المرور المذكورة أعلاه."
   },
   "bbeb2269d1830f72": {
    "source": "<g1>A menu shut with Escape opens again at the first click on its title</g1>: a menu opened from the menu bar and shut with Escape, the pointer still on its title, was left marked open. On Linux the next click on that title only \"shut\" it, and a second click was needed; on Windows Escape seemed to do nothing (the menu came back at once). Escape, or MDM losing the focus, now shuts the menu whatever the pointer rests on; a press on a title still shuts its own menu or opens another.",
@@ -12706,10 +12726,6 @@
    "source": "Your browsers hand it their downloads, and proven open-source tools do the specialist work. <g1>Set up the extension</g1>.",
    "text": "تسلمه متصفحاتك تنزيلاتها، وتقوم الأدوات مفتوحة المصدر المثبتة بالعمل المتخصص. <g1>إعداد الإضافة</g1>."
   },
-  "bfccf2cc495dc164": {
-   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek and Cyrillic text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. Other scripts are shaped and drawn by egui.",
-   "text": "نافذة egui واحدة مرسومة بإحداثيات بكسل ثابتة، بالإضافة إلى منفذ عرض فوري لكل مربع حوار. <x1/> يحتفظ بالحالة (التنزيلات، قوائم الانتظار، الإعدادات، تحديد القائمة) ويحول أوامر القائمة وشريط الأدوات والمفاتيح وIPC إلى إجراءات. كل مربع حوار هو وحدة خاصة به ويعيد <x2/> (مفتوح، مغلق، منجز بقيمة). تقتصر استدعاءات Windows فقط على <x3/> ونظيراتها في Linux وmacOS على <x4/> (بدءا من الجلسة، مضيف المستعرضات، الأصوات، العرض في المجلد، معالج الأعطال)؛ كل ملف آخر هو Rust آمن ومحمول. تأتي الخطوط من النظام: مجلد Fonts في Windows، وخطوط نظام macOS، وfontconfig في Linux (<x5/>). في Windows، يتم رسم النصوص اللاتينية واليونانية والسيريلية بواسطة DirectWrite (<x6/>، عبر خطاف egui لراسمة الحروف): عرض → نص → سلس في وضعه الطبيعي، مع تنعيم الحواف بالحجم المطلوب ووضعها عند ربع بكسل مع تقدم الخط نفسه؛ كلاسيكي (الافتراضي) في وضع GDI-classic، بحيث تتجمع الأشكال الملمحة لكل حرف وعرض البكسل الكامل. يتم تشكيل ورسم النصوص الأخرى بواسطة egui."
-  },
   "bfcf797517e5c279": {
    "source": "MDM remembers the columns, their widths and the sort order.",
    "text": "يتذكر MDM الأعمدة وعروضها وترتيب الفرز."
@@ -12805,6 +12821,10 @@
   "c16bf35f546c4e5c": {
    "source": "<g1>Update now</g1> in Help → Check for updates: MDM downloads the new version, checks it, puts it in place and restarts, on Windows (setup, portable and plain zip), Mac and Linux (AppImage, .tar.gz; a .deb or .rpm opens in the system's installer). It installs only files listed in a checksum list signed by MDM's release key, which every release now carries (<x2/>). The first update this way will be from 0.2.1 to the next version.",
    "text": "<g1>تحديث الآن</g1> في «تعليمات» → «التحقق من وجود تحديثات»: ينزل MDM الإصدار الجديد ويتحقق منه ويثبته ثم يعيد التشغيل على Windows (نسخة التثبيت، والنسخة المحمولة، وملف zip عادي)، وعلى Mac وLinux (AppImage و.tar.gz؛ ويفتح .deb أو .rpm في أداة التثبيت الخاصة بالنظام). لا يثبت إلا الملفات المدرجة في قائمة بصمات الملفات الموقعة بمفتاح إصدار MDM، وتضم كل الإصدارات هذه القائمة الآن (<x2/>). سيكون أول تحديث بهذه الطريقة من 0.2.1 إلى الإصدار التالي."
+  },
+  "c17a4b4d31ab68a9": {
+   "source": "The smallest text in a Chinese, Japanese or Korean interface (their glyphs are denser than Latin's)",
+   "text": "أصغر نص في واجهة صينية أو يابانية أو كورية (رموزها أكثر كثافة من اللاتينية)"
   },
   "c1899b1d4f5b3ff2": {
    "source": "The download button over videos",
@@ -12933,6 +12953,10 @@
   "c3b2f678a0ea5986": {
    "source": "A connection that is far slower than the others is dropped and opened again.",
    "text": "يتم إسقاط الاتصال الأبطأ بكثير من الآخرين وإعادة فتحه."
+  },
+  "c3b6062dd1dccf3a": {
+   "source": "<g1>MDM doesn't say it is JDownloader.</g1> Some sites first ask whether JDownloader is running (a script named <x2/>) and show their button only then. MDM doesn't answer that question, so such a site may say no program was found; a site that simply sends its form works.",
+   "text": "<g1>لا يقول MDM إنه JDownloader.</g1> تسأل بعض المواقع أولا عما إذا كان JDownloader قيد التشغيل (برنامج نصي يسمى <x2/>) وتظهر زرها بعد ذلك فقط. لا يجيب MDM على هذا السؤال، لذلك قد يقول مثل هذا الموقع أنه لم يتم العثور على برنامج؛ يعمل الموقع الذي يرسل نموذجه ببساطة."
   },
   "c3bbc73f092cecb9": {
    "source": "Options on its Sounds page: a sound for each event",
@@ -13170,6 +13194,10 @@
    "source": "Every version is on the <g1>Releases</g1> page. For Windows there are three files:",
    "text": "توجد جميع الإصدارات في صفحة <g1>الإصدارات</g1>. بالنسبة لنظام Windows، توجد ثلاثة ملفات:"
   },
+  "c740de7dd5da36cb": {
+   "source": "MDM supports five services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3>, <g4>TorBox</g4> and <g5>Mega-Debrid</g5>.",
+   "text": "يدعم MDM خمس خدمات: <g1>Real-Debrid</g1> و<g2>AllDebrid</g2> و<g3>Premiumize</g3> و<g4>TorBox</g4> و<g5>Mega-Debrid</g5>."
+  },
   "c746660e91994045": {
    "source": "<g1>If it can't be reached, use the system's DNS</g1>: off by default, so a DNS that doesn't answer stops the download with a message naming it rather than quietly showing your lookups to the system's DNS. A name the DNS says doesn't exist never falls back (that would undo a filtering DNS).",
    "text": "<g1>إذا تعذر الوصول إليه، فاستخدم DNS الخاص بالنظام</g1>: هذا الخيار متوقف افتراضيا. إذا لم يستجب DNS، يتوقف التنزيل وتظهر رسالة تسميه، بدلا من إرسال استعلاماتك بصمت إلى DNS الخاص بالنظام. ولا يرجع النظام إلى DNS آخر إذا أفاد هذا DNS بأن الاسم غير موجود (فذلك يلغي عمل DNS الذي يحجب بعض المواقع)."
@@ -13334,6 +13362,10 @@
    "source": "<g1>A long file name ran out of the progress window</g1> (<g2>#62</g2>): on the <g3>Options on completion</g3> tab, a longer translation of \"Save To:\" (Turkish, German…) ran into the path, and the path ran past the window's edge. The label now takes the room its language needs, and the path is shortened in the middle, keeping the file's name in sight, and shown whole on hover; right-to-left languages included.",
    "text": "<g1>اسم ملف طويل تجاوز نافذة التقدم</g1> (<g2>#62</g2>): في علامة التبويب <g3>خيارات عند الاكتمال</g3>، امتدت ترجمة أطول لـ \"حفظ في:\" (التركية، الألمانية...) إلى المسار، وتجاوز المسار حافة النافذة. تأخذ التسمية الآن المساحة التي تحتاجها لغتها، ويتم تقصير المسار في المنتصف، مع الحفاظ على اسم الملف مرئيا، ويظهر بالكامل عند التمرير؛ بما في ذلك اللغات من اليمين إلى اليسار."
   },
+  "c999b61151dbe721": {
+   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid) turn a file host's link into a direct one the engine downloads",
+   "text": "حسابات Debrid (العدد 44): تحول واجهات برمجة التطبيقات الرسمية للخدمات (Real-Debrid وAllDebrid وPremiumize وTorBox وMega-Debrid) رابط موقع الاستضافة إلى رابط مباشر يقوم المحرك بتنزيله."
+  },
   "c9a8324f618160c6": {
    "source": "<g1>The plain zip</g1> (<x2/>), the same programs without an installer.",
    "text": "<g1>الملف المضغوط العادي</g1> (<x2/>)، وهو نفس البرامج بدون برنامج تثبيت."
@@ -13434,17 +13466,9 @@
    "source": "Can I download without the browser extension?",
    "text": "هل يمكنني التنزيل بدون إضافة المتصفح؟"
   },
-  "cb3fee6871e1183d": {
-   "source": "<g1>0.5.2</g1> <g2>17.1 MB</g2>",
-   "text": "<g1>0.5.2</g1> <g2>17.1 ميغابايت</g2>"
-  },
   "cb565e5b28b1036b": {
    "source": "<g1><x2/> Add to Firefox</g1><g3><x4/> Add to Chrome</g3>",
    "text": "<g1><x2/> أضف إلى Firefox</g1><g3><x4/> أضف إلى Chrome</g3>"
-  },
-  "cb661d84888ecca4": {
-   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3> and <g4>Premiumize</g4>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
-   "text": "تأخذ <g1>الخيارات → الحسابات → إضافة...</g1> <g2>Real-Debrid</g2> و<g3>AllDebrid</g3> و<g4>Premiumize</g4>. يسجل Real-Debrid وAllDebrid الدخول برمز تؤكده في المستعرض، أو برمز API الخاص بك؛ وPremiumize بمفتاح API الخاص به. يعرض MDM اسم الحساب وما إذا كان مدفوعا. مع وجود عدة حسابات، يمر الرابط عبر الحساب الأول الذي تدعم خدمته موقع الاستضافة الخاص به."
   },
   "cb75f147f406ef80": {
    "source": "Check the download's own <g1>Speed Limiter</g1> tab in its progress window.",
@@ -13489,6 +13513,10 @@
   "cbed9e6bff5df9ed": {
    "source": "Sorted into packages",
    "text": "مفرزة في حزم"
+  },
+  "cbfd25f29119468a": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own…",
+   "text": "خدمة الديبريد، مثل Real-Debrid أو AllDebrid أو Premiumize أو TorBox أو Mega-Debrid، هي حساب مدفوع يجلب الملفات من مواقع الاستضافة إلى خوادمه الخاصة..."
   },
   "cbfdf9d84e3b1fa2": {
    "source": "A tooltip's left and right padding",
@@ -13662,10 +13690,6 @@
    "source": "Link grabber and archives — Mister Download Manager help",
    "text": "ملتقط الروابط والأرشيفات — تعليمات Mister Download Manager"
   },
-  "ce5bf471e6fccfb8": {
-   "source": "<g1>Comments</g1><g2><x3/> people</g2>",
-   "text": "<g1>التعليقات</g1><g2><x3/> أشخاص</g2>"
-  },
   "ce6f1a716e6dad6d": {
    "source": "Or",
    "text": "أو"
@@ -13749,6 +13773,10 @@
   "cfadb8fa8b105d9f": {
    "source": "A greyed toolbar label",
    "text": "تسمية شريط أدوات باهتة"
+  },
+  "cfddefff24fc39b6": {
+   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; experimental): <g1>Add...</g1> signs in by code in the browser, with your user name and password, or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
+   "text": "حسابات خدمة Debrid الخاصة بك (Real-Debrid وAllDebrid وPremiumize وTorBox وMega-Debrid؛ تجريبي): تسجل <g1>إضافة...</g1> الدخول عبر رمز في المستعرض، باستخدام اسم المستخدم وكلمة المرور، أو باستخدام رمز API أو المفتاح الخاص بك؛ ثم يتم تنزيل رابط من مضيف تدعمه الخدمة عبره. ترتيب القائمة هو ترتيب طلب الحسابات. انظر <g2>حسابات خدمة Debrid</g2>."
   },
   "cfe97b6cc1200669": {
    "source": "Yes: HTTP and SOCKS proxies, and proxy auto-config (PAC) scripts, in <g1>Options → Proxy / Socks</g1>. See <g2>Options</g2>. To keep every download on a VPN, see <g3>Network adapter</g3>.",
@@ -14194,10 +14222,6 @@
    "source": "Mister Download Manager and IDM, side by side.",
    "text": "Mister Download Manager و IDM، جنبا إلى جنب."
   },
-  "d65efc937a364b03": {
-   "source": "<x1/> issue",
-   "text": "<x1/> مشكلة"
-  },
   "d663f408764b1150": {
    "source": "Replay",
    "text": "إعادة التشغيل"
@@ -14314,10 +14338,6 @@
    "source": "Set it up",
    "text": "إعداده"
   },
-  "d7dccabcd92050ba": {
-   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid or Premiumize account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
-   "text": "<g1>حسابات Debrid الخاصة بك.</g1> أي رابط أو تورنت ترسله عبر حساب Real-Debrid أو AllDebrid أو Premiumize في <g2>الخيارات ← الحسابات</g2> يذهب إلى تلك الخدمة، التي تقوم بعد ذلك بتقديم الملف. يبقى تسجيل الدخول الخاص بها على جهاز الكمبيوتر الخاص بك، مع كلمات المرور المذكورة أعلاه."
-  },
   "d7e47d8cb056d141": {
    "source": "<g1>Download in order</g1>, to watch a video while it downloads, with each file's first and last pieces early. Other torrents fetch the rarest pieces first.",
    "text": "<g1>تنزيل بالترتيب</g1>، لمشاهدة فيديو أثناء تنزيله، مع القطع الأولى والأخيرة لكل ملف مبكرا. تجلب التورنتات الأخرى القطع الأندر أولا."
@@ -14361,6 +14381,10 @@
   "d89e02f60b2ac3f2": {
    "source": "Speed Limiter",
    "text": "محدد السرعة"
+  },
+  "d8ab0b376c3097e9": {
+   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek, Cyrillic and single-codepoint CJK text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. CJK uses the interface language's system face; combining marks, multi-codepoint clusters and missing glyphs stay with egui, as do other scripts.",
+   "text": "نافذة egui واحدة مرسومة بإحداثيات بكسل ثابتة، بالإضافة إلى منفذ عرض فوري واحد لكل مربع حوار. <x1/> يحتفظ بالحالة (التنزيلات، قوائم الانتظار، الإعدادات، تحديد القائمة) ويحول أوامر القائمة وشريط الأدوات والمفاتيح وIPC إلى إجراءات. كل مربع حوار هو وحدة خاصة به ويعيد <x2/> (مفتوح، مغلق، منجز بقيمة). المكالمات الخاصة بنظام Windows فقط محصورة في <x3/> ونظيراتها في Linux وmacOS في <x4/> (بدءا من الجلسة، ومضيف المستعرضات، والأصوات، والعرض في المجلد، ومعالج الأعطال)؛ كل ملف آخر هو Rust آمن ومحمول. تأتي الخطوط من النظام: مجلد Fonts في Windows، وخطوط النظام في macOS، وfontconfig في Linux (<x5/>). في Windows، يتم رسم النصوص اللاتينية واليونانية والسيريلية وCJK ذات نقطة ترميز واحدة بواسطة DirectWrite (<x6/>، عبر خطاف egui لراسمة الحروف): «عرض» ← «نص» ← «سلس» في وضعه الطبيعي، مع تنعيم الحواف بالحجم المطلوب ووضعها عند ربع بكسل مع تقدمات الخط الخاصة به؛ «كلاسيكي» (الافتراضي) في وضع GDI-classic، بحيث تتجمع الأشكال الملمحة لكل حرف وعرض البكسل الكامل. يستخدم CJK واجهة نظام اللغة؛ تبقى علامات الدمج والمجموعات متعددة نقاط الترميز والحروف المفقودة مع egui، وكذلك الخطوط الأخرى."
   },
   "d8c59eee97dfb40d": {
    "source": "<g1>Port</g1> — 8463 by default.",
@@ -14749,6 +14773,10 @@
   "e069363b1b77d1db": {
    "source": "Chrome, Firefox, Edge and more",
    "text": "Chrome وFirefox وEdge والمزيد"
+  },
+  "e0c2425f7ce3b025": {
+   "source": "The page's own address isn't sent as the links' referrer: a page could name any.",
+   "text": "لا يتم إرسال عنوان الصفحة الخاص كمرجع للروابط: يمكن للصفحة تسمية أي شيء."
   },
   "e0f4ab5df9c8188d": {
    "source": "A running queue starts its downloads in list order, a few at a time (four by default). When one fails, it moves to the end of the queue and is tried again 30 seconds later. The queue stops when nothing is left to download.",
@@ -15150,10 +15178,6 @@
    "source": "A second copy of MDM watches the first. When MDM crashes, the report window says <g1>Mister Download Manager closed unexpectedly</g1>. When its window hasn't answered for 8 seconds, it says <g2>Mister Download Manager stopped responding</g2>, and <g3>End and restart MDM</g3> closes the frozen copy and starts a fresh one. If MDM comes back by itself, the window says so.",
    "text": "تراقب نسخة ثانية من MDM النسخة الأولى. عندما يتعطل MDM، تقول نافذة التقرير <g1>توقف Mister Download Manager بشكل غير متوقع</g1>. عندما لا تستجيب نافذته لمدة 8 ثوان، تقول <g2>توقف Mister Download Manager عن الاستجابة</g2>، ويقوم <g3>إنهاء MDM وإعادة تشغيله</g3> بإغلاق النسخة المتوقفة وبدء نسخة جديدة. إذا عاد MDM للعمل من تلقاء نفسه، فإن النافذة تخبرك بذلك."
   },
-  "e6e4ffbd1a17c7e8": {
-   "source": "<x1/> pull request",
-   "text": "<x1/> طلب سحب"
-  },
   "e6e9f590b183bea4": {
    "source": "Link grabber: paste many links, MDM groups them, checks which are online, and extracts archives when they arrive.",
    "text": "ملتقط الروابط: الصق العديد من الروابط، يقوم MDM بتجميعها، ويتحقق من المتصل منها، ويستخرج الأرشيفات عند وصولها."
@@ -15378,6 +15402,10 @@
    "source": "Make one",
    "text": "أنشئ واحدة"
   },
+  "e9ee6b93a480a828": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM…",
+   "text": "يبلغ Windows عن رقمين مختلفين للذاكرة. الذاكرة قيد الاستخدام (عمود «الذاكرة» في مدير المهام، مجموعة العمل الخاصة) هي ما يحتفظ به البرنامج في ذاكرة الوصول العشوائي (RAM)..."
+  },
   "ea0b11f82fe35728": {
    "source": "Tasks → Add magnet link..., or the toolbar's Add Torrent",
    "text": "المهام → إضافة رابط مغناطيسي...، أو إضافة تورنت في شريط الأدوات"
@@ -15497,10 +15525,6 @@
   "eb908c0a11a04d0d": {
    "source": "Note",
    "text": "ملاحظة"
-  },
-  "eb9f527d55414228": {
-   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "آخر تحديث 2026-11-13 · ينطبق على التطبيق وإضافة المستعرض وموقع misterdownloadmanager.com"
   },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
@@ -15685,6 +15709,14 @@
   "ee4329d38e737b6a": {
    "source": "Pick a quality.",
    "text": "اختر جودة."
+  },
+  "ee48f7cb0fdcc5f1": {
+   "source": "Use your Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
+   "text": "استخدم حسابك في Real-Debrid أو AllDebrid أو Premiumize أو Mega-Debrid في Mister Download Manager: روابط استضافة الملفات مفتوحة، ثم يتم تنزيلها بكل اتصال."
+  },
+  "ee5325073a33b985": {
+   "source": "<g1>Links to this computer or your network are left out</g1>: a link to <x2/>, to a private or link-local address (<x3/>, <x4/>, <x5/>, <x6/>, their IPv6 kin), or to a name without a dot or under <x7/>, <x8/> or <x9/> never reaches Link grabber. A link site's files aren't there, and such an address could be your router or another device. MDM judges the address as written: a public-looking name that points into your network isn't recognized, so look at a package before you add it.",
+   "text": "<g1>يتم استبعاد الروابط إلى هذا الكمبيوتر أو شبكتك</g1>: لا يصل رابط إلى <x2/>، أو إلى عنوان خاص أو محلي (<x3/>، <x4/>، <x5/>، <x6/>، نظائرها في IPv6)، أو إلى اسم بدون نقطة أو تحت <x7/>، <x8/> أو <x9/> إلى ملتقط الروابط أبدا. لا توجد ملفات موقع الروابط هناك، ويمكن أن يكون مثل هذا العنوان هو جهاز التوجيه الخاص بك أو جهاز آخر. يحكم MDM على العنوان كما هو مكتوب: لا يتم التعرف على اسم يبدو عاما ويشير إلى شبكتك، لذا انظر إلى الحزمة قبل إضافتها."
   },
   "ee657a313da06c4d": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: free and open source, laid out like IDM, and it imports your IDM list. If you need something else first, such as an Android app or a particular feature, the comparison above shows what each of the others is good at.",
@@ -16094,6 +16126,10 @@
    "source": "The list shows the order they will run in. Use the arrow buttons under it to move a download up or down.",
    "text": "تعرض القائمة ترتيب التنزيلات. استخدم أزرار الأسهم أسفلها لنقل التنزيل إلى أعلى القائمة أو أسفلها."
   },
+  "f3a43b64feb190bf": {
+   "source": "Only one program can listen on port 9666. If JDownloader is running, MDM says so: close it, then turn the option off and on again.",
+   "text": "يمكن لبرنامج واحد فقط الاستماع على المنفذ 9666. إذا كان JDownloader قيد التشغيل، يقول MDM ذلك: أغلقه، ثم قم بإيقاف تشغيل الخيار وتشغيله مرة أخرى."
+  },
   "f3d19efbbf46e57b": {
    "source": "Archives extracted",
    "text": "الأرشيفات المستخرجة"
@@ -16274,10 +16310,6 @@
    "source": "Not offered on its website<g1><g2>3</g2></g1>",
    "text": "غير معروض على موقعه<g1><g2>3</g2></g1>"
   },
-  "f79d1bba86369d73": {
-   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox; experimental): <g1>Add...</g1> signs in by code in the browser or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
-   "text": "حسابات خدمة debrid الخاصة بك (Real-Debrid، AllDebrid، Premiumize، TorBox؛ تجريبي): <g1>إضافة...</g1> تسجل الدخول عبر رمز في المستعرض أو باستخدام رمز API أو مفتاحك؛ ثم يتم تنزيل رابط من مضيف تدعمه الخدمة عبرها. ترتيب القائمة هو ترتيب طلب الحسابات. انظر <g2>حسابات خدمة Debrid</g2>."
-  },
   "f7a4f8dcbb4812c2": {
    "source": "In Chrome, Edge and Brave you can limit an extension to some sites (right-click its toolbar button → <g1>This can read and change site data</g1>). On a site it may not read, the extension can't pass your sign-in on, so it leaves the download to the browser. Choose <g2>On all sites</g2> to let MDM take downloads everywhere.",
    "text": "في Chrome وEdge وBrave، يمكنك تقييد الامتداد على بعض المواقع (انقر بزر الفأرة الأيمن على زر شريط أدواته → <g1>يمكنه قراءة وتغيير بيانات الموقع</g1>). في موقع قد لا يتمكن من قراءته، لا يمكن للامتداد تمرير تسجيل دخولك، لذا يترك التنزيل للمتصفح. اختر <g2>على جميع المواقع</g2> للسماح لـ MDM بالتقاط التنزيلات في كل مكان."
@@ -16321,10 +16353,6 @@
   "f8092cd791a22a18": {
    "source": "<g1>Stop sharing after sharing for … minutes</g1> — or once it has been shared that long, over all its runs. Off by default.",
    "text": "<g1>إيقاف البذر بعد مدة … دقيقة</g1> — أو بمجرد أن يستمر بذره لهذه المدة، عبر جميع مرات تشغيله. متوقف افتراضيا."
-  },
-  "f821c9c149c3e050": {
-   "source": "<x1/> comments",
-   "text": "<x1/> تعليقات"
   },
   "f82dc8051d1faab0": {
    "source": "names besides its addresses the page may be opened by",
@@ -16413,10 +16441,6 @@
   "f99db8564b0343d7": {
    "source": "What's new in version 0.5.0 <g1>2026-11-08</g1>",
    "text": "ما الجديد في الإصدار 0.5.0 <g1>2026-11-08</g1>"
-  },
-  "f9a8db1326e07676": {
-   "source": "<x1/> issues",
-   "text": "<x1/> مشكلات"
   },
   "f9ad81eb1765abbd": {
    "source": "In the browser extension's menu, <g1>Send downloads to → Another Mister Download Manager (a server)</g1>: type the server's address, open it once in that browser to accept its certificate, then enter a pairing code (<x2/> above). Downloads the extension catches, and <g3>Download with Mister Download Manager</g3> on a link, then go to the server instead of this computer. The browser's cookies are not sent to the server: a download that needs you to be signed in to a site stays with this computer.",
@@ -16826,6 +16850,10 @@
    "source": "Privacy policy — Mister Download Manager",
    "text": "سياسة الخصوصية — Mister Download Manager"
   },
+  "fea1b4253c14428a": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts",
+   "text": "حسابات Real-Debrid وAllDebrid وPremiumize وMega-Debrid"
+  },
   "fea945c5c18cacc1": {
    "source": "Why is MDM faster than a browser?",
    "text": "لماذا MDM أسرع من المتصفح؟"
@@ -16917,6 +16945,10 @@
   "ffe6d971c9f20725": {
    "source": "Step by step in the help",
    "text": "خطوة بخطوة في التعليمات"
+  },
+  "ffed56884994ca66": {
+   "source": "<g1>The first time a site sends links, MDM asks</g1>: <g2>Allow</g2> (that site's links go to Link grabber from now on), <g3>Block</g3> (they never do), or <g4>Not now</g4> (these links are dropped, and the site is asked again next time). The site is the one your browser names, never what the page claims. When the browser names none (a page that hides where it is, or one inside a sandboxed frame), the window says <g5>An unknown site</g5>: it is asked about every time, and its answer is never kept. Turning Click'n'Load off forgets the answers.",
+   "text": "<g1>في المرة الأولى التي يرسل فيها موقع روابط، يسأل MDM</g1>: <g2>السماح</g2> (تذهب روابط هذا الموقع إلى ملتقط الروابط من الآن فصاعدا)، <g3>حظر</g3> (لا تذهب أبدا)، أو <g4>ليس الآن</g4> (يتم إسقاط هذه الروابط، ويسأل الموقع مرة أخرى في المرة القادمة). الموقع هو ما يسميه مستعرضك، وليس ما تدعيه الصفحة أبدا. عندما لا يسمي المستعرض شيئا (صفحة تخفي مكانها، أو صفحة داخل إطار معزول)، تقول النافذة <g5>موقع غير معروف</g5>: يسأل عنه في كل مرة، ولا يتم الاحتفاظ بإجابته أبدا. يؤدي إيقاف تشغيل Click'n'Load إلى نسيان الإجابات."
   },
   "ffeedec50b9a371f": {
    "source": "For a download already in the list, <g1>File Properties</g1> has the same choice beside the login: <g2>Through Real-Debrid</g2>. It can be changed while the download isn't running. The next start goes the new way, and continues from what is already downloaded when the file is the same.",

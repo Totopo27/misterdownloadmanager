@@ -24,9 +24,56 @@ use librqbit::{
 
 pub mod blocklist;
 mod names;
+pub mod rename_plugin;
 pub mod trackers;
 mod watch;
-pub use names::UnsafeName;
+pub use names::{UnsafeName, check as check_names};
+
+/// Check that a single file or folder name (one path component, with no `/` or `\`) is safe to
+/// write on this system (`names::check`). When `folder_rules` is true, characters and trailing
+/// dots that [`Meta::folder_in`] would otherwise rewrite are also refused so the chosen folder
+/// name matches what is created on disk.
+pub fn check_single_name(name: &str, folder_rules: bool) -> Result<(), UnsafeName> {
+    if folder_rules {
+        if name.chars().any(|c| r#":<>"|?*"#.contains(c)) {
+            return Err(UnsafeName {
+                path: name.to_owned(),
+                why: "a character Windows doesn't allow in a name",
+            });
+        }
+        if name.ends_with(['.', ' ']) {
+            return Err(UnsafeName {
+                path: name.to_owned(),
+                why: "a name ending with a dot or a space",
+            });
+        }
+    }
+    names::check([[name.to_owned()]])
+}
+
+/// Check that a relative file or folder path has no root, prefix, `.` or `..`, and passes
+/// [`names::check`] for this system.
+pub fn check_relative_path(path: &Path) -> Result<(), UnsafeName> {
+    let raw = path.to_string_lossy();
+    let has_drive_prefix = raw
+        .split(['/', '\\'])
+        .next()
+        .is_some_and(|first| first.as_bytes().get(1) == Some(&b':'));
+    if path.is_absolute()
+        || raw.starts_with(['/', '\\'])
+        || has_drive_prefix
+        || path
+            .components()
+            .any(|c| !matches!(c, std::path::Component::Normal(_)))
+    {
+        return Err(UnsafeName {
+            path: raw.into_owned(),
+            why: "an empty, `.` or `..` name",
+        });
+    }
+    let parts: Vec<String> = raw.split(['/', '\\']).map(str::to_owned).collect();
+    names::check([parts])
+}
 
 #[derive(Debug, thiserror::Error)]
 pub enum TorrentError {
@@ -98,15 +145,18 @@ pub fn magnet_link(torrent: &[u8]) -> Option<String> {
 pub fn files_from_bytes(torrent: &[u8]) -> Result<Vec<FileEntry>, TorrentError> {
     check_bytes(torrent)?;
     let meta = librqbit::torrent_from_bytes(torrent).map_err(|_| TorrentError::NotATorrent)?;
+    let hash = meta.info_hash.as_string();
     let info = meta.info.data.validate().map_err(engine)?;
-    Ok(info
+    let mut entries: Vec<FileEntry> = info
         .iter_file_details()
         .map(|f| FileEntry {
             path: f.filename.to_pathbuf(),
             size: f.len,
             padding: f.attrs().padding,
         })
-        .collect())
+        .collect();
+    rename_plugin::apply_from_memory(&hash, &mut entries);
+    Ok(entries)
 }
 
 /// Before librqbit restores its saved torrents (`session.json` and a `<hash>.torrent` for each,
@@ -574,6 +624,9 @@ fn log_network(session: &Session, saved_nodes: bool) {
 impl Torrents {
     pub async fn start(cfg: Config) -> Result<Torrents, TorrentError> {
         std::fs::create_dir_all(&cfg.state_dir).map_err(engine)?;
+        // The single files renamed in Add torrent, for the lists read without waiting
+        // (`seen_files`, `files_from_bytes`) before a torrent's storage first asks for them.
+        rename_plugin::load_into_memory(&cfg.state_dir.join("session"));
         let proxied = cfg.proxy.is_some();
         let v4_only = cfg.bind.as_ref().is_some_and(Bind::v4_only);
         let bind_ip = match &cfg.bind {
@@ -658,6 +711,9 @@ impl Torrents {
             },
             bind_ip,
             fastresume: true,
+            default_storage_factory: Some(rename_plugin::storage_factory(
+                cfg.state_dir.join("session"),
+            )),
             persistence: Some(SessionPersistenceConfig::Json {
                 folder: Some(cfg.state_dir.join("session")),
             }),
@@ -873,7 +929,9 @@ impl Torrents {
     /// last read. Never waits, as [`Self::seen`].
     pub fn seen_files(&self, hash: &str) -> Option<(Vec<FileEntry>, Option<Vec<usize>>, u32)> {
         let seen = self.watch.get(hash)?;
-        let (files, piece) = files_of(seen.handle.as_ref()?)?;
+        let (mut files, piece) = files_of(seen.handle.as_ref()?)?;
+        // A single file renamed in Add torrent, from memory: no disk read here.
+        rename_plugin::apply_from_memory(hash, &mut files);
         Some((files, seen.chosen.clone(), piece))
     }
 
@@ -905,7 +963,8 @@ impl Torrents {
     /// Its files (as in `Meta::files`), which are chosen (None: all), and the piece size.
     pub fn files(&self, hash: &str) -> Option<(Vec<FileEntry>, Option<Vec<usize>>, u32)> {
         let h = self.session.get(id(hash).ok()?)?;
-        let (files, piece) = files_of(&h)?;
+        let (mut files, piece) = files_of(&h)?;
+        rename_plugin::apply_to_entries(&self.session_dir, hash, &mut files);
         Some((files, h.only_files(), piece))
     }
 
@@ -2694,5 +2753,153 @@ mod tests {
             .await
             .unwrap_err();
         assert!(matches!(err, TorrentError::NotATorrent), "{err}");
+    }
+
+    /// #517: a renamed single-file torrent writes its bytes to the new name on disk (never
+    /// creating the original name), checks against the new file, and resumes at the new name
+    /// across a session restart. An unchanged single-file torrent writes nothing to `renames.json`.
+    #[tokio::test(flavor = "multi_thread", worker_threads = 4)]
+    async fn renamed_single_file_torrent_writes_checks_and_resumes_at_new_name() {
+        let tmp = tempfile::tempdir().unwrap();
+        let src = tmp.path().join("seed");
+        std::fs::create_dir_all(&src).unwrap();
+        let orig_file = src.join("original.bin");
+        let data: Vec<u8> = (0..180_000u32).map(|i| (i % 251) as u8).collect();
+        std::fs::write(&orig_file, &data).unwrap();
+        let spawner = librqbit::spawn_utils::BlockingSpawner::new(1);
+        let torrent = librqbit::create_torrent(
+            &orig_file,
+            librqbit::CreateTorrentOptions {
+                name: None,
+                trackers: Vec::new(),
+                piece_length: Some(16 * 1024),
+            },
+            &spawner,
+        )
+        .await
+        .unwrap()
+        .as_bytes()
+        .unwrap()
+        .to_vec();
+
+        let seeder = Torrents::start(offline(&tmp.path().join("seeder")))
+            .await
+            .unwrap();
+        let hash = seeder
+            .add(&torrent, &src, None, Vec::new(), false)
+            .await
+            .unwrap();
+        let deadline = std::time::Instant::now() + Duration::from_secs(20);
+        while seeder.stats(&hash).unwrap().phase != Phase::Finished {
+            assert!(std::time::Instant::now() < deadline, "seeder never checked");
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        let seed_addr = seeder.listen_addr().expect("seeder listens");
+
+        let leech_state = tmp.path().join("leecher");
+        let session_dir = leech_state.join("session");
+        // 1. Unchanged name: `sync_renamed_file` does not create `renames.json`.
+        rename_plugin::sync_renamed_file(
+            &session_dir,
+            &hash,
+            &torrent,
+            std::path::Path::new("original.bin"),
+        );
+        assert!(
+            !session_dir.join("renames.json").exists(),
+            "unchanged name does not write renames.json"
+        );
+
+        // 2. Changed name: `sync_renamed_file` records the rename in `renames.json`.
+        rename_plugin::sync_renamed_file(
+            &session_dir,
+            &hash,
+            &torrent,
+            std::path::Path::new("renamed_video.mp4"),
+        );
+        assert!(
+            session_dir.join("renames.json").exists(),
+            "changed name writes renames.json"
+        );
+
+        // 3. Download to `out`: writes to `renamed_video.mp4`, never `original.bin`.
+        let out = tmp.path().join("out");
+        let leecher = Torrents::start(offline(&leech_state)).await.unwrap();
+        let got_hash = leecher
+            .add(&torrent, &out, None, vec![seed_addr], false)
+            .await
+            .unwrap();
+        assert_eq!(got_hash, hash);
+        let deadline = std::time::Instant::now() + Duration::from_secs(20);
+        while leecher.stats(&hash).unwrap().phase != Phase::Finished {
+            assert!(
+                std::time::Instant::now() < deadline,
+                "leecher never finished: {:?}",
+                leecher.stats(&hash)
+            );
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        assert!(
+            !out.join("original.bin").exists(),
+            "original name is never created"
+        );
+        assert_eq!(
+            std::fs::read(out.join("renamed_video.mp4")).unwrap(),
+            data,
+            "renamed file holds the downloaded bytes"
+        );
+        let (files, _, _) = leecher.files(&hash).unwrap();
+        assert_eq!(files.len(), 1);
+        assert_eq!(files[0].path, PathBuf::from("renamed_video.mp4"));
+        leecher.stop().await;
+
+        // 4. Restart the session with a cold in-memory cache: reloads from `renames.json`,
+        // resumes at `renamed_video.mp4`, and rechecks the renamed file on disk.
+        rename_plugin::clear_memory_for_test();
+        let resumed = Torrents::start(offline(&leech_state)).await.unwrap();
+        let deadline = std::time::Instant::now() + Duration::from_secs(20);
+        while resumed
+            .stats(&hash)
+            .map_or(true, |s| s.phase != Phase::Finished)
+        {
+            assert!(
+                std::time::Instant::now() < deadline,
+                "resumed session never reached Finished: {:?}",
+                resumed.stats(&hash)
+            );
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        assert_eq!(resumed.stats(&hash).unwrap().done, data.len() as u64);
+
+        // Full recheck (`readd(..., true)`) verifies pieces against `renamed_video.mp4`.
+        resumed.readd(&hash, &torrent, true).await.unwrap();
+        let deadline = std::time::Instant::now() + Duration::from_secs(20);
+        while resumed
+            .stats(&hash)
+            .map_or(true, |s| s.phase != Phase::Finished)
+        {
+            assert!(
+                std::time::Instant::now() < deadline,
+                "recheck never finished: {:?}",
+                resumed.stats(&hash)
+            );
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        assert_eq!(resumed.stats(&hash).unwrap().done, data.len() as u64);
+        // The lists read without waiting (the progress window's, Files...) name it the new way
+        // too after the restart: the renames are loaded as the session starts.
+        let deadline = std::time::Instant::now() + Duration::from_secs(20);
+        let seen = loop {
+            if let Some((files, _, _)) = resumed.seen_files(&hash) {
+                break files;
+            }
+            assert!(std::time::Instant::now() < deadline, "never seen");
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        };
+        assert_eq!(seen.len(), 1);
+        assert_eq!(seen[0].path, PathBuf::from("renamed_video.mp4"));
+
+        resumed.stop().await;
+        seeder.stop().await;
     }
 }

@@ -2811,6 +2811,15 @@ pub fn combo_arrow(ui: &mut Ui, rc: Rect, id: &str, open: bool) -> Response {
     resp
 }
 
+/// [`keep_keys`] for a box that is typed in (an editable combo's, as Save As and Address): Left
+/// and Right are its caret's and Up / Down its history's, `escape` closes its drop list. A box
+/// is drawn first and `keep_keys` called after it, which *replaces* the keys the box asked
+/// egui to leave it: with `horizontal` false, Left / Right in Save As moved the focus to the
+/// control beside it ("..." and the like) instead of the caret to the next character.
+pub fn keep_edit_keys(ui: &Ui, resp: &Response, escape: bool) {
+    keep_keys(ui, resp, true, true, escape);
+}
+
 /// The keys that open an editable combo's drop list while its box has the focus: Alt+Down or
 /// F4, as Windows' combo boxes.
 /// Up / Down in an editable drop-down's box (the list closed): the next / previous of its

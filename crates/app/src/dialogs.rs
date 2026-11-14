@@ -724,8 +724,9 @@ impl AddUrl {
                     self.address = self.history[i].clone();
                     self.error = None;
                 }
-                // While its list is open, Escape closes the list and the box keeps the keys.
-                winui::keep_keys(ui, &addr, false, true, self.list_open);
+                // Left / Right move its caret (#812); while its list is open, Escape closes
+                // the list and the box keeps the keys.
+                winui::keep_edit_keys(ui, &addr, self.list_open);
                 let list_was_open = self.list_open;
                 if self.list_open
                     && let Some(i) = winui::drop_list(
@@ -1443,7 +1444,8 @@ impl FileInfo {
                     self.set_folder(&folder);
                     self.edited = true;
                 }
-                winui::keep_keys(ui, &save, false, true, self.folders_open);
+                // Left / Right move its caret, not the focus to "..." beside it (#812).
+                winui::keep_edit_keys(ui, &save, self.folders_open);
                 let folders_were_open = self.folders_open;
                 if self.folders_open {
                     let shown: Vec<String> = self
@@ -4115,6 +4117,57 @@ mod tests {
         });
         rx.recv_timeout(std::time::Duration::from_secs(20))
             .expect("Add URL hung");
+    }
+
+    /// #812: Left / Right in Add URL's Address box move its caret, and the focus stays in the
+    /// box, not on OK beside it (Save As in Download File Info keeps them the same way,
+    /// `winui::keep_edit_keys`). With addresses entered before, as Up / Down step through them.
+    #[test]
+    fn add_url_left_and_right_stay_in_the_address_box() {
+        let ctx = egui::Context::default();
+        let mut dlg = AddUrl {
+            address: "https://example.com/file.zip".to_owned(),
+            history: vec!["https://a.example/x.zip".to_owned()],
+            ..AddUrl::default()
+        };
+        let mut frame = |key: Option<egui::Key>| {
+            let events = key
+                .map(|key| egui::Event::Key {
+                    key,
+                    physical_key: None,
+                    pressed: true,
+                    repeat: false,
+                    modifiers: egui::Modifiers::default(),
+                })
+                .into_iter()
+                .collect();
+            let input = egui::RawInput {
+                events,
+                ..Default::default()
+            };
+            let mut out = ctx.run_ui(input, |ui| {
+                let _ = dlg.show(ui.ctx(), |_| None);
+            });
+            out.textures_delta.clear();
+        };
+        for _ in 0..4 {
+            frame(None);
+        }
+        let in_box = ctx.memory(|m| m.focused());
+        assert!(in_box.is_some(), "the Address box has the focus");
+        for key in [
+            egui::Key::ArrowRight,
+            egui::Key::ArrowLeft,
+            egui::Key::ArrowRight,
+        ] {
+            frame(Some(key));
+            frame(None);
+            assert_eq!(
+                ctx.memory(|m| m.focused()),
+                in_box,
+                "{key:?} keeps the focus in the box"
+            );
+        }
     }
 
     /// #661: Add URL asks for the clipboard as it opens and draws its frames without waiting for

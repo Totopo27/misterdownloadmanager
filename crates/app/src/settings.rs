@@ -152,6 +152,10 @@ pub struct Settings {
     /// closing quits). On by default, for existing lists too, in every copy. Only where a tray
     /// shows MDM's icon.
     pub close_to_tray: bool,
+    /// General (#558): global keyboard shortcut to show or hide the main window (e.g. `Cmd+U`,
+    /// `Shift+Cmd+M`, `Ctrl+Alt+D`); empty when none is set.
+    #[serde(default)]
+    pub show_hide_hotkey: String,
     pub mv2_extensions: bool,
     pub advanced_integration: bool,
     /// General: "Capture downloads from the following browsers" (name, on).
@@ -321,6 +325,9 @@ pub struct Settings {
     pub extract_auto: bool,
     /// Then move the archive (every volume of it) to the Recycle Bin (the Trash). Off.
     pub extract_delete: bool,
+    /// Extract in place with HatchZip when it is installed: the archive is removed while its
+    /// files come out, so only they need room (large downloads on a nearly full disk). Off.
+    pub extract_in_place: bool,
     /// Into a folder named after the archive: 0 when it holds several things at its top (smart),
     /// 1 always, 2 never.
     pub extract_subfolder: u8,
@@ -407,6 +414,7 @@ impl Default for Settings {
             clipboard_autostart: true,
             minimize_to_tray: true,
             close_to_tray: true,
+            show_hide_hotkey: String::new(),
             mv2_extensions: true,
             advanced_integration: true,
             browsers: BROWSERS.iter().map(|b| (b.to_string(), true)).collect(),
@@ -489,6 +497,7 @@ impl Default for Settings {
             video_cookies_profile: String::new(),
             extract_auto: false,
             extract_delete: false,
+            extract_in_place: false,
             extract_subfolder: 0,
             grabber_check: true,
             grabber_hide_pages: true,

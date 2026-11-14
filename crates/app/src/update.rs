@@ -19,9 +19,9 @@ pub const UPDATED: &str = "/updated";
 #[derive(Debug)]
 pub enum Next {
     /// MDM closes once this has started: the new copy (or the installer, which starts it).
-    /// Started by the window when it takes the result, so an update cancelled meanwhile starts
-    /// nothing.
-    Restart(Command),
+    /// Started on the worker, but only when not cancelled meanwhile ([`Job::drop`]: closing the
+    /// window starts nothing).
+    Restart,
     /// Handed to the system's package installer (a .deb or .rpm): MDM stays open.
     Opened,
 }
@@ -48,11 +48,13 @@ pub struct Job {
     slot: Arc<Mutex<Option<Result<Next, String>>>>,
     /// The file is downloaded and being put in place (Cancel can't stop that).
     installing: Arc<AtomicBool>,
+    cancelled: Arc<AtomicBool>,
     task: tokio::task::JoinHandle<()>,
 }
 
 impl Drop for Job {
     fn drop(&mut self) {
+        self.cancelled.store(true, Ordering::Release);
         self.task.abort();
     }
 }
@@ -68,10 +70,12 @@ impl Job {
         let progress = Arc::new(Progress::default());
         let slot = Arc::new(Mutex::new(None));
         let installing = Arc::new(AtomicBool::new(false));
-        let (p, out, busy, ctx) = (
+        let cancelled = Arc::new(AtomicBool::new(false));
+        let (p, out, busy, canc, ctx) = (
             progress.clone(),
             slot.clone(),
             installing.clone(),
+            cancelled.clone(),
             ctx.clone(),
         );
         // Repaint while it runs, for the progress bar.
@@ -88,7 +92,7 @@ impl Job {
                 Ok(file) => {
                     busy.store(true, Ordering::Release);
                     ctx.request_repaint();
-                    tokio::task::spawn_blocking(move || apply(install, &file))
+                    tokio::task::spawn_blocking(move || apply(install, &file, &canc))
                         .await
                         .map_err(|e| e.to_string())
                         .and_then(|r| r)
@@ -103,6 +107,7 @@ impl Job {
             progress,
             slot,
             installing,
+            cancelled,
             task,
         }
     }
@@ -120,7 +125,7 @@ impl Job {
 
 /// Put `file` (checked) in place of this `install`. Long (unpacking, copying, programs waited
 /// for): never on the window's thread ([`Job`] runs it).
-fn apply(install: Install, file: &Path) -> Result<Next, String> {
+fn apply(install: Install, file: &Path, cancelled: &AtomicBool) -> Result<Next, String> {
     // Tests only (feature `test-update`): "Installing the update..." held this many seconds.
     #[cfg(feature = "test-update")]
     if let Some(secs) = std::env::var("MDM_TEST_UPDATE_HOLD")
@@ -138,14 +143,21 @@ fn apply(install: Install, file: &Path) -> Result<Next, String> {
         Ok(d)
     };
     let restart = |program: &Path| -> Result<Next, String> {
+        if cancelled.load(Ordering::Acquire) {
+            return Err("cancelled".into());
+        }
         let mut cmd = Command::new(program);
         cmd.arg(UPDATED);
-        Ok(Next::Restart(cmd))
+        cmd.spawn().map_err(|e| e.to_string())?;
+        Ok(Next::Restart)
     };
     match install {
         // The installer closes MDM itself (/exit), installs where it was (the same install
         // mode), and starts it again (/relaunch, tools/installer/mdm.iss).
         Install::Installer => {
+            if cancelled.load(Ordering::Acquire) {
+                return Err("cancelled".into());
+            }
             let mut cmd = Command::new(file);
             cmd.args([
                 "/VERYSILENT",
@@ -153,7 +165,8 @@ fn apply(install: Install, file: &Path) -> Result<Next, String> {
                 "/NORESTART",
                 "/relaunch=1",
             ]);
-            Ok(Next::Restart(cmd))
+            cmd.spawn().map_err(|e| e.to_string())?;
+            Ok(Next::Restart)
         }
         Install::PortableZip | Install::PlainZip => {
             let out = unpack_dir()?;
@@ -220,12 +233,19 @@ fn apply(install: Install, file: &Path) -> Result<Next, String> {
             let _ = std::fs::remove_dir_all(&old);
             std::fs::rename(&bundle, &old).map_err(|e| e.to_string())?;
             std::fs::rename(&staged, &bundle).map_err(|e| e.to_string())?;
+            if cancelled.load(Ordering::Acquire) {
+                return Err("cancelled".into());
+            }
             let mut cmd = Command::new("open");
             cmd.arg("-n").arg(&bundle).args(["--args", UPDATED]);
-            Ok(Next::Restart(cmd))
+            cmd.spawn().map_err(|e| e.to_string())?;
+            Ok(Next::Restart)
         }
         // Installing a package needs the administrator: the system's installer asks.
         Install::Deb | Install::Rpm => {
+            if cancelled.load(Ordering::Acquire) {
+                return Err("cancelled".into());
+            }
             open::that_detached(file).map_err(|e| e.to_string())?;
             Ok(Next::Opened)
         }
@@ -329,5 +349,26 @@ mod tests {
         // Unsigned: neither.
         let unsigned = vec![(new.to_string(), format!("https://x/{new}"))];
         assert_eq!(asset_for(Install::AppImage, "0.3.0", &unsigned), None);
+    }
+
+    #[test]
+    fn dropped_before_apply_spawns_starts_nothing() {
+        let rt = tokio::runtime::Builder::new_current_thread()
+            .build()
+            .unwrap();
+        let cancelled = Arc::new(AtomicBool::new(false));
+        let job = Job {
+            progress: Arc::new(Progress::default()),
+            slot: Arc::new(Mutex::new(None)),
+            installing: Arc::new(AtomicBool::new(false)),
+            cancelled: cancelled.clone(),
+            task: rt.spawn(async {}),
+        };
+        assert!(!cancelled.load(Ordering::Acquire));
+        drop(job);
+        assert!(cancelled.load(Ordering::Acquire));
+
+        let res = apply(Install::Installer, Path::new("setup.exe"), &cancelled);
+        assert_eq!(res.unwrap_err(), "cancelled");
     }
 }

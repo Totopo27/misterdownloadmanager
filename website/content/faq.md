@@ -17,6 +17,12 @@ No. MDM is an independent program written from scratch in Rust, with no connecti
 
 The layout is familiar on purpose: the toolbar, the categories, the download list, the progress window with every connection, queues and the scheduler. The differences: MDM is free and open source, downloads BitTorrent and magnet links in the same list, finished faster in [our benchmark](/benchmark.html), speaks 86 languages and has builds for Linux and macOS. IDM is the more mature product, refined over many years. See the full [comparison](/idm-alternative.html).
 
+### Why does MDM show a larger memory figure than IDM? {#memory-vs-idm}
+
+Windows reports two different memory numbers. Memory in use (Task Manager's "Memory" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's "Private Bytes", Resource Monitor's "Commit") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM.
+
+On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.
+
 ### Is it safe? Does it contain adware or spyware? {#is-it-safe}
 
 MDM contains no adware, spyware, bundled offers or tracking. Its whole source code is public, so anyone can check what it does, and every release is built from that code by GitHub's servers, where the build can be inspected. The helper programs it can fetch for videos are verified before they run: yt-dlp against its developers' signing key, ffmpeg against its published checksums. Download MDM only from [this site](/download.html) or the project's GitHub releases.

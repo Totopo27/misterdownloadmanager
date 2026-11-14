@@ -29,6 +29,8 @@ struct Job {
     files: Vec<PathBuf>,
     password: Option<String>,
     delete: bool,
+    /// Options → Archives: in place with HatchZip, when it is installed.
+    in_place: bool,
     /// Right-click → Extract (said again, a missing 7-Zip, each time).
     by_hand: bool,
     subfolder: mdm_extract::Subfolder,
@@ -152,6 +154,7 @@ impl Extracts {
             archive,
             password: pkg.and_then(|p| p.password.clone()),
             delete: pkg.map_or(settings.extract_delete, |p| p.delete_after),
+            in_place: settings.extract_in_place,
             by_hand,
             subfolder: settings.extract_into(),
             url: first.url.clone(),
@@ -289,6 +292,26 @@ impl Extracts {
                 ),
             );
         }
+        if report.in_place {
+            note(
+                items,
+                // i18n: in a download's log: HatchZip (a program's name) extracted the archive in place, removing it as it went
+                crate::i18n::t(
+                    "HatchZip extracted it in place: the archive was removed as its files came out",
+                )
+                .to_owned(),
+            );
+        }
+        if let Some(left) = &report.left {
+            note(
+                items,
+                crate::i18n::fmt(
+                    // i18n: in a download's log, after HatchZip (a program's name) extracted in place: the entries left out (links, unsafe names) were not deleted, they are still in {folder}
+                    crate::i18n::t("The entries left out are still in {folder}"),
+                    &[("folder", &crate::i18n::ltr(&left.display().to_string()))],
+                ),
+            );
+        }
         if let Some(gone) = trashed {
             let text = match (gone, cfg!(windows)) {
                 // i18n: in a download's log: the downloaded archive, after it was extracted
@@ -332,6 +355,20 @@ pub fn seven_zip() -> Option<PathBuf> {
         Some(v) if v.is_empty() || v.eq_ignore_ascii_case("none") => None,
         Some(v) => Some(PathBuf::from(v)),
         None => mdm_extract::find_7zip(),
+    }
+}
+
+/// Tests only: the HatchZip program to use instead of the one installed; empty or `none`: as
+/// if it weren't installed. Never set for users.
+const TEST_HATCHZIP: &str = "MDM_TEST_HATCHZIP";
+
+/// HatchZip's command line program (hatchzip.dev), optional: the installed one, or a test's
+/// `MDM_TEST_HATCHZIP`.
+pub fn hatch_zip() -> Option<PathBuf> {
+    match std::env::var_os(TEST_HATCHZIP) {
+        Some(v) if v.is_empty() || v.eq_ignore_ascii_case("none") => None,
+        Some(v) => Some(PathBuf::from(v)),
+        None => mdm_extract::find_hatchzip(),
     }
 }
 
@@ -390,6 +427,31 @@ fn failed(name: &str, e: &Error) -> String {
         Error::NoTool => {
             crate::i18n::t("7z and RAR archives need 7-Zip, which isn't installed").to_owned()
         }
+        Error::NoRoom(_) => {
+            // i18n: why an archive wasn't extracted (after "Couldn't extract {name}: "); HatchZip is a program's name
+            crate::i18n::t(
+                "there isn't enough free space for its files, HatchZip says; nothing was changed",
+            )
+            .to_owned()
+        }
+        Error::Partial(folder) => crate::i18n::fmt(
+            // i18n: why an archive wasn't extracted in place (after "Couldn't extract {name}: "); {folder} holds the files extracted so far
+            crate::i18n::t(
+                "it stopped partway. The files extracted so far are in {folder}, the rest is still in the archive: Extract continues",
+            ),
+            &[("folder", &crate::i18n::ltr(&folder.display().to_string()))],
+        ),
+        Error::Unplaced { to, left, why } => crate::i18n::fmt(
+            // i18n: why an archive wasn't extracted in place (after "Couldn't extract {name}: "); HatchZip took its files out (the archive is gone), but moving them stopped: {to} holds those moved, {left} the others, {error} the system's reason
+            crate::i18n::t(
+                "its files came out, but moving them stopped ({error}). Those moved are in {to}, the others still in {left}; nothing was deleted",
+            ),
+            &[
+                ("error", why.as_str()),
+                ("to", &crate::i18n::ltr(&to.display().to_string())),
+                ("left", &crate::i18n::ltr(&left.display().to_string())),
+            ],
+        ),
         // i18n: why an archive wasn't extracted (after "Couldn't extract {name}: ")
         Error::Unsupported => crate::i18n::t("it is not an archive MDM extracts").to_owned(),
         // i18n: why an archive wasn't extracted (after "Couldn't extract {name}: ")
@@ -416,7 +478,8 @@ fn start(job: Job, ctx: &egui::Context) -> Running {
             let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| run(&j, &stop)))
                 .unwrap_or_else(|_| Err(Error::Damaged("the decoder failed".into())));
             // Extracted: the archive (and its volumes) to the Trash, when asked.
-            let trashed = (r.is_ok() && j.delete).then(|| {
+            let in_place = r.as_ref().is_ok_and(|r| r.in_place);
+            let trashed = (r.is_ok() && j.delete && !in_place).then(|| {
                 let present: Vec<PathBuf> =
                     j.files.iter().filter(|f| f.exists()).cloned().collect();
                 to_trash(&present)
@@ -461,6 +524,9 @@ fn run(job: &Job, cancel: &AtomicBool) -> Result<Report, Error> {
         password: job.password.clone(),
         limits,
         tool: seven_zip(),
+        hatchzip: hatch_zip(),
+        in_place: job.in_place,
+        runs: mdm_ipc::data_dir().map(|d| d.join("hatchzip-runs")),
         on_file: &mut on_file,
         cancel: Some(cancel),
     };

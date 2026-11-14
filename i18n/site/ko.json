@@ -66,10 +66,6 @@
    "source": "Portable mode in detail →",
    "text": "휴대용 모드 자세히 보기 →"
   },
-  "01579d403b821195": {
-   "source": "<x1/> pull requests",
-   "text": "<x1/>개의 풀 리퀘스트"
-  },
   "015f73be8184c2cb": {
    "source": "Yes. MDM writes its progress as it goes, so after a lost connection, a crash or a restart it carries on where it stopped. Before resuming it checks that the file on the server hasn't changed. When a download address has expired, <g1>Refresh download address</g1> lets you give it a fresh one and keep the data. See <g2>Resume a broken download</g2>.",
    "text": "예. MDM은 다운로드 진행 상황을 기록하므로 연결이 끊기거나, 프로그램이 충돌하거나, 다시 시작한 후에도 중단된 지점부터 계속 다운로드합니다. 다시 시작하기 전에 서버의 파일이 변경되지 않았는지 확인합니다. 다운로드 주소가 만료된 경우 <g1>다운로드 주소 새로 고침</g1>을 사용해 새 주소를 입력하고 기존 데이터를 유지할 수 있습니다. <g2>중단된 다운로드 다시 시작</g2>을 참조하세요."
@@ -214,10 +210,6 @@
    "source": "<g1>Help → About Mister Download Manager</g1> shows the version you have.",
    "text": "<g1>도움말 → Mister Download Manager 정보</g1>에서 현재 버전을 확인할 수 있습니다."
   },
-  "030e42728ee6a418": {
-   "source": "<g1>Pull requests</g1><g2><x3/> people</g2>",
-   "text": "<g1>풀 리퀘스트</g1><g2><x3/>명</g2>"
-  },
   "031da5c20d1881e4": {
    "source": "Everything the Scheduler can do →",
    "text": "예약 관리자의 모든 기능 →"
@@ -314,10 +306,6 @@
    "source": "Tick <g1>Wake the computer to run this queue</g1>, under the start time, and a computer that is asleep at the start time is woken for it. It needs <g2>Start download at</g2>.",
    "text": "시작 시각 아래의 <g1>이 큐를 실행하기 위해 컴퓨터 절전 모드 해제</g1>를 선택하면 시작 시각에 절전 모드인 컴퓨터가 깨어납니다. 이 옵션을 사용하려면 <g2>다운로드 시작 시각</g2>을 설정해야 합니다."
   },
-  "04ea3f289327532e": {
-   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list:",
-   "text": "<g2>옵션 → 계정</g2>에서 <g1>토렌트 및 마그넷 링크를 피어 대신 첫 번째 계정으로 보내기</g1>를 선택하세요. 그러면 마그넷 링크(URL 추가, 브라우저, 클립보드, 드롭) 또는 <x3/> 파일(토렌트 추가의 <g4>지금 다운로드</g4> 또는 <g5>나중에</g5>)이 목록의 첫 번째 계정으로 전송됩니다."
-  },
   "04fca60787a71402": {
    "source": "Don't make MDM reachable from the internet (a router's port forwarding): the remote control is made for your home network. To reach it while away, use a VPN to your home network instead (WireGuard, Tailscale): with Tailscale, choose its address in <g1>Listen on</g1>.",
    "text": "MDM이 인터넷에서 연결할 수 있도록 설정하지 마세요(라우터의 포트 포워딩). 원격 제어는 홈 네트워크용으로 만들어졌습니다. 외부에 있을 때 연결하려면 대신 홈 네트워크로 VPN(WireGuard, Tailscale)을 사용하세요. Tailscale을 사용하는 경우 <g1>수신 위치</g1>에서 해당 주소를 선택하세요."
@@ -393,6 +381,10 @@
   "05bd7f3cbec0de04": {
    "source": "When the browser used no proxy, and <g1>No proxy/socks</g1> is chosen, MDM uses Windows' proxy settings, as browsers do.",
    "text": "브라우저가 프록시를 사용하지 않았고 <g1>프록시/SOCKS 없음</g1>을 선택한 경우, MDM은 브라우저와 마찬가지로 Windows의 프록시 설정을 사용합니다."
+  },
+  "05d0b33779393664": {
+   "source": "<g1>Links a page sent aren't looked up</g1>: Link grabber shows them as <g2>Not looked up</g2>, and no request leaves for them, with or without your Sites Logins or debrid accounts, until you add them to the queue. Nothing is downloaded before that.",
+   "text": "<g1>페이지에서 보낸 링크는 조회되지 않습니다</g1>. 링크 그래버는 이를 <g2>조회되지 않음</g2>으로 표시하며, 대기열에 추가하기 전까지는 사이트 로그인 또는 디브리드 계정 유무에 관계없이 어떠한 요청도 보내지 않습니다. 그 전에는 아무것도 다운로드되지 않습니다."
   },
   "05e4107afbf16316": {
    "source": "Open it with <g1>Scheduler</g1> on the toolbar or <g2>Downloads → Scheduler</g2>. Right-clicking a queue and choosing <g3>Schedule</g3> or <g4>Edit queue</g4> opens it on that queue.",
@@ -489,6 +481,10 @@
   "0717a2923d7e72cc": {
    "source": "<g1>Chrome, Edge, Brave, Opera and Vivaldi</g1>: one click from the Chrome Web Store, and the browser keeps it up to date. Edge first asks to allow extensions from other stores.",
    "text": "<g1>Chrome, Edge, Brave, Opera, Vivaldi</g1>: Chrome 웹 스토어에서 한 번 클릭하면 브라우저가 자동으로 최신 상태로 유지합니다. Edge는 먼저 다른 스토어의 확장 프로그램을 허용할지 묻습니다."
+  },
+  "071f7e9f51504932": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM.",
+   "text": "Windows는 두 가지 다른 메모리 수치를 보고합니다. 사용 중인 메모리(작업 관리자의 “메모리” 열, 개인 작업 세트)는 프로그램이 현재 RAM에 보유하고 있는 메모리입니다. 커밋된 메모리(프로세스 탐색기의 “개인 바이트”, 리소스 모니터의 “커밋”)는 Windows가 프로그램을 위해 할당한 메모리입니다. 대부분은 페이징될 수 있으므로 프로그램이 그만큼의 RAM을 사용하고 있다는 의미는 아닙니다."
   },
   "072428c8bd6ba91a": {
    "source": "When the limit is reached, MDM stops downloading. New downloads show <g1>Waiting: the download limit is reached (Scheduler)</g1>. Everything resumes on its own when the period is over. <g2>Show warning before stopping downloads</g2> tells you when this happens and when downloads will go on.",
@@ -777,6 +773,10 @@
   "0b4f1bd33e265aad": {
    "source": "In the browser extension, <g1>Send downloads to → Another Mister Download Manager (a server)</g1> sends the downloads it catches, and <g2>Download with Mister Download Manager</g2> on a link, to the server instead of your computer. The browser's cookies stay behind, so a download that needs you signed in to a site stays with your computer.",
    "text": "브라우저 확장 프로그램에서 <g1>다운로드 보낼 위치 → 다른 Mister Download Manager (서버)</g1>를 선택하면 감지된 다운로드를 사용자의 컴퓨터 대신 서버로 보냅니다. 링크에서 <g2>Mister Download Manager으로 다운로드</g2>를 선택하는 경우에도 마찬가지입니다. 브라우저 쿠키는 컴퓨터에 남아 있으므로, 사이트에 로그인해야 하는 다운로드는 컴퓨터에서 진행됩니다."
+  },
+  "0b4f6db95315517d": {
+   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour), Mega-Debrid 60 (it allows 50 a second). When a service says it's asked too often, MDM waits.",
+   "text": "MDM은 각 서비스에 요청 제한보다 훨씬 적게 요청합니다. Real-Debrid는 분당 최대 120회(250회 허용), AllDebrid는 300회(600회 허용), Premiumize는 60회(제한 없음), TorBox는 120회(분당 300회, 시간당 새 웹 다운로드 60회 허용), Mega-Debrid는 60회(초당 50회 허용). 서비스에서 너무 자주 요청했다고 알리면 MDM은 대기합니다."
   },
   "0b60549b3aaf5aea": {
    "source": "A portable copy. The download list and settings stay in a <x1/> folder next to the program, and nothing is written to the registry. Browser integration needs the installer. See <g2>Portable mode</g2>.",
@@ -1182,6 +1182,10 @@
    "source": "<g1>Firefox</g1> works on every system. If you signed in only moments ago with Firefox open, close it once so it writes the sign-in to its files.",
    "text": "<g1>Firefox</g1>는 모든 시스템에서 작동합니다. Firefox를 열어둔 채로 방금 로그인했다면, 파일을 기록하도록 한 번 닫았다가 다시 여세요."
   },
+  "1263147c9c6487c5": {
+   "source": "<g1>Link sites, for Click'n'Load.</g1> Off until you turn it on in <g2>Options → Archives and Link grabber</g2>: then MDM listens on port 9666 of this computer only. The first time a site sends links MDM asks whether to allow it; what an allowed site sends opens in Link grabber, where nothing is looked up or downloaded until you add it. Links to this computer or your own network are left out.",
+   "text": "<g1>클릭앤로드용 링크 사이트.</g1> <g2>옵션 → 압축 파일 및 링크 그래버</g2>에서 켜기 전까지는 꺼져 있습니다. 켜면 MDM은 이 컴퓨터의 9666번 포트에서만 수신합니다. 사이트에서 링크를 처음 보낼 때 MDM은 허용할지 묻습니다. 허용된 사이트에서 보낸 링크는 링크 그래버에서 열리며, 추가하기 전까지는 아무것도 조회되거나 다운로드되지 않습니다. 이 컴퓨터나 사용자 네트워크로 연결되는 링크는 제외됩니다."
+  },
   "12696d50b6f54aa3": {
    "source": "The tray icon",
    "text": "알림 영역 아이콘"
@@ -1321,6 +1325,10 @@
   "143e794d57701123": {
    "source": "The download list's Web chip",
    "text": "다운로드 목록의 웹 칩"
+  },
+  "14449a0155412e85": {
+   "source": "<g1>Accept Click'n'Load from web pages (port 9666)</g1> (off by default) — a link site's Click'n'Load button sends its links to MDM's Link grabber. See <g2>Click'n'Load</g2>.",
+   "text": "<g1>웹 페이지에서 Click'n'Load 수락 (포트 9666)</g1> (기본적으로 해제) — 링크 사이트의 Click'n'Load 버튼이 MDM의 링크 그래버로 링크를 보냅니다. <g2>Click'n'Load</g2>를 참조하세요."
   },
   "14462b3e558d6a58": {
    "source": "The download list's grid lines",
@@ -1658,10 +1666,6 @@
    "source": "To open the page by the server's name (<x1/>), give MDM that name: <x2/> (several: separated by commas). Other names are refused, so that no web page can reach MDM through a name of its own.",
    "text": "서버 이름(<x1/>)으로 페이지를 열려면 MDM에 해당 이름을 지정합니다: <x2/> (여러 개일 경우 쉼표로 구분). 다른 이름은 거부되므로 어떤 웹 페이지도 자체 이름을 통해 MDM에 접근할 수 없습니다."
   },
-  "197cf5eb6cf3a06e": {
-   "source": "Every size (26)",
-   "text": "모든 크기 (26)"
-  },
   "19810b030c072070": {
    "source": "Path",
    "text": "경로"
@@ -1846,6 +1850,10 @@
    "source": "<g1>Notification area</g1><g2>Starts with the computer in the notification area, and hides progress windows there while they run.</g2>",
    "text": "<g1>알림 영역</g1><g2>컴퓨터 시작 시 알림 영역에서 시작하며, 진행 중인 창을 알림 영역에 숨깁니다.</g2>"
   },
+  "1bdd089e60f96be2": {
+   "source": "Click'n'Load",
+   "text": "Click'n'Load"
+  },
   "1be93bd020009908": {
    "source": "<g1>The keyboard focus got lost</g1> when a button greyed itself or Escape closed a drop-down: Tab started over at the top of the window. It now moves on, or comes back, as in Windows.",
    "text": "<g1>키보드 포커스를 잃던 문제</g1>: 버튼이 비활성화되거나 Escape 키를 눌러 드롭다운을 닫으면 Tab 키를 눌렀을 때 창 맨 위부터 다시 시작했습니다. 이제 Windows처럼 다음 항목으로 이동하거나 이전 항목으로 돌아옵니다."
@@ -1901,6 +1909,10 @@
   "1c766405f60723d9": {
    "source": "Crates",
    "text": "크레이트"
+  },
+  "1c7c8388e4cf543a": {
+   "source": "Last updated 2026-11-14",
+   "text": "최종 업데이트: 2026년 11월 14일"
   },
   "1c7c99ef90478d88": {
    "source": "Windows 10/11; macOS, Linux to try",
@@ -2210,10 +2222,6 @@
    "source": "On macOS only an administrator can schedule a wake, so the option is greyed. MDM doesn't ask for an administrator's password. An administrator can have the Mac wake every day a minute before the queue starts, for example at 10:59 PM for a queue that starts at 11:00 PM:",
    "text": "macOS에서는 관리자만 절전 모드 해제를 예약할 수 있으므로 옵션이 비활성화됩니다. MDM은 관리자 암호를 요청하지 않습니다. 관리자는 큐가 시작되기 1분 전, 예를 들어 오후 11시에 시작하는 큐라면 매일 오후 10시 59분에 Mac이 깨어나도록 설정할 수 있습니다."
   },
-  "216eae12c95fa610": {
-   "source": "Everyone who sent a pull request, opened an issue or commented on GitHub since version <x1/>.",
-   "text": "버전 <x1/> 이후 GitHub에서 풀 리퀘스트를 보내거나, 이슈를 열거나, 댓글을 남겨주신 모든 분들께 감사드립니다."
-  },
   "2171be975f40efe2": {
    "source": "<g1>Moving from IDM</g1><g2>Your IDM list comes over in one file, each download with its address, referrer and cookies.</g2>",
    "text": "<g1>IDM에서 이동</g1><g2>IDM 목록이 하나의 파일로 가져와지며, 각 다운로드에는 주소, 리퍼러 및 쿠키가 포함됩니다.</g2>"
@@ -2285,10 +2293,6 @@
   "223eac9bc2498002": {
    "source": "<g1>FTP</g1><g2>and FTPS</g2>",
    "text": "<g1>FTP</g1><g2>및 FTPS</g2>"
-  },
-  "225937cd2337f950": {
-   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize and TorBox: file-host links through your own account.",
-   "text": "<g1><g2>디브리드 서비스 계정</g2></g1> — Real-Debrid, AllDebrid, Premiumize, TorBox: 사용자 계정을 통한 파일 호스트 링크."
   },
   "228586c26511a211": {
    "source": "Open the add-on's page on addons.mozilla.org, <g1>Mister Download Manager</g1>, and click <g2>Add to Firefox</g2>. Zen and LibreWolf use the same page.",
@@ -2385,6 +2389,10 @@
   "23c9ffb3ae37e1be": {
    "source": "Warning text",
    "text": "경고 텍스트"
+  },
+  "23dbac576172f8c1": {
+   "source": "Some sites hide the key in a script MDM doesn't run (only the plain form the documentation shows is read): then their button reports a failure, and the site's plain links are the way.",
+   "text": "일부 사이트는 MDM이 실행하지 않는 스크립트에 키를 숨깁니다(문서에 표시된 일반 양식만 읽습니다). 그러면 해당 버튼은 실패를 보고하며, 사이트의 일반 링크를 사용해야 합니다."
   },
   "23dc7b2c6f77ebe2": {
    "source": "<g1>Ctrl++</g1> / <g2>Ctrl+−</g2>",
@@ -2697,6 +2705,10 @@
   "2826420ef85a1bcf": {
    "source": "Open <g1>View → Language...</g1>. The same window as on the first start opens: every language by its flag, its own name and its English name. Type in <g2>Search</g2> to narrow the list, then double-click a language or select it and click <g3>OK</g3>. The window switches at once; there is nothing to restart.",
    "text": "<g1>보기 → 언어...</g1>를 엽니다. 처음 시작할 때와 동일한 창이 열립니다. 각 언어는 국기, 자체 이름 및 영어 이름으로 표시됩니다. <g2>검색</g2>에 입력하여 목록을 좁힌 다음, 언어를 두 번 클릭하거나 선택하고 <g3>확인</g3>을 클릭합니다. 창은 즉시 전환되며 다시 시작할 필요가 없습니다."
+  },
+  "282685fe5e7ae3c6": {
+   "source": "<g1>Click'n'Load</g1> buttons on link sites, once you turn it on. See <g2>Click'n'Load</g2>.",
+   "text": "링크 사이트의 <g1>Click'n'Load</g1> 버튼을 켜면 작동합니다. <g2>Click'n'Load</g2>를 참조하세요."
   },
   "282f9b6ea43027ed": {
    "source": "Saved beside the video, they get its name and the language: <x1/>. Players such as VLC and MPV pick them up on their own. With ffmpeg they're always SRT; without it, the site's own format (often WebVTT, <x2/>).",
@@ -3858,10 +3870,6 @@
    "source": "For video pages, MDM downloads yt-dlp (and ffmpeg if you want merged qualities) on first use.",
    "text": "비디오 페이지의 경우, MDM은 처음 사용할 때 yt-dlp (그리고 병합된 품질을 원하면 ffmpeg)를 다운로드합니다."
   },
-  "39ba3311a16e6d4d": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts",
-   "text": "Real-Debrid, AllDebrid 및 Premiumize 계정"
-  },
   "39c6e3069cb8cc85": {
    "source": "Click <g1>OK</g1>.",
    "text": "<g1>확인</g1>을 클릭하세요."
@@ -3869,10 +3877,6 @@
   "39f0061bac128459": {
    "source": "<g1>Options → Archives</g1> says whether 7-Zip was found. Without it, a 7z or RAR archive isn't extracted, and the <g2>7-Zip needed</g2> window says so, with a <g3>Get 7-Zip</g3> button.",
    "text": "<g1>옵션 → 압축 파일</g1>에서 7-Zip이 발견되었는지 여부를 알려줍니다. 7-Zip이 없으면 7z 또는 RAR 압축 파일이 압축 해제되지 않으며, <g2>7-Zip 필요</g2> 창에 <g3>7-Zip 받기</g3> 버튼과 함께 해당 내용이 표시됩니다."
-  },
-  "39f69afa6e85f9d1": {
-   "source": "<g1>Issues</g1><g2><x3/> people</g2>",
-   "text": "<g1>이슈</g1><g2><x3/>명</g2>"
   },
   "3a14e0e8b14737d7": {
    "source": "Choose <g1>Downloads → Speed Limiter → Turn on</g1>.",
@@ -4085,10 +4089,6 @@
   "3d4a4f2d1b19754e": {
    "source": "Can I move my downloads over from IDM?",
    "text": "IDM에서 다운로드 목록을 가져올 수 있나요?"
-  },
-  "3d5479ff36667ffd": {
-   "source": "MDM sends the service only the links you download through it, and your account's token or key. Nothing else.",
-   "text": "MDM은 서비스를 통해 다운로드하는 링크와 계정의 토큰 또는 키만 서비스에 보냅니다. 다른 것은 보내지 않습니다."
   },
   "3d67b0a7f32fc0e5": {
    "source": "The free, open-source IDM alternative. Every connection at once, crash-safe resume, torrents and video in one list.",
@@ -4525,6 +4525,10 @@
   "438a47f34fb3d4b7": {
    "source": "Browser integration — Mister Download Manager help",
    "text": "브라우저 통합 — Mister Download Manager 도움말"
+  },
+  "43ab4c1a614d9ad1": {
+   "source": "<g1>Limits</g1>: at most 10 posts a minute from one site, 500 links and 256 KB a post; more is refused, and one site's posts don't use up another's. At most 20 posts wait for an answer. A site brings MDM's window to the front at most once a minute; its links still arrive in Link grabber in between.",
+   "text": "<g1>제한</g1>: 한 사이트에서 분당 최대 10개의 게시물, 게시물당 500개의 링크 및 256KB; 그 이상은 거부되며, 한 사이트의 게시물은 다른 사이트의 게시물을 소모하지 않습니다. 최대 20개의 게시물이 답변을 기다립니다. 한 사이트는 MDM 창을 분당 최대 한 번만 전면으로 가져옵니다. 그 사이에도 링크는 링크 그래버에 계속 도착합니다."
   },
   "43ad4ee2e95fdb1f": {
    "source": "A page's own short sounds (a click, a voice-search chime) are no longer listed in <g1>Media on this page</g1>.",
@@ -5142,6 +5146,10 @@
    "source": "The formats you meet",
    "text": "지원되는 형식"
   },
+  "4da9d590ebb4306e": {
+   "source": "A button that sends a DLC container instead of links isn't taken: reading one needs a key MDM can't use. The site's plain links, or its Click'n'Load button, are the way.",
+   "text": "링크 대신 DLC 컨테이너를 보내는 버튼은 허용되지 않습니다. 이를 읽으려면 MDM이 사용할 수 없는 키가 필요합니다. 사이트의 일반 링크 또는 Click'n'Load 버튼을 사용하세요."
+  },
   "4dad09a9ad62a54a": {
    "source": "Many sites hand out links that only work for a while, or only while you are signed in. Resuming then fails, because the old address no longer answers.",
    "text": "많은 사이트에서 잠시 동안만 작동하거나 로그인한 상태에서만 작동하는 링크를 제공합니다. 이 경우 이전 주소가 더 이상 응답하지 않아 다운로드를 다시 시작할 수 없습니다."
@@ -5574,6 +5582,10 @@
    "source": "To add a download instead, send <x1/>.",
    "text": "대신 다운로드를 추가하려면 <x1/>를 보내세요."
   },
+  "54c262b0fc40fe2e": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts — Mister Download Manager",
+   "text": "Real-Debrid, AllDebrid, Premiumize, Mega-Debrid 계정 — Mister Download Manager"
+  },
   "54c47c38624ff486": {
    "source": "<g1>Support MDM</g1>: <g2>Help → Support MDM</g2> and a line in <g3>About</g3> open the creator's <g4>GitHub Sponsors</g4> page in the browser; the website, the README and the browser extension's popup link to it too. Only when asked: MDM stays free, with no reminders, and nothing changes or unlocks.",
    "text": "<g1>MDM 지원</g1>: <g2>도움말 → MDM 지원</g2> 및 <g3>정보</g3>의 한 줄이 브라우저에서 제작자의 <g4>GitHub Sponsors</g4> 페이지를 엽니다. 웹사이트, README 및 브라우저 확장 프로그램의 팝업도 이 페이지로 연결됩니다. 요청 시에만 작동하며, MDM은 무료로 유지되고 알림이 없으며, 아무것도 변경되거나 잠금 해제되지 않습니다."
@@ -5653,10 +5665,6 @@
   "55a4316a9df511bb": {
    "source": "A small file",
    "text": "작은 파일"
-  },
-  "55a523d7ca4b905f": {
-   "source": "Thanks to",
-   "text": "감사합니다"
   },
   "55ecea9df3d3ed23": {
    "source": "Paste the address of a playlist (<x1/>) or a channel's videos (<x2/>) and click <g3>Look up</g3>. Instead of one video's qualities, the window lists the list's videos, each with its length.",
@@ -5797,10 +5805,6 @@
   "57d55935c79c75f6": {
    "source": "Install one of them, either works, then look the video up again. MDM finds Deno, Node.js (also one installed with nvm) and Bun by itself. If it still says so, the new program's folder isn't on the <x1/> MDM started with (Windows' installers add it for programs started after them): quit MDM (<g2>Tasks → Exit</g2>) and start it again.",
    "text": "이 중 하나를 설치하면 작동합니다. 그런 다음 비디오를 다시 찾아보세요. MDM은 Deno, Node.js(nvm으로 설치된 것도 포함) 및 Bun을 자동으로 찾습니다. 여전히 메시지가 표시되면 새 프로그램 폴더가 MDM이 시작될 때의 <x1/>에 없는 것입니다(Windows 설치 프로그램은 이후에 시작되는 프로그램에 추가합니다). MDM을 종료(<g2>작업 → 끝내기</g2>)하고 다시 시작하세요."
-  },
-  "57df30288a29fe94": {
-   "source": "Made possible by these amazing humans",
-   "text": "이 놀라운 분들 덕분에 가능했습니다."
   },
   "57e101e4403fd046": {
    "source": "Command",
@@ -5949,6 +5953,10 @@
   "59d5983b5e65fbf4": {
    "source": "reads who opened pull requests and issues, and who commented, from GitHub's public API (the maintainer, Claude and bots left out) for every place that thanks them: the website's home page, <x1/> and each release on the News page (<x2/>, on every build), each release's notes (<x3/>, the people active since the release before) and the README (<x4/> at each release's preparation: its round photos are committed in <x5/>, since GitHub can't round a picture in a README).",
    "text": "감사 인사를 전하는 모든 곳(웹사이트 홈페이지, <x1/>, 뉴스 페이지의 각 릴리스(<x2/>, 모든 빌드), 각 릴리스 노트(<x3/>, 이전 릴리스 이후 활동한 사람), README(<x4/>, 각 릴리스 준비 시: GitHub에서는 README에서 사진을 둥글게 처리할 수 없으므로 둥근 사진은 <x5/>에 커밋됨))에 대해 GitHub의 공개 API에서 풀 리퀘스트와 이슈를 열고 댓글을 단 사람을 읽어옵니다(유지 관리자, Claude 및 봇은 제외)."
+  },
+  "59d718d0872bfa97": {
+   "source": "Tick <g1>Send torrents and magnet links to the first account instead of to peers</g1> in <g2>Options → Accounts</g2>. A magnet link (Add URL, the browser, the clipboard, a drop) or a <x3/> file (Add torrent's <g4>Download Now</g4> or <g5>Later</g5>) then goes to the first account in the list whose service takes torrents (Mega-Debrid doesn't, yet):",
+   "text": "<g2>옵션 → 계정</g2>에서 <g1>토렌트 및 마그넷 링크를 피어 대신 첫 번째 계정으로 보냅니다</g1>를 선택합니다. 그러면 마그넷 링크(URL 추가, 브라우저, 클립보드, 드롭) 또는 <x3/> 파일(토렌트 추가의 <g4>지금 다운로드</g4> 또는 <g5>나중에</g5>)이 토렌트를 허용하는 목록의 첫 번째 계정으로 이동합니다(Mega-Debrid는 아직 지원하지 않음):"
   },
   "5a277738c32493f8": {
    "source": "Support MDM",
@@ -6181,6 +6189,10 @@
   "5d7b9ab9db6cbd11": {
    "source": "Your first download",
    "text": "첫 다운로드"
+  },
+  "5d83c63f00bc131b": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM right now. Committed memory (Process Explorer's \"Private Bytes\", Resource Monitor's \"Commit\") is memory Windows has set aside for the program; most of it can be paged out, so it doesn't mean the program is using that much RAM. On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "Windows는 두 가지 다른 메모리 수치를 보고합니다. 사용 중인 메모리(작업 관리자의 \"메모리\" 열, 개인 작업 집합)는 프로그램이 현재 RAM에 보관하고 있는 메모리입니다. 커밋된 메모리(프로세스 탐색기의 \"개인 바이트\", 리소스 모니터의 \"커밋\")는 Windows가 프로그램을 위해 할당한 메모리입니다. 대부분은 페이징될 수 있으므로 프로그램이 그만큼의 RAM을 사용하고 있다는 의미는 아닙니다. 한 테스트 머신(Windows 11, MDM 0.5.2, IDM 6.42, 릴리스 빌드)에서 트레이의 사용 중인 메모리는 MDM의 경우 6~9MB, IDM의 경우 약 6MB였습니다. 창이 열려 있을 때 MDM은 시작 직후 약 70MB를 사용하고, 창이 트레이로 숨겨지면 약 10MB를 사용하여 Windows에 메모리를 반환합니다. 커밋된 메모리는 MDM의 경우 130~160MB, IDM의 경우 약 10MB였습니다. MDM이 빠르게 다운로드하는 동안 사용 중인 메모리는 잠시 동안 수백 MB까지 증가할 수 있지만(디스크가 따라잡는 동안 데이터를 메모리에 보관함), 다운로드가 끝난 후 몇 초 이내에 다시 감소하며, 트레이에서는 약 10분 이내에 나머지를 Windows에 반환합니다."
   },
   "5d8435f41cea6550": {
    "source": "Protocols",
@@ -6429,10 +6441,6 @@
   "60d28e32899eb074": {
    "source": "<g1>GNU GPL 3.0</g1><g2>free software, for good</g2>",
    "text": "<g1>GNU GPL 3.0</g1><g2>영원히 무료 소프트웨어</g2>"
-  },
-  "60db104b0c4ca856": {
-   "source": "MDM asks each service well under its request limit: Real-Debrid at most 120 times a minute (it allows 250), AllDebrid 300 (it allows 600), Premiumize 60 (it publishes no limit), TorBox 120 (it allows 300 a minute, and 60 new web downloads an hour). When a service says it's asked too often, MDM waits.",
-   "text": "MDM은 각 서비스에 요청 제한보다 훨씬 적게 요청합니다. Real-Debrid는 분당 최대 120회 (허용 250회), AllDebrid는 300회 (허용 600회), Premiumize는 60회 (제한 없음), TorBox는 120회 (분당 300회, 시간당 신규 웹 다운로드 60회 허용)입니다. 서비스에서 너무 자주 요청했다고 알리면 MDM은 기다립니다."
   },
   "60e4ea08eb29abeb": {
    "source": "<g1>Stop</g1> on a download in a running queue stays stopped, instead of the queue starting it again a moment later; <g2>Stop All</g2> too (<g3>#341</g3>).",
@@ -6778,6 +6786,10 @@
    "source": "The progress window shows it coming in.",
    "text": "진행 창에 다운로드 진행 상황이 표시됩니다."
   },
+  "6687c22337b780e7": {
+   "source": "MDM sends the service only the links you download through it, and your account's token or key (on Mega-Debrid, or its user name and password). Nothing else. Mega-Debrid's documentation puts them in the address; MDM sends them in the request's body instead, where no proxy or server log keeps them.",
+   "text": "MDM은 서비스를 통해 다운로드하는 링크와 계정의 토큰 또는 키(Mega-Debrid의 경우, 또는 사용자 이름과 암호)만 서비스로 보냅니다. 그 외에는 아무것도 보내지 않습니다. Mega-Debrid의 설명서에는 주소에 포함되어 있다고 되어 있지만, MDM은 요청 본문에 보내므로 프록시나 서버 로그에 남지 않습니다."
+  },
   "66987ab567339aa6": {
    "source": "Free IDM alternative",
    "text": "무료 IDM 대체 프로그램"
@@ -6913,6 +6925,10 @@
   "68b88047fcca2939": {
    "source": "Queue downloads for later →",
    "text": "나중에 다운로드할 파일 대기열에 추가하기 →"
+  },
+  "68ba2e7f312decbd": {
+   "source": "Any web page can send links there, not only the link site you are on, so MDM is careful with them:",
+   "text": "현재 접속한 링크 사이트뿐만 아니라 모든 웹 페이지에서 링크를 보낼 수 있으므로 MDM은 다음과 같이 주의를 기울입니다."
   },
   "6934a2b5fa583b1e": {
    "source": "Contributors — Mister Download Manager",
@@ -7085,6 +7101,10 @@
   "6b957cd1180602a0": {
    "source": "How many connections does it use?",
    "text": "MDM은 몇 개의 연결을 사용하나요?"
+  },
+  "6ba170458f12182a": {
+   "source": "Many link sites have a <g1>Click'n'Load</g1> button that sends their links straight to a download manager on your computer, as JDownloader's documentation for web sites describes. Turn it on in <g2>Options → Archives and Link grabber → Accept Click'n'Load from web pages</g2> (off by default). MDM then listens on port 9666 of this computer only, and the links a page sends open in Link grabber, with the page's package name and archive password.",
+   "text": "많은 링크 사이트에는 JDownloader의 웹 사이트 문서에 설명된 대로 링크를 컴퓨터의 다운로드 관리자로 바로 보내는 <g1>Click'n'Load</g1> 버튼이 있습니다. <g2>옵션 → 압축 파일 및 링크 그래버 → 웹 페이지에서 Click'n'Load 허용</g2>에서 이 기능을 켜세요(기본적으로 꺼져 있습니다). 그러면 MDM은 이 컴퓨터의 포트 9666에서만 수신하며, 페이지가 보낸 링크는 페이지의 패키지 이름과 압축 파일 암호와 함께 링크 그래버에서 열립니다."
   },
   "6bb8d2e69de9ec9f": {
    "source": "This website",
@@ -7266,6 +7286,10 @@
    "source": "Every window, rebuilt.",
    "text": "모든 창을 새롭게 만들었습니다."
   },
+  "6e3b4017fb705290": {
+   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid, Premiumize or Mega-Debrid, then downloaded with MDM's speed and resume.</g2>",
+   "text": "<g1>디브리드 계정</g1><g2>Real-Debrid, AllDebrid, Premiumize 또는 Mega-Debrid를 통해 잠금 해제된 파일 호스트 링크를 MDM의 속도와 재개 기능으로 다운로드합니다.</g2>"
+  },
   "6e409093f697abac": {
    "source": "Batch download numbered files and lists of links — Mister Download Manager",
    "text": "번호 매겨진 파일 및 링크 목록 일괄 다운로드 — Mister Download Manager"
@@ -7325,10 +7349,6 @@
   "6eef75044c57910f": {
    "source": "Stop now also stops yt-dlp, which used to keep downloading in the background.",
    "text": "중지 기능이 이제 백그라운드에서 계속 다운로드되던 yt-dlp도 중지합니다."
-  },
-  "6f06002d2161cba3": {
-   "source": "Last updated 2026-11-13",
-   "text": "최종 업데이트: 2026-11-13"
   },
   "6f082d0aaa31277a": {
    "source": "The dotted keyboard focus rectangle",
@@ -7560,7 +7580,7 @@
   },
   "7297ca101de5145e": {
    "source": "The list couldn't be read from GitHub when this page was built. Everyone is on GitHub meanwhile, in the project's <g1>pull requests</g1> and <g2>issues</g2>.",
-   "text": "이 페이지를 만들 때 GitHub에서 목록을 읽을 수 없었습니다. 모든 기여자는 프로젝트의 <g1>풀 리퀘스트</g1> 및 <g2>이슈</g2>에서 GitHub에 있습니다."
+   "text": "이 페이지를 만들 때 GitHub에서 목록을 읽을 수 없었습니다. 모든 참여자는 프로젝트의 <g1>풀 리퀘스트</g1>와 <g2>이슈</g2>에서 GitHub에 있습니다."
   },
   "729a19fc6ce418f9": {
    "source": "Reporting problems",
@@ -7617,10 +7637,6 @@
   "73460447cd841230": {
    "source": "1 GiB over a fast local link",
    "text": "빠른 로컬 연결을 통한 1 GiB"
-  },
-  "734a722e25f3a1f1": {
-   "source": "Use your Real-Debrid, AllDebrid or Premiumize account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
-   "text": "Mister Download Manager에서 Real-Debrid, AllDebrid 또는 Premiumize 계정을 사용하세요: 파일 호스트 링크가 잠금 해제된 후 모든 연결을 통해 다운로드됩니다."
   },
   "734da40a1b2e7f72": {
    "source": "Everything MDM doesn't take stays with the browser.",
@@ -7910,6 +7926,10 @@
    "source": "What it costs the computer",
    "text": "컴퓨터에 미치는 부담"
   },
+  "77dd412fabcb0ad1": {
+   "source": "Why does MDM show a larger memory figure than IDM?",
+   "text": "MDM이 IDM보다 더 큰 메모리 수치를 표시하는 이유는 무엇입니까?"
+  },
   "77de723e952c5bde": {
    "source": ", <x1/>, <x2/>, <x3/>, <x4/>,",
    "text": ", <x1/>, <x2/>, <x3/>, <x4/>,"
@@ -7973,10 +7993,6 @@
   "79298af691e8bdd2": {
    "source": "You need your own paid account with one of these services: MDM doesn't sell or include one. Sharing an account or its links breaks the services' terms and can get the account suspended.",
    "text": "이러한 서비스 중 하나에 유료 계정이 있어야 합니다. MDM은 계정을 판매하거나 포함하지 않습니다. 계정 또는 링크를 공유하는 것은 서비스 약관을 위반하며 계정이 정지될 수 있습니다."
-  },
-  "7931468b8d7d517a": {
-   "source": "<x1/> <g2>Everyone who helped</g2>",
-   "text": "<x1/> <g2>도움을 주신 모든 분</g2>"
   },
   "7957b18548166390": {
    "source": "Questions and answers — Mister Download Manager",
@@ -8990,6 +9006,10 @@
    "source": "Pieces of a stream (its segments) are never listed. A copy-protected stream (DRM: Widevine, PlayReady, FairPlay, as most paid streaming services use) is listed as <g1>Protected</g1>, with no <g2>Download</g2> button: no tool may break that protection, and MDM doesn't try.",
    "text": "스트림의 일부(세그먼트)는 목록에 표시되지 않습니다. 대부분의 유료 스트리밍 서비스에서 사용하는 복사 방지 스트림(DRM: Widevine, PlayReady, FairPlay)은 <g1>보호됨</g1>으로 표시되며 <g2>다운로드</g2> 버튼이 없습니다. 어떤 도구도 보호 기능을 해제할 수 없으며 MDM도 시도하지 않습니다."
   },
+  "87d38b69da245498": {
+   "source": "Why does MDM show a larger memory figure than IDM? — Mister Download Manager",
+   "text": "MDM이 IDM보다 더 큰 메모리 수치를 표시하는 이유 — Mister Download Manager"
+  },
   "87fdb00b527c2d1d": {
    "source": "What is different",
    "text": "다른 점"
@@ -9562,6 +9582,10 @@
    "source": "Transfer",
    "text": "전송"
   },
+  "913e347659323df9": {
+   "source": "Click'n'Load 2 (#37): the listener on 127.0.0.1:9666 that reads a link site's posts into packages for Link grabber, with limits on what it takes",
+   "text": "Click'n'Load 2(#37): 127.0.0.1:9666에서 수신 대기하며, 링크 사이트의 게시물을 Link grabber용 패키지로 읽어 들이고, 수신 항목에 제한을 둡니다."
+  },
   "91413c8d067f6992": {
    "source": "<g1>All Downloads</g1> — everything, with a node per category below it.",
    "text": "<g1>모든 다운로드</g1> — 모든 다운로드와 그 아래의 범주별 노드."
@@ -9605,10 +9629,6 @@
   "91f7b61e72ddf0bc": {
    "source": "<g1>Acceleration and resume</g1><g2>A file split over up to 32 connections, re-split until the last byte, and resumed after any crash.</g2>",
    "text": "<g1>가속 및 재개</g1><g2>최대 32개 연결로 파일을 분할하고, 마지막 바이트까지 재분할하며, 충돌 후에도 재개합니다.</g2>"
-  },
-  "92055d4da1d101c5": {
-   "source": "<x1/> people who sent a pull request, reported a problem or joined a conversation on GitHub. <g2>Meet them all</g2>",
-   "text": "<x1/> GitHub에서 풀 리퀘스트를 보내거나, 문제를 보고하거나, 대화에 참여해 주신 분들입니다. <g2>모든 분을 만나보세요</g2>"
   },
   "92078a4a178bf949": {
    "source": "A title bar MDM draws, while its window isn't the active one (transparent: as when active)",
@@ -9746,10 +9766,6 @@
    "source": "<g1><x2/></g1> — the shape of text boxes, check boxes, buttons, progress bars, scroll bars, the focus mark and the title bar.",
    "text": "<g1><x2/></g1> — 텍스트 상자, 확인란, 버튼, 진행률 표시줄, 스크롤 막대, 포커스 표시 및 제목 표시줄의 모양입니다."
   },
-  "940dfcf7abcc8702": {
-   "source": "<g1>Debrid accounts</g1><g2>File-host links unlocked through Real-Debrid, AllDebrid or Premiumize, then downloaded with MDM's speed and resume.</g2>",
-   "text": "<g1>Debrid 계정</g1><g2>Real-Debrid, AllDebrid 또는 Premiumize를 통해 파일 호스트 링크를 잠금 해제한 다음, MDM의 속도와 재개 기능으로 다운로드합니다.</g2>"
-  },
   "94138b99718bf4a0": {
    "source": "Mister Download Manager (\"MDM\", \"the software\") and the website misterdownloadmanager.com (\"the site\") are made by Ahmed Nefzaoui and contributors (\"we\"). By using the software or the site you accept these terms. If you don't, please don't use them.",
    "text": "Mister Download Manager(\"MDM\", \"소프트웨어\") 및 웹사이트 misterdownloadmanager.com(\"사이트\")은 Ahmed Nefzaoui와 기여자들(\"당사\")이 만들었습니다. 소프트웨어 또는 사이트를 사용함으로써 귀하는 본 약관에 동의합니다. 동의하지 않는 경우, 사용하지 마십시오."
@@ -9793,10 +9809,6 @@
   "949e7c1956120262": {
    "source": "Options → Connection: the DNS list at the bottom.",
    "text": "옵션 → 연결: 하단의 DNS 목록."
-  },
-  "94a7f71ab168f4df": {
-   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox) turn a file host's link into a direct one the engine downloads",
-   "text": "Debrid 계정(#44): 서비스의 공식 API(Real-Debrid, AllDebrid, Premiumize, TorBox)가 파일 호스트 링크를 엔진이 다운로드하는 직접 링크로 변환합니다."
   },
   "94d1813016d4945e": {
    "source": "Where there is no tray",
@@ -9885,6 +9897,10 @@
   "95ff4e3f1e52b773": {
    "source": "portable.zip — runs from a folder or USB stick",
    "text": "portable.zip — 폴더 또는 USB 드라이브에서 실행"
+  },
+  "960ec6fa3baf5716": {
+   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3>, <g4>Premiumize</g4> and <g5>Mega-Debrid</g5>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key; Mega-Debrid with your user name and password, or an application's API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
+   "text": "<g1>옵션 → 계정 → 추가...</g1>에서 <g2>Real-Debrid</g2>, <g3>AllDebrid</g3>, <g4>Premiumize</g4>, <g5>Mega-Debrid</g5> 계정을 추가할 수 있습니다. Real-Debrid와 AllDebrid는 브라우저에서 확인하는 코드 또는 API 토큰으로 로그인하고, Premiumize는 API 키로, Mega-Debrid는 사용자 이름과 비밀번호 또는 애플리케이션의 API 키로 로그인합니다. MDM은 계정 이름과 프리미엄 계정 여부를 표시합니다. 여러 계정이 있는 경우, 링크는 해당 호스트를 지원하는 첫 번째 서비스 계정을 통해 연결됩니다."
   },
   "9610ce30533afc6e": {
    "source": "<g1>Your own devices, for the remote control.</g1> Off until you turn it on in <g2>Options → Remote</g2>: then MDM answers, over HTTPS on your local network, only the phones and computers you paired with its code.",
@@ -10174,10 +10190,6 @@
    "source": "<g1><g2>Video downloads</g2></g1> — download a video from its page (YouTube, Vimeo and many more) with yt-dlp.",
    "text": "<g1><g2>비디오 다운로드</g2></g1> — yt-dlp를 사용해 비디오 페이지(YouTube, Vimeo 등)에서 비디오를 다운로드합니다."
   },
-  "99d899e1714af677": {
-   "source": "MDM supports four services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3> and <g4>TorBox</g4>.",
-   "text": "MDM은 <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3>, <g4>TorBox</g4> 네 가지 서비스를 지원합니다."
-  },
   "99e549b640c7f008": {
    "source": "Light while it waits",
    "text": "대기 중에는 가볍게"
@@ -10322,10 +10334,6 @@
    "source": "Helium",
    "text": "Helium"
   },
-  "9c29a3e8e53ea368": {
-   "source": "Real-Debrid, AllDebrid and Premiumize accounts — Mister Download Manager",
-   "text": "Real-Debrid, AllDebrid 및 Premiumize 계정 — Mister Download Manager"
-  },
   "9c4861e08c9b1cf2": {
    "source": "Download manager command line and automation API",
    "text": "다운로드 관리자 명령줄 및 자동화 API"
@@ -10449,10 +10457,6 @@
   "9e18dba709154be4": {
    "source": "Send downloads from your browser",
    "text": "브라우저에서 다운로드 보내기"
-  },
-  "9e23173a22cf615a": {
-   "source": "<x1/> comment",
-   "text": "<x1/>개의 댓글"
   },
   "9e2414e7eb93b062": {
    "source": "Windows 7's feel: glossy buttons, a glassy title bar and a glossy green progress bar.",
@@ -10742,10 +10746,6 @@
    "source": "A window larger than the screen at that size (Options at 200 % on a 1366 × 768 screen) opens as large as the screen allows, and the rest scrolls: with the scroll bars, the mouse wheel, or <g1>Tab</g1> to the next control.",
    "text": "해당 크기에서 화면보다 큰 창 (1366 × 768 화면에서 200%로 설정된 옵션)은 화면이 허용하는 최대 크기로 열리며, 나머지는 스크롤됩니다. 스크롤 막대, 마우스 휠 또는 <g1>Tab</g1> 키를 사용하여 다음 컨트롤로 이동할 수 있습니다."
   },
-  "a24bd8fd730a41d0": {
-   "source": "On Windows, an OpenGL older than 3.0 (an old graphics card's driver, such as Intel's first HD Graphics, whose OpenGL is 2.1) can't draw MDM: its windows come out as garbage. MDM notices it as it starts and starts again with Direct3D on Microsoft's software renderer (WARP), from then on, and <g1>View → Draw with</g1> says so. Choosing <g2>OpenGL</g2> there tries it again.",
-   "text": "Windows에서 OpenGL 3.0 미만 버전(예: Intel 1세대 HD Graphics와 같이 OpenGL 2.1을 사용하는 오래된 그래픽 카드 드라이버)은 MDM을 그릴 수 없어 창이 깨져 보입니다. MDM은 시작 시 이를 감지하고 Microsoft 소프트웨어 렌더러(WARP)의 Direct3D로 다시 시작하며, 이후부터는 <g1>보기 → 다음으로 그리기</g1>에 그렇게 표시됩니다. 거기서 <g2>OpenGL</g2>을 선택하면 다시 시도합니다."
-  },
   "a2907e04d7c8512f": {
    "source": "Why doesn't MDM take over my download? — Mister Download Manager",
    "text": "MDM이 내 다운로드를 가로채지 않는 이유는 무엇인가요? — Mister Download Manager"
@@ -10797,6 +10797,10 @@
   "a356f214a2ec96a0": {
    "source": "In Arabic, Hebrew, Persian, Urdu and Uyghur the whole window is mirrored, the way Windows does it for these languages. File names, addresses and folder paths keep their own direction inside translated sentences, so they stay readable. MDM uses the system's own fonts for every script.",
    "text": "아랍어, 히브리어, 페르시아어, 우르두어, 위구르어에서는 Windows가 해당 언어에 대해 수행하는 방식과 같이 전체 창이 미러링됩니다. 파일 이름, 주소, 폴더 경로는 번역된 문장 내에서도 고유한 방향을 유지하여 가독성을 높입니다. MDM은 모든 스크립트에 시스템의 자체 글꼴을 사용합니다."
+  },
+  "a3610d8542e56513": {
+   "source": "Last updated 2026-11-14 · applies to the app, the browser extension and misterdownloadmanager.com",
+   "text": "최종 업데이트: 2026년 11월 14일 · 앱, 브라우저 확장 프로그램 및 misterdownloadmanager.com에 적용됩니다."
   },
   "a3633bf4f8cf650e": {
    "source": "Remove the selected item of a list (a login, an exception, a queue: asks first)",
@@ -11062,6 +11066,14 @@
    "source": "Internet Download Manager 6.42",
    "text": "Internet Download Manager 6.42"
   },
+  "a6ce32d80128c1ea": {
+   "source": "Every size (27)",
+   "text": "모든 크기 (27)"
+  },
+  "a73a27470dadf3f9": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
+   "text": "Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid와 같은 디브리드 서비스는 파일 호스트에서 자체 서버로 파일을 다운로드하는 유료 계정입니다. 호스트의 대기 시간, 속도 제한 및 캡차 없이 일반적인 직접 링크를 제공합니다. MDM에 계정을 추가하면 서비스가 지원하는 호스트의 링크가 서비스를 통해 잠금 해제된 다음, MDM이 다른 파일과 마찬가지로 모든 연결, 일시 중지 및 재개를 통해 다운로드합니다."
+  },
   "a7431b39fec4f131": {
    "source": "How it holds: Windows binds the adapter's own address. Windows then sends those packets only through that adapter (its strong host model). Linux binds the device itself (Linux 5.7 or newer), and macOS binds the interface. An address of a kind the adapter doesn't have (IPv6 on an IPv4-only VPN) is refused, not sent around it.",
    "text": "작동 방식: Windows는 어댑터 자체 주소를 바인딩합니다. 그러면 Windows는 해당 패킷을 해당 어댑터를 통해서만 보냅니다(강력한 호스트 모델). Linux는 장치 자체를 바인딩하고(Linux 5.7 이상), macOS는 인터페이스를 바인딩합니다. 어댑터가 가지고 있지 않은 종류의 주소(IPv4 전용 VPN의 IPv6)는 거부되며, 우회하여 보내지지 않습니다."
@@ -11182,6 +11194,10 @@
    "source": "Choose <g1>Tasks → Show drop target</g1>. A small box with the MDM icon appears and stays on top of other windows.",
    "text": "<g1>작업 → 끌어 놓기 대상 표시</g1>를 선택합니다. MDM 아이콘이 있는 작은 상자가 나타나 다른 창 위에 표시됩니다."
   },
+  "a8dd103bdb8c3ce6": {
+   "source": "On one test machine (Windows 11, MDM 0.5.2, IDM 6.42, release builds), memory in use in the tray was 6–9 MB for MDM and about 6 MB for IDM. With its window open, MDM uses about 70 MB right after it starts, and about 10 MB once the window has been hidden in the tray, which gives memory back to Windows. Committed memory was 130–160 MB for MDM and about 10 MB for IDM. While MDM downloads fast, its memory in use can rise to a few hundred MB for a moment (it holds data in memory while the disk catches up); it drops back within seconds of the download ending, and in the tray it hands the rest back to Windows within about ten minutes.",
+   "text": "한 테스트 머신(Windows 11, MDM 0.5.2, IDM 6.42, 릴리스 빌드)에서 트레이의 사용 중인 메모리는 MDM의 경우 6~9MB, IDM의 경우 약 6MB였습니다. 창을 열었을 때 MDM은 시작 직후 약 70MB를 사용하고, 창이 트레이로 숨겨지면 약 10MB를 사용하여 메모리를 Windows에 반환합니다. 커밋된 메모리는 MDM의 경우 130~160MB, IDM의 경우 약 10MB였습니다. MDM이 빠르게 다운로드하는 동안 사용 중인 메모리는 잠시 동안 수백 MB까지 증가할 수 있습니다(디스크가 따라잡는 동안 데이터를 메모리에 보관합니다). 다운로드가 끝나면 몇 초 내에 다시 감소하며, 트레이에서는 약 10분 이내에 나머지를 Windows에 반환합니다."
+  },
   "a8e296926efbf0e1": {
    "source": "<g1>Main download queue</g1> — where <g2>Download Later</g2>, batch downloads and imported lists go. A download leaves it when it is finished.",
    "text": "<g1>기본 다운로드 대기열</g1> — <g2>나중에 다운로드</g2>, 일괄 다운로드 및 가져온 목록이 들어가는 곳입니다. 다운로드가 완료되면 이 대기열에서 나갑니다."
@@ -11297,6 +11313,10 @@
   "aa33e21a9939345a": {
    "source": "<g1>Linux: Vulkan, and macOS: Metal, in View → Draw with</g1> (<g2>#206</g2>). Linux can draw its windows with Vulkan (on Wayland and X11), and macOS with Metal, the way Windows draws with Direct3D. OpenGL stays the default there until reports from real graphics cards are in: try it and tell us how it went. The same safety net as on Windows: when Vulkan or Metal can't start (no driver for it), its first frame doesn't come within 10 seconds, or a start with it ends before its first frame, MDM draws with OpenGL until it is chosen again, and the menu says why. A graphics card reset while MDM runs starts MDM again.",
    "text": "<g1>Linux: Vulkan, macOS: Metal, 보기 → 다음으로 그리기</g1>(<g2>#206</g2>). Linux는 Vulkan(Wayland 및 X11에서)으로, macOS는 Metal로 창을 그릴 수 있으며, 이는 Windows가 Direct3D로 그리는 방식과 유사합니다. 실제 그래픽 카드 보고서가 나올 때까지 OpenGL이 기본값으로 유지됩니다. 직접 사용해보고 결과를 알려주세요. Windows와 동일한 안전망이 있습니다: Vulkan 또는 Metal이 시작할 수 없거나(드라이버 없음), 첫 프레임이 10초 이내에 나타나지 않거나, 시작 후 첫 프레임이 나타나기 전에 종료되면, MDM은 다시 선택될 때까지 OpenGL로 그리며, 메뉴에 이유가 표시됩니다. MDM 실행 중에 그래픽 카드가 재설정되면 MDM이 다시 시작됩니다."
+  },
+  "aa3bccf286cd1a17": {
+   "source": "<g1><g2>Debrid service accounts</g2></g1> — Real-Debrid, AllDebrid, Premiumize, TorBox and Mega-Debrid: file-host links through your own account.",
+   "text": "<g1><g2>디브리드 서비스 계정</g2></g1> — Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid: 사용자 계정을 통한 파일 호스트 링크."
   },
   "aa4c0c6b476d4f22": {
    "source": "Browser integration is set up by MDM itself at each start (the browsers installed then are found); add the extension as in <g1>Browser integration</g1>. Firefox installed as a Snap (Ubuntu's) reaches MDM once you allow it; other Snap and Flatpak browsers can't (see <g2>Flatpak and Snap browsers</g2>). The tray icon, Dark Mode support and Launch on startup work on GNOME (Ubuntu's), KDE Plasma, Xfce and Cinnamon.",
@@ -11474,6 +11494,10 @@
    "source": "Firefox asks to confirm: click <g1>Add</g1>. Firefox keeps the add-on up to date.",
    "text": "Firefox에서 확인을 요청하면 <g1>추가</g1>를 클릭합니다. 부가 기능은 Firefox에서 자동으로 업데이트됩니다."
   },
+  "ad104637d2763ef5": {
+   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - <g3>User name</g3> and <g4>Password</g4>, then <g5>Sign in</g5> (Mega-Debrid). Mega-Debrid blocks your connection for some minutes after a few wrong passwords. Each sign-in replaces the account's last one at Mega-Debrid, so another program signed in to the same account makes MDM sign in again on its next link, on its own. MDM itself signs in only when its token is refused, so its checks and its downloads at once don't end each other's. MDM keeps your password (in the keychain, see below) to sign in again. - or paste your <g6>API token</g6> (<g7>Find my token</g7> opens the service's page that shows it), then <g8>Use the token</g8>. Premiumize signs in this way only: paste the API key from its Account page. On Mega-Debrid, make an application under <g9>My Account → API Key</g9> and paste its key; MDM then never needs your password, and doesn't keep it: the key is all it stores, and you can delete the key on that page at any time. Mega-Debrid doesn't say whether a key's account is premium, so the Accounts list says <g10>the service doesn't say whether it is premium</g10> for it; a free account's links are refused when you download them.",
+   "text": "서비스를 선택한 다음 다음 중 하나를 수행합니다. - <g1>브라우저에서 로그인</g1>(Real-Debrid, AllDebrid, TorBox): MDM이 코드를 표시하고 서비스 페이지를 엽니다(TorBox는 <x2/>에서도 사용 가능). 여기에 코드를 입력하고(AllDebrid 페이지에는 이미 코드가 있음) MDM을 허용합니다. 대화 상자가 자동으로 이를 감지합니다. - <g3>사용자 이름</g3>과 <g4>암호</g4>를 입력한 다음 <g5>로그인</g5>(Mega-Debrid). Mega-Debrid는 암호를 몇 번 잘못 입력하면 몇 분 동안 연결을 차단합니다. 각 로그인은 Mega-Debrid에서 계정의 마지막 로그인을 대체하므로, 동일한 계정에 로그인한 다른 프로그램이 다음 링크에서 MDM이 다시 로그인하도록 만듭니다. MDM 자체는 토큰이 거부될 때만 로그인하므로, MDM의 확인과 다운로드가 서로를 종료하지 않습니다. MDM은 다시 로그인하기 위해 암호를 보관합니다(키체인에, 아래 참조). - 또는 <g6>API 토큰</g6>을 붙여넣은 다음(<g7>내 토큰 찾기</g7>는 토큰을 표시하는 서비스 페이지를 엽니다) <g8>토큰 사용</g8>. Premiumize는 이 방식으로만 로그인합니다. 계정 페이지에서 API 키를 붙여넣으세요. Mega-Debrid에서는 <g9>내 계정 → API 키</g9>에서 애플리케이션을 만들고 해당 키를 붙여넣으세요. 그러면 MDM은 암호가 필요 없으며 암호를 보관하지 않습니다. 키만 저장하며, 언제든지 해당 페이지에서 키를 삭제할 수 있습니다. Mega-Debrid는 키의 계정이 프리미엄인지 여부를 알려주지 않으므로, 계정 목록에는 <g10>서비스에서 프리미엄 여부를 알려주지 않습니다</g10>라고 표시됩니다. 무료 계정의 링크는 다운로드할 때 거부됩니다."
+  },
   "ad20819c93bdea53": {
    "source": "Windows may give the stick another drive letter, such as <x1/> instead of <x2/>. The folders you set, and the downloads already in the list, still point at the old letter. Check <g3>Options → Save to</g3> and change the folders if needed. When MDM is about to save into a folder that doesn't exist, it asks whether to create it.",
    "text": "Windows에서 USB 드라이브에 <x2/> 대신 <x1/>과 같은 다른 드라이브 문자를 지정할 수 있습니다. 설정한 폴더와 목록에 있는 기존 다운로드는 여전히 이전 드라이브 문자를 가리킵니다. <g3>옵션 → 저장 위치</g3>를 확인하고 필요한 경우 폴더를 변경하세요. MDM이 존재하지 않는 폴더에 저장하려고 하면 폴더를 만들지 묻는 메시지가 표시됩니다."
@@ -11513,10 +11537,6 @@
   "adbf2cdd5f87d0b6": {
    "source": "Transfer: first request to last byte",
    "text": "전송: 첫 요청부터 마지막 바이트까지"
-  },
-  "adc99f39f820cbb6": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands back a plain direct link, without the host's waits, speed caps and captchas. With your account in MDM, a link from a host your service supports is unlocked through the service, then downloaded by MDM like any file: all its connections, pause and resume.",
-   "text": "Real-Debrid, AllDebrid, Premiumize, TorBox와 같은 디브리드 서비스는 유료 계정으로, 자체 서버에서 파일 호스트로부터 파일을 다운로드합니다. 이 서비스는 호스트의 대기 시간, 속도 제한, 캡차가 없는 일반적인 직접 링크를 제공합니다. MDM에 계정을 추가하면, 서비스가 지원하는 호스트의 링크가 서비스를 통해 잠금 해제된 다음, MDM이 다른 파일과 마찬가지로 모든 연결, 일시 중지 및 재개를 통해 다운로드합니다."
   },
   "ade160a1aa789777": {
    "source": "MDM downloads what you point it at, the way a web browser does, only faster and with more control. It's made for everyday downloads: software and updates, documents, your own files from cloud storage, videos and music you're allowed to save, Linux images and other torrents shared by their makers, and anything else you have the right to download.",
@@ -11673,6 +11693,10 @@
   "b05f1388075b4b26": {
    "source": "The Scheduler's choices for when the queue is done, Turn off computer when done among them",
    "text": "대기열 완료 시 예약 관리자의 선택 사항, 완료 시 컴퓨터 끄기 포함"
+  },
+  "b064cf9d46e0dfec": {
+   "source": "<g1>Links a site packed</g1> (Click'n'Load) keep the site's packages and names, with their archive password when the site gave one.",
+   "text": "<g1>사이트에서 묶은 링크</g1>(Click'n'Load)는 사이트에서 제공한 압축 파일 암호와 함께 사이트의 패키지와 이름을 유지합니다."
   },
   "b08e516b19471d83": {
    "source": "<g1>All files and checksums</g1><g2>Version 0.5.2 on GitHub Releases, with SHA256SUMS.txt</g2>",
@@ -12346,10 +12370,6 @@
    "source": "Options: Remote",
    "text": "옵션: 원격"
   },
-  "b9a51e6448b28bb1": {
-   "source": "Pick the service, then either: - <g1>Sign in in the browser</g1> (Real-Debrid, AllDebrid and TorBox): MDM shows a code and opens the service's page (TorBox's is also at <x2/>). Type the code there (AllDebrid's page already has it) and allow MDM. The dialog notices on its own. - or paste your <g3>API token</g3> (<g4>Find my token</g4> opens the service's page that shows it), then <g5>Use the token</g5>. Premiumize signs in this way only: paste the API key from its Account page.",
-   "text": "서비스를 선택한 다음 다음 중 하나를 수행하세요. - <g1>브라우저에서 로그인</g1> (Real-Debrid, AllDebrid, TorBox): MDM이 코드를 표시하고 서비스 페이지를 엽니다 (TorBox 페이지는 <x2/>에서도 이용 가능). 거기에 코드를 입력하고 (AllDebrid 페이지에는 이미 코드가 있습니다) MDM을 허용하세요. 대화 상자가 자동으로 이를 감지합니다. - 또는 <g3>API 토큰</g3>을 붙여넣은 다음 (<g4>내 토큰 찾기</g4>를 클릭하면 토큰이 표시되는 서비스 페이지가 열립니다) <g5>토큰 사용</g5>을 클릭하세요. Premiumize는 이 방법으로만 로그인합니다: 계정 페이지에서 API 키를 붙여넣으세요."
-  },
   "b9bee71f3466bfea": {
    "source": "Change it at any time, no restart",
    "text": "언제든지 재시작 없이 변경"
@@ -12426,10 +12446,6 @@
    "source": "<g1>The time</g1> is measured from the download's own connections, as each one opens: MDM sends nothing extra to the server. It is an estimate (the time to open a connection, divided by its round trips: one for http, two for https), so it says <g2>about</g2>. The quickest connection counts.",
    "text": "<g1>시간</g1>은 다운로드가 연결을 열 때마다 다운로드에 사용되는 연결을 통해 측정합니다. MDM은 서버에 추가 데이터를 보내지 않습니다. 추정값이므로 <g2>약</g2>이라고 표시합니다. 연결을 여는 데 걸린 시간을 왕복 횟수로 나누어 계산합니다(HTTP는 1회, HTTPS는 2회). 가장 빠른 연결을 기준으로 합니다."
   },
-  "bb7529bf5491688a": {
-   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize or TorBox, is a paid account that downloads files from file hosts on its own servers. It hands…",
-   "text": "Real-Debrid, AllDebrid, Premiumize, TorBox와 같은 디브리드 서비스는 유료 계정으로, 자체 서버에서 파일 호스트로부터 파일을 다운로드합니다. 이 서비스는..."
-  },
   "bb7ddff510dd3161": {
    "source": "If your network gives a proxy auto-config (PAC) script, type its address, or pick the file, under <g1>Use automatic configuration script</g1>. MDM fetches it and asks it which way each download goes (<x2/>, <x3/> or <x4/>), as browsers do. Until it has been fetched, or if it can't be, MDM uses the system's settings.",
    "text": "네트워크에서 프록시 자동 구성(PAC) 스크립트를 제공하는 경우, <g1>자동 구성 스크립트 사용</g1>에서 주소를 입력하거나 파일을 선택합니다. MDM은 브라우저와 마찬가지로 스크립트를 가져와 각 다운로드가 어떤 경로(<x2/>, <x3/> 또는 <x4/>)로 진행될지 묻습니다. 스크립트를 가져오기 전이나 가져올 수 없는 경우, MDM은 시스템 설정을 사용합니다."
@@ -12445,6 +12461,10 @@
   "bbdebbdee79af831": {
    "source": "MDM finds the browsers installed and offers each one its extension.",
    "text": "MDM은 설치된 브라우저를 찾아 각 브라우저에 확장 프로그램을 제공합니다."
+  },
+  "bbe26dcd777f25da": {
+   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
+   "text": "<g1>사용자의 디브리드 계정.</g1> <g2>옵션 → 계정</g2>에서 Real-Debrid, AllDebrid, Premiumize 또는 Mega-Debrid 계정을 통해 보내는 링크나 토렌트는 해당 서비스로 전송되며, 해당 서비스에서 파일을 제공합니다. 로그인 정보는 위 비밀번호와 함께 사용자의 컴퓨터에 저장됩니다."
   },
   "bbeb2269d1830f72": {
    "source": "<g1>A menu shut with Escape opens again at the first click on its title</g1>: a menu opened from the menu bar and shut with Escape, the pointer still on its title, was left marked open. On Linux the next click on that title only \"shut\" it, and a second click was needed; on Windows Escape seemed to do nothing (the menu came back at once). Escape, or MDM losing the focus, now shuts the menu whatever the pointer rests on; a press on a title still shuts its own menu or opens another.",
@@ -12706,10 +12726,6 @@
    "source": "Your browsers hand it their downloads, and proven open-source tools do the specialist work. <g1>Set up the extension</g1>.",
    "text": "브라우저가 다운로드를 MDM에 전달하고, 검증된 오픈 소스 도구가 전문적인 작업을 수행합니다. <g1>확장 프로그램 설정</g1>."
   },
-  "bfccf2cc495dc164": {
-   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek and Cyrillic text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. Other scripts are shaped and drawn by egui.",
-   "text": "고정된 픽셀 좌표에 그려지는 하나의 egui 창과 대화 상자당 하나의 즉시 뷰포트가 있습니다. <x1/>는 상태(다운로드, 대기열, 설정, 목록 선택)를 유지하고 메뉴, 도구 모음, 키 및 IPC 명령을 작업으로 변환합니다. 각 대화 상자는 자체 모듈이며 <x2/>(열림, 닫힘, 값으로 완료됨)를 반환합니다. Windows 전용 호출은 <x3/>로 제한되고, Linux 및 macOS의 해당 호출은 <x4/>로 제한됩니다(세션 시작, 브라우저 호스트, 소리, 폴더에서 표시, 충돌 처리기). 다른 모든 파일은 안전하고 이식 가능한 Rust입니다. 글꼴은 시스템에서 가져옵니다: Windows의 글꼴 폴더, macOS의 시스템 글꼴, Linux의 fontconfig(<x5/>). Windows에서는 DirectWrite(<x6/>, egui의 글리프 래스터라이저 후크를 통해)가 라틴어, 그리스어 및 키릴어 텍스트를 그립니다. 보기 → 텍스트 → 부드럽게는 자연 모드에서 요청된 크기로 안티앨리어싱되고 글꼴 자체의 간격으로 쿼터 픽셀에 배치됩니다. 클래식(기본값)은 GDI-클래식 모드에서 각 글자의 힌트 모양과 전체 픽셀 너비가 함께 나타납니다. 다른 스크립트는 egui에 의해 모양이 지정되고 그려집니다."
-  },
   "bfcf797517e5c279": {
    "source": "MDM remembers the columns, their widths and the sort order.",
    "text": "MDM은 열과 너비, 정렬 순서를 기억합니다."
@@ -12805,6 +12821,10 @@
   "c16bf35f546c4e5c": {
    "source": "<g1>Update now</g1> in Help → Check for updates: MDM downloads the new version, checks it, puts it in place and restarts, on Windows (setup, portable and plain zip), Mac and Linux (AppImage, .tar.gz; a .deb or .rpm opens in the system's installer). It installs only files listed in a checksum list signed by MDM's release key, which every release now carries (<x2/>). The first update this way will be from 0.2.1 to the next version.",
    "text": "도움말 → 업데이트 확인에서 <g1>지금 업데이트</g1>를 선택하면 MDM이 Windows(설치 프로그램, 휴대용 버전 및 일반 zip), Mac 및 Linux(AppImage, .tar.gz)에서 새 버전을 다운로드하고 검증한 뒤 설치하고 다시 시작합니다(.deb 또는 .rpm 파일은 시스템 설치 프로그램에서 열립니다). 이제 모든 릴리스에 MDM의 릴리스 키로 서명된 체크섬 목록이 포함됩니다. 목록에 있는 파일만 설치합니다(<x2/>). 이 방식으로 처음 업데이트할 때는 0.2.1에서 다음 버전으로 업데이트됩니다."
+  },
+  "c17a4b4d31ab68a9": {
+   "source": "The smallest text in a Chinese, Japanese or Korean interface (their glyphs are denser than Latin's)",
+   "text": "중국어, 일본어, 한국어 인터페이스에서 가장 작은 텍스트 (이 언어의 글리프는 라틴어보다 밀도가 높습니다)"
   },
   "c1899b1d4f5b3ff2": {
    "source": "The download button over videos",
@@ -12933,6 +12953,10 @@
   "c3b2f678a0ea5986": {
    "source": "A connection that is far slower than the others is dropped and opened again.",
    "text": "다른 연결보다 훨씬 느린 연결은 끊어졌다가 다시 열립니다."
+  },
+  "c3b6062dd1dccf3a": {
+   "source": "<g1>MDM doesn't say it is JDownloader.</g1> Some sites first ask whether JDownloader is running (a script named <x2/>) and show their button only then. MDM doesn't answer that question, so such a site may say no program was found; a site that simply sends its form works.",
+   "text": "<g1>MDM은 자신이 JDownloader라고 말하지 않습니다.</g1> 일부 사이트는 먼저 JDownloader가 실행 중인지 묻고(<x2/>라는 스크립트) 그 다음에야 버튼을 표시합니다. MDM은 그 질문에 답하지 않으므로, 그런 사이트는 프로그램이 발견되지 않았다고 말할 수 있습니다. 단순히 양식을 보내는 사이트는 작동합니다."
   },
   "c3bbc73f092cecb9": {
    "source": "Options on its Sounds page: a sound for each event",
@@ -13170,6 +13194,10 @@
    "source": "Every version is on the <g1>Releases</g1> page. For Windows there are three files:",
    "text": "모든 버전은 <g1>릴리스</g1> 페이지에 있습니다. Windows용 파일은 세 가지입니다."
   },
+  "c740de7dd5da36cb": {
+   "source": "MDM supports five services: <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3>, <g4>TorBox</g4> and <g5>Mega-Debrid</g5>.",
+   "text": "MDM은 <g1>Real-Debrid</g1>, <g2>AllDebrid</g2>, <g3>Premiumize</g3>, <g4>TorBox</g4>, <g5>Mega-Debrid</g5>의 5가지 서비스를 지원합니다."
+  },
   "c746660e91994045": {
    "source": "<g1>If it can't be reached, use the system's DNS</g1>: off by default, so a DNS that doesn't answer stops the download with a message naming it rather than quietly showing your lookups to the system's DNS. A name the DNS says doesn't exist never falls back (that would undo a filtering DNS).",
    "text": "<g1>연결할 수 없는 경우 시스템 DNS 사용</g1>: 기본적으로 꺼져 있습니다. 따라서 DNS가 응답하지 않으면 시스템 DNS에 조회 내용을 노출하지 않고, 해당 DNS의 이름을 표시하며 다운로드를 중지합니다. DNS에서 존재하지 않는다고 응답한 이름에는 시스템 DNS를 사용하지 않습니다(필터링 DNS의 기능을 무효화하기 때문입니다)."
@@ -13334,6 +13362,10 @@
    "source": "<g1>A long file name ran out of the progress window</g1> (<g2>#62</g2>): on the <g3>Options on completion</g3> tab, a longer translation of \"Save To:\" (Turkish, German…) ran into the path, and the path ran past the window's edge. The label now takes the room its language needs, and the path is shortened in the middle, keeping the file's name in sight, and shown whole on hover; right-to-left languages included.",
    "text": "<g1>긴 파일 이름이 진행 창을 벗어났습니다</g1> (<g2>#62</g2>): <g3>완료 시 옵션</g3> 탭에서 \"저장 위치:\"의 더 긴 번역(터키어, 독일어 등)이 경로로 이어졌고, 경로는 창 가장자리를 넘어갔습니다. 이제 레이블은 해당 언어에 필요한 공간을 차지하고, 경로는 중간에서 단축되어 파일 이름을 볼 수 있도록 하며, 마우스 오버 시 전체가 표시됩니다. 오른쪽에서 왼쪽으로 쓰는 언어도 포함됩니다."
   },
+  "c999b61151dbe721": {
+   "source": "Debrid accounts (#44): the services' official APIs (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid) turn a file host's link into a direct one the engine downloads",
+   "text": "Debrid 계정(#44): 서비스의 공식 API(Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid)는 파일 호스트 링크를 엔진이 다운로드하는 직접 링크로 변환합니다."
+  },
   "c9a8324f618160c6": {
    "source": "<g1>The plain zip</g1> (<x2/>), the same programs without an installer.",
    "text": "<g1>일반 zip 파일</g1>(<x2/>): 설치 프로그램 없이 동일한 프로그램이 들어 있습니다."
@@ -13434,17 +13466,9 @@
    "source": "Can I download without the browser extension?",
    "text": "브라우저 확장 프로그램 없이 다운로드할 수 있나요?"
   },
-  "cb3fee6871e1183d": {
-   "source": "<g1>0.5.2</g1> <g2>17.1 MB</g2>",
-   "text": "<g1>0.5.2</g1> <g2>17.1 MB</g2>"
-  },
   "cb565e5b28b1036b": {
    "source": "<g1><x2/> Add to Firefox</g1><g3><x4/> Add to Chrome</g3>",
    "text": "<g1><x2/> Firefox에 추가</g1><g3><x4/> Chrome에 추가</g3>"
-  },
-  "cb661d84888ecca4": {
-   "source": "<g1>Options → Accounts → Add...</g1> takes <g2>Real-Debrid</g2>, <g3>AllDebrid</g3> and <g4>Premiumize</g4>. Real-Debrid and AllDebrid sign in with a code you confirm in the browser, or with your API token; Premiumize with its API key. MDM shows the account's name and whether it is premium. With several accounts, a link goes through the first one whose service supports its host.",
-   "text": "<g1>옵션 → 계정 → 추가...</g1>는 <g2>Real-Debrid</g2>, <g3>AllDebrid</g3> 및 <g4>Premiumize</g4>를 지원합니다. Real-Debrid와 AllDebrid는 브라우저에서 확인하는 코드 또는 API 토큰으로 로그인하며, Premiumize는 API 키로 로그인합니다. MDM은 계정 이름과 프리미엄 여부를 표시합니다. 여러 계정이 있는 경우, 링크는 해당 호스트를 지원하는 첫 번째 서비스 계정을 통해 다운로드됩니다."
   },
   "cb75f147f406ef80": {
    "source": "Check the download's own <g1>Speed Limiter</g1> tab in its progress window.",
@@ -13489,6 +13513,10 @@
   "cbed9e6bff5df9ed": {
    "source": "Sorted into packages",
    "text": "패키지로 분류"
+  },
+  "cbfd25f29119468a": {
+   "source": "A debrid service, such as Real-Debrid, AllDebrid, Premiumize, TorBox or Mega-Debrid, is a paid account that downloads files from file hosts on its own…",
+   "text": "Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid와 같은 디브리드 서비스는 파일 호스트에서 자체 서버로 파일을 다운로드하는 유료 계정입니다."
   },
   "cbfdf9d84e3b1fa2": {
    "source": "A tooltip's left and right padding",
@@ -13662,10 +13690,6 @@
    "source": "Link grabber and archives — Mister Download Manager help",
    "text": "링크 그래버 및 압축 파일 — Mister Download Manager 도움말"
   },
-  "ce5bf471e6fccfb8": {
-   "source": "<g1>Comments</g1><g2><x3/> people</g2>",
-   "text": "<g1>댓글</g1><g2><x3/>명</g2>"
-  },
   "ce6f1a716e6dad6d": {
    "source": "Or",
    "text": "또는"
@@ -13749,6 +13773,10 @@
   "cfadb8fa8b105d9f": {
    "source": "A greyed toolbar label",
    "text": "회색 도구 모음 레이블"
+  },
+  "cfddefff24fc39b6": {
+   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; experimental): <g1>Add...</g1> signs in by code in the browser, with your user name and password, or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
+   "text": "디브리드 서비스 계정(Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; 실험적): <g1>추가...</g1>를 통해 브라우저에서 코드로 로그인하거나, 사용자 이름과 비밀번호 또는 API 토큰이나 키로 로그인할 수 있습니다. 그러면 서비스가 지원하는 호스트의 링크가 해당 서비스를 통해 다운로드됩니다. 목록의 순서는 계정이 요청되는 순서입니다. <g2>디브리드 서비스 계정</g2>을 참조하세요."
   },
   "cfe97b6cc1200669": {
    "source": "Yes: HTTP and SOCKS proxies, and proxy auto-config (PAC) scripts, in <g1>Options → Proxy / Socks</g1>. See <g2>Options</g2>. To keep every download on a VPN, see <g3>Network adapter</g3>.",
@@ -14194,10 +14222,6 @@
    "source": "Mister Download Manager and IDM, side by side.",
    "text": "Mister Download Manager와 IDM, 나란히 비교"
   },
-  "d65efc937a364b03": {
-   "source": "<x1/> issue",
-   "text": "<x1/>개의 이슈"
-  },
   "d663f408764b1150": {
    "source": "Replay",
    "text": "재생"
@@ -14314,10 +14338,6 @@
    "source": "Set it up",
    "text": "설정하기"
   },
-  "d7dccabcd92050ba": {
-   "source": "<g1>Your debrid accounts.</g1> A link or torrent you send through a Real-Debrid, AllDebrid or Premiumize account in <g2>Options → Accounts</g2> goes to that service, which then serves the file. Its sign-in stays on your computer, with the passwords above.",
-   "text": "<g1>디브리드 계정.</g1> <g2>옵션 → 계정</g2>에서 Real-Debrid, AllDebrid 또는 Premiumize 계정을 통해 보내는 링크나 토렌트는 해당 서비스로 전송되며, 해당 서비스가 파일을 제공합니다. 로그인 정보는 위 비밀번호와 함께 컴퓨터에 저장됩니다."
-  },
   "d7e47d8cb056d141": {
    "source": "<g1>Download in order</g1>, to watch a video while it downloads, with each file's first and last pieces early. Other torrents fetch the rarest pieces first.",
    "text": "<g1>순서대로 다운로드</g1>를 사용하면 다운로드 중인 비디오를 시청할 수 있으며, 각 파일의 첫 번째 및 마지막 조각이 먼저 다운로드됩니다. 다른 토렌트는 가장 희귀한 조각을 먼저 가져옵니다."
@@ -14361,6 +14381,10 @@
   "d89e02f60b2ac3f2": {
    "source": "Speed Limiter",
    "text": "속도 제한"
+  },
+  "d8ab0b376c3097e9": {
+   "source": "One egui window painted to fixed pixel coordinates, plus one immediate viewport per dialog. <x1/> holds the state (downloads, queues, settings, the list's selection) and turns menu, toolbar, key and IPC commands into actions. Each dialog is its own module and returns an <x2/> (open, closed, done with a value). Windows-only calls are confined to <x3/> and their Linux and macOS counterparts to <x4/> (starting with the session, the browsers' host, sounds, show in folder, the crash handler); every other file is safe, portable Rust. Fonts come from the system: Windows' Fonts folder, macOS's system fonts, fontconfig on Linux (<x5/>). On Windows, Latin, Greek, Cyrillic and single-codepoint CJK text is drawn by DirectWrite (<x6/>, through egui's glyph rasterizer hook): View → Text → Smooth in its natural mode, anti-aliased at the size asked for and placed at quarter pixels with the font's own advances; Classic (the default) in GDI-classic mode, so each letter's hinted shape and whole-pixel width come together. CJK uses the interface language's system face; combining marks, multi-codepoint clusters and missing glyphs stay with egui, as do other scripts.",
+   "text": "고정된 픽셀 좌표에 그려지는 하나의 egui 창과 대화 상자당 하나의 즉시 뷰포트가 있습니다. <x1/>는 상태(다운로드, 대기열, 설정, 목록 선택)를 유지하고 메뉴, 도구 모음, 키 및 IPC 명령을 작업으로 전환합니다. 각 대화 상자는 자체 모듈이며 <x2/>(열림, 닫힘, 값으로 완료됨)를 반환합니다. Windows 전용 호출은 <x3/>로 제한되며, Linux 및 macOS의 해당 호출은 <x4/>(세션 시작, 브라우저 호스트, 소리, 폴더에 표시, 충돌 처리기)로 제한됩니다. 다른 모든 파일은 안전하고 이식 가능한 Rust입니다. 글꼴은 시스템에서 가져옵니다. Windows의 글꼴 폴더, macOS의 시스템 글꼴, Linux의 fontconfig(<x5/>). Windows에서는 DirectWrite(<x6/>, egui의 글리프 래스터라이저 후크를 통해)가 라틴어, 그리스어, 키릴어 및 단일 코드 포인트 CJK 텍스트를 그립니다. 보기 → 텍스트 → 부드럽게는 자연 모드에서 요청된 크기로 안티앨리어싱되고 글꼴 자체의 진행에 따라 쿼터 픽셀에 배치됩니다. 클래식(기본값)은 GDI-클래식 모드에서 각 문자의 힌트 모양과 전체 픽셀 너비가 함께 나타납니다. CJK는 인터페이스 언어의 시스템 글꼴을 사용합니다. 결합 문자, 다중 코드 포인트 클러스터 및 누락된 글리프는 다른 스크립트와 마찬가지로 egui에 남아 있습니다."
   },
   "d8c59eee97dfb40d": {
    "source": "<g1>Port</g1> — 8463 by default.",
@@ -14749,6 +14773,10 @@
   "e069363b1b77d1db": {
    "source": "Chrome, Firefox, Edge and more",
    "text": "Chrome, Firefox, Edge 등"
+  },
+  "e0c2425f7ce3b025": {
+   "source": "The page's own address isn't sent as the links' referrer: a page could name any.",
+   "text": "페이지 자체 주소는 링크의 리퍼러로 전송되지 않습니다. 페이지는 어떤 이름이든 지정할 수 있습니다."
   },
   "e0f4ab5df9c8188d": {
    "source": "A running queue starts its downloads in list order, a few at a time (four by default). When one fails, it moves to the end of the queue and is tried again 30 seconds later. The queue stops when nothing is left to download.",
@@ -15150,10 +15178,6 @@
    "source": "A second copy of MDM watches the first. When MDM crashes, the report window says <g1>Mister Download Manager closed unexpectedly</g1>. When its window hasn't answered for 8 seconds, it says <g2>Mister Download Manager stopped responding</g2>, and <g3>End and restart MDM</g3> closes the frozen copy and starts a fresh one. If MDM comes back by itself, the window says so.",
    "text": "MDM의 두 번째 복사본이 첫 번째 복사본을 감시합니다. MDM이 충돌하면 보고서 창에 <g1>Mister Download Manager이(가) 예기치 않게 종료되었습니다</g1>라고 표시됩니다. 창이 8초 동안 응답하지 않으면 <g2>Mister Download Manager이(가) 응답을 중지했습니다</g2>라고 표시되며, <g3>MDM 종료 및 다시 시작</g3>을 통해 멈춘 복사본을 닫고 새 복사본을 시작합니다. MDM이 자동으로 다시 시작되면 창에 해당 내용이 표시됩니다."
   },
-  "e6e4ffbd1a17c7e8": {
-   "source": "<x1/> pull request",
-   "text": "<x1/>개의 풀 리퀘스트"
-  },
   "e6e9f590b183bea4": {
    "source": "Link grabber: paste many links, MDM groups them, checks which are online, and extracts archives when they arrive.",
    "text": "링크 그래버: 여러 링크를 붙여넣으면 MDM이 링크를 그룹화하고, 온라인 상태인지 확인하며, 도착 시 압축 파일을 추출합니다."
@@ -15378,6 +15402,10 @@
    "source": "Make one",
    "text": "테마 만들기"
   },
+  "e9ee6b93a480a828": {
+   "source": "Windows reports two different memory numbers. Memory in use (Task Manager's \"Memory\" column, the private working set) is what a program is holding in RAM…",
+   "text": "Windows는 두 가지 다른 메모리 수치를 보고합니다. 사용 중인 메모리(작업 관리자의 \"메모리\" 열, 개인 작업 집합)는 프로그램이 현재 RAM에 보관하고 있는 메모리입니다..."
+  },
   "ea0b11f82fe35728": {
    "source": "Tasks → Add magnet link..., or the toolbar's Add Torrent",
    "text": "작업 → 마그넷 링크 추가... 또는 도구 모음의 토렌트 추가"
@@ -15497,10 +15525,6 @@
   "eb908c0a11a04d0d": {
    "source": "Note",
    "text": "참고"
-  },
-  "eb9f527d55414228": {
-   "source": "Last updated 2026-11-13 · applies to the app, the browser extension and misterdownloadmanager.com",
-   "text": "최종 업데이트: 2026년 11월 13일 · 앱, 브라우저 확장 프로그램 및 misterdownloadmanager.com에 적용됩니다."
   },
   "ebb00adeab17b68e": {
    "source": "<g1>Links that work only once</g1> (or hosts that allow one download at a time) failed with \"403 Forbidden\" after Download File Info had looked them up (<g2>#28</g2>): the window's look and the download each asked the server. The download now continues from the answer the window got, and asks again only if that connection has closed meanwhile.",
@@ -15685,6 +15709,14 @@
   "ee4329d38e737b6a": {
    "source": "Pick a quality.",
    "text": "화질을 선택하세요."
+  },
+  "ee48f7cb0fdcc5f1": {
+   "source": "Use your Real-Debrid, AllDebrid, Premiumize or Mega-Debrid account in Mister Download Manager: file-host links unlocked, then downloaded with every connection.",
+   "text": "Mister Download Manager에서 Real-Debrid, AllDebrid, Premiumize 또는 Mega-Debrid 계정을 사용하세요. 파일 호스트 링크를 잠금 해제한 다음, 모든 연결을 통해 다운로드합니다."
+  },
+  "ee5325073a33b985": {
+   "source": "<g1>Links to this computer or your network are left out</g1>: a link to <x2/>, to a private or link-local address (<x3/>, <x4/>, <x5/>, <x6/>, their IPv6 kin), or to a name without a dot or under <x7/>, <x8/> or <x9/> never reaches Link grabber. A link site's files aren't there, and such an address could be your router or another device. MDM judges the address as written: a public-looking name that points into your network isn't recognized, so look at a package before you add it.",
+   "text": "<g1>이 컴퓨터 또는 네트워크로의 링크는 제외됩니다</g1>. <x2/>, 사설 또는 링크 로컬 주소(<x3/>, <x4/>, <x5/>, <x6/>, 해당 IPv6 주소), 또는 점이 없거나 <x7/>, <x8/> 또는 <x9/> 아래의 이름으로 연결되는 링크는 링크 그래버에 도달하지 않습니다. 링크 사이트의 파일은 거기에 없으며, 이러한 주소는 라우터 또는 다른 장치일 수 있습니다. MDM은 작성된 주소를 기준으로 판단합니다. 네트워크 내부를 가리키는 공개적으로 보이는 이름은 인식되지 않으므로, 패키지를 추가하기 전에 확인하세요."
   },
   "ee657a313da06c4d": {
    "source": "If you want Internet Download Manager's layout without its price, Mister Download Manager: free and open source, laid out like IDM, and it imports your IDM list. If you need something else first, such as an Android app or a particular feature, the comparison above shows what each of the others is good at.",
@@ -16094,6 +16126,10 @@
    "source": "The list shows the order they will run in. Use the arrow buttons under it to move a download up or down.",
    "text": "목록은 실행될 순서를 보여줍니다. 아래의 화살표 버튼을 사용하여 다운로드를 위아래로 이동시킵니다."
   },
+  "f3a43b64feb190bf": {
+   "source": "Only one program can listen on port 9666. If JDownloader is running, MDM says so: close it, then turn the option off and on again.",
+   "text": "포트 9666에서는 하나의 프로그램만 수신할 수 있습니다. JDownloader가 실행 중이면 MDM이 이를 알립니다. JDownloader를 닫은 다음, 옵션을 껐다가 다시 켜세요."
+  },
   "f3d19efbbf46e57b": {
    "source": "Archives extracted",
    "text": "압축 파일 추출됨"
@@ -16274,10 +16310,6 @@
    "source": "Not offered on its website<g1><g2>3</g2></g1>",
    "text": "웹사이트에서 제공되지 않음<g1><g2>3</g2></g1>"
   },
-  "f79d1bba86369d73": {
-   "source": "Your debrid service accounts (Real-Debrid, AllDebrid, Premiumize, TorBox; experimental): <g1>Add...</g1> signs in by code in the browser or with your API token or key; a link from a host the service supports is then downloaded through it. The list's order is the order accounts are asked. See <g2>Debrid service accounts</g2>.",
-   "text": "디브리드 서비스 계정(Real-Debrid, AllDebrid, Premiumize, TorBox; 실험적): <g1>추가...</g1>를 클릭하면 브라우저에서 코드로 로그인하거나 API 토큰 또는 키로 로그인할 수 있습니다. 서비스가 지원하는 호스트의 링크는 해당 서비스를 통해 다운로드됩니다. 목록의 순서는 계정이 요청되는 순서입니다. <g2>디브리드 서비스 계정</g2>을 참조하세요."
-  },
   "f7a4f8dcbb4812c2": {
    "source": "In Chrome, Edge and Brave you can limit an extension to some sites (right-click its toolbar button → <g1>This can read and change site data</g1>). On a site it may not read, the extension can't pass your sign-in on, so it leaves the download to the browser. Choose <g2>On all sites</g2> to let MDM take downloads everywhere.",
    "text": "Chrome, Edge, Brave에서는 확장 프로그램이 접근할 수 있는 사이트를 제한할 수 있습니다(도구 모음 버튼을 마우스 오른쪽 버튼으로 클릭 → <g1>이 사이트의 데이터를 읽고 변경할 수 있음</g1>). 확장 프로그램이 접근할 수 없는 사이트에서는 로그인 정보를 전달할 수 없으므로 다운로드를 브라우저에서 진행합니다. MDM이 모든 사이트에서 다운로드를 가져오게 하려면 <g2>모든 사이트에서</g2>를 선택하세요."
@@ -16321,10 +16353,6 @@
   "f8092cd791a22a18": {
    "source": "<g1>Stop sharing after sharing for … minutes</g1> — or once it has been shared that long, over all its runs. Off by default.",
    "text": "<g1>다음 시간 동안 공유한 후 공유 중지: …분</g1> — 또는 모든 실행에서 해당 시간 동안 공유된 후 중지됩니다. 기본적으로 꺼져 있습니다."
-  },
-  "f821c9c149c3e050": {
-   "source": "<x1/> comments",
-   "text": "<x1/>개의 댓글"
   },
   "f82dc8051d1faab0": {
    "source": "names besides its addresses the page may be opened by",
@@ -16413,10 +16441,6 @@
   "f99db8564b0343d7": {
    "source": "What's new in version 0.5.0 <g1>2026-11-08</g1>",
    "text": "버전 0.5.0의 새로운 기능 <g1>2026-11-08</g1>"
-  },
-  "f9a8db1326e07676": {
-   "source": "<x1/> issues",
-   "text": "<x1/>개의 이슈"
   },
   "f9ad81eb1765abbd": {
    "source": "In the browser extension's menu, <g1>Send downloads to → Another Mister Download Manager (a server)</g1>: type the server's address, open it once in that browser to accept its certificate, then enter a pairing code (<x2/> above). Downloads the extension catches, and <g3>Download with Mister Download Manager</g3> on a link, then go to the server instead of this computer. The browser's cookies are not sent to the server: a download that needs you to be signed in to a site stays with this computer.",
@@ -16826,6 +16850,10 @@
    "source": "Privacy policy — Mister Download Manager",
    "text": "개인정보처리방침 — Mister Download Manager"
   },
+  "fea1b4253c14428a": {
+   "source": "Real-Debrid, AllDebrid, Premiumize and Mega-Debrid accounts",
+   "text": "Real-Debrid, AllDebrid, Premiumize, Mega-Debrid 계정"
+  },
   "fea945c5c18cacc1": {
    "source": "Why is MDM faster than a browser?",
    "text": "MDM이 브라우저보다 빠른 이유는 무엇인가요?"
@@ -16917,6 +16945,10 @@
   "ffe6d971c9f20725": {
    "source": "Step by step in the help",
    "text": "도움말에서 단계별로"
+  },
+  "ffed56884994ca66": {
+   "source": "<g1>The first time a site sends links, MDM asks</g1>: <g2>Allow</g2> (that site's links go to Link grabber from now on), <g3>Block</g3> (they never do), or <g4>Not now</g4> (these links are dropped, and the site is asked again next time). The site is the one your browser names, never what the page claims. When the browser names none (a page that hides where it is, or one inside a sandboxed frame), the window says <g5>An unknown site</g5>: it is asked about every time, and its answer is never kept. Turning Click'n'Load off forgets the answers.",
+   "text": "<g1>사이트에서 처음 링크를 보낼 때 MDM이 묻습니다</g1>. <g2>허용</g2>(해당 사이트의 링크가 이제부터 링크 그래버로 이동), <g3>차단</g3>(절대 이동하지 않음), 또는 <g4>나중에</g4>(이 링크는 삭제되고 다음번에 다시 묻습니다). 사이트는 브라우저가 지정한 사이트이며, 페이지가 주장하는 사이트가 아닙니다. 브라우저가 아무것도 지정하지 않으면(자신이 어디에 있는지 숨기는 페이지 또는 샌드박스 프레임 내부의 페이지) 창에 <g5>알 수 없는 사이트</g5>라고 표시됩니다. 이 경우 매번 묻고, 답변은 저장되지 않습니다. Click'n'Load를 끄면 답변이 잊혀집니다."
   },
   "ffeedec50b9a371f": {
    "source": "For a download already in the list, <g1>File Properties</g1> has the same choice beside the login: <g2>Through Real-Debrid</g2>. It can be changed while the download isn't running. The next start goes the new way, and continues from what is already downloaded when the file is the same.",

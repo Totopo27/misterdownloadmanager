@@ -6013,7 +6013,6 @@ column	Upload speed	سرعت آپلود
 extension	A list of videos: choose them in Mister Download Manager	فهرستی از ویدیوها: آن‌ها را در Mister Download Manager انتخاب کنید
 #. text in the browser extension
 #. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
-#, machine
 extension	Added to MDM	به MDM اضافه شد
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
@@ -6022,7 +6021,6 @@ extension	Added to the queue	به صف اضافه شد
 #. text in the browser extension
 #. command in the menu of the download button over a video: opens the app's Download video window, with every quality and the subtitles
 #. the trailing ... means it is still going on: keep it
-#, machine
 extension	All qualities and subtitles...	همه کیفیت‌ها و زیرنویس‌ها...
 #. text in the browser extension
 #. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
@@ -6034,7 +6032,6 @@ extension	Another Mister Download Manager (a server)	یک Mister Download Manage
 extension	Audio	صدا
 #. text in the browser extension
 #. after the best quality in the menu of the download button over a video, after a star (★ best); lower case; one word
-#, machine
 extension	best	بهترین
 #. text in the browser extension
 #. the name this browser gets in the other MDM's list of paired devices
@@ -6047,8 +6044,7 @@ extension	Browser extension	افزونه مرورگر
 extension	Button settings...	تنظیمات دکمه...
 #. text in the browser extension
 #. on the download button over a copy-protected video, after 'Protected video ·': it can't be downloaded; short, lower case
-#, machine
-extension	can't be saved	قابل ذخیره نیست
+extension	can't be saved	امکان ذخیره‌سازی ندارد
 #. text in the browser extension
 #. shown briefly on the download button when nothing on the page says which video the player is playing, so nothing was sent
 #, machine
@@ -6076,7 +6072,6 @@ extension	Download	دانلود
 extension	Download all links with Mister Download Manager	همه پیوندها را با Mister Download Manager بارگیری کن
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
-#, machine
 extension	Download best	بارگیری بهترین کیفیت
 #. text in the browser extension
 #. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
@@ -6084,8 +6079,7 @@ extension	Download best	بارگیری بهترین کیفیت
 extension	Download selected links with Mister Download Manager	پیوندهای انتخاب شده را با Mister Download Manager بارگیری کن
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
-#, machine
-extension	Download the best quality	بهترین کیفیت را بارگیری کنید
+extension	Download the best quality	بارگیری بهترین کیفیت
 #. text in the browser extension
 #. the button over a video on a web page that downloads it; verb; short (it sits on the video)
 #, machine
@@ -6096,7 +6090,6 @@ extension	Download video	دانلود ویدیو
 extension	Download with Mister Download Manager	دانلود با Mister Download Manager
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
-#, machine
 extension	Download {what}	بارگیری {what}
 #. text in the browser extension
 #. shown in the toolbar button's popup after the site was excluded
@@ -6117,7 +6110,6 @@ extension	Drag the dots to move it along the edge	نقطه‌ها را بکشی�
 extension	Enter its https:// address.	آدرس https:// آن را وارد کنید.
 #. text in the browser extension
 #. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
-#, machine
 extension	Get MDM	دریافت MDM
 #. text in the browser extension
 #. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
@@ -6182,7 +6174,6 @@ extension	Looking up the qualities…	در حال جست‌وجوی کیفیت�
 extension	Looking up took too long	جست‌وجو بیش از حد طول کشید
 #. text in the browser extension
 #. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
-#, machine
 extension	MDM didn't answer	MDM پاسخ نداد
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
@@ -6252,8 +6243,7 @@ extension	No video to download here	ویدیویی برای دانلود در ا
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	قابل دسترسی نیست. یک بار آدرس آن را در این مرورگر باز کنید و گواهی آن را بپذیرید، سپس دوباره امتحان کنید.
 #. text in the browser extension
 #. on the download button over a video (grey) when the button is turned off on this web site; a 'Turn on' button follows it; short
-#, machine
-extension	Off on this site	در این سایت خاموش است
+extension	Off on this site	در این سایت غیرفعال است
 #. text in the browser extension
 #. button: open the other MDM's address in a tab (to accept its certificate once)
 #, machine
@@ -6268,11 +6258,9 @@ extension	Open its address once and accept its certificate, then enter a code fr
 extension	Open Mister Download Manager	باز کردن Mister Download Manager
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
-#, machine
 extension	Open post	باز کردن پست
 #. text in the browser extension
 #. on the download button (amber) over a video in a feed (a social site's home page, a timeline) that can't be downloaded from there: the user should open the post the video belongs to; short
-#, machine
 extension	Open the post to download it	برای بارگیری، پست را باز کنید
 #. text in the browser extension
 #. button in the toolbar button's popup: open the app's Options
@@ -6281,7 +6269,6 @@ extension	Open the post to download it	برای بارگیری، پست را ب�
 extension	Options...	گزینه‌ها...
 #. text in the browser extension
 #. in the list under the download button over a video, after a sound-only line's bitrate: the sound as the site sends it, not converted (e.g. '128 kbps · original'); lower case; one word
-#, machine
 extension	original	اصلی
 #. text in the browser extension
 #. button: pair this browser with the other MDM using the code
@@ -6305,11 +6292,9 @@ extension	Prefix media file names with the page title	افزودن عنوان ص
 extension	Protected	محافظت‌شده
 #. text in the browser extension
 #. on the download button over a copy-protected (DRM) video, which no tool can download; 'can't be saved' follows it after a dot; short
-#, machine
 extension	Protected video	ویدیوی محافظت‌شده
 #. text in the browser extension
 #. button on the download button over a video when the app didn't answer: try again; verb; very short
-#, machine
 extension	Retry	تلاش مجدد
 #. text in the browser extension
 #. switch in the toolbar button's popup: on, the app downloads through the same proxy the browser uses (one a VPN or proxy extension sets); the browser then asks once to allow reading it
@@ -6322,7 +6307,6 @@ extension	Send downloads to	ارسال دانلودها به
 #. text in the browser extension
 #. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
-#, machine
 extension	Sending to MDM...	در حال ارسال به MDM...
 #. text in the browser extension
 #. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
@@ -6330,7 +6314,6 @@ extension	Sending to MDM...	در حال ارسال به MDM...
 extension	Sent to Mister Download Manager	به Mister Download Manager ارسال شد
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
-#, machine
 extension	Show	نمایش
 #. text in the browser extension
 #. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
@@ -6374,8 +6357,7 @@ extension	This download's details were too large to hand over	جزئیات ای�
 extension	This page's player streams its video in pieces, so there's no file to list. Point at the video and use its Download video button.	پخش‌کننده این صفحه ویدیو را به صورت قطعه‌ای پخش می‌کند، بنابراین فایلی برای فهرست کردن وجود ندارد. روی ویدیو اشاره کنید و از دکمه «بارگیری ویدیو» آن استفاده کنید.
 #. text in the browser extension
 #. button on the download button over a video when it is off on this web site: turns it on again here; verb; very short
-#, machine
-extension	Turn on	روشن کردن
+extension	Turn on	فعال کردن
 #. text in the browser extension
 #. status when the app is older than the extension; keep the name Mister Download Manager as it is
 #, machine
@@ -7109,79 +7091,59 @@ menu	Vulkan didn't start here: OpenGL draws	Vulkan اینجا شروع نشد: O
 menu	Vulkan draws with a software renderer	Vulkan با یک رندر نرم‌افزاری ترسیم می‌کند
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menubar	&Downloads	&بارگیری‌ها
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menubar	&File	&فایل
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menubar	&Help	&راهنما
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
-#, machine
 menubar	&Tasks	&وظایف
 #. menu bar title in the main window (menus, toolbar, Categories pane)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menubar	&View	&نما
 #. toolbar button in the main window
-#, machine
 toolbar	Add Torrent	افزودن تورنت
 #. toolbar button in the main window
-#, machine
 toolbar	Add URL	افزودن URL
 #. toolbar button in the main window
 #. verb: delete the selected downloads
-#, machine
 toolbar	Delete	حذف
 #. toolbar button in the main window
-#, machine
 toolbar	Delete Completed	حذف تکمیل‌شده‌ها
 #. toolbar button in the main window
 #. plural noun: opens the Options window (settings)
-#, machine
-toolbar	Options	گزینه‌ها
+toolbar	Options	تنظیمات
 #. toolbar button in the main window
 #. verb: continue the selected downloads
-#, machine
 toolbar	Resume	ادامه
 #. toolbar button in the main window
 #. noun: the tool that starts and stops queues on time
-#, machine
 toolbar	Scheduler	زمان‌بندی
 #. toolbar button in the main window
-#, machine
 toolbar	Start Queue	شروع صف
 #. toolbar button in the main window
 #. verb: stop the selected downloads
-#, machine
 toolbar	Stop	توقف
 #. toolbar button in the main window
-#, machine
 toolbar	Stop All	توقف همه
 #. toolbar button in the main window
-#, machine
 toolbar	Stop Queue	توقف صف
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
-#, machine
 unit	{n} GB	{n} گیگابایت
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
-#, machine
 unit	{n} KB	{n} کیلوبایت
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
-#, machine
 unit	{n} KB/sec	{n} کیلوبایت/ثانیه
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
-#, machine
 unit	{n} MB	{n} مگابایت
 #. unit after a number in the download list (sizes, speeds, status)
 #. {n} = a number (keep the braces as they are)
-#, machine
 unit	{n} MB/sec	{n} مگابایت/ثانیه

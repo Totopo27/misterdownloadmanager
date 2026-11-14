@@ -17,7 +17,7 @@
 // it, #578), link (a .zip link, throttled and not), ask (Firefox set to ask what to
 // do with each new type, as Waterfox is: caught before its dialog, #208), cookie (cookies and referrer
 // forwarded), names (Content-Disposition), redirect, leadon (a page going to the file by script, #374), form (POST, 303), alt (Alt+click leaves it
-// to the browser), opened (a PDF or MP3 the browser would show or play), spot (the video button
+// to the browser: a link, a redirect, a page's script; Firefox's own default too, #332), opened (a PDF or MP3 the browser would show or play), spot (the video button
 // clear of the page's controls, #421), feeds (a video in a feed sends its post, its own file, or
 // nothing and says so, never the feed: sample pages served at LinkedIn's, Facebook's, X's,
 // Instagram's, Reddit's, TikTok's, Vimeo's, Dailymotion's addresses, #689), preview (the video button kept over a hover-to-play
@@ -39,7 +39,9 @@
 // clicked, dragged, kept; "never on the site" in the last browser; the button's clicks go through
 // its menu's "Open in…" to the Download video window, as in csp, hls, streams, sniffed and
 // inplace), panelOptions (the button follows Options in an open tab: off, on, the site listed;
-// #532), videoFocus (mouse idle/fullscreen and keyboard focus, #480), reconnect (a tab opened while
+// #532), videoFocus (mouse idle/fullscreen and keyboard focus, #480), fullscreen (one
+// button over a video in full screen, the page's or the player's, and after the extension was
+// updated while it showed, #336), reconnect (a tab opened while
 // the host couldn't start gets the button once it can, no reload; then MDM started by a click, and
 // reached after it quits and starts again, #474), start (MDM not running: the host starts it),
 // remote (Send downloads to → Another MDM, #157: paired from the popup, a link downloaded by a
@@ -755,7 +757,9 @@ async function firefox(bin, profile, dl, page, ready) {
       extension,
       serve,
       // Another add-on (the folder `dir`), temporary beside ours: its ID; and removed again.
-      install: async (dir) => (await bidi.send("webExtension.install", { extensionData: { type: "path", path: dir } })).extension,
+      // `dir` a folder, or an extensionData (ours again, as an update brings it: firefoxExtension).
+      install: async (dir) =>
+        (await bidi.send("webExtension.install", { extensionData: typeof dir === "string" ? { type: "path", path: dir } : dir })).extension,
       uninstall: (id) => bidi.send("webExtension.uninstall", { extension: id }),
       inBrowser,
       base: `moz-extension://${FIREFOX_UUID}/`,
@@ -763,6 +767,11 @@ async function firefox(bin, profile, dl, page, ready) {
       evaluate,
       mouse,
       menu,
+      // A PNG of what the tab shows (its viewport) in `file`.
+      screenshot: async (file) => {
+        const { data } = await bidi.send("browsingContext.captureScreenshot", { context });
+        fs.writeFileSync(file, Buffer.from(data, "base64"));
+      },
       navigate,
       key,
       pill,
@@ -2095,32 +2104,53 @@ const CASES = {
     return `posted again with token=abc (${posts.length} request(s)); 303: ${seen.map((e) => `${e.method} ${e.path.split("/")[1]} ${e.status}`).join(", ")}`;
   },
 
-  // Alt+click: the browser keeps the download, MDM gets nothing.
+  // Alt+click (Option+click on a Mac, #332): the browser keeps the download, MDM gets nothing. A
+  // link to the file; one that redirects to it; Firefox's family: one to a page whose script goes
+  // to the file (Chromium downloads such a link's page itself), and its default setting, where the
+  // browser alone does nothing with an Alt+click (browser.altClickSave off; the run's profile has
+  // it on, as Chromium's behaviour).
   async alt(t) {
-    const file = `e2e-alt-${t.name}.zip`;
-    const p = `/gen/1M/${file}`;
-    await t.session.navigate(`${LAB}/page?link=${encodeURIComponent(p)}`);
-    const a = await rect(t.session, "#link");
-    await t.session.mouse((a.l + a.r) / 2, (a.t + a.b) / 2, "click", { alt: true });
-    const kept = path.join(t.dl, file);
-    try {
-      await until(`${file} in the browser's folder`, 20000, () => {
-        const names = fs.readdirSync(t.dl);
-        return names.length === 1 && names[0] === file && fs.statSync(kept).size === 1 << 20;
-      });
-    } catch (e) {
+    const firefox = Boolean(t.session.inBrowser);
+    const kept = async (label, link, file) => {
+      const p = `/gen/1M/${file}`;
+      await t.session.navigate(`${LAB}/page?link=${encodeURIComponent(link)}`);
+      const a = await rect(t.session, "#link");
+      await t.session.mouse((a.l + a.r) / 2, (a.t + a.b) / 2, "click", { alt: true });
+      const at = path.join(t.dl, file);
+      try {
+        await until(`${file} in the browser's folder`, 20000, () => {
+          const names = fs.readdirSync(t.dl);
+          return names.length === 1 && names[0] === file && fs.statSync(at).size === 1 << 20;
+        });
+      } catch (e) {
+        const item = (await mdmList()).find((d) => d.file === file);
+        const tab = await t.session.evaluate("location.href").catch((x) => x.message);
+        e.message += ` (${label}; MDM: ${item ? `${item.status} ${item.path}` : "nothing"}; the tab: ${tab}; requests: ${(await requests(p)).map(brief).join("; ") || "none"}; the browser's folder: ${fs.readdirSync(t.dl).join(", ") || "empty"})`;
+        throw e;
+      }
+      await sleep(1500);
       const item = (await mdmList()).find((d) => d.file === file);
-      const tab = await t.session.evaluate("location.href").catch((x) => x.message);
-      e.message += ` (MDM: ${item ? `${item.status} ${item.path}` : "nothing"}; the tab: ${tab}; requests: ${(await requests(p)).map(brief).join("; ") || "none"}; the browser's folder: ${fs.readdirSync(t.dl).join(", ") || "empty"})`;
-      throw e;
+      if (item) throw new Error(`${label}: MDM got it too: ${item.status} ${item.path}`);
+      const all = await requests(p);
+      if (all.length !== 1) throw new Error(`${label}: ${all.length} requests for it (only the browser's expected): ${all.map(brief).join("; ")}`);
+      fs.rmSync(at);
+      return label;
+    };
+    const done = [];
+    const name = (k) => `e2e-alt-${k}-${t.name}.zip`;
+    done.push(await kept("the link", `/gen/1M/${name("link")}`, name("link")));
+    done.push(await kept("a redirect", `/redirect?to=${encodeURIComponent(`/gen/1M/${name("redirect")}`)}`, name("redirect")));
+    if (firefox) {
+      done.push(await kept("a page's script", `/leadon?to=${encodeURIComponent(`/gen/1M/${name("script")}`)}`, name("script")));
+      const pref = JSON.stringify("browser.altClickSave");
+      await t.session.inBrowser(`(Services.prefs.setBoolPref(${pref}, false), "set")`);
+      try {
+        done.push(await kept("Firefox's default (no save on Alt+click)", `/gen/1M/${name("default")}`, name("default")));
+      } finally {
+        await t.session.inBrowser(`(Services.prefs.setBoolPref(${pref}, true), "set")`).catch(() => {});
+      }
     }
-    await sleep(1500);
-    const item = (await mdmList()).find((d) => d.file === file);
-    if (item) throw new Error(`MDM got it too: ${item.status} ${item.path}`);
-    const all = await requests(p);
-    if (all.length !== 1) throw new Error(`${all.length} requests for it (only the browser's expected): ${all.map(brief).join("; ")}`);
-    fs.rmSync(kept);
-    return "the browser's own download, MDM untouched";
+    return `the browser's own download, MDM untouched: ${done.join(", ")}`;
   },
 
   // Files the browser would show or play, made downloads, MDM's (Chromium 128+, Firefox): typed
@@ -2972,6 +3002,110 @@ const CASES = {
     // Headless Firefox refuses the player's fullscreen request and Tab's focus on it here.
     if (t.kind === "firefox") throw new Skip("headless Firefox denies fullscreen and keyboard focus to the test page");
     return videoFocus(t.session);
+  },
+
+  // #336: one video, one button, in full screen too. As YouTube does in Firefox, the whole page
+  // goes full screen (<html>), then a player's own element; out again. Then (Firefox's family) the
+  // extension updated while its button shows: Firefox gives the new copy a world of its own, and
+  // the old copy's button stayed on the page, frozen, beside the new one.
+  async fullscreen(t) {
+    const s = t.session;
+    const firefox = Boolean(s.inBrowser);
+    // Headless Firefox grants full screen only to a page whose window has the focus, which it
+    // gives when its window is told to take it (again after each full screen).
+    const focus = () =>
+      firefox &&
+      s.inBrowser(`(() => { window.focus(); Services.focus.activeWindow = window; gBrowser.selectedBrowser.focus(); return Services.focus.activeWindow === window; })()`);
+    if (firefox) {
+      await focus();
+      await s.inBrowser(`(Services.prefs.setIntPref("full-screen-api.warning.timeout", 0), Services.prefs.setCharPref("full-screen-api.transition-duration.enter", "0 0"), Services.prefs.setCharPref("full-screen-api.transition-duration.leave", "0 0"), Services.prefs.setBoolPref("full-screen-api.allow-trusted-requests-only", false), "set")`);
+    }
+    await s.navigate(`${LAB}/page?video=${encodeURIComponent("/gen/1M/clip.mp4")}`);
+    await s.evaluate(`(() => {
+      const v = document.querySelector("#video");
+      const player = document.createElement("div");
+      player.id = "fs-player";
+      player.style.cssText = "width:640px;height:360px;background:#18212d;margin-top:40px";
+      v.before(player);
+      player.append(v);
+      v.controls = false;
+      v.style.cssText = "width:100%;height:100%";
+      // Room to scroll: a frozen button stays where it was as the video moves.
+      document.body.style.minHeight = "2000px";
+      return true;
+    })()`);
+    // The buttons on the page (shown or not), and how many show.
+    const count = () =>
+      s.evaluate(`(() => { const all = [...document.querySelectorAll("mdm-video-button")];
+        return { all: all.length, shown: all.filter((b) => b.style.getPropertyValue("display") === "block").length }; })()`);
+    const one = async (when) => {
+      const v = await rect(s, "#video");
+      if (!(await hover(s, v))) throw new Error(`${when}: no button over the video ${JSON.stringify(v)}, ${JSON.stringify(await count())}`);
+      // One on the page (a button left by an old copy counts, shown or not), never two shown.
+      await sleep(300);
+      const n = await count();
+      if (n.shown > 1 || n.all !== 1) {
+        const where = await s.evaluate(`[...document.querySelectorAll("mdm-video-button")].map((b) => [b.parentNode.localName + "#" + b.parentNode.id, b.style.getPropertyValue("display"), b.style.getPropertyValue("transform")].join(" ")).join("; ") + " | fs: " + (document.fullscreenElement ? document.fullscreenElement.localName + "#" + document.fullscreenElement.id : "none")`);
+        throw new Error(`${when}: ${n.shown} buttons shown, ${n.all} on the page (${where})`);
+      }
+    };
+    const enter = async (sel) => {
+      // Firefox may refuse a request that comes right after leaving full screen: asked again.
+      let r = "";
+      for (let i = 0; i < 5; i++) {
+        await focus();
+        r = await s.evaluate(`document.querySelector(${JSON.stringify(sel)}).requestFullscreen().then(() => document.fullscreenElement.localName, (e) => "refused: " + e)`);
+        if (!/^refused/.test(r)) break;
+        await sleep(1000);
+      }
+      if (/^refused/.test(r)) throw new Error(`full screen (${sel}) ${r}`);
+      await sleep(500);
+    };
+    const leave = async () => {
+      await s.evaluate("document.exitFullscreen().then(() => true, () => false)");
+      await until("the page out of full screen", 5000, () => s.evaluate("!document.fullscreenElement"));
+      await sleep(500);
+    };
+    const done = [];
+    await one("before full screen");
+    await enter("html");
+    await one("the page in full screen");
+    await leave();
+    await one("back from the page's full screen");
+    await enter("#fs-player");
+    await one("the player in full screen");
+    await leave();
+    await one("back from the player's full screen");
+    done.push("one button in and out of full screen (the page's, the player's)");
+    if (firefox) {
+      // The extension updated while its button shows over the video in full screen.
+      await enter("html");
+      const v = await rect(s, "#video");
+      if (!(await hover(s, v))) throw new Error("no button before the update");
+      // Shown a while (its look-up done, the copy idle), the pointer still moving over it.
+      for (let i = 0; i < 8; i++) {
+        await s.mouse((v.l + v.r) / 2 + (i % 2), (v.t + v.b) / 2);
+        await sleep(200);
+      }
+      await s.uninstall(s.extension);
+      s.extension = await s.install(firefoxExtension);
+      await sleep(1500);
+      // E2E_SHOTS: <browser>-fullscreen-update.png, the page in full screen with the button(s).
+      if (process.env.E2E_SHOTS) {
+        const dir = path.resolve(process.env.E2E_SHOTS);
+        fs.mkdirSync(dir, { recursive: true });
+        await s.evaluate("(scrollBy(0, 120), true)");
+        await sleep(300);
+        await hover(s, await rect(s, "#video"));
+        await sleep(400);
+        await s.screenshot(path.join(dir, `${t.name}-fullscreen-update.png`));
+      }
+      await one("after the extension was updated, in full screen");
+      await leave();
+      await one("after the update, out of full screen");
+      done.push("one after the extension was updated while it showed");
+    }
+    return done.join("; ");
   },
 
   // #689: the sample feeds at their sites' addresses (served by the browser's protocol).

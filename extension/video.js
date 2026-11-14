@@ -14,10 +14,15 @@
 // browser captured, the button on, the site not excluded).
 (() => {
   // One button per page: a copy cut off from the extension (after an update) gives way to the
-  // new one.
+  // new one. Chromium runs the new copy where the old one ran, so it stops the old one here
+  // (`teardown`). Firefox gives the new copy a world of its own: it can't reach the old copy,
+  // whose listeners died with it while its button stayed on the page, frozen where it was, shown
+  // if it was then: two buttons over the video (#336, seen in full screen). Any button already
+  // on the page is such a copy's: it goes.
   const prev = globalThis.__mdmVideoButton;
   if (prev && typeof prev === "object" && prev.alive()) return;
   if (prev && typeof prev.teardown === "function") prev.teardown();
+  for (const old of document.querySelectorAll("mdm-video-button")) old.remove();
   const ext = globalThis.browser ?? globalThis.chrome;
 
   // A video worth a button: big enough to be content, not a short muted looping clip (an
@@ -1472,6 +1477,9 @@ button:focus-visible { outline: none; }
   }
 
   function show(v) {
+    // Cut off from the extension (updated or removed) and still running (Firefox may leave such
+    // a copy going in its own world beside the new one): it goes instead of showing (#336).
+    if (!ext.runtime?.id) return teardown();
     if (video !== v) {
       video = v;
       held = null;

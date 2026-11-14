@@ -2406,6 +2406,317 @@ fn set_xattr(path: &Path, name: &str, value: &str) {
     };
 }
 
+/// macOS: whether `NSApplication.sharedApplication` is currently the active foreground app with a
+/// visible, non-minimized titled window (#558).
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+pub fn macos_is_active_and_visible() -> bool {
+    use objc2::msg_send;
+    use objc2::runtime::{AnyClass, AnyObject, Bool};
+    // SAFETY: called on the main UI thread; queries `NSApplication.sharedApplication`.
+    unsafe {
+        let Some(cls) = AnyClass::get(c"NSApplication") else {
+            return false;
+        };
+        let app: *mut AnyObject = msg_send![cls, sharedApplication];
+        if app.is_null() {
+            return false;
+        }
+        let active: Bool = msg_send![app, isActive];
+        if !active.as_bool() {
+            return false;
+        }
+        let hidden: Bool = msg_send![app, isHidden];
+        if hidden.as_bool() {
+            return false;
+        }
+        let windows: *mut AnyObject = msg_send![app, windows];
+        if windows.is_null() {
+            return false;
+        }
+        let count: usize = msg_send![windows, count];
+        for i in 0..count {
+            let win: *mut AnyObject = msg_send![windows, objectAtIndex: i];
+            if win.is_null() {
+                continue;
+            }
+            let style: usize = msg_send![win, styleMask];
+            // NSWindowStyleMaskTitled = 1 << 0 (skips borderless status bar / internal windows).
+            if (style & 1) == 0 {
+                continue;
+            }
+            let visible: Bool = msg_send![win, isVisible];
+            let mini: Bool = msg_send![win, isMiniaturized];
+            if visible.as_bool() && !mini.as_bool() {
+                return true;
+            }
+        }
+        false
+    }
+}
+
+/// macOS: orders out the main window and hides the application when no other titled window is
+/// visible, so focus returns cleanly to the previously active app (#558).
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+pub fn macos_hide_window() {
+    use objc2::msg_send;
+    use objc2::runtime::{AnyClass, AnyObject, Bool};
+    // SAFETY: called on the main UI thread; orders out titled windows and hides `NSApp`.
+    unsafe {
+        let Some(cls) = AnyClass::get(c"NSApplication") else {
+            return;
+        };
+        let app: *mut AnyObject = msg_send![cls, sharedApplication];
+        if app.is_null() {
+            return;
+        }
+        let null_obj: *mut AnyObject = std::ptr::null_mut();
+        let windows: *mut AnyObject = msg_send![app, windows];
+        let mut visible_titled = 0usize;
+        if !windows.is_null() {
+            let count: usize = msg_send![windows, count];
+            for i in 0..count {
+                let win: *mut AnyObject = msg_send![windows, objectAtIndex: i];
+                if win.is_null() {
+                    continue;
+                }
+                let style: usize = msg_send![win, styleMask];
+                if (style & 1) == 0 {
+                    continue;
+                }
+                let visible: Bool = msg_send![win, isVisible];
+                let mini: Bool = msg_send![win, isMiniaturized];
+                if visible.as_bool() && !mini.as_bool() {
+                    visible_titled += 1;
+                    let _: () = msg_send![win, orderOut: null_obj];
+                }
+            }
+        }
+        if visible_titled <= 1 {
+            let _: () = msg_send![app, hide: null_obj];
+        }
+    }
+}
+
+/// macOS: brings MDM and its windows to the topmost foreground in front of all other apps when
+/// woken from the menu bar icon or the global hotkey (#558).
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+pub fn macos_activate_and_show() {
+    use objc2::msg_send;
+    use objc2::runtime::{AnyClass, AnyObject, Bool};
+    // SAFETY: called on the main UI thread; activates `NSRunningApplication.currentApplication` and
+    // `NSApplication.sharedApplication`, and orders all titled windows to the front.
+    unsafe {
+        let Some(cls) = AnyClass::get(c"NSApplication") else {
+            return;
+        };
+        let app: *mut AnyObject = msg_send![cls, sharedApplication];
+        if app.is_null() {
+            return;
+        }
+        let null_obj: *mut AnyObject = std::ptr::null_mut();
+        let _: () = msg_send![app, unhide: null_obj];
+        if let Some(run_cls) = AnyClass::get(c"NSRunningApplication") {
+            let cur: *mut AnyObject = msg_send![run_cls, currentApplication];
+            if !cur.is_null() {
+                // NSApplicationActivateAllWindows (1) | NSApplicationActivateIgnoringOtherApps (2) = 3
+                let _: Bool = msg_send![cur, activateWithOptions: 3usize];
+            }
+        }
+        let _: () = msg_send![app, activateIgnoringOtherApps: Bool::YES];
+        let windows: *mut AnyObject = msg_send![app, windows];
+        if !windows.is_null() {
+            let count: usize = msg_send![windows, count];
+            for i in 0..count {
+                let win: *mut AnyObject = msg_send![windows, objectAtIndex: i];
+                if win.is_null() {
+                    continue;
+                }
+                let style: usize = msg_send![win, styleMask];
+                if (style & 1) == 0 {
+                    continue;
+                }
+                let mini: Bool = msg_send![win, isMiniaturized];
+                if mini.as_bool() {
+                    let _: () = msg_send![win, deminiaturize: null_obj];
+                }
+                let _: () = msg_send![win, makeKeyAndOrderFront: null_obj];
+                let _: () = msg_send![win, orderFrontRegardless];
+            }
+        }
+    }
+}
+
+#[cfg(target_os = "macos")]
+#[allow(unsafe_code)]
+mod macos_hotkey {
+    use crate::hotkey::Shortcut;
+    use std::ffi::c_void;
+    use std::sync::Arc;
+    use std::sync::atomic::{AtomicBool, Ordering};
+
+    type OSStatus = i32;
+    type EventTargetRef = *mut c_void;
+    type EventHandlerCallRef = *mut c_void;
+    type EventRef = *mut c_void;
+    type EventHandlerRef = *mut c_void;
+    type EventHotKeyRef = *mut c_void;
+    type EventHandlerUPP =
+        unsafe extern "C" fn(EventHandlerCallRef, EventRef, *mut c_void) -> OSStatus;
+
+    #[repr(C)]
+    #[derive(Clone, Copy)]
+    struct EventTypeSpec {
+        event_class: u32,
+        event_kind: u32,
+    }
+
+    #[repr(C)]
+    #[derive(Clone, Copy)]
+    struct EventHotKeyID {
+        signature: u32,
+        id: u32,
+    }
+
+    const K_EVENT_CLASS_KEYBOARD: u32 = u32::from_be_bytes(*b"keyb");
+    const K_EVENT_HOT_KEY_PRESSED: u32 = 5;
+    const HOTKEY_SIGNATURE: u32 = u32::from_be_bytes(*b"MDMH");
+
+    #[link(name = "Carbon", kind = "framework")]
+    unsafe extern "C" {
+        fn GetApplicationEventTarget() -> EventTargetRef;
+        fn InstallEventHandler(
+            in_target: EventTargetRef,
+            in_handler: EventHandlerUPP,
+            in_num_types: u32,
+            in_list: *const EventTypeSpec,
+            in_user_data: *mut c_void,
+            out_ref: *mut EventHandlerRef,
+        ) -> OSStatus;
+        fn RemoveEventHandler(in_handler_ref: EventHandlerRef) -> OSStatus;
+        fn RegisterEventHotKey(
+            in_hot_key_code: u32,
+            in_hot_key_modifiers: u32,
+            in_hot_key_id: EventHotKeyID,
+            in_target: EventTargetRef,
+            in_options: u32,
+            out_ref: *mut EventHotKeyRef,
+        ) -> OSStatus;
+        fn UnregisterEventHotKey(in_hot_key_ref: EventHotKeyRef) -> OSStatus;
+    }
+
+    struct CallbackCtx {
+        fired: Arc<AtomicBool>,
+        ctx: egui::Context,
+    }
+
+    unsafe extern "C" fn hotkey_handler(
+        _next: EventHandlerCallRef,
+        _event: EventRef,
+        user_data: *mut c_void,
+    ) -> OSStatus {
+        if !user_data.is_null() {
+            // SAFETY: `user_data` points to `Box<CallbackCtx>` owned by `GlobalHotKeyOs` until
+            // after `RemoveEventHandler` completes in `Drop`.
+            let cb = unsafe { &*(user_data as *const CallbackCtx) };
+            cb.fired.store(true, Ordering::SeqCst);
+            cb.ctx.request_ui_pass(egui::ViewportId::ROOT);
+            cb.ctx.request_repaint();
+        }
+        0
+    }
+
+    pub struct GlobalHotKeyOs {
+        hotkey_ref: EventHotKeyRef,
+        handler_ref: EventHandlerRef,
+        _cb: Box<CallbackCtx>,
+    }
+
+    impl GlobalHotKeyOs {
+        pub fn register(
+            shortcut: Shortcut,
+            fired: Arc<AtomicBool>,
+            taken: Arc<AtomicBool>,
+            ctx: egui::Context,
+        ) -> Option<Self> {
+            let mut cb = Box::new(CallbackCtx { fired, ctx });
+            let user_data = (&mut *cb as *mut CallbackCtx).cast::<c_void>();
+            let spec = EventTypeSpec {
+                event_class: K_EVENT_CLASS_KEYBOARD,
+                event_kind: K_EVENT_HOT_KEY_PRESSED,
+            };
+            let mut handler_ref: EventHandlerRef = std::ptr::null_mut();
+            let mut hotkey_ref: EventHotKeyRef = std::ptr::null_mut();
+
+            // SAFETY: called on the main UI thread; installs a Carbon application event handler
+            // and registers the global hotkey with HIToolbox.
+            unsafe {
+                let target = GetApplicationEventTarget();
+                if target.is_null() {
+                    return None;
+                }
+                let status = InstallEventHandler(
+                    target,
+                    hotkey_handler,
+                    1,
+                    &spec,
+                    user_data,
+                    &mut handler_ref,
+                );
+                if status != 0 || handler_ref.is_null() {
+                    tracing::warn!("global hotkey: InstallEventHandler failed ({status})");
+                    return None;
+                }
+                let id = EventHotKeyID {
+                    signature: HOTKEY_SIGNATURE,
+                    id: 1,
+                };
+                let reg_status = RegisterEventHotKey(
+                    shortcut.key.carbon_vk(),
+                    shortcut.carbon_modifiers(),
+                    id,
+                    target,
+                    0,
+                    &mut hotkey_ref,
+                );
+                if reg_status != 0 || hotkey_ref.is_null() {
+                    let _ = RemoveEventHandler(handler_ref);
+                    taken.store(true, Ordering::SeqCst);
+                    tracing::warn!(
+                        "global hotkey: RegisterEventHotKey({}) failed ({reg_status})",
+                        shortcut.canonical()
+                    );
+                    return None;
+                }
+            }
+            tracing::info!("global hotkey registered: {}", shortcut.canonical());
+            Some(Self {
+                hotkey_ref,
+                handler_ref,
+                _cb: cb,
+            })
+        }
+    }
+
+    impl Drop for GlobalHotKeyOs {
+        fn drop(&mut self) {
+            // SAFETY: unregisters the hotkey and removes the handler before `_cb` is dropped.
+            unsafe {
+                if !self.hotkey_ref.is_null() {
+                    let _ = UnregisterEventHotKey(self.hotkey_ref);
+                    self.hotkey_ref = std::ptr::null_mut();
+                }
+                if !self.handler_ref.is_null() {
+                    let _ = RemoveEventHandler(self.handler_ref);
+                    self.handler_ref = std::ptr::null_mut();
+                }
+            }
+        }
+    }
+}
+
 /// Rename `from` to `to` without ever replacing an existing entry (`ErrorKind::AlreadyExists`
 /// when `to` is already there).
 #[allow(unsafe_code)]
@@ -2491,6 +2802,9 @@ pub(crate) fn fallback_rename_no_replace(from: &Path, to: &Path) -> std::io::Res
         }
     }
 }
+
+#[cfg(target_os = "macos")]
+pub use macos_hotkey::GlobalHotKeyOs;
 
 #[cfg(all(test, target_os = "linux"))]
 mod tests {
